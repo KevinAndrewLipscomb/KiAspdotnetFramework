@@ -12,6 +12,7 @@ type
   public
     constructor Create;
     function AffiliateNumOfId(id: string): string;
+    function BeValidProfile(id: string): boolean;
     procedure BindDropDownList
       (
       kind3_user_id: string;
@@ -70,6 +71,11 @@ end;
 function TClass_biz_kind1s.AffiliateNumOfId(id: string): string;
 begin
   AffiliateNumOfId := db_kind1s.AffiliateNumOfId(id);
+end;
+
+function TClass_biz_kind1s.BeValidProfile(id: string): boolean;
+begin
+  BeValidProfile := db_kind1s.BeValidProfile(id);
 end;
 
 procedure TClass_biz_kind1s.BindDropDownList

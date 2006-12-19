@@ -12,9 +12,22 @@ type
     { Private Declarations }
   public
     constructor Create;
+    function BeStalePassword
+      (
+      user_kind: string;
+      user_id: string
+      )
+      : boolean;
     procedure BindKind3s(target: system.object);
     procedure BindKind2s(target: system.object);
     procedure BindKind1s(target: system.object);
+    procedure Check
+      (
+      user_kind: string;
+      user_id: string;
+      out be_stale_password: boolean;
+      out email_address: string
+      );
     function EmailAddressByKindId
       (
       user_kind: string;
@@ -29,6 +42,18 @@ type
       encoded_password: string
       )
       : boolean;
+    procedure SetEmailAddress
+      (
+      user_kind: string;
+      user_id: string;
+      email_address: string
+      );
+    procedure SetPassword
+      (
+      user_kind: string;
+      user_id: string;
+      encoded_password: string
+      );
     procedure SetTemporaryPassword
       (
       user_kind: string;
@@ -46,6 +71,23 @@ constructor TClass_db_accounts.Create;
 begin
   inherited Create;
   // TODO: Add any constructor code here
+end;
+
+function TClass_db_accounts.BeStalePassword
+  (
+  user_kind: string;
+  user_id: string
+  )
+  : boolean;
+begin
+  self.Open;
+  BeStalePassword := '1' = Borland.Data.Provider.BdpCommand.Create
+    (
+    'SELECT be_stale_password FROM ' + user_kind + '_user where id=' + user_id,
+    connection
+    )
+    .ExecuteScalar.tostring;
+  self.Close;
 end;
 
 procedure TClass_db_accounts.BindKind3s(target: system.object);
@@ -115,6 +157,41 @@ begin
   self.Close;
 end;
 
+procedure TClass_db_accounts.Check
+  (
+  user_kind: string;
+  user_id: string;
+  out be_stale_password: boolean;
+  out email_address: string
+  );
+var
+  bdr: bdpdatareader;
+begin
+  self.Open;
+  bdr := bdpcommand.Create
+    (
+    'SELECT be_stale_password'
+    + ' , password_reset_email_address'
+    + ' FROM ' + user_kind + '_user'
+    + ' where id = ' + user_id,
+    connection
+    )
+    .ExecuteReader;
+  bdr.Read;
+  if bdr['be_stale_password'].tostring = '0' then begin
+    be_stale_password := FALSE;
+    if be_stale_password then begin
+      email_address := bdr['password_reset_email_address'].tostring;
+    end else begin
+      email_address := system.string.EMPTY;
+    end;
+  end else begin
+    be_stale_password := TRUE;
+  end;
+  bdr.Close;
+  self.Close;
+end;
+
 function TClass_db_accounts.EmailAddressByKindId
   (
   user_kind: string;
@@ -178,6 +255,45 @@ begin
     connection
     )
     .ExecuteScalar;
+  self.Close;
+end;
+
+procedure TClass_db_accounts.SetEmailAddress
+  (
+  user_kind: string;
+  user_id: string;
+  email_address: string
+  );
+begin
+  self.Open;
+  borland.data.provider.bdpcommand.Create
+    (
+    'UPDATE ' + user_kind + '_user '
+    + 'SET password_reset_email_address = "' + email_address + '"'
+    + 'WHERE id = ' + user_id,
+    connection
+    )
+    .ExecuteNonQuery;
+  self.Close;
+end;
+
+procedure TClass_db_accounts.SetPassword
+  (
+  user_kind: string;
+  user_id: string;
+  encoded_password: string
+  );
+begin
+  self.Open;
+  borland.data.provider.bdpcommand.Create
+    (
+    'update ' + user_kind + '_user'
+    + ' set encoded_password = "' + encoded_password + '",'
+    +   ' be_stale_password = FALSE '
+    + ' where id = ' + user_id,
+    connection
+    )
+    .ExecuteNonQuery;
   self.Close;
 end;
 

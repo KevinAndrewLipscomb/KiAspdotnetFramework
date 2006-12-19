@@ -84,6 +84,7 @@ type
 implementation
 
 uses
+  appcommon,
   Class_biz_accounts;
 
 {$REGION 'Designer Managed Code'}
@@ -259,14 +260,8 @@ begin
   //
   if not p.be_profile_initially_valid then begin
     //
-    // Notify regional council that contact person has affirmed responsibilities.
+    // Perform actions that should only be done the first time the account becomes valid...
     //
-    TClass_biz_accounts.Create.NotifyRegionOfkind1PocAffirmation
-      (
-      session['kind1_user_id'].tostring,
-      kind1_name,
-      contact_person_name
-      );
   end;
   //
   server.Transfer('kind1_overview.aspx');
