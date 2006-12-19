@@ -14,6 +14,7 @@ type
   public
     constructor Create;
     function AffiliateNumOfId(id: string): string;
+    function BeValidProfile(id: string): boolean;
     procedure BindDropDownList
       (
       kind3_user_id: string;
@@ -77,6 +78,14 @@ begin
     connection
     )
     .ExecuteScalar.tostring;
+  self.Close;
+end;
+
+function TClass_db_kind1s.BeValidProfile(id: string): boolean;
+begin
+  self.Open;
+  BeValidProfile :=
+    ('1' = bdpCommand.Create('select be_valid_profile from kind1 where id = ' + id,connection).ExecuteScalar.tostring);
   self.Close;
 end;
 

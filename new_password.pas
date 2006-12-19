@@ -35,6 +35,7 @@ type
 implementation
 
 uses
+  appcommon,
   Class_biz_accounts;
 
 {$REGION 'Designer Managed Code'}

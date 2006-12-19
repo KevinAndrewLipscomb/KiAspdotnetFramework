@@ -8,14 +8,16 @@ uses
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, system.configuration, borland.data.provider,
   system.web.security,
-  Class_db;
+  Class_biz_accounts,
+  Class_biz_user;
 
 const ID = '$Id$';
 
 type
   p_type =
     RECORD
-    db: TClass_db;
+    biz_accounts: TClass_biz_accounts;
+    biz_user: TClass_biz_user;
     END;
   TWebForm_kind3_overview = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
@@ -52,6 +54,9 @@ type
 
 implementation
 
+uses
+  appcommon;
+
 {$REGION 'Designer Managed Code'}
 /// <summary>
 /// Required method for Designer support -- do not modify
@@ -70,9 +75,8 @@ end;
 
 procedure TWebForm_kind3_overview.Page_Load(sender: System.Object; e: System.EventArgs);
 var
-  bdr: borland.data.provider.BdpDataReader;
+  be_stale_password: boolean;
   kind3_user_email_address: string;
-  max_fiscal_year_id_string: string;
 begin
   appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
   if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
@@ -83,75 +87,18 @@ begin
       server.Transfer('~/login.aspx');
     end;
     Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - kind3_overview';
-    p.db := TClass_db.Create;
+    //
+    p.biz_accounts := TClass_biz_accounts.Create;
+    p.biz_user := TClass_biz_user.Create;
     //
     Label_kind3_name.Text := session['kind3_name'].ToString;
     //
-    p.db.Open;
-    bdr := Borland.Data.Provider.BdpCommand.Create
-      (
-      'SELECT be_stale_password, password_reset_email_address FROM kind3_user'
-      + ' where id = ' + session['kind3_user_id'].tostring,
-      p.db.connection
-      )
-      .ExecuteReader;
-    bdr.Read;
-    if bdr['be_stale_password'].ToString = '0' then begin
+    p.biz_accounts.Check(p.biz_user.Kind,p.biz_user.IdNum,be_stale_password,kind3_user_email_address);
+    if not be_stale_password then begin
       //
-      // Get anything else needed from this reader, then close it.  We have another reader to open, and only one can be open at a
-      // time.
+      // Do meaningful processing...
       //
-      kind3_user_email_address := bdr['password_reset_email_address'].tostring;
-      bdr.Close;
-      //
-      // Where we go next depends on how many appropriations have been made to this kind3.
-      //
-      // Determine current fiscal year
-      //
-      max_fiscal_year_id_string := borland.data.provider.bdpcommand.Create
-        (
-        'SELECT max(id) as max_id FROM fiscal_year',
-        p.db.connection
-        )
-        .ExecuteScalar.tostring;
-      //
-      bdr := borland.data.provider.bdpcommand.Create
-        (
-        'SELECT region_dictated_appropriation.id,'
-        + ' concat("$",format(region_dictated_appropriation.amount,2)," from the ",name," ",designator," contract (amendment ",amendment_num,")")'
-        +   ' as appropriation_description'
-        + ' FROM region_dictated_appropriation'
-        +   ' JOIN state_dictated_appropriation on (state_dictated_appropriation.id=state_dictated_appropriation_id)'
-        +   ' JOIN region_code_name_map on (region_code_name_map.code=region_code)'
-        +   ' JOIN fiscal_year on (fiscal_year.id = fiscal_year_id)'
-        + ' WHERE kind3_code = ' + session['kind3_user_id'].ToString
-        +   ' and fiscal_year_id = ' + max_fiscal_year_id_string,
-        p.db.connection
-        )
-        .ExecuteReader;
-      while bdr.Read do begin
-        RadioButtonList_appropriation.Items.Add(listitem.Create(bdr['appropriation_description'].tostring,bdr['id'].ToString));
-      end;
-      bdr.Close;
-      p.db.Close;
-      if RadioButtonList_appropriation.items.Count = 0 then begin
-        server.Transfer('no_appropriation.aspx');
-      end else begin
-        //
-        // Add the kind3's email address to the session, as it will be needed by kind3_dictated_appropriations however we
-        // get there.
-        //
-        session.Remove('kind3_user_password_reset_email_address');
-        session.Add('kind3_user_password_reset_email_address',kind3_user_email_address);
-        if RadioButtonList_appropriation.items.Count = 1 then begin
-          session.Remove('region_dictated_appropriation_id');
-          session.Add('region_dictated_appropriation_id',RadioButtonList_appropriation.items[0].value);
-          server.Transfer('kind3_dictated_appropriations.aspx');
-        end;
-      end;
     end else begin
-      bdr.Close;
-      p.db.Close;
       server.Transfer('change_password.aspx');
     end;
   end;

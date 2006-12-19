@@ -8,14 +8,16 @@ uses
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, borland.data.provider, system.configuration,
   system.net, system.web.security,
-  Class_db;
+  Class_biz_accounts,
+  Class_biz_user;
 
 const ID = '$Id$';
 
 type
   p_type =
     RECORD
-    db: TClass_db;
+    biz_accounts: TClass_biz_accounts;
+    biz_user: TClass_biz_user;
     END;
   TWebForm_change_email_address = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
@@ -54,6 +56,9 @@ type
 
 implementation
 
+uses
+  appcommon;
+
 {$REGION 'Designer Managed Code'}
 /// <summary>
 /// Required method for Designer support -- do not modify
@@ -83,9 +88,8 @@ begin
       server.Transfer('~/login.aspx');
     end;
     Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - change_email_address';
-    //
-    p.db := TClass_db.Create;
-    p.db.Open;
+    p.biz_accounts := TClass_biz_accounts.Create;
+    p.biz_user:= TClass_biz_user.Create;
     //
     // Set Label_account descriptor
     //
@@ -97,18 +101,9 @@ begin
     //
     // Preload email address fields
     //
-    email_address := borland.data.provider.BdpCommand.Create
-      (
-      'SELECT password_reset_email_address '
-      + 'FROM ' + session['target_user_table'].ToString + '_user '
-      + 'WHERE id = "' + session[session['target_user_table'].ToString + '_user_id'].ToString + '"',
-      p.db.connection
-      )
-      .ExecuteScalar.tostring;
+    email_address := p.biz_accounts.EmailAddressByKindId(p.biz_user.Kind,p.biz_user.IdNum);
     TextBox_nominal_email_address.Text := email_address;
     TextBox_confirmation_email_address.Text := email_address;
-    //
-    p.db.Close;
     end;
 end;
 
@@ -157,19 +152,7 @@ procedure TWebForm_change_email_address.Button_submit_Click(sender: System.Objec
   e: System.EventArgs);
 begin
   if page.isvalid then begin
-    p.db.Open;
-    //
-    // Commit the data to the database.
-    //
-    borland.data.provider.bdpcommand.Create
-      (
-      'UPDATE ' + session['target_user_table'].ToString + '_user '
-      + 'SET password_reset_email_address = "' + Safe(TextBox_nominal_email_address.Text.Trim,EMAIL_ADDRESS) + '"'
-      + 'WHERE id = "' + session[session['target_user_table'].ToString + '_user_id'].ToString + '"',
-      p.db.connection
-      )
-      .ExecuteNonQuery;
-    p.db.Close;
+    p.biz_accounts.SetEmailAddress(p.biz_user.Kind,Safe(TextBox_nominal_email_address.Text.Trim,EMAIL_ADDRESS),p.biz_user.IdNum);
     server.Transfer(session['target_user_table'].ToString + '_overview.aspx');
   end;
 end;

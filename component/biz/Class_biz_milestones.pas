@@ -17,17 +17,14 @@ type
 type
   milestone_type =
     (
-    KIND3_DICTATED_APPROPRIATION_DEADLINE_MILESTONE = 1,
-    KIND1_PURCHASE_COMPLETION_DEADLINE_MILESTONE = 2,
-    KIND1_INVOICE_SUBMISSION_DEADLINE_MILESTONE = 3,
-    KIND1_CANCELED_CHECK_SUBMISSION_DEADLINE_MILESTONE = 4
+    FIRST_MILESTONE = 1,
+    SECOND_MILESTONE = 2
     );
 implementation
 
 uses
   Class_db_milestones,
   Class_biz_accounts,
-  Class_biz_emsof_requests,
   system.collections;
 
 //
@@ -47,10 +44,8 @@ type
 const
   REMINDER_CONTROL_TABLE: reminder_control_table_type =
     (
-    (num_reminders:6; relative_day_num_array:(1,3,7,14,30,90)), // KIND3_DICTATED_APPROPRIATION_DEADLINE_MILESTONE
-    (num_reminders:6; relative_day_num_array:(1,3,7,14,30,90)), // KIND1_PURCHASE_COMPLETION_DEADLINE_MILESTONE
-    (num_reminders:6; relative_day_num_array:(1,3,7,14,30,90)), // KIND1_INVOICE_SUBMISSION_DEADLINE_MILESTONE
-    (num_reminders:6; relative_day_num_array:(1,3,7,14,30,90))  // KIND1_CANCELED_CHECK_SUBMISSION_DEADLINE_MILESTONE
+    (num_reminders:6; relative_day_num_array:(1,3,7,14,30,90)), // FIRST_MILESTONE
+    (num_reminders:6; relative_day_num_array:(1,3,7,14,30,90))  // SECOND_MILESTONE
     );
 
 constructor TClass_biz_milestones.Create;
@@ -64,11 +59,10 @@ var
   be_handled: boolean;
   be_processed: boolean;
   biz_accounts: TClass_biz_accounts;
-  biz_emsof_requests: TClass_biz_emsof_requests;
   deadline: datetime;
   db_milestones: TClass_db_milestones;
   i: cardinal;
-  j: cardinal;
+//  j: cardinal;
   master_id: string;
   master_id_q: queue;
   milestone: milestone_type;
@@ -76,7 +70,6 @@ var
   today: datetime;
 begin
   biz_accounts := TClass_biz_accounts.Create;
-  biz_emsof_requests := TClass_biz_emsof_requests.Create;
   db_milestones := TClass_db_milestones.Create;
   master_id_q := nil;
   today := datetime.Today;
@@ -86,25 +79,17 @@ begin
     if not be_processed then begin
       if (today > deadline) then begin
         case milestone of
-        KIND3_DICTATED_APPROPRIATION_DEADLINE_MILESTONE:
-          master_id_q := biz_emsof_requests.FailUnfinalized;
-        KIND1_PURCHASE_COMPLETION_DEADLINE_MILESTONE:
+        FIRST_MILESTONE:
+          BEGIN
+          END;
+        SECOND_MILESTONE:
           BEGIN
           // Not application-enforceable
           END;
-        KIND1_INVOICE_SUBMISSION_DEADLINE_MILESTONE:
-          master_id_q := biz_emsof_requests.CloseInvoiceSubmissionWindow;
-        KIND1_CANCELED_CHECK_SUBMISSION_DEADLINE_MILESTONE:
-          master_id_q := biz_emsof_requests.CloseProofOfPaymentSubmissionWindow;
         end;
         for i := 1 to master_id_q.Count do begin
           master_id := master_id_q.Dequeue.tostring;
-          biz_accounts.MakeDeadlineFailureNotification
-            (
-            milestone,
-            biz_emsof_requests.Kind1IdOfMasterId(master_id),
-            biz_emsof_requests.Kind3CodeOfMasterId(master_id)
-            );
+          //biz_accounts.MakeDeadlineFailureNotification;
         end;
         db_milestones.MarkProcessed(ord(milestone));
       end else begin
@@ -113,12 +98,12 @@ begin
         while (not be_handled) and (i < REMINDER_CONTROL_TABLE[milestone].num_reminders) do begin
           relative_day_num := REMINDER_CONTROL_TABLE[milestone].relative_day_num_array[i];
           if today = deadline.AddDays(-(relative_day_num)).Date then begin
-            master_id_q := biz_emsof_requests.SusceptibleTo(milestone);
-            for j := 1 to master_id_q.Count do begin
-              master_id := master_id_q.Dequeue.tostring;
-              biz_accounts.Remind(milestone,relative_day_num,deadline,biz_emsof_requests.Kind1IdOfMasterId(master_id));
-              be_handled := TRUE;
-            end;
+//            master_id_q := biz_emsof_requests.SusceptibleTo(milestone);
+//            for j := 1 to master_id_q.Count do begin
+//              master_id := master_id_q.Dequeue.tostring;
+//              biz_accounts.Remind(milestone,relative_day_num,deadline,biz_emsof_requests.Kind1IdOfMasterId(master_id));
+//              be_handled := TRUE;
+//            end;
           end;
           i := i + 1;
         end;

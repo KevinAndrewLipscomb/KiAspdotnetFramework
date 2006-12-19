@@ -3,14 +3,12 @@ unit Class_db_milestones;
 interface
 
 uses
-  Class_biz_fiscal_years,
   Class_db,
   system.collections;
 
 type
   TClass_db_milestones = class(TClass_db)
   private
-    biz_fiscal_years: TClass_biz_fiscal_years;
   public
     constructor Create;
     procedure Check
@@ -31,7 +29,6 @@ constructor TClass_db_milestones.Create;
 begin
   inherited Create;
   // TODO: Add any constructor code here
-  biz_fiscal_years := TClass_biz_fiscal_years.Create;
 end;
 
 procedure TClass_db_milestones.Check
@@ -48,7 +45,7 @@ begin
     (
     'select be_processed,value'
     + ' from fy_calendar'
-    + ' where fiscal_year_id = ' + biz_fiscal_years.IdOfCurrent
+    + ' where fiscal_year_id = ' //+ biz_fiscal_years.IdOfCurrent
     +   ' and milestone_code = ' + code.tostring,
     connection
     )
@@ -66,7 +63,7 @@ var
 begin
   cmdText := 'update fy_calendar'
     + ' set be_processed = TRUE'
-    + ' where fiscal_year_id = ' + biz_fiscal_years.IdOfCurrent
+    + ' where fiscal_year_id = ' //+ biz_fiscal_years.IdOfCurrent
     +   ' and milestone_code = ' + code.tostring;
   self.Open;
   borland.data.provider.bdpcommand.Create

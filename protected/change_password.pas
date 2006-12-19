@@ -8,14 +8,16 @@ uses
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, borland.data.provider, system.configuration,
   system.web.security,
-  Class_db;
+  Class_biz_accounts,
+  Class_biz_user;
 
 const ID = '$Id$';
 
 type
   p_type =
     RECORD
-    db: TClass_db;
+    biz_accounts: TClass_biz_accounts;
+    biz_user: TClass_biz_user;
     END;
   TWebForm_change_password = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
@@ -53,6 +55,9 @@ type
 
 implementation
 
+uses
+  appcommon;
+
 {$REGION 'Designer Managed Code'}
 /// <summary>
 /// Required method for Designer support -- do not modify
@@ -79,8 +84,6 @@ begin
       server.Transfer('~/login.aspx');
     end;
     Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - change_password';
-    //
-    p.db := TClass_db.Create;
     //
     Label_account_descriptor.Text := session[session['target_user_table'].ToString + '_name'].ToString;
     if session['target_user_table'].tostring = 'kind3' then begin
@@ -123,19 +126,7 @@ end;
 procedure TWebForm_change_password.Button_submit_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  //
-  // Commit the data to the database.
-  //
-  p.db.Open;
-  borland.data.provider.bdpcommand.Create
-    (
-    'UPDATE ' + session['target_user_table'].ToString + '_user'
-    + ' SET encoded_password = "' + ki.Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)) + '",'
-    +   ' be_stale_password = FALSE'
-    + ' WHERE id = "' + session[session['target_user_table'].ToString + '_user_id'].ToString + '"',
-    p.db.connection
-    ).ExecuteNonQuery;
-  p.db.Close;
+  p.biz_accounts.SetPassword(p.biz_user.Kind,p.biz_user.IdNum,ki.Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
   server.Transfer(session['target_user_table'].ToString + '_overview.aspx');
 end;
 

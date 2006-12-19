@@ -11,15 +11,15 @@ const
   ID = '$Id$';
 
 type
-  TClass_db = class
+  TClass_db = class abstract
   private
     { Private Declarations }
   protected
     connection: borland.data.provider.bdpconnection;
-  public
-    constructor Create;
     procedure Close;
     procedure Open;
+  public
+    constructor Create;
   end;
 
 implementation

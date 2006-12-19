@@ -51,10 +51,10 @@ uses
   Class_db_kind1s in 'component\db\Class_db_kind1s.pas',
   Default in 'Default.pas' {Default.TWebForm_Default: ki_web_ui.page_class},
   Global in 'Global.pas' {Global.TGlobal: System.Web.HttpApplication},
-  salogin in 'salogin.pas' {salogin.TWebForm_salogin: ki.web.Page},
-  new_password in 'new_password.pas' {new_password.TWebForm_new_password: ki.web.Page},
-  change_email_address in 'protected\change_email_address.pas' {change_email_address.TWebForm_change_email_address: System.Web.UI.Page},
-  change_password in 'protected\change_password.pas' {change_password.TWebForm_change_password: System.Web.UI.Page},
+  salogin in 'salogin.pas' {salogin.TWebForm_salogin: ki_web_ui.page_class},
+  new_password in 'new_password.pas' {new_password.TWebForm_new_password: ki_web_ui.page_class},
+  change_email_address in 'protected\change_email_address.pas' {change_email_address.TWebForm_change_email_address: ki_web_ui.page_class},
+  change_password in 'protected\change_password.pas' {change_password.TWebForm_change_password: ki_web_ui.page_class},
   kind3_overview in 'protected\kind3_overview.pas' {kind3_overview.TWebForm_kind3_overview: ki_web_ui.page_class},
   profile in 'protected\profile.pas' {profile.TWebForm_profile: ki_web_ui.page_class},
   kind2_overview in 'protected\kind2_overview.pas' {kind2_overview.TWebForm_kind2_overview: ki_web_ui.page_class},
@@ -68,7 +68,8 @@ uses
   Class_biz_milestones in 'component\biz\Class_biz_milestones.pas',
   Class_db_milestones in 'component\db\Class_db_milestones.pas',
   Class_biz_kind3s in 'component\biz\Class_biz_kind3s.pas',
-  Class_db_kind3s in 'component\db\Class_db_kind3s.pas';
+  Class_db_kind3s in 'component\db\Class_db_kind3s.pas',
+  appcommon in 'appcommon.pas';
 
 const ID = '$Id$';
 
