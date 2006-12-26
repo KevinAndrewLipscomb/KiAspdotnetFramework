@@ -11,7 +11,7 @@
 	  <p><asp:placeholder id="PlaceHolder_precontent" runat="server"></asp:placeholder></p>
 	  <p><small>[ 
 		  <ASP:LinkButton id="LinkButton_logout" runat="server" causesvalidation="False">Logout</ASP:LinkButton>&nbsp;] [ 
-		  Change your WebEMSOF
+		  Change your {appname}
 		<ASP:LinkButton id="LinkButton_change_password" runat="server">password</ASP:LinkButton>&nbsp;| <ASP:LinkButton id="LinkButton_change_email_address" runat="server">email address</ASP:LinkButton>&nbsp;]
 	  </small></p>
 	  <h1><ASP:Label id="Label_kind1_name" runat="server" font-bold="True"></ASP:Label></h1>
@@ -22,7 +22,7 @@
               <td>
                 <table cellspacing="0" cellpadding="10" width="100%" border="0">
                     <tr>
-                      <td bgcolor="#f5f5f5"><strong>Your kind1's WebEMSOF profile is:</strong></td>
+                      <td bgcolor="#f5f5f5"><strong>Your kind1's {appname} profile is:</strong></td>
                       <td><ASP:Label id="Label_profile_status" runat="server"></ASP:Label></td>
                       <td><ASP:LinkButton id="LinkButton_profile_action" runat="server" font-size="X-Small"></ASP:LinkButton></td>
                     </tr>

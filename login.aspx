@@ -38,7 +38,7 @@
 								<ASP:ListItem value="0">-- Select (then wait for form to refresh) --</ASP:ListItem>
 								<ASP:ListItem value="kind1">Kind1</ASP:ListItem>
 								<ASP:ListItem value="kind3">Kind3</ASP:ListItem>
-								<ASP:ListItem value="kind2">Kind2</ASP:ListItem></ASP:DropDownList><ASP:RegularExpressionValidator id="RegularExpressionValidator_user_kind" runat="server" errormessage="Please select a user kind." font-bold="True" controltovalidate="DropDownList_user_kind" validationexpression="[a-z_]+">!ERR!</ASP:RegularExpressionValidator>
+								<ASP:ListItem value="kind2">Kind2</ASP:ListItem></ASP:DropDownList><ASP:RegularExpressionValidator id="RegularExpressionValidator_user_kind" runat="server" errormessage="Please select a user kind." font-bold="True" controltovalidate="DropDownList_user_kind" validationexpression="[a-z_1-9]+">!ERR!</ASP:RegularExpressionValidator>
 									</td>
 				</tr>
 				<tr>

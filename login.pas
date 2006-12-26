@@ -116,7 +116,7 @@ begin
   args.isvalid := p.biz_accounts.Exists
     (
     Safe(DropDownList_user_kind.selectedvalue,ECMASCRIPT_WORD),
-    Safe(DropDownList_user.selectedvalue,NUM),
+    Safe(DropDownList_user.selectedvalue.Substring(DropDownList_user.selectedvalue.LastIndexOf('_') + 1),NUM),
     ki.Digest(Safe(TextBox_password.Text.trim,ALPHANUM))
     );
 end;
@@ -125,7 +125,11 @@ procedure TWebForm_login.DropDownList_user_SelectedIndexChanged(sender: System.O
   e: System.EventArgs);
 begin
   session.Remove(DropDownList_user_kind.selectedvalue + '_user_id');
-  session.Add(DropDownList_user_kind.selectedvalue + '_user_id',Safe(DropDownList_user.SelectedValue,NUM));
+  session.Add
+    (
+    DropDownList_user_kind.selectedvalue + '_user_id',
+    Safe(DropDownList_user.selectedvalue.Substring(DropDownList_user.selectedvalue.LastIndexOf('_') + 1),NUM)
+    );
   session.Remove(DropDownList_user_kind.selectedvalue + '_name');
   session.Add(DropDownList_user_kind.selectedvalue + '_name',Safe(DropDownList_user.SelectedItem.Text,ORG_NAME));
 end;
@@ -137,13 +141,13 @@ begin
   session.Add('target_user_table',Safe(DropDownList_user_kind.selectedvalue,ECMASCRIPT_WORD));
   Label_user.enabled := TRUE;
   if DropDownList_user_kind.selectedvalue = 'kind1' then begin
-    Label_user.text := 'kind1';
+    Label_user.text := 'Kind1';
     p.biz_accounts.Bindkind1s(DropDownList_user);
   end else if DropDownList_user_kind.selectedvalue = 'kind3' then begin
     Label_user.text := 'Kind3';
     p.biz_accounts.BindKind3s(DropDownList_user);
   end else if DropDownList_user_kind.selectedvalue = 'kind2' then begin
-    Label_user.text := 'Regional staffer';
+    Label_user.text := 'Kind2';
     p.biz_accounts.BindKind2s(DropDownList_user);
   end else begin
     session.Remove('target_user_table');
