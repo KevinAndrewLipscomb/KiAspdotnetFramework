@@ -99,8 +99,8 @@ begin
   DropDownList(target).items.Add(listitem.Create('-- Select --','0'));
   bdr := Borland.Data.Provider.BdpCommand.Create
     (
-    'SELECT id,name '
-    + 'FROM kind3_user JOIN kind3_code_name_map on (kind3_code_name_map.code = kind3_user.id) '
+    'SELECT kind3_user.id,name '
+    + 'FROM kind3_user JOIN kind3 on (kind3.id = kind3_user.id) '
     + 'WHERE be_active = TRUE '
     + 'ORDER BY name',
     connection
@@ -122,16 +122,16 @@ begin
   DropDownList(target).items.Add(listitem.Create('-- Select --','0'));
   bdr := Borland.Data.Provider.BdpCommand.Create
     (
-    'SELECT id,last_name,first_name '
+    'SELECT id,name '
     + 'FROM kind2_user JOIN kind2 using (id) '
     + 'WHERE be_active = TRUE '
-    + 'ORDER BY last_name,first_name',
+    + 'ORDER BY name',
     connection
     )
     .ExecuteReader;
   while bdr.Read do begin
     DropDownList(target).Items.Add
-      (listitem.Create(bdr['last_name'].tostring + ', ' + bdr['first_name'].tostring,'kind2_' + bdr['id'].ToString));
+      (listitem.Create(bdr['name'].tostring,'kind2_' + bdr['id'].ToString));
   end;
   bdr.Close;
   self.Close;
