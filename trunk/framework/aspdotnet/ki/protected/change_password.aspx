@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                       <td>
-						You must change your password before proceeding.<br>
+						If you logged in using a temporary password, you must change your password before proceeding.<br>
 					  </td>
                     </tr>
                     <tr>

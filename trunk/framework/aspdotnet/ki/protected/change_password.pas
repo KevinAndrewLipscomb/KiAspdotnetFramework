@@ -85,6 +85,9 @@ begin
     end;
     Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - change_password';
     //
+    p.biz_accounts := TClass_biz_accounts.Create;
+    p.biz_user := TClass_biz_user.Create;
+    //
     Label_account_descriptor.Text := session[session['target_user_table'].ToString + '_name'].ToString;
     if session['target_user_table'].tostring = 'kind3' then begin
       Label_account_descriptor.Text := Label_account_descriptor.Text + ' Kind3';

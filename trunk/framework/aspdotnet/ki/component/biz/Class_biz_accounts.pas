@@ -69,13 +69,13 @@ type
       user_id: string;
       email_address: string
       );
-    procedure SetTemporaryPassword
+    procedure SetPassword
       (
       user_kind: string;
       user_id: string;
       encoded_password: string
       );
-    procedure SetPassword
+    procedure SetTemporaryPassword
       (
       user_kind: string;
       user_id: string;
@@ -194,7 +194,7 @@ begin
     ConfigurationSettings.AppSettings['sender_email_address'],
     kind1_email_address,
     'Reminder of approaching deadline',
-    'This is an automated reminder from WebEMSOF.' + NEW_LINE
+    'This is an automated reminder from KiAspdotnetFramework.' + NEW_LINE
     + NEW_LINE
     + 'You have ' + num_days_left.tostring + ' days to ' + task_description + '.  The deadline is '
     + deadline_date.tostring('HH:mm:ss dddd, MMMM d, yyyy') + '.' + NEW_LINE
