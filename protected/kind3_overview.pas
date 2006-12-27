@@ -23,7 +23,6 @@ type
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure Button_continue_Click(sender: System.Object; e: System.EventArgs);
     procedure LinkButton_logout_Click(sender: System.Object; e: System.EventArgs);
     procedure LinkButton_change_password_Click(sender: System.Object; e: System.EventArgs);
     procedure LinkButton_change_email_address_Click(sender: System.Object; e: System.EventArgs);
@@ -38,9 +37,6 @@ type
     PlaceHolder_precontent: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_postcontent: System.Web.UI.WebControls.PlaceHolder;
     Label_kind3_name: System.Web.UI.WebControls.Label;
-    RadioButtonList_appropriation: System.Web.UI.WebControls.RadioButtonList;
-    Button_continue: System.Web.UI.WebControls.Button;
-    RequiredFieldValidator_appropriation: System.Web.UI.WebControls.RequiredFieldValidator;
     Label_literal_kind3: System.Web.UI.WebControls.Label;
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
     LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
@@ -67,7 +63,6 @@ begin
   Include(Self.LinkButton_logout.Click, Self.LinkButton_logout_Click);
   Include(Self.LinkButton_change_password.Click, Self.LinkButton_change_password_Click);
   Include(Self.LinkButton_change_email_address.Click, Self.LinkButton_change_email_address_Click);
-  Include(Self.Button_continue.Click, Self.Button_continue_Click);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebForm_kind3_overview_PreRender);
 end;
@@ -138,14 +133,6 @@ begin
   formsauthentication.SignOut;
   session.Clear;
   server.Transfer('../Default.aspx');
-end;
-
-procedure TWebForm_kind3_overview.Button_continue_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  session.Remove('region_dictated_appropriation_id');
-  session.Add('region_dictated_appropriation_id',Safe(RadioButtonList_appropriation.SelectedValue,NUM));
-  server.Transfer('kind3_dictated_appropriations.aspx');
 end;
 
 end.

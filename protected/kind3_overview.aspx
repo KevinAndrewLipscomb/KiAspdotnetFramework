@@ -20,25 +20,7 @@
 	  </small></p>
 <p>
 		<ASP:Label id="Label_kind3_name" runat="server" font-bold="True" font-size="Large"></ASP:Label>&nbsp;<ASP:Label id="Label_literal_kind3" runat="server" font-bold="True" font-size="Large">Kind3</ASP:Label></p>
-<p>
-        <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
-            <tr>
-              <td>
-                <table cellspacing="0" cellpadding="10" border="0">
-                    <tr>
-                      <td bgcolor="#f5f5f5"><strong>Available allocations</strong></td>
-                    </tr>
-                    <tr>
-                      <td>
-<p>Which allocation do you want to work with?&nbsp; <ASP:RequiredFieldValidator id="RequiredFieldValidator_appropriation" runat="server" errormessage="Please choose an allocation." font-bold="True" controltovalidate="RadioButtonList_appropriation">!ERR!</ASP:RequiredFieldValidator></p>
-<p>
-        <ASP:RadioButtonList id="RadioButtonList_appropriation" runat="server"></ASP:RadioButtonList></p>
-<p>
-        <ASP:Button id="Button_continue" runat="server" text="Continue"></ASP:Button></p></td>
-                    </tr>
-                </table></td>
-            </tr>
-        </table></p>
+<p></p>
     <asp:placeholder id="PlaceHolder_postcontent" runat="server">
     </asp:placeholder>
      <sstchur:SmartScroller runat="server" /></form>

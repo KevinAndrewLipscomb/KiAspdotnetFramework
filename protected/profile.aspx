@@ -15,7 +15,7 @@
 	  <p>
 		<small>[
 		  <ASP:LinkButton id="LinkButton_logout" runat="server" causesvalidation="False">Logout</ASP:LinkButton>&nbsp;] [ Back to <ASP:LinkButton id="LinkButton_kind1_overview" runat="server">kind1 overview</ASP:LinkButton>&nbsp;form ]
-		  [ Change your {appname}
+		  [ Change your KiAspdotnetFramework
 		<ASP:LinkButton id="LinkButton_change_password" runat="server">password</ASP:LinkButton>&nbsp;| <ASP:LinkButton id="LinkButton_change_email_address" runat="server">email address</ASP:LinkButton>&nbsp;]
 		</small></p>
 	  <p>
