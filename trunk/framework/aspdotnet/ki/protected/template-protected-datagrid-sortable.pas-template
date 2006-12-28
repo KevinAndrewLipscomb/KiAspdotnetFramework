@@ -211,15 +211,8 @@ begin
 end;
 
 procedure TWebForm_template_protected_datagrid_sortable.Bind;
-var be_datagrid_empty: boolean;
-var cmdText: string;
 begin
-  p.biz1.Bind
-    (
-    p.sort_order,
-    p.be_sort_order_ascending,
-    DataGrid1
-    );
+  p.biz1.BindTemplateProtectedDatagridSortable(p.sort_order,p.be_sort_order_ascending,DataGrid1);
   //
   // Manage control visibilities.
   //
