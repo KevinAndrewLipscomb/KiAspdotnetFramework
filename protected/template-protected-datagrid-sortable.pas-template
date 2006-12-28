@@ -8,7 +8,7 @@ uses
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration, system.web.security,
   borland.data.provider,
-  Class_bc1,
+  Class_biz1,
   ki,
   ki_web_ui;
 
@@ -17,8 +17,9 @@ const ID = '$Id$';
 type
   p_type =
     RECORD
-    bc1: Class_bc1.TClass_bc1;
+    be_datagrid_empty: boolean;
     be_sort_order_ascending: boolean;
+    biz1: TClass_biz1;
     tcci_id: cardinal; // tcci = TableCellCollection Index
     tcci_field1: cardinal;
     tcci_field2: cardinal;
@@ -79,8 +80,10 @@ end;
 {$ENDREGION}
 
 procedure TWebForm_template_protected_datagrid_sortable.Page_Load(sender: System.Object; e: System.EventArgs);
+var
+  waypoint_stack: stack;
 begin
-  ki.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
+  appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
   if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
     p := p_type(session['p']);
   end else begin
@@ -97,6 +100,7 @@ begin
       //
       // Initialize implementation-wide vars.
       //
+      p.biz1 := TClass_biz1.Create;
       p.be_sort_order_ascending := TRUE;
       p.tcci_id := 1;
       p.tcci_field1 := 2;
@@ -210,7 +214,7 @@ procedure TWebForm_template_protected_datagrid_sortable.Bind;
 var be_datagrid_empty: boolean;
 var cmdText: string;
 begin
-  TClass_bc1.Create.Bind
+  p.biz1.Bind
     (
     p.sort_order,
     p.be_sort_order_ascending,
