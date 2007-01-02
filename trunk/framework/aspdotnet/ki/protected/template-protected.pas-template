@@ -7,7 +7,7 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration, system.web.security,
-  ki,
+  appcommon,
   ki_web_ui;
 
 const ID = '$Id$';
@@ -22,6 +22,10 @@ type
     procedure InitializeComponent;
     procedure LinkButton_logout_Click(sender: System.Object; e: System.EventArgs);
     procedure TWebForm_template_protected_PreRender(sender: System.Object;
+      e: System.EventArgs);
+    procedure LinkButton_change_password_Click(sender: System.Object;
+      e: System.EventArgs);
+    procedure LinkButton_change_email_address_Click(sender: System.Object;
       e: System.EventArgs);
     procedure LinkButton_back_Click(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
@@ -62,6 +66,8 @@ procedure TWebForm_template_protected.InitializeComponent;
 begin
   Include(Self.LinkButton_logout.Click, Self.LinkButton_logout_Click);
   Include(Self.LinkButton_back.Click, Self.LinkButton_back_Click);
+  Include(Self.LinkButton_change_password.Click, Self.LinkButton_change_password_Click);
+  Include(Self.LinkButton_change_email_address.Click, Self.LinkButton_change_email_address_Click);
   Include(Self.LinkButton_drill_down.Click, Self.LinkButton_drill_down_Click);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebForm_template_protected_PreRender);
@@ -69,8 +75,10 @@ end;
 {$ENDREGION}
 
 procedure TWebForm_template_protected.Page_Load(sender: System.Object; e: System.EventArgs);
+var
+  waypoint_stack: stack;
 begin
-  ki.common.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
+  appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
   if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
     p := p_type(session['p']);
   end else begin
