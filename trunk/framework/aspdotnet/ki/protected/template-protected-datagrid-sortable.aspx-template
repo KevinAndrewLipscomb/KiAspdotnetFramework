@@ -1,4 +1,4 @@
-<%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %><%@ Page language="c#" Debug="true" Codebehind="template-protected-datagrid-sortable.pas" AutoEventWireup="false" Inherits="template-protected-datagrid-sortable.TWebForm_template-protected-datagrid-sortable" %>
+<%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %><%@ Page language="c#" Debug="true" Codebehind="template_protected_datagrid_sortable.pas" AutoEventWireup="false" Inherits="template_protected_datagrid_sortable.TWebForm_template_protected_datagrid_sortable" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
