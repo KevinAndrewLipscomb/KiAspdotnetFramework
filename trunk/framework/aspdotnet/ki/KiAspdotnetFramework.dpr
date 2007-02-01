@@ -69,7 +69,8 @@ uses
   Class_db_milestones in 'component\db\Class_db_milestones.pas',
   Class_biz_kind3s in 'component\biz\Class_biz_kind3s.pas',
   Class_db_kind3s in 'component\db\Class_db_kind3s.pas',
-  appcommon in 'appcommon.pas';
+  appcommon in 'appcommon.pas',
+  Class_db_trail in 'component\db\Class_db_trail.pas';
 
 const ID = '$Id$';
 
