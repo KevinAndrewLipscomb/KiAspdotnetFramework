@@ -38,6 +38,7 @@ library KiAspdotnetFramework;
 {%DelphiDotNetAssemblyCompiler 'lib\ki\ki.dll'}
 {%File 'noninteractive\.crontab'}
 {%AspMarkupContainer 'noninteractive\milestone_sweep.aspx'}
+{%AspMarkupContainer 'noninteractive\daily_tasks.aspx'}
 
 uses
   System.Reflection,
@@ -70,7 +71,9 @@ uses
   Class_biz_kind3s in 'component\biz\Class_biz_kind3s.pas',
   Class_db_kind3s in 'component\db\Class_db_kind3s.pas',
   appcommon in 'appcommon.pas',
-  Class_db_trail in 'component\db\Class_db_trail.pas';
+  Class_db_trail in 'component\db\Class_db_trail.pas',
+  Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
+  daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page};
 
 const ID = '$Id$';
 
