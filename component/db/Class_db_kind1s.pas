@@ -5,12 +5,13 @@ interface
 uses
   borland.data.provider,
   Class_db,
+  Class_db_trail,
   system.web.ui.webcontrols;
 
 type
   TClass_db_kind1s = class(TClass_db)
   private
-    { Private Declarations }
+    db_trail: TClass_db_trail;
   public
     constructor Create;
     function AffiliateNumOfId(id: string): string;
@@ -41,6 +42,7 @@ constructor TClass_db_kind1s.Create;
 begin
   inherited Create;
   // TODO: Add any constructor code here
+  db_trail := TClass_db_trail.Create;
 end;
 
 function TClass_db_kind1s.AffiliateNumOfId(id: string): string;
@@ -133,10 +135,13 @@ begin
   self.Open;
   borland.data.provider.bdpcommand.Create
     (
-    'UPDATE kind1 '
-    + 'SET name = "' + name + '"'
-    +   ', be_valid_profile = TRUE '
-    + 'WHERE id = "' + id + '"',
+    db_trail.Saved
+      (
+      'UPDATE kind1 '
+      + 'SET name = "' + name + '"'
+      +   ', be_valid_profile = TRUE '
+      + 'WHERE id = "' + id + '"'
+      ),
     connection
     )
     .ExecuteNonQuery;
