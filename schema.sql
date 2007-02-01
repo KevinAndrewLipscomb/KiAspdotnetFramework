@@ -5,6 +5,21 @@ SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT=0;
 START TRANSACTION;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `journal`
+--
+
+DROP TABLE IF EXISTS journal;
+CREATE TABLE IF NOT EXISTS journal (
+  `timestamp` TIMESTAMP NOT NULL,
+  actor VARCHAR(31) NOT NULL,
+  action VARCHAR(2047) NOT NULL,
+  PRIMARY KEY(`timestamp`),
+  INDEX actor (actor)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- kind1
 --
