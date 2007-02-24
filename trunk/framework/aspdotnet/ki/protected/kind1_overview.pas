@@ -13,7 +13,7 @@ uses
   Class_biz_kind1s,
   Class_biz_user;
 
-const ID = '$Id$';
+
 
 type
   p_type =

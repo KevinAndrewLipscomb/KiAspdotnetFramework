@@ -9,7 +9,7 @@ uses
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, system.configuration, system.web.security,
   system.text;
 
-const ID = '$Id$';
+
 
 type
   TWebForm_kind2_overview = class(ki_web_ui.page_class)

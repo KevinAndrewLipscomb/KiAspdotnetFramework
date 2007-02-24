@@ -75,7 +75,7 @@ uses
   Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
   daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page};
 
-const ID = '$Id$';
+
 
 //
 // General Information about an assembly is controlled through the following
