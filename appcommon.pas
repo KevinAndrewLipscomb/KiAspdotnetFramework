@@ -6,7 +6,7 @@ uses
   system.configuration,
   system.web.UI.WebControls;
 
-const ID = '$Id$';
+
 
 procedure PopulatePlaceHolders
   (
