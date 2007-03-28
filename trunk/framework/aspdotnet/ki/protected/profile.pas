@@ -9,9 +9,8 @@ uses
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki,
   Borland.Data.Common, System.Globalization,
   System.Data.Common, system.configuration, system.web.security,
-  Class_biz_kind1s;
-
-
+  Class_biz_kind1s,
+  UserControl_print_div;
 
 type
   p_type =
@@ -47,6 +46,7 @@ type
     LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
     LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
     LinkButton_kind1_overview: System.Web.UI.WebControls.LinkButton;
+    UserControl_print_div: TWebUserControl_print_div;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -91,6 +91,8 @@ begin
       server.Transfer('~/login.aspx');
     end;
     Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - profile';
+    
+    //
     p.biz_kind1s := TClass_biz_kind1s.Create;
     //
     // Set Label_kind1_name

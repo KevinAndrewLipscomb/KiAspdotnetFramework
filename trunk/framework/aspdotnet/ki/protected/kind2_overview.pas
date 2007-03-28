@@ -7,9 +7,8 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, system.configuration, system.web.security,
-  system.text;
-
-
+  system.text,
+  UserControl_print_div;
 
 type
   TWebForm_kind2_overview = class(ki_web_ui.page_class)
@@ -30,6 +29,7 @@ type
     LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
     LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
     Label_account_descriptor: System.Web.UI.WebControls.Label;
+    UserControl_print_div: TWebUserControl_print_div;
     //
     procedure OnInit(e: EventArgs); override;
   private
@@ -74,6 +74,7 @@ begin
     end;
     //
     Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - kind2_overview';
+    
     Label_account_descriptor.text := session['kind2_name'].tostring;
     //
     //
