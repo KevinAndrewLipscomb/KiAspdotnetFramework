@@ -1,4 +1,3 @@
-
 unit template_protected_datagrid_sortable;
 
 interface
@@ -10,9 +9,8 @@ uses
   borland.data.provider,
   Class_biz1,
   ki,
-  ki_web_ui;
-
-
+  ki_web_ui,
+  UserControl_print_div;
 
 type
   p_type =
@@ -55,6 +53,7 @@ type
     LinkButton_back: System.Web.UI.WebControls.LinkButton;
     DataGrid1: System.Web.UI.WebControls.DataGrid;
     TableRow_none: System.Web.UI.HtmlControls.HtmlTableRow;
+    UserControl_print_div: TWebUserControl_print_div;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }

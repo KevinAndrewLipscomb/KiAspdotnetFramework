@@ -11,9 +11,8 @@ uses
   Borland.Data.Common, system.configuration, system.web.security,
   Class_biz_accounts,
   Class_biz_kind1s,
-  Class_biz_user;
-
-
+  Class_biz_user,
+  UserControl_print_div;
 
 type
   p_type =
@@ -46,6 +45,7 @@ type
     LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
     LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
+    UserControl_print_div: TWebUserControl_print_div;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -93,6 +93,7 @@ begin
     end;
     //
     Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - kind1_overview';
+    
     //
     // Set Label_kind1_name
     //

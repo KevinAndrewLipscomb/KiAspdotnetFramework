@@ -8,9 +8,8 @@ uses
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration, system.web.security,
   appcommon,
-  ki_web_ui;
-
-
+  ki_web_ui,
+  UserControl_print_div;
 
 type
   p_type =
@@ -48,6 +47,7 @@ type
     Label_account_descriptor: System.Web.UI.WebControls.Label;
     LinkButton_back: System.Web.UI.WebControls.LinkButton;
     LinkButton_drill_down: System.Web.UI.WebControls.LinkButton;
+    UserControl_print_div: TWebUserControl_print_div;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }

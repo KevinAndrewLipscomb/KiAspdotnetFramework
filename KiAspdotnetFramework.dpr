@@ -39,6 +39,7 @@ library KiAspdotnetFramework;
 {%File 'noninteractive\.crontab'}
 {%AspMarkupContainer 'noninteractive\milestone_sweep.aspx'}
 {%AspMarkupContainer 'noninteractive\daily_tasks.aspx'}
+{%AspMarkupContainer 'usercontrol\ki\UserControl_print_div.ascx'}
 
 uses
   System.Reflection,
@@ -73,9 +74,8 @@ uses
   appcommon in 'appcommon.pas',
   Class_db_trail in 'component\db\Class_db_trail.pas',
   Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
-  daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page};
-
-
+  daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page},
+  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: System.Windows.Forms.UserControl};
 
 //
 // General Information about an assembly is controlled through the following
