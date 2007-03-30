@@ -81,6 +81,10 @@ begin
   if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
     p := p_type(session['p']);
   end else begin
+    if (session['intendedkind_user_id'] = nil) or (session['intendedkind_name'] = nil) then begin
+      session.Clear;
+      server.Transfer('~/login.aspx');
+    end;
     //
     Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected_landing';
     Label_account_descriptor.text := session.item['_name'].tostring;
