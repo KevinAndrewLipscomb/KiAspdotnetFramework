@@ -1,4 +1,3 @@
-
 unit change_email_address;
 
 interface
@@ -10,8 +9,6 @@ uses
   system.net, system.web.security,
   Class_biz_accounts,
   Class_biz_user;
-
-
 
 type
   p_type =
@@ -149,6 +146,8 @@ begin
   if page.isvalid then begin
     p.biz_accounts.SetEmailAddress(p.biz_user.Kind,Safe(TextBox_nominal_email_address.Text.Trim,EMAIL_ADDRESS),p.biz_user.IdNum);
     server.Transfer(session['target_user_table'].ToString + '_overview.aspx');
+  end else begin
+    ValidationAlert;
   end;
 end;
 
