@@ -1,4 +1,4 @@
-<%@ Page language="c#" Debug="true" Codebehind="template_protected.pas" AutoEventWireup="false" Inherits="template_protected.TWebForm_template_protected" %>
+<%@ Page language="c#" Debug="true" Codebehind="template_protected_nonlanding.pas" AutoEventWireup="false" Inherits="template_protected_nonlanding.TWebForm_template_protected_nonlanding" %>
 <%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_print_div" Src="~/usercontrol/ki/UserControl_print_div.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

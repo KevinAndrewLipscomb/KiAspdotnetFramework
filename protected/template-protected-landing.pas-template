@@ -1,5 +1,4 @@
-
-unit template_protected;
+unit template_protected_landing;
 
 interface
 
@@ -15,12 +14,12 @@ type
   p_type =
     RECORD
     END;
-  TWebForm_template_protected = class(ki_web_ui.page_class)
+  TWebForm_template_protected_landing = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
     procedure LinkButton_logout_Click(sender: System.Object; e: System.EventArgs);
-    procedure TWebForm_template_protected_PreRender(sender: System.Object;
+    procedure TWebForm_template_protected_landing_PreRender(sender: System.Object;
       e: System.EventArgs);
     procedure LinkButton_change_password_Click(sender: System.Object;
       e: System.EventArgs);
@@ -62,7 +61,7 @@ implementation
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebForm_template_protected.InitializeComponent;
+procedure TWebForm_template_protected_landing.InitializeComponent;
 begin
   Include(Self.LinkButton_logout.Click, Self.LinkButton_logout_Click);
   Include(Self.LinkButton_back.Click, Self.LinkButton_back_Click);
@@ -70,11 +69,11 @@ begin
   Include(Self.LinkButton_change_email_address.Click, Self.LinkButton_change_email_address_Click);
   Include(Self.LinkButton_drill_down.Click, Self.LinkButton_drill_down_Click);
   Include(Self.Load, Self.Page_Load);
-  Include(Self.PreRender, Self.TWebForm_template_protected_PreRender);
+  Include(Self.PreRender, Self.TWebForm_template_protected_landing_PreRender);
 end;
 {$ENDREGION}
 
-procedure TWebForm_template_protected.Page_Load(sender: System.Object; e: System.EventArgs);
+procedure TWebForm_template_protected_landing.Page_Load(sender: System.Object; e: System.EventArgs);
 var
   waypoint_stack: stack;
 begin
@@ -82,29 +81,19 @@ begin
   if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
     p := p_type(session['p']);
   end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      //
-      // The request for this page could not have been the result of a server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
-      //
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
-      //
-      Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected';
-      Label_account_descriptor.text := session.item['_name'].tostring;
-      //
-      {$REGION 'Keep this block iff the user lands on this form immediately after login.'}
-      session.Remove('waypoint_stack');
-      waypoint_stack := system.collections.stack.Create;
-      waypoint_stack.Push('regional_staffer_overview.aspx');
-      session.Add('waypoint_stack',waypoint_stack);
-      {$ENDREGION}
-      //
-    end;
+    //
+    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected_landing';
+    Label_account_descriptor.text := session.item['_name'].tostring;
+    //
+    session.Remove('waypoint_stack');
+    waypoint_stack := system.collections.stack.Create;
+    waypoint_stack.Push('template_protected_landing.aspx');
+    session.Add('waypoint_stack',waypoint_stack);
+    //
   end;
 end;
 
-procedure TWebForm_template_protected.OnInit(e: EventArgs);
+procedure TWebForm_template_protected_landing.OnInit(e: EventArgs);
 begin
   //
   // Required for Designer support
@@ -114,40 +103,40 @@ begin
 end;
 
 {$REGION 'Waypoint management code for drill-down server.Transfer calls.'}
-procedure TWebForm_template_protected.LinkButton_drill_down_Click(sender: System.Object;
+procedure TWebForm_template_protected_landing.LinkButton_drill_down_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  system.collections.stack(session['waypoint_stack']).Push('template_protected.aspx');
+  system.collections.stack(session['waypoint_stack']).Push('template_protected_landing.aspx');
   server.Transfer('detail.aspx');
 end;
 {$ENDREGION}
 
-procedure TWebForm_template_protected.LinkButton_change_email_address_Click(sender: System.Object;
+procedure TWebForm_template_protected_landing.LinkButton_change_email_address_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   server.Transfer('change_email_address.aspx');
 end;
 
-procedure TWebForm_template_protected.LinkButton_change_password_Click(sender: System.Object;
+procedure TWebForm_template_protected_landing.LinkButton_change_password_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   server.Transfer('change_password.aspx');
 end;
 
-procedure TWebForm_template_protected.LinkButton_back_Click(sender: System.Object;
+procedure TWebForm_template_protected_landing.LinkButton_back_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   server.Transfer(stack(session['waypoint_stack']).Pop.tostring);
 end;
 
-procedure TWebForm_template_protected.TWebForm_template_protected_PreRender(sender: System.Object;
+procedure TWebForm_template_protected_landing.TWebForm_template_protected_landing_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
   session.Remove('p');
   session.Add('p',p);
 end;
 
-procedure TWebForm_template_protected.LinkButton_logout_Click(sender: System.Object;
+procedure TWebForm_template_protected_landing.LinkButton_logout_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   formsauthentication.SignOut;
