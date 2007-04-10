@@ -78,10 +78,10 @@ var
   waypoint_stack: stack;
 begin
   appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
-  if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['p']);
+  if IsPostback and (session['template_protected_landing.p'].GetType.namespace = p.GetType.namespace) then begin
+    p := p_type(session['template_protected_landing.p']);
   end else begin
-    if (session['intendedkind_user_id'] = nil) or (session['intendedkind_name'] = nil) then begin
+    if (session['user_id'] = nil) or (session['username'] = nil) then begin
       session.Clear;
       server.Transfer('~/login.aspx');
     end;
@@ -136,8 +136,8 @@ end;
 procedure TWebForm_template_protected_landing.TWebForm_template_protected_landing_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('p');
-  session.Add('p',p);
+  session.Remove('template_protected_landing.p');
+  session.Add('template_protected_landing.p',p);
 end;
 
 procedure TWebForm_template_protected_landing.LinkButton_logout_Click(sender: System.Object;

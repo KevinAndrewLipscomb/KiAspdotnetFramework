@@ -90,8 +90,8 @@ var
   waypoint_stack: stack;
 begin
   appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
-  if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['p']);
+  if IsPostback and (session['template_protected_datagrid_sortable.p'].GetType.namespace = p.GetType.namespace) then begin
+    p := p_type(session['template_protected_datagrid_sortable.p']);
   end else begin
     if request.servervariables['URL'] = request.currentexecutionfilepath then begin
       //
@@ -151,8 +151,8 @@ end;
 procedure TWebForm_template_protected_datagrid_sortable.TWebForm_template_protected_datagrid_sortable_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('p');
-  session.Add('p',p);
+  session.Remove('template_protected_datagrid_sortable.p');
+  session.Add('template_protected_datagrid_sortable.p',p);
 end;
 
 procedure TWebForm_template_protected_datagrid_sortable.DataGrid1_ItemCommand(source: System.Object;

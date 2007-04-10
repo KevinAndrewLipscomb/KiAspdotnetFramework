@@ -1,5 +1,4 @@
-
-unit kind1_overview;
+unit overview;
 
 interface
 
@@ -9,27 +8,24 @@ uses
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki,
   System.Data.Common, Borland.Data.Provider, System.Globalization,
   Borland.Data.Common, system.configuration, system.web.security,
-  Class_biz_accounts,
-  Class_biz_kind1s,
   Class_biz_user,
+  Class_biz_users,
   UserControl_print_div;
 
 type
   p_type =
     RECORD
-    biz_accounts: TClass_biz_accounts;
-    biz_kind1s: TClass_biz_kind1s;
     biz_user: TClass_biz_user;
+    biz_users: TClass_biz_users;
     END;
-  TWebForm_kind1_overview = class(ki_web_ui.page_class)
+  TWebForm_overview = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure LinkButton_profile_action_Click(sender: System.Object; e: System.EventArgs);
     procedure LinkButton_change_password_Click(sender: System.Object; e: System.EventArgs);
     procedure LinkButton_change_email_address_Click(sender: System.Object; e: System.EventArgs);
     procedure LinkButton_logout_Click(sender: System.Object; e: System.EventArgs);
-    procedure TWebForm_kind1_overview_PreRender(sender: System.Object;
+    procedure TWebForm_overview_PreRender(sender: System.Object;
       e: System.EventArgs);
   {$ENDREGION}
   strict private
@@ -39,13 +35,11 @@ type
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;
     PlaceHolder_precontent: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_postcontent: System.Web.UI.WebControls.PlaceHolder;
-    Label_kind1_name: System.Web.UI.WebControls.Label;
-    Label_profile_status: System.Web.UI.WebControls.Label;
-    LinkButton_profile_action: System.Web.UI.WebControls.LinkButton;
     LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
     LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
     UserControl_print_div: TWebUserControl_print_div;
+    Label_username: System.Web.UI.WebControls.Label;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -62,56 +56,79 @@ uses
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebForm_kind1_overview.InitializeComponent;
+procedure TWebForm_overview.InitializeComponent;
 begin
   Include(Self.LinkButton_logout.Click, Self.LinkButton_logout_Click);
   Include(Self.LinkButton_change_password.Click, Self.LinkButton_change_password_Click);
   Include(Self.LinkButton_change_email_address.Click, Self.LinkButton_change_email_address_Click);
-  Include(Self.LinkButton_profile_action.Click, Self.LinkButton_profile_action_Click);
   Include(Self.Load, Self.Page_Load);
-  Include(Self.PreRender, Self.TWebForm_kind1_overview_PreRender);
+  Include(Self.PreRender, Self.TWebForm_overview_PreRender);
 end;
 {$ENDREGION}
 
-procedure TWebForm_kind1_overview.Page_Load(sender: System.Object; e: System.EventArgs);
+procedure TWebForm_overview.Page_Load(sender: System.Object; e: System.EventArgs);
+var
+  i: cardinal;
+  num_privileges: cardinal;
+  privilege_array: ki.string_array;
+  waypoint_stack: stack;
 begin
   appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
-  if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['p']);
+  if IsPostback and (session['overview.p'].GetType.namespace = p.GetType.namespace) then begin
+    p := p_type(session['overview.p']);
   end else begin
-    if (session['kind1_user_id'] = nil) or (session['kind1_name'] = nil) then begin
+    if (session['user_id'] = nil) or (session['username'] = nil) then begin
       session.Clear;
       server.Transfer('~/login.aspx');
     end;
     //
-    p.biz_accounts := TClass_biz_accounts.Create;
-    p.biz_kind1s := TClass_biz_kind1s.Create;
     p.biz_user := TClass_biz_user.Create;
+    p.biz_users := TClass_biz_users.Create;
     //
-    if p.biz_accounts.BeStalePassword(p.biz_user.Kind,p.biz_user.IdNum) then begin
+    p.biz_users.RecordSuccessfulLogin(session['user_id'].tostring);
+    //
+    if p.biz_users.BeStalePassword(p.biz_user.IdNum) then begin
       server.Transfer('change_password.aspx');
     end;
     //
-    Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - kind1_overview';
-    
+    Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - overview';
+    Label_username.text := session['username'].ToString;
     //
-    // Set Label_kind1_name
+    session.Remove('waypoint_stack');
+    waypoint_stack := system.collections.stack.Create;
+    waypoint_stack.Push('overview.aspx');
+    session.Add('waypoint_stack',waypoint_stack);
     //
-    Label_kind1_name.Text := session['kind1_name'].ToString;
+    // Display controls appropriate to all users.
     //
-    // Set Label_profile_status
     //
-    if not p.biz_kind1s.BeValidProfile(p.biz_user.IdNum) then begin
-      Label_profile_status.Text := 'Not saved.';
-      LinkButton_profile_action.Text := '[Create profile]';
+    privilege_array := p.biz_user.Privileges;
+    if privilege_array = nil then begin
+      //
+      // Display controls appropriate ONLY to unprivileged users.
+      //
+      //
     end else begin
-      Label_profile_status.Text := 'Saved.';
-      LinkButton_profile_action.Text := '[Edit profile]';
+      //
+      // Display controls appropriate to user's privileges.
+      //
+      num_privileges := system.array(privilege_array).length;
+      for i := 0 to (num_privileges - 1) do begin
+
+        if privilege_array[i] ='priv_A' then begin
+          //
+          //
+        end else if privilege_array[i] = 'priv_B' then begin
+          //
+          //
+        end;
+      end;
+      //
     end;
   end;
 end;
 
-procedure TWebForm_kind1_overview.OnInit(e: EventArgs);
+procedure TWebForm_overview.OnInit(e: EventArgs);
 begin
   //
   // Required for Designer support
@@ -120,14 +137,14 @@ begin
   inherited OnInit(e);
 end;
 
-procedure TWebForm_kind1_overview.TWebForm_kind1_overview_PreRender(sender: System.Object;
+procedure TWebForm_overview.TWebForm_overview_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('p');
-  session.Add('p',p);
+  session.Remove('overview.p');
+  session.Add('overview.p',p);
 end;
 
-procedure TWebForm_kind1_overview.LinkButton_logout_Click(sender: System.Object;
+procedure TWebForm_overview.LinkButton_logout_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   formsauthentication.SignOut;
@@ -135,22 +152,16 @@ begin
   server.Transfer('../Default.aspx');
 end;
 
-procedure TWebForm_kind1_overview.LinkButton_change_email_address_Click(sender: System.Object;
+procedure TWebForm_overview.LinkButton_change_email_address_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   server.Transfer('change_email_address.aspx');
 end;
 
-procedure TWebForm_kind1_overview.LinkButton_change_password_Click(sender: System.Object;
+procedure TWebForm_overview.LinkButton_change_password_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   server.Transfer('change_password.aspx');
-end;
-
-procedure TWebForm_kind1_overview.LinkButton_profile_action_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  server.Transfer('profile.aspx');
 end;
 
 end.
