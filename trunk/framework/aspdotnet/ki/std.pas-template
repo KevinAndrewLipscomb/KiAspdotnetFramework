@@ -1,4 +1,3 @@
-
 unit template_std;
 
 interface
@@ -9,8 +8,6 @@ uses
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration,
   ki,
   ki_web_ui;
-
-
 
 type
   p_type =
@@ -39,6 +36,9 @@ type
 
 implementation
 
+uses
+  appcommon;
+
 {$REGION 'Designer Managed Code'}
 /// <summary>
 /// Required method for Designer support -- do not modify
@@ -53,9 +53,9 @@ end;
 
 procedure TWebForm_template_std.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  ki.common.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
-  if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['p']);
+  appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
+  if IsPostback and (session['template_std.p'].GetType.namespace = p.GetType.namespace) then begin
+    p := p_type(session['template_std.p']);
   end else begin
     if request.servervariables['URL'] = request.currentexecutionfilepath then begin
       //
@@ -81,8 +81,8 @@ end;
 procedure TWebForm_template_std.TWebForm_template_std_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('p');
-  session.Add('p',p);
+  session.Remove('template_std.p');
+  session.Add('template_std.p',p);
 end;
 
 end.

@@ -1,4 +1,4 @@
-﻿-- $Id$
+-- $Id$
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -22,100 +22,93 @@ CREATE TABLE IF NOT EXISTS journal (
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 --
--- kind1
+-- Table structure for table `profile`
 --
-drop table if exists kind1;
-create table kind1
+drop table if exists profile;
+create table profile
   (
-  id int unsigned NOT NULL,
-  name varchar(63) NOT NULL,
-  be_valid_profile boolean NOT NULL default 0,
-  PRIMARY KEY  (id)
+  id int unsigned AUTO_INCREMENT,
+  user_id int unsigned,
+  be_valid boolean NOT NULL default 0,
+  PRIMARY KEY (id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- kind2
+-- Table structure for table `privilege`
 --
-drop table if exists kind2;
-create table kind2
+drop table if exists privilege;
+create table privilege
   (
-  id int unsigned NOT NULL,
-  name varchar(63) NOT NULL,
-  be_valid_profile boolean NOT NULL default 0,
-  PRIMARY KEY  (id)
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(63) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (`name`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- kind3
+-- Table structure for table `role`
 --
-drop table if exists kind3;
-create table kind3
-  (
-  id int unsigned NOT NULL,
-  name varchar(63) NOT NULL,
-  be_valid_profile boolean NOT NULL default 0,
-  PRIMARY KEY  (id)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS kind1_user;
-CREATE TABLE kind1_user (
-  id int unsigned NOT NULL,
-  encoded_password char(40) default NULL,
-  be_stale_password boolean NOT NULL default 1,
-  password_reset_email_address varchar(255) NOT NULL,
-  be_active boolean NOT NULL default 1,
-  PRIMARY KEY  (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS kind2_group;
-CREATE TABLE kind2_group (
+DROP TABLE IF EXISTS role;
+CREATE TABLE role (
   id int unsigned NOT NULL auto_increment,
   `name` varchar(63) NOT NULL,
-  PRIMARY KEY  (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS kind2_role;
-CREATE TABLE kind2_role (
-  id int unsigned NOT NULL auto_increment,
-  user_id int unsigned NOT NULL,
-  group_id int unsigned NOT NULL,
   PRIMARY KEY  (id),
-  KEY user_id (user_id),
-  KEY group_id (group_id)
+  UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS kind2_user;
-CREATE TABLE kind2_user (
-  id int unsigned NOT NULL,
+--
+-- Table structure for table `role_privilege_map`
+--
+DROP TABLE IF EXISTS role_privilege_map;
+CREATE TABLE role_privilege_map (
+  role_id int unsigned NOT NULL,
+  privilege_id int unsigned NOT NULL,
+  PRIMARY KEY  (role_id,privilege_id),
+  KEY privilege_id (privilege_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- table structure for table `role_user_map`
+--
+DROP TABLE IF EXISTS role_user_map;
+CREATE TABLE role_user_map (
+  user_id int unsigned NOT NULL,
+  role_id int unsigned NOT NULL,
+  PRIMARY KEY  (user_id,role_id),
+  KEY role_id (role_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `user`
+--   Framework-required info about user
+--
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  username char(40) NOT NULL,
   encoded_password char(40) default NULL,
   be_stale_password boolean NOT NULL default 1,
   password_reset_email_address varchar(255) NOT NULL,
   be_active boolean NOT NULL default 1,
-  PRIMARY KEY  (id)
+  num_unsuccessful_login_attempts int unsigned NOT NULL default 0,
+  last_login datetime NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (username),
+  UNIQUE KEY (password_reset_email_address)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS kind3_user;
-CREATE TABLE kind3_user (
-  id int unsigned NOT NULL,
-  encoded_password char(40) default NULL,
-  be_stale_password boolean NOT NULL default 1,
-  password_reset_email_address varchar(255) NOT NULL,
-  be_active boolean NOT NULL default 1,
-  PRIMARY KEY  (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO user (username,password_reset_email_address,last_login) VALUES
+('appadmin','appadmin@frompaper2web.com',0);
+UPDATE user SET id = 0 where username = 'appadmin';
 
-ALTER TABLE `kind1_user`
-  ADD CONSTRAINT kind1_user_ibfk_1 FOREIGN KEY (id) REFERENCES kind1 (id);
 
-ALTER TABLE `kind2_role`
-  ADD CONSTRAINT kind2_role_ibfk_1 FOREIGN KEY (user_id) REFERENCES kind2_user (id),
-  ADD CONSTRAINT kind2_role_ibfk_2 FOREIGN KEY (group_id) REFERENCES kind2_group (id);
+ALTER TABLE profile
+  ADD CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id);
 
-ALTER TABLE `kind2_user`
-  ADD CONSTRAINT kind2_user_ibfk_1 FOREIGN KEY (id) REFERENCES kind2 (id);
+ALTER TABLE role_user_map
+  ADD CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id),
+  ADD CONSTRAINT FOREIGN KEY (role_id) REFERENCES role (id);
 
-ALTER TABLE `kind3_user`
-  ADD CONSTRAINT kind3_user_ibfk_1 FOREIGN KEY (id) REFERENCES kind3 (id);
 
 SET FOREIGN_KEY_CHECKS=1;
 

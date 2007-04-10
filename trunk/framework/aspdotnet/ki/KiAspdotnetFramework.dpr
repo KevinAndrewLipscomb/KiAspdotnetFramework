@@ -20,13 +20,8 @@ library KiAspdotnetFramework;
 {%AspFolderContainer 'component\db'}
 {%AspMarkupContainer 'Default.aspx'}
 {%AspMarkupContainer 'Global.asax'}
-{%AspMarkupContainer 'new_password.aspx'}
 {%AspMarkupContainer 'protected\change_email_address.aspx'}
 {%AspMarkupContainer 'protected\change_password.aspx'}
-{%AspMarkupContainer 'protected\kind3_overview.aspx'}
-{%AspMarkupContainer 'protected\profile.aspx'}
-{%AspMarkupContainer 'protected\kind2_overview.aspx'}
-{%AspMarkupContainer 'protected\kind1_overview.aspx'}
 {%AspWebConfigContainer 'protected\Web.config'}
 {%AspMarkupContainer 'salogin.aspx'}
 {%AspMarkupContainer 'login.aspx'}
@@ -40,42 +35,38 @@ library KiAspdotnetFramework;
 {%AspMarkupContainer 'noninteractive\milestone_sweep.aspx'}
 {%AspMarkupContainer 'noninteractive\daily_tasks.aspx'}
 {%AspMarkupContainer 'usercontrol\ki\UserControl_print_div.ascx'}
+{%AspMarkupContainer 'new_user_registration.aspx'}
+{%AspMarkupContainer 'remind_username.aspx'}
+{%AspMarkupContainer 'protected\overview.aspx'}
 
 uses
   System.Reflection,
   System.Runtime.CompilerServices,
   Class_biz_user in 'component\biz\Class_biz_user.pas',
-  Class_biz_accounts in 'component\biz\Class_biz_accounts.pas',
-  Class_biz_kind1s in 'component\biz\Class_biz_kind1s.pas',
   Class_db_user in 'component\db\Class_db_user.pas',
   Class_db in 'component\db\Class_db.pas',
-  Class_db_accounts in 'component\db\Class_db_accounts.pas',
-  Class_db_kind1s in 'component\db\Class_db_kind1s.pas',
   Default in 'Default.pas' {Default.TWebForm_Default: ki_web_ui.page_class},
   Global in 'Global.pas' {Global.TGlobal: System.Web.HttpApplication},
   salogin in 'salogin.pas' {salogin.TWebForm_salogin: ki_web_ui.page_class},
-  new_password in 'new_password.pas' {new_password.TWebForm_new_password: ki_web_ui.page_class},
   change_email_address in 'protected\change_email_address.pas' {change_email_address.TWebForm_change_email_address: ki_web_ui.page_class},
   change_password in 'protected\change_password.pas' {change_password.TWebForm_change_password: ki_web_ui.page_class},
-  kind3_overview in 'protected\kind3_overview.pas' {kind3_overview.TWebForm_kind3_overview: ki_web_ui.page_class},
-  profile in 'protected\profile.pas' {profile.TWebForm_profile: ki_web_ui.page_class},
-  kind2_overview in 'protected\kind2_overview.pas' {kind2_overview.TWebForm_kind2_overview: ki_web_ui.page_class},
-  kind1_overview in 'protected\kind1_overview.pas' {kind1_overview.TWebForm_kind1_overview: ki_web_ui.page_class},
-  Class_biz_kind2s in 'component\biz\Class_biz_kind2s.pas',
-  Class_db_kind2s in 'component\db\Class_db_kind2s.pas',
   login in 'login.pas' {login.TWebForm_login: ki_web_ui.page_class},
   exception in 'exception.pas' {exception.TWebForm_exception: ki_web_ui.page_class},
   timeout in 'timeout.pas' {timeout.TWebForm_timeout: system.web.ui.page},
   milestone_sweep in 'noninteractive\milestone_sweep.pas' {milestone_sweep.TWebForm_milestone_sweep: system.web.ui.page},
   Class_biz_milestones in 'component\biz\Class_biz_milestones.pas',
   Class_db_milestones in 'component\db\Class_db_milestones.pas',
-  Class_biz_kind3s in 'component\biz\Class_biz_kind3s.pas',
-  Class_db_kind3s in 'component\db\Class_db_kind3s.pas',
   appcommon in 'appcommon.pas',
   Class_db_trail in 'component\db\Class_db_trail.pas',
   Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
   daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page},
-  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: System.Windows.Forms.UserControl};
+  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: System.Windows.Forms.UserControl},
+  Class_biz_users in 'component\biz\Class_biz_users.pas',
+  Class_db_users in 'component\db\Class_db_users.pas',
+  Class_biz_notifications in 'component\biz\Class_biz_notifications.pas',
+  new_user_registration in 'new_user_registration.pas' {new_user_registration.TWebForm_new_user_registration: ki_web_ui.page_class},
+  remind_username in 'remind_username.pas' {remind_username.TWebForm_remind_username: ki_web_ui.page_class},
+  overview in 'protected\overview.pas' {overview.TWebForm_overview: ki_web_ui.page_class};
 
 //
 // General Information about an assembly is controlled through the following
