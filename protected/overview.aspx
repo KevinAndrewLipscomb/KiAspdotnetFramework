@@ -1,5 +1,6 @@
 <%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %><%@ Page language="c#" Debug="true" Codebehind="overview.pas" AutoEventWireup="false" Inherits="overview.TWebForm_overview"%>
 <%@ Register TagPrefix="uc1" TagName="UserControl_print_div" Src="~/usercontrol/ki/UserControl_print_div.ascx" %>
+<%@ Reference Control="~/usercontrol/app/UserControl_roster.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
@@ -19,11 +20,11 @@
 		  Change <ASP:LinkButton id="LinkButton_change_password" runat="server" causesvalidation="False">password</ASP:LinkButton>&nbsp;| <ASP:LinkButton id="LinkButton_change_email_address" runat="server" causesvalidation="False">email address</ASP:LinkButton>&nbsp;]</small>
 	  </td>
 			  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td align="right"><uc1:UserControl_print_div id="UserControl_print_div" runat="server"></uc1:UserControl_print_div></td>
+				<td align="right"><uc1:UserControl_print_div id="UserControl_print_div" runat="server" visible="False"></uc1:UserControl_print_div></td>
 			  </tr>
 		  </table></p>
 	  <p></p>
-      <p><ASP:PlaceHolder id="PlaceHolder_establish_membership" runat="server"></ASP:PlaceHolder></p>
+      <p><ASP:PlaceHolder id="PlaceHolder_establish_membership" runat="server"></ASP:PlaceHolder><ASP:PlaceHolder id="PlaceHolder_roster" runat="server"></ASP:PlaceHolder></p>
       <p>
 	  <asp:placeholder id="PlaceHolder_postcontent" runat="server"></asp:placeholder></p>
     <p><sstchur:SmartScroller runat="server" /></p></form>

@@ -235,6 +235,7 @@
       <File FileName="remind_username.aspx" ContainerId="AspMarkupContainer" ModuleName="remind_username"/>
       <File FileName="protected\overview.aspx" ContainerId="AspMarkupContainer" ModuleName="overview"/>
       <File FileName="usercontrol\app\UserControl_establish_membership.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_establish_membership"/>
+      <File FileName="protected\establish_membership_trouble.aspx" ContainerId="AspMarkupContainer" ModuleName="establish_membership_trouble"/>
       <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
       <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
       <File FileName="component\biz\Class_biz_user.pas" ContainerId="" ModuleName="Class_biz_user"/>
@@ -265,6 +266,7 @@
       <File FileName="component\biz\Class_biz_members.pas" ContainerId="" ModuleName="Class_biz_members"/>
       <File FileName="component\db\Class_db_members.pas" ContainerId="" ModuleName="Class_db_members"/>
       <File FileName="usercontrol\app\UserControl_establish_membership.pas" ContainerId="" ModuleName="UserControl_establish_membership" Parent="usercontrol\app\UserControl_establish_membership.ascx"/>
+      <File FileName="protected\establish_membership_trouble.pas" ContainerId="" ModuleName="establish_membership_trouble" Parent="protected\establish_membership_trouble.aspx"/>
     </FileList>
   </DelphiDotNet.Personality>
 </BorlandProject>

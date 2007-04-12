@@ -39,6 +39,7 @@ library KiAspdotnetFramework;
 {%AspMarkupContainer 'remind_username.aspx'}
 {%AspMarkupContainer 'protected\overview.aspx'}
 {%AspMarkupContainer 'usercontrol\app\UserControl_establish_membership.ascx'}
+{%AspMarkupContainer 'protected\establish_membership_trouble.aspx'}
 
 uses
   System.Reflection,
@@ -70,7 +71,8 @@ uses
   overview in 'protected\overview.pas' {overview.TWebForm_overview: ki_web_ui.page_class},
   Class_biz_members in 'component\biz\Class_biz_members.pas',
   Class_db_members in 'component\db\Class_db_members.pas',
-  UserControl_establish_membership in 'usercontrol\app\UserControl_establish_membership.pas';
+  UserControl_establish_membership in 'usercontrol\app\UserControl_establish_membership.pas',
+  establish_membership_trouble in 'protected\establish_membership_trouble.pas';
 
 //
 // General Information about an assembly is controlled through the following

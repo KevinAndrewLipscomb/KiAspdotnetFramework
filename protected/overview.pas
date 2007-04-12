@@ -43,6 +43,7 @@ type
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
     UserControl_print_div: TWebUserControl_print_div;
     Label_username: System.Web.UI.WebControls.Label;
+    PlaceHolder_roster: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     procedure OnInit(e: EventArgs); override;
   private
@@ -114,7 +115,7 @@ begin
     //
     session.Remove('privilege_array');
     session.Add('privilege_array',p.biz_user.Privileges);
-    if (session['privilege_array'] <> nil) and Has(string_array(session['privilege_array']),'member') then begin
+    if (session['privilege_array'] <> nil) then begin
       session.Remove('member_id');
       session.Add('member_id',p.biz_members.IdOfUserId(session['user_id'].tostring));
     end;
@@ -131,7 +132,7 @@ begin
     //
     // Display controls appropriate to user's privileges.
     //
-    if Has(string_array(session['privilege_array']),'member') then begin
+    if Has(string_array(session['privilege_array']),'see-roster') then begin
       //
 //      PlaceHolder_roster.controls.Add(TWebUserControl_roster(LoadControl('~/usercontrol/app/UserControl_roster.ascx')));
       //
