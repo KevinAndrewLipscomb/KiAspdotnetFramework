@@ -4,7 +4,8 @@ interface
 
 uses
   Class_biz_notifications,
-  Class_db_users;
+  Class_db_users,
+  ki;
 
 type
   TClass_biz_users = class
@@ -13,6 +14,12 @@ type
     biz_notifications: TClass_biz_notifications;
   public
     constructor Create;
+    function AcceptAsMember
+      (
+      shared_secret: string;
+      id: string
+      )
+      : boolean;
     function BeAuthorized
       (
       username: string;
@@ -37,6 +44,7 @@ type
     function NumUnsuccessfulLoginAttemptsOf(username: string): cardinal;
     function PasswordResetEmailAddressOfId(id: string): string;
     function PasswordResetEmailAddressOfUsername(username: string): string;
+    function PrivilegesOf(id: string): ki.string_array;
     procedure RecordSuccessfulLogin(id: string);
     procedure RecordUnsuccessfulLoginAttempt(username: string);
     procedure RegisterNew
@@ -62,7 +70,6 @@ implementation
 
 uses
   Class_biz_user,
-  ki,
   system.configuration;
 
 constructor TClass_biz_users.Create;
@@ -71,6 +78,16 @@ begin
   // TODO: Add any constructor code here
   biz_notifications := TClass_biz_notifications.Create;
   db_users := TClass_db_users.Create;
+end;
+
+function TClass_biz_users.AcceptAsMember
+  (
+  shared_secret: string;
+  id: string
+  )
+  : boolean;
+begin
+  AcceptAsMember := db_users.AcceptAsMember(shared_secret,id);
 end;
 
 function TClass_biz_users.BeAuthorized
@@ -153,6 +170,11 @@ end;
 function TClass_biz_users.PasswordResetEmailAddressOfUsername(username: string): string;
 begin
   PasswordResetEmailAddressOfUsername := db_users.PasswordResetEmailAddressOfUsername(username);
+end;
+
+function TClass_biz_users.PrivilegesOf(id: string): ki.string_array;
+begin
+  PrivilegesOf := db_users.PrivilegesOf(id);
 end;
 
 procedure TClass_biz_users.RecordSuccessfulLogin(id: string);

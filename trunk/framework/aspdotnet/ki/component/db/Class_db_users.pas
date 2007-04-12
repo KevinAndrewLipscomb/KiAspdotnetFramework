@@ -4,7 +4,8 @@ interface
 
 uses
   Class_db,
-  Class_db_trail;
+  Class_db_trail,
+  ki;
 
 type
   TClass_db_users = class(TClass_db)
@@ -12,6 +13,12 @@ type
     db_trail: TClass_db_trail;
   public
     constructor Create;
+    function AcceptAsMember
+      (
+      shared_secret: string;
+      id: string
+      )
+      : boolean;
     function BeAuthorized
       (
       username: string;
@@ -25,6 +32,7 @@ type
     function NumUnsuccessfulLoginAttemptsOf(username: string): cardinal;
     function PasswordResetEmailAddressOfId(id: string): string;
     function PasswordResetEmailAddressOfUsername(username: string): string;
+    function PrivilegesOf(id: string): ki.string_array;
     procedure RecordSuccessfulLogin(id: string);
     procedure RecordUnsuccessfulLoginAttempt(username: string);
     procedure RegisterNew
@@ -61,6 +69,36 @@ begin
   inherited Create;
   // TODO: Add any constructor code here
   db_trail := TClass_db_trail.Create;
+end;
+
+function TClass_db_users.AcceptAsMember
+  (
+  shared_secret: string;
+  id: string
+  )
+  : boolean;
+var
+  accept_as_member: boolean;
+begin
+  accept_as_member := FALSE;
+  self.Open;
+  if nil <> bdpcommand.Create('select 1 from member where cad_num = "' + shared_secret + '"',connection).ExecuteScalar then begin
+    bdpcommand.Create
+      (
+      'START TRANSACTION'
+      + ' ;'
+      + ' update member set user_id = ' + id + ' where cad_num = "' + shared_secret + '"'
+      + ' ;'
+      + ' insert role_user_map (user_id,role_id) select ' + id + ', role.id from role where role.name = "Member"'
+      + ' ;'
+      + ' COMMIT',
+      connection
+      )
+      .ExecuteNonquery;
+    accept_as_member := TRUE;
+  end;
+  self.Close;
+  AcceptAsMember := accept_as_member;
 end;
 
 function TClass_db_users.BeAuthorized
@@ -145,6 +183,34 @@ begin
   PasswordResetEmailAddressOfUsername := bdpcommand.Create
     ('select password_reset_email_address from user where username = "' + username + '"',connection).ExecuteScalar.tostring;
   self.Close;
+end;
+
+function TClass_db_users.PrivilegesOf(id: string): ki.string_array;
+var
+  bdr: bdpdatareader;
+  num_privileges: cardinal;
+  privileges_of: ki.string_array;
+begin
+  self.Open;
+  bdr := bdpcommand.Create
+    (
+    'select distinct name'
+    + ' from privilege'
+    +   ' join role_privilege_map on (role_privilege_map.privilege_id=privilege.id)'
+    +   ' join role_user_map on (role_user_map.role_id=role_privilege_map.role_id)'
+    + ' where user_id = ' + id,
+    connection
+    )
+    .ExecuteReader;
+  num_privileges := 0;
+  while bdr.Read do begin
+    num_privileges := num_privileges + 1;
+    SetLength(privileges_of,num_privileges);
+    privileges_of[num_privileges - 1] := bdr['name'].tostring;
+  end;
+  bdr.Close;
+  self.Close;
+  PrivilegesOf := privileges_of;
 end;
 
 procedure TClass_db_users.RecordSuccessfulLogin(id: string);
