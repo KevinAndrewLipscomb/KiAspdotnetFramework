@@ -8,8 +8,10 @@ uses
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki,
   System.Data.Common, Borland.Data.Provider, System.Globalization,
   Borland.Data.Common, system.configuration, system.web.security,
+  Class_biz_members,
   Class_biz_user,
   Class_biz_users,
+  UserControl_establish_membership,
   UserControl_print_div;
 
 type
@@ -17,6 +19,7 @@ type
     RECORD
     biz_user: TClass_biz_user;
     biz_users: TClass_biz_users;
+    biz_members: TClass_biz_members;
     END;
   TWebForm_overview = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
@@ -40,6 +43,7 @@ type
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
     UserControl_print_div: TWebUserControl_print_div;
     Label_username: System.Web.UI.WebControls.Label;
+    PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -67,13 +71,26 @@ end;
 {$ENDREGION}
 
 procedure TWebForm_overview.Page_Load(sender: System.Object; e: System.EventArgs);
-var
-  i: cardinal;
-  num_privileges: cardinal;
-  privilege_array: ki.string_array;
-  waypoint_stack: stack;
 begin
   appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
+  if not IsPostback then begin
+    //
+    Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - overview';
+    Label_username.text := session['username'].ToString;
+    //
+  end;
+end;
+
+procedure TWebForm_overview.OnInit(e: EventArgs);
+var
+  waypoint_stack: stack;
+begin
+  //
+  // Required for Designer support
+  //
+  InitializeComponent;
+  inherited OnInit(e);
+  //
   if IsPostback and (session['overview.p'].GetType.namespace = p.GetType.namespace) then begin
     p := p_type(session['overview.p']);
   end else begin
@@ -84,57 +101,44 @@ begin
     //
     p.biz_user := TClass_biz_user.Create;
     p.biz_users := TClass_biz_users.Create;
-    //
-    p.biz_users.RecordSuccessfulLogin(session['user_id'].tostring);
+    p.biz_members := TClass_biz_members.Create;
     //
     if p.biz_users.BeStalePassword(p.biz_user.IdNum) then begin
       server.Transfer('change_password.aspx');
     end;
-    //
-    Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - overview';
-    Label_username.text := session['username'].ToString;
     //
     session.Remove('waypoint_stack');
     waypoint_stack := system.collections.stack.Create;
     waypoint_stack.Push('overview.aspx');
     session.Add('waypoint_stack',waypoint_stack);
     //
-    // Display controls appropriate to all users.
-    //
-    //
-    privilege_array := p.biz_user.Privileges;
-    if privilege_array = nil then begin
-      //
-      // Display controls appropriate ONLY to unprivileged users.
-      //
-      //
-    end else begin
-      //
-      // Display controls appropriate to user's privileges.
-      //
-      num_privileges := system.array(privilege_array).length;
-      for i := 0 to (num_privileges - 1) do begin
-
-        if privilege_array[i] ='priv_A' then begin
-          //
-          //
-        end else if privilege_array[i] = 'priv_B' then begin
-          //
-          //
-        end;
-      end;
-      //
+    session.Remove('privilege_array');
+    session.Add('privilege_array',p.biz_user.Privileges);
+    if (session['privilege_array'] <> nil) and Has(string_array(session['privilege_array']),'member') then begin
+      session.Remove('member_id');
+      session.Add('member_id',p.biz_members.IdOfUserId(session['user_id'].tostring));
     end;
   end;
-end;
-
-procedure TWebForm_overview.OnInit(e: EventArgs);
-begin
   //
-  // Required for Designer support
+  if session['privilege_array'] = nil then begin
+    //
+    // Display controls appropriate ONLY to unprivileged users.
+    //
+    PlaceHolder_establish_membership.controls.Add
+      (TWebUserControl_establish_membership(LoadControl('~/usercontrol/app/UserControl_establish_membership.ascx')));
+    //
+  end else begin
+    //
+    // Display controls appropriate to user's privileges.
+    //
+    if Has(string_array(session['privilege_array']),'member') then begin
+      //
+//      PlaceHolder_roster.controls.Add(TWebUserControl_roster(LoadControl('~/usercontrol/app/UserControl_roster.ascx')));
+      //
+    end;
+    //
+  end;
   //
-  InitializeComponent;
-  inherited OnInit(e);
 end;
 
 procedure TWebForm_overview.TWebForm_overview_PreRender(sender: System.Object;
