@@ -40,6 +40,8 @@ library KiAspdotnetFramework;
 {%AspMarkupContainer 'protected\overview.aspx'}
 {%AspMarkupContainer 'usercontrol\app\UserControl_establish_membership.ascx'}
 {%AspMarkupContainer 'protected\establish_membership_trouble.aspx'}
+{%AspMarkupContainer 'usercontrol\app\UserControl_precontent.ascx'}
+{%AspMarkupContainer 'usercontrol\app\UserControl_postcontent.ascx'}
 
 uses
   System.Reflection,
@@ -72,7 +74,9 @@ uses
   Class_biz_members in 'component\biz\Class_biz_members.pas',
   Class_db_members in 'component\db\Class_db_members.pas',
   UserControl_establish_membership in 'usercontrol\app\UserControl_establish_membership.pas',
-  establish_membership_trouble in 'protected\establish_membership_trouble.pas';
+  establish_membership_trouble in 'protected\establish_membership_trouble.pas',
+  UserControl_precontent in 'usercontrol\app\UserControl_precontent.pas' {UserControl_precontent.TWebUserControl_precontent: ki_web_ui.usercontrol_class},
+  UserControl_postcontent in 'usercontrol\app\UserControl_postcontent.pas' {UserControl_postcontent.TWebUserControl_postcontent: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following

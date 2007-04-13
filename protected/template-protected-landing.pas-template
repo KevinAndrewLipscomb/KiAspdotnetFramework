@@ -74,10 +74,25 @@ end;
 {$ENDREGION}
 
 procedure TWebForm_template_protected_landing.Page_Load(sender: System.Object; e: System.EventArgs);
+begin
+  if not IsPostback then begin
+    //
+    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected_landing';
+    Label_account_descriptor.text := session.[username'].tostring;
+    //
+  end;
+end;
+
+procedure TWebForm_template_protected_landing.OnInit(e: EventArgs);
 var
   waypoint_stack: stack;
 begin
-  appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
+  //
+  // Required for Designer support
+  //
+  InitializeComponent;
+  inherited OnInit(e);
+  //
   if IsPostback and (session['template_protected_landing.p'].GetType.namespace = p.GetType.namespace) then begin
     p := p_type(session['template_protected_landing.p']);
   end else begin
@@ -86,24 +101,13 @@ begin
       server.Transfer('~/login.aspx');
     end;
     //
-    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected_landing';
-    Label_account_descriptor.text := session.item['_name'].tostring;
-    //
     session.Remove('waypoint_stack');
     waypoint_stack := system.collections.stack.Create;
     waypoint_stack.Push('template_protected_landing.aspx');
     session.Add('waypoint_stack',waypoint_stack);
     //
   end;
-end;
-
-procedure TWebForm_template_protected_landing.OnInit(e: EventArgs);
-begin
   //
-  // Required for Designer support
-  //
-  InitializeComponent;
-  inherited OnInit(e);
 end;
 
 {$REGION 'Waypoint management code for drill-down server.Transfer calls.'}

@@ -24,13 +24,14 @@ CREATE TABLE IF NOT EXISTS journal (
 --
 -- Table structure for table `profile`
 --
-drop table if exists profile;
-create table profile
+drop table if exists member;
+create table member
   (
   id int unsigned AUTO_INCREMENT,
   user_id int unsigned,
   be_valid boolean NOT NULL default 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  UNIQUE KEY user_id (user_id),
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -56,6 +57,8 @@ CREATE TABLE role (
   UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO role (id,`name`) VALUES
+(1,'Application Administrator');
 --
 -- Table structure for table `role_privilege_map`
 --
@@ -102,7 +105,7 @@ INSERT INTO user (username,password_reset_email_address,last_login) VALUES
 UPDATE user SET id = 0 where username = 'appadmin';
 
 
-ALTER TABLE profile
+ALTER TABLE member
   ADD CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id);
 
 ALTER TABLE role_user_map
