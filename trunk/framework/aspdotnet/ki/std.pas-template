@@ -25,8 +25,6 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;
-    PlaceHolder_precontent: System.Web.UI.WebControls.PlaceHolder;
-    PlaceHolder_postcontent: System.Web.UI.WebControls.PlaceHolder;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -53,19 +51,8 @@ end;
 
 procedure TWebForm_template_std.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  appcommon.PopulatePlaceHolders(PlaceHolder_precontent,PlaceHolder_postcontent);
-  if IsPostback and (session['template_std.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['template_std.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      //
-      // The request for this page could not have been the result of a server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
-      //
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
-      Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_std';
-    end;
+  if not IsPostback then begin
+    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_std';
   end;
 end;
 
@@ -76,6 +63,22 @@ begin
   //
   InitializeComponent;
   inherited OnInit(e);
+  //
+  if IsPostback and (session['template_std.p'].GetType.namespace = p.GetType.namespace) then begin
+    p := p_type(session['template_std.p']);
+  end else begin
+    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
+      //
+      // The request for this page could not have been the result of a server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
+      //
+      session.Clear;
+      server.Transfer('~/login.aspx');
+    end else begin
+      //
+      //
+    end;
+  end;
+  //
 end;
 
 procedure TWebForm_template_std.TWebForm_template_std_PreRender(sender: System.Object;
