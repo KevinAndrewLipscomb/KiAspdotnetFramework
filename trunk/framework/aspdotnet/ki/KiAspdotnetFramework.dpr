@@ -64,7 +64,7 @@ uses
   Class_db_trail in 'component\db\Class_db_trail.pas',
   Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
   daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page},
-  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: System.Windows.Forms.UserControl},
+  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class},
   Class_biz_users in 'component\biz\Class_biz_users.pas',
   Class_db_users in 'component\db\Class_db_users.pas',
   Class_biz_notifications in 'component\biz\Class_biz_notifications.pas',
