@@ -1,4 +1,5 @@
 <%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_precontent.pas" Inherits="UserControl_precontent.TWebUserControl_precontent"%>
+<%@ OutputCache Duration="86400" VaryByParam="none" Shared="true" %>
 <table width="100%" cellspacing="0" cellpadding="5" bgcolor="#b0c4de" border="0">
   <tr>
 	<td align="center"><strong><ASP:Label id="Label_sponsor" runat="server"></ASP:Label></strong></td>
@@ -113,3 +114,4 @@
 	  </p>
 	  </td>
 	<td valign="top">
+        <ASP:ValidationSummary id="ValidationSummary1" runat="server"></ASP:ValidationSummary>
