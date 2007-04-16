@@ -1,37 +1,31 @@
 unit UserControl_precontent;
+//
+// UserControl_precontent must not attempt to access session state because UserControl_precontent is invoked on the timeout page
+// and session state is by definition nonexistent in a timeout situation.
+//
 
 interface
 
 uses
   ki_web_ui,
-  System.Data,
-  System.Drawing,
-  System.Web,
-  System.Web.UI,
   System.Web.UI.WebControls,
   System.Web.UI.HtmlControls;
 
 type
-  p_type =
-    RECORD
-    END;
   TWebUserControl_precontent = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure TWebUserControl_precontent_PreRender(sender: System.Object;
-      e: System.EventArgs);
   {$ENDREGION}
   strict private
-    p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    Label_application_name: System.Web.UI.WebControls.Label;
     HtmlImage_sponsor_logoseal: System.Web.UI.HtmlControls.HtmlImage;
     HtmlImage_sponsor_sponsor_logoseal: System.Web.UI.HtmlControls.HtmlImage;
     HtmlImage_partner_banner: System.Web.UI.HtmlControls.HtmlImage;
     Label_sponsor: System.Web.UI.WebControls.Label;
     ValidationSummary1: System.Web.UI.WebControls.ValidationSummary;
+    Label_application_name: System.Web.UI.WebControls.Label;
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -42,9 +36,6 @@ type
 implementation
 
 uses
-  appcommon,
-  ki,
-  System.Collections,
   system.configuration;
 
 procedure TWebUserControl_precontent.Page_Load(sender: System.Object; e: System.EventArgs);
@@ -76,13 +67,6 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['UserControl_precontent.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['UserControl_precontent.p']);
-  end else begin
-    //
-    //
-  end;
-  //
 end;
 
 {$REGION 'Designer Managed Code'}
@@ -93,15 +77,7 @@ end;
 procedure TWebUserControl_precontent.InitializeComponent;
 begin
   Include(Self.Load, Self.Page_Load);
-  Include(Self.PreRender, Self.TWebUserControl_precontent_PreRender);
 end;
 {$ENDREGION}
-
-procedure TWebUserControl_precontent.TWebUserControl_precontent_PreRender(sender: System.Object;
-  e: System.EventArgs);
-begin
-  session.Remove('UserControl_precontent.p');
-  session.Add('UserControl_precontent.p',p);
-end;
 
 end.

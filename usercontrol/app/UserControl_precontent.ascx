@@ -1,8 +1,7 @@
 <%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_precontent.pas" Inherits="UserControl_precontent.TWebUserControl_precontent"%>
-<%@ OutputCache Duration="86400" VaryByParam="none" Shared="true" %>
-<table width="100%" cellspacing="0" cellpadding="5" bgcolor="#b0c4de" border="0">
+<table width="100%" cellspacing="0" cellpadding="5" bgcolor="#b0c4de" border="1" bordercolor="lightsteelblue">
   <tr>
-	<td align="center"><strong><ASP:Label id="Label_sponsor" runat="server"></ASP:Label></strong></td>
+	<td align="center"><strong><ASP:Label id="Label_application_name" runat="server"></ASP:Label></strong></td>
   </tr>
 </table>
 <table cellspacing="0" cellpadding="10" width="100%" border="0">
@@ -12,7 +11,7 @@
           <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="5" width="100%" border="1">
               <tr>
                 <td bgcolor="#f5f5f5">
-                  <p align="center"><strong><ASP:Label id="Label_application_name" runat="server" font-bold="True" font-italic="True"></ASP:Label></strong>
+                  <p align="center"><strong><ASP:Label id="Label_sponsor" runat="server" font-bold="True"></ASP:Label></strong>
                   </p></td>
               </tr>
           </table>
@@ -20,8 +19,7 @@
 	  <p>
 	  <table cellspacing="0" cellpadding="0" width="100%" border="0">
 		<tr>
-		  <td align="center"><a href="http://www.vabeachems.com"><img id="HtmlImage_sponsor_logoseal" alt="Sponsor logoseal" src="~\protected\image\sponsor_logoseal.jpg" border="0" name="HtmlImage_sponsor_logoseal" runat="Server">
-                  </a></td>
+		  <td align="center"><a href="http://www.sponsor.com"><img id="HtmlImage_sponsor_logoseal" alt="Sponsor logoseal" src="~\protected\image\sponsor_logoseal.jpg" border="0" runat="Server"></a></td>
 		</tr>
 	  </table>
 	  </p>
@@ -105,10 +103,8 @@
 		<table cellspacing="0" cellpadding="5" width="100%" border="0">
 			<tr>
 			  <td>
-				  <p align="center"><img id="HtmlImage_partner_banner" alt="Partner banner" src="~\protected\image\partner_banner.jpg" border="0" name="HtmlImage_partner_banner" runat="Server"></p>
-				  <p align="center">
-                    <a href="http://www.vbgov.com"><img id="HtmlImage_sponsor_sponsor_logoseal" alt="Sponsor sponsor logoseal" src="~\protected\image\sponsor_sponsor_logoseal.jpg" border="0" name="HtmlImage_sponsor_sponsor_logoseal" runat="Server">
-                    </a></p></td>
+				  <p align="center"><a href="http://www.partner.com"><img id="HtmlImage_partner_banner" alt="Partner banner" src="~\protected\image\partner_banner.jpg" border="0" runat="Server"></p>
+				  <p align="center"><a href="http://www.sponsorsponsor.com"><img id="HtmlImage_sponsor_sponsor_logoseal" alt="Sponsor sponsor logoseal" src="~\protected\image\sponsor_sponsor_logoseal.jpg" border="0" runat="Server"></a></p></td>
 			</tr>
 		</table>
 	  </p>
