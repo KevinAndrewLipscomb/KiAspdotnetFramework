@@ -21,6 +21,20 @@ CREATE TABLE IF NOT EXISTS journal (
   INDEX actor (actor)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member`
+--
+drop table if exists member;
+create table if not exists member
+  (
+  id int unsigned AUTO_INCREMENT,
+  be_valid boolean NOT NULL default 0,
+  email_address varchar(255),
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Table structure for table `profile`
 --
@@ -59,6 +73,18 @@ CREATE TABLE role (
 
 INSERT INTO role (id,`name`) VALUES
 (1,'Application Administrator');
+
+--
+-- table structure for table `role_member_map`
+--
+DROP TABLE IF EXISTS role_member_map;
+CREATE TABLE role_member_map (
+  member_id int unsigned NOT NULL,
+  role_id int unsigned NOT NULL,
+  PRIMARY KEY  (member_id,role_id),
+  KEY role_id (role_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Table structure for table `role_privilege_map`
 --
@@ -68,17 +94,6 @@ CREATE TABLE role_privilege_map (
   privilege_id int unsigned NOT NULL,
   PRIMARY KEY  (role_id,privilege_id),
   KEY privilege_id (privilege_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- table structure for table `role_user_map`
---
-DROP TABLE IF EXISTS role_user_map;
-CREATE TABLE role_user_map (
-  user_id int unsigned NOT NULL,
-  role_id int unsigned NOT NULL,
-  PRIMARY KEY  (user_id,role_id),
-  KEY role_id (role_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -104,13 +119,25 @@ INSERT INTO user (username,password_reset_email_address,last_login) VALUES
 ('appadmin','appadmin@frompaper2web.com',0);
 UPDATE user SET id = 0 where username = 'appadmin';
 
+--
+-- table structure for table `user_member_map`
+--
+DROP TABLE IF EXISTS user_member_map;
+CREATE TABLE user_member_map (
+  user_id int unsigned NOT NULL,
+  member_id int unsigned NOT NULL,
+  PRIMARY KEY  (user_id),
+  UNIQUE KEY (member_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE member
-  ADD CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id);
 
-ALTER TABLE role_user_map
-  ADD CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id),
+ALTER TABLE role_member_map
+  ADD CONSTRAINT FOREIGN KEY (member_id) REFERENCES member (id),
   ADD CONSTRAINT FOREIGN KEY (role_id) REFERENCES role (id);
+
+ALTER TABLE user_member_map
+  ADD CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id),
+  ADD CONSTRAINT FOREIGN KEY (member_id) REFERENCES member (id);
 
 
 SET FOREIGN_KEY_CHECKS=1;

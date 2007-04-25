@@ -19,7 +19,9 @@ type
 //      )
       : boolean;
     function BeValidProfile(id: string): boolean;
+    function EmailAddressOf(member_id: string): string;
     function IdOfUserId(user_id: string): string;
+    function UserIdOf(member_id: string): string;
   end;
 
 implementation
@@ -57,9 +59,19 @@ begin
   BeValidProfile := db_members.BeValidProfile(id);
 end;
 
+function TClass_biz_members.EmailAddressOf(member_id: string): string;
+begin
+  EmailAddressOf := db_members.EmailAddressOf(member_id);
+end;
+
 function TClass_biz_members.IdOfUserId(user_id: string): string;
 begin
   IdOfUserId := db_members.IdOfUserId(user_id);
+end;
+
+function TClass_biz_members.UserIdOf(member_id: string): string;
+begin
+  UserIdOf := db_members.UserIdOf(member_id);
 end;
 
 end.

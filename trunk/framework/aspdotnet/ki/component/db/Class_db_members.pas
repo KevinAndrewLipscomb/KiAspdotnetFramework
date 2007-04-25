@@ -40,7 +40,9 @@ type
 //      )
 //      : boolean;
     function BeValidProfile(id: string): boolean;
+    function EmailAddressOf(member_id: string): string;
     function IdOfUserId(user_id: string): string;
+    function UserIdOf(member_id: string): string;
   end;
 
 implementation
@@ -63,10 +65,48 @@ begin
   self.Close;
 end;
 
+function TClass_db_members.EmailAddressOf(member_id: string): string;
+var
+  email_address_obj: system.object;
+begin
+  //
+  self.Open;
+  email_address_obj :=
+    bdpcommand.Create('select email_address from member where id = ' + member_id,connection).ExecuteScalar.tostring;
+  if email_address_obj <> nil then begin
+    EmailAddressOf := email_address_obj.tostring;
+  end else begin
+    EmailAddressOf := system.string.EMPTY;
+  end;
+  self.Close;
+end;
+
 function TClass_db_members.IdOfUserId(user_id: string): string;
+var
+  member_id_obj: system.object;
 begin
   self.Open;
-  IdOfUserId := bdpcommand.Create('select id from member where user_id = ' + user_id,connection).ExecuteScalar.tostring;
+  member_id_obj := bdpcommand.Create('select member_id from user_member_map where user_id = ' + user_id,connection).ExecuteScalar;
+  if member_id_obj <> nil then begin
+    IdOfUserId := member_id_obj.tostring;
+  end else begin
+    IdOfUserId := system.string.EMPTY;
+  end;
+  self.Close;
+end;
+
+function TClass_db_members.UserIdOf(member_id: string): string;
+var
+  user_id_obj: system.object;
+begin
+  //
+  self.Open;
+  user_id_obj := bdpcommand.Create('select user_id from user_member_map where member_id = ' + member_id,connection).ExecuteScalar;
+  if user_id_obj <> nil then begin
+    UserIdOf := user_id_obj.tostring;
+  end else begin
+    UserIdOf := system.string.EMPTY;
+  end;
   self.Close;
 end;
 
