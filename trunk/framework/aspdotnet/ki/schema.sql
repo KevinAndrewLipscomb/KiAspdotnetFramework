@@ -35,6 +35,20 @@ create table if not exists member
   PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+drop table if exists notification;
+create table notification
+  (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(63) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (`name`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Table structure for table `profile`
 --
@@ -45,7 +59,7 @@ create table member
   user_id int unsigned,
   be_valid boolean NOT NULL default 0,
   PRIMARY KEY (id),
-  UNIQUE KEY user_id (user_id),
+  UNIQUE KEY user_id (user_id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -67,8 +81,10 @@ DROP TABLE IF EXISTS role;
 CREATE TABLE role (
   id int unsigned NOT NULL auto_increment,
   `name` varchar(63) NOT NULL,
+  tier_id TINYINT UNSIGNED,
   PRIMARY KEY  (id),
-  UNIQUE KEY (`name`)
+  UNIQUE KEY (`name`),
+  KEY tier_id (tier_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO role (id,`name`) VALUES
@@ -86,6 +102,17 @@ CREATE TABLE role_member_map (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Table structure for table `role_notification_map`
+--
+DROP TABLE IF EXISTS role_notification_map;
+CREATE TABLE role_notification_map (
+  role_id int unsigned NOT NULL,
+  notification_id int unsigned NOT NULL,
+  PRIMARY KEY  (role_id,notification_id),
+  KEY privilege_id (notification_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Table structure for table `role_privilege_map`
 --
 DROP TABLE IF EXISTS role_privilege_map;
@@ -94,6 +121,17 @@ CREATE TABLE role_privilege_map (
   privilege_id int unsigned NOT NULL,
   PRIMARY KEY  (role_id,privilege_id),
   KEY privilege_id (privilege_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `tier`
+--
+DROP TABLE IF EXISTS tier;
+CREATE TABLE tier (
+  id tinyint unsigned NOT NULL,
+  name varchar(31) NOT NULL,
+  PRIMARY KEY id (id),
+  UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -130,6 +168,9 @@ CREATE TABLE user_member_map (
   UNIQUE KEY (member_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+ALTER TABLE role
+  ADD CONSTRAINT tier_id FOREIGN KEY tier_id (tier_id) REFERENCES tier (id);
 
 ALTER TABLE role_member_map
   ADD CONSTRAINT FOREIGN KEY (member_id) REFERENCES member (id),
