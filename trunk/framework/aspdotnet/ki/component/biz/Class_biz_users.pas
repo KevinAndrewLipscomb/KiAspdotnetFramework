@@ -3,13 +3,15 @@ unit Class_biz_users;
 interface
 
 uses
-  Class_biz_notifications,
+  Class_db_members,
   Class_db_users,
+  Class_biz_notifications,
   ki;
 
 type
   TClass_biz_users = class
   private
+    db_members: TClass_db_members;
     db_users: TClass_db_users;
     biz_notifications: TClass_biz_notifications;
   public
@@ -77,6 +79,7 @@ begin
   inherited Create;
   // TODO: Add any constructor code here
   biz_notifications := TClass_biz_notifications.Create;
+  db_members := TClass_db_members.Create;
   db_users := TClass_db_users.Create;
 end;
 
@@ -209,6 +212,7 @@ procedure TClass_biz_users.SetEmailAddress
   );
 begin
   db_users.SetEmailAddress(id,email_address);
+  // db_members.SetEmailAddress(db_members.IdOfUserId(id),email_address);
 end;
 
 procedure TClass_biz_users.SetPassword
