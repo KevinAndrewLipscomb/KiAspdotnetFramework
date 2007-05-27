@@ -42,6 +42,11 @@ type
     function BeValidProfile(id: string): boolean;
     function EmailAddressOf(member_id: string): string;
     function IdOfUserId(user_id: string): string;
+    procedure SetEmailAddress
+      (
+      id: string;
+      email_address: string
+      );
     function UserIdOf(member_id: string): string;
   end;
 
@@ -92,6 +97,27 @@ begin
   end else begin
     IdOfUserId := system.string.EMPTY;
   end;
+  self.Close;
+end;
+
+procedure TClass_db_members.SetEmailAddress
+  (
+  id: string;
+  email_address: string
+  );
+begin
+  self.Open;
+  borland.data.provider.bdpcommand.Create
+    (
+    db_trail.Saved
+      (
+      'UPDATE member'
+      + ' SET email_address = "' + email_address + '"'
+      + ' WHERE id = ' + id
+      ),
+    connection
+    )
+    .ExecuteNonQuery;
   self.Close;
 end;
 

@@ -212,7 +212,7 @@ procedure TClass_biz_users.SetEmailAddress
   );
 begin
   db_users.SetEmailAddress(id,email_address);
-  // db_members.SetEmailAddress(db_members.IdOfUserId(id),email_address);
+  db_members.SetEmailAddress(db_members.IdOfUserId(id),email_address);
 end;
 
 procedure TClass_biz_users.SetPassword
