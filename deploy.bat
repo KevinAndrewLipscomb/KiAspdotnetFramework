@@ -8,6 +8,7 @@
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework                                  ready-to-deploy                                 *.config                  /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework                                  ready-to-deploy                                 *.pdf                     /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\bin                              ready-to-deploy\bin                                                       /m /np /ns /z | qgrep "New "
+@robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\image                            ready-to-deploy\image                                                     /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\noninteractive                   ready-to-deploy\noninteractive                  *.crontab                 /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\noninteractive                   ready-to-deploy\noninteractive                  *.aspx                    /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\protected                        ready-to-deploy\protected                       *.asax                    /m /np /ns /z | qgrep "New "
