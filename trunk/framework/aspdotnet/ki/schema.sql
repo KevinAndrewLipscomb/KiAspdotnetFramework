@@ -153,10 +153,6 @@ CREATE TABLE user (
   UNIQUE KEY (password_reset_email_address)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO user (username,password_reset_email_address,last_login) VALUES
-('appadmin','appadmin@frompaper2web.com',0);
-UPDATE user SET id = 0 where username = 'appadmin';
-
 --
 -- table structure for table `user_member_map`
 --
