@@ -83,7 +83,8 @@ var
 begin
   accept_as_member := FALSE;
   self.Open;
-  member_id_obj := bdpcommand.Create('select id from member where cad_num = "' + shared_secret + '"',connection).ExecuteScalar;
+  member_id_obj := bdpcommand.Create('select id from member where id = "' + shared_secret + '"',connection).ExecuteScalar;
+    // For robust shared secret functionality, change "where id = " to one or more shared secret fields.
   if member_id_obj <> nil then begin
     bdpcommand.Create
       (
