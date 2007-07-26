@@ -7,6 +7,7 @@
   <head>
       <!-- $Id$ -->
 	<title id="Title" runat="server"></title>
+   <link REL="StyleSheet" HREF="standard.css" TYPE="text/css" />
   </head>
 
   <body>
