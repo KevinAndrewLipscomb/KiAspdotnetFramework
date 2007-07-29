@@ -94,7 +94,10 @@ begin
     email_address := p.biz_users.SelfEmailAddress;
     TextBox_nominal_email_address.Text := email_address;
     TextBox_confirmation_email_address.Text := email_address;
-    end;
+    //
+    Focus(TextBox_nominal_email_address);
+    //
+  end;
 end;
 
 procedure TWebForm_change_email_address.OnInit(e: EventArgs);
