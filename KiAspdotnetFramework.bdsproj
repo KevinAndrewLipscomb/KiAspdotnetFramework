@@ -192,9 +192,6 @@
     
     
     
-    
-    
-    
     <FileList>
       <File FileName="Web.config" ContainerId="AspWebConfigContainer" ModuleName="Web"/>
       <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System" AssemblyName="System" Version="1.0.5000.0" LinkUnits="False"/>
@@ -226,7 +223,7 @@
       <File FileName="dbscript" ContainerId="AspFolderContainer" ModuleName="dbscript"/>
       <File FileName="exception.aspx" ContainerId="AspMarkupContainer" ModuleName="exception"/>
       <File FileName="timeout.aspx" ContainerId="AspMarkupContainer" ModuleName="timeout"/>
-      <File FileName="lib\ki\ki.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="ki" AssemblyName="ki" Version="1.0.2692.25865" LinkUnits="False"/>
+      <File FileName="lib\ki\ki.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="ki" AssemblyName="ki" Version="1.0.2765.36789" LinkUnits="False"/>
       <File FileName="noninteractive\.crontab" ContainerId="File"/>
       <File FileName="noninteractive\milestone_sweep.aspx" ContainerId="AspMarkupContainer" ModuleName="milestone_sweep"/>
       <File FileName="noninteractive\daily_tasks.aspx" ContainerId="AspMarkupContainer" ModuleName="daily_tasks"/>
