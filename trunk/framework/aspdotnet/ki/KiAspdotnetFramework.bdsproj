@@ -123,8 +123,8 @@
 			<Directories Name="UnitOutputDir" Type="String"></Directories>
 			<Directories Name="PackageDLLOutputDir" Type="String"></Directories>
 			<Directories Name="PackageDCPOutputDir" Type="String"></Directories>
-			<Directories Name="SearchPath" Type="String">c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\program files\common files\borland shared\bds\shared assemblies\4.0;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki</Directories>
-			<Directories Name="Packages" Type="String">ki;c:\windows\microsoft.net\framework\v1.1.4322\mscorlib.dll;c:\program files\common files\borland shared\bds\shared assemblies\4.0\Borland.Data.Common.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Design.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll;c:\program files\common files\borland shared\bds\shared assemblies\4.0\Borland.Data.Provider.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.XML.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Web.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Drawing.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Data.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.dll</Directories>
+			<Directories Name="SearchPath" Type="String">c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\program files\common files\borland shared\bds\shared assemblies\4.0;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols</Directories>
+			<Directories Name="Packages" Type="String">c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll;ki;c:\windows\microsoft.net\framework\v1.1.4322\mscorlib.dll;c:\program files\common files\borland shared\bds\shared assemblies\4.0\Borland.Data.Common.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Design.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll;c:\program files\common files\borland shared\bds\shared assemblies\4.0\Borland.Data.Provider.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.XML.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Web.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Drawing.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.Data.dll;c:\windows\microsoft.net\framework\v1.1.4322\System.dll</Directories>
 			<Directories Name="Conditionals" Type="String"></Directories>
 			<Directories Name="DebugSourceDirs" Type="String">C:\Inetpub\wwwroot\KiAspdotnetFramework\component\biz\</Directories>
 			<Directories Name="UsePackages" Type="Boolean">True</Directories>
@@ -223,7 +223,7 @@
       <File FileName="dbscript" ContainerId="AspFolderContainer" ModuleName="dbscript"/>
       <File FileName="exception.aspx" ContainerId="AspMarkupContainer" ModuleName="exception"/>
       <File FileName="timeout.aspx" ContainerId="AspMarkupContainer" ModuleName="timeout"/>
-      <File FileName="lib\ki\ki.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="ki" AssemblyName="ki" Version="1.0.2765.36789" LinkUnits="False"/>
+      <File FileName="lib\ki\ki.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="ki" AssemblyName="ki" Version="1.0.2768.42170" LinkUnits="False"/>
       <File FileName="noninteractive\.crontab" ContainerId="File"/>
       <File FileName="noninteractive\milestone_sweep.aspx" ContainerId="AspMarkupContainer" ModuleName="milestone_sweep"/>
       <File FileName="noninteractive\daily_tasks.aspx" ContainerId="AspMarkupContainer" ModuleName="daily_tasks"/>
@@ -236,6 +236,7 @@
       <File FileName="usercontrol\app\UserControl_precontent.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_precontent"/>
       <File FileName="usercontrol\app\UserControl_postcontent.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_postcontent"/>
       <File FileName="noninteractive\test_report.aspx" ContainerId="AspMarkupContainer" ModuleName="test_report"/>
+      <File FileName="c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="Microsoft.Web.UI.WebControls" AssemblyName="Microsoft.Web.UI.WebControls" Version="1.0.2.226" LinkUnits="False"/>
       <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
       <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
       <File FileName="component\biz\Class_biz_user.pas" ContainerId="" ModuleName="Class_biz_user"/>
