@@ -43,6 +43,7 @@ library KiAspdotnetFramework;
 {%AspMarkupContainer 'usercontrol\app\UserControl_precontent.ascx'}
 {%AspMarkupContainer 'usercontrol\app\UserControl_postcontent.ascx'}
 {%AspMarkupContainer 'noninteractive\test_report.aspx'}
+{%DelphiDotNetAssemblyCompiler 'c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll'}
 
 uses
   System.Reflection,
