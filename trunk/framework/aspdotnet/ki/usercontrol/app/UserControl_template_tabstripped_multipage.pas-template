@@ -9,7 +9,7 @@ uses
   System.Web,
   System.Web.UI,
   System.Web.UI.WebControls,
-  System.Web.UI.HtmlControls;
+  System.Web.UI.HtmlControls, Microsoft.Web.UI.WebControls;
 
 type
   p_type =
@@ -26,6 +26,8 @@ type
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
+    TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
+    MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
