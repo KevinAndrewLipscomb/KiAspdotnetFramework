@@ -3,18 +3,16 @@
   <table cellspacing="0" cellpadding="0" border="0">
 	  <tr>
 		<td>
-		  <iewc:TabStrip id="TabStrip1" runat="server" tabselectedstyle="background-color:#ffffff;color:#000000" tabhoverstyle="background-color:#777777"
-			   tabdefaultstyle="background-color:#000000;font-family:verdana;font-weight:bold;font-size:8pt;color:#ffffff;width:79;height:21;text-align:center" targetid="MultiPage1">
+		  <iewc:TabStrip id="TabStrip1" runat="server" tabselectedstyle="padding:10;border-top:thin solid silver;border-left:thin solid silver;border-right:thin solid silver;background-color:white;font-weight:bold;"
+			   tabdefaultstyle="padding:10;border-top:thin solid white;border-left:thin solid white;border-right:thin solid white;background-color:silver;" targetid="MultiPage1" forecolor="Blue">
           <iewc:Tab text="Tab 1"></iewc:Tab>
-          <iewc:TabSeparator></iewc:TabSeparator>
           <iewc:Tab text="Tab 2"></iewc:Tab>
-          <iewc:TabSeparator></iewc:TabSeparator>
           <iewc:Tab text="Tab 3"></iewc:Tab>
 		  </iewc:TabStrip>
 		</td>
 	  </tr>
 	  <tr>
-		<td>
+		<td style="BORDER-RIGHT: silver thin solid; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; BORDER-LEFT: silver thin solid; PADDING-TOP: 10px; BORDER-BOTTOM: silver thin solid">
 		  <iewc:MultiPage id="MultiPage1" runat="server">
 			 <iewc:pageview>
 					Page 1
