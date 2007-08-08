@@ -13,7 +13,7 @@ uses
   Class_biz_users,
   UserControl_establish_membership,
   UserControl_print_div,
-  UserControl_template_tabstripped_multipage;
+  UserControl_member_binder;
 
 type
   p_type =
@@ -43,7 +43,7 @@ type
     UserControl_print_div: TWebUserControl_print_div;
     Label_username: System.Web.UI.WebControls.Label;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
-    PlaceHolder_tabstripped_multipage: System.Web.UI.WebControls.PlaceHolder;
+    PlaceHolder_member_binder: System.Web.UI.WebControls.PlaceHolder;
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -128,7 +128,7 @@ begin
     //
   end else begin
     //
-    PlaceHolder_tabstripped_multipage.controls.Add(TWebUserControl_template_tabstripped_multipage(LoadControl('~/usercontrol/app/UserControl_template_tabstripped_multipage.ascx')));
+    PlaceHolder_member_binder.controls.Add(TWebUserControl_member_binder(LoadControl('~/usercontrol/app/UserControl_member_binder.ascx')));
     //
   end;
   //
