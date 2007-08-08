@@ -48,12 +48,6 @@ begin
   //
   if not IsPostback then begin
     //
-    // Display controls appropriate to user's privileges.
-    //
-    if Has(string_array(session['privilege_array']),'see-roster') then begin
-      //
-      //
-    end;
     //
   end;
   //
@@ -71,6 +65,12 @@ begin
     p := p_type(session['UserControl_member_binder.p']);
   end else begin
     //
+    // Display controls appropriate to user's privileges.
+    //
+    if Has(string_array(session['privilege_array']),'see-roster') then begin
+      //
+      //
+    end;
     //
   end;
   //
