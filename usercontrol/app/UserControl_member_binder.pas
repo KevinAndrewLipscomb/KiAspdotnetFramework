@@ -1,4 +1,4 @@
-unit UserControl_template_tabstripped_multipage;
+unit UserControl_member_binder;
 
 interface
 
@@ -15,11 +15,11 @@ type
   p_type =
     RECORD
     END;
-  TWebUserControl_template_tabstripped_multipage = class(ki_web_ui.usercontrol_class)
+  TWebUserControl_member_binder = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure TWebUserControl_template_tabstripped_multipage_PreRender(sender: System.Object;
+    procedure TWebUserControl_member_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
   {$ENDREGION}
   strict private
@@ -43,7 +43,7 @@ uses
   System.Collections,
   system.configuration;
 
-procedure TWebUserControl_template_tabstripped_multipage.Page_Load(sender: System.Object; e: System.EventArgs);
+procedure TWebUserControl_member_binder.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
   //
   if not IsPostback then begin
@@ -59,7 +59,7 @@ begin
   //
 end;
 
-procedure TWebUserControl_template_tabstripped_multipage.OnInit(e: System.EventArgs);
+procedure TWebUserControl_member_binder.OnInit(e: System.EventArgs);
 begin
   //
   // Required for Designer support
@@ -67,8 +67,8 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['UserControl_template_tabstripped_multipage.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['UserControl_template_tabstripped_multipage.p']);
+  if IsPostback and (session['UserControl_member_binder.p'].GetType.namespace = p.GetType.namespace) then begin
+    p := p_type(session['UserControl_member_binder.p']);
   end else begin
     //
     //
@@ -81,18 +81,18 @@ end;
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebUserControl_template_tabstripped_multipage.InitializeComponent;
+procedure TWebUserControl_member_binder.InitializeComponent;
 begin
   Include(Self.Load, Self.Page_Load);
-  Include(Self.PreRender, Self.TWebUserControl_template_tabstripped_multipage_PreRender);
+  Include(Self.PreRender, Self.TWebUserControl_member_binder_PreRender);
 end;
 {$ENDREGION}
 
-procedure TWebUserControl_template_tabstripped_multipage.TWebUserControl_template_tabstripped_multipage_PreRender(sender: System.Object;
+procedure TWebUserControl_member_binder.TWebUserControl_member_binder_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('UserControl_template_tabstripped_multipage.p');
-  session.Add('UserControl_template_tabstripped_multipage.p',p);
+  session.Remove('UserControl_member_binder.p');
+  session.Add('UserControl_member_binder.p',p);
 end;
 
 end.
