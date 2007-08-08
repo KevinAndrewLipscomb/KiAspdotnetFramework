@@ -48,6 +48,12 @@ begin
   //
   if not IsPostback then begin
     //
+    // Display controls appropriate to user's privileges.
+    //
+    if Has(string_array(session['privilege_array']),'see-roster') then begin
+      //
+      //
+    end;
     //
   end;
   //

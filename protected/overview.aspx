@@ -28,7 +28,7 @@
 			  </tr>
 		  </table></p>
 	  <p></p>
-      <p><ASP:PlaceHolder id="PlaceHolder_establish_membership" runat="server"></ASP:PlaceHolder><ASP:PlaceHolder id="PlaceHolder_roster" runat="server"></ASP:PlaceHolder></p>
+      <p><ASP:PlaceHolder id="PlaceHolder_establish_membership" runat="server"></ASP:PlaceHolder><ASP:PlaceHolder id="PlaceHolder_tabstripped_multipage" runat="server"></ASP:PlaceHolder></p>
       <uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent>
     <p><sstchur:SmartScroller runat="server" /></p></form>
   </body>
