@@ -4,12 +4,16 @@ interface
 
 uses
   ki_web_ui,
+  Microsoft.Web.UI.WebControls,
   System.Data,
   System.Drawing,
   System.Web,
   System.Web.UI,
   System.Web.UI.WebControls,
-  System.Web.UI.HtmlControls, Microsoft.Web.UI.WebControls;
+  System.Web.UI.HtmlControls;
+//  UserControl1,
+//  UserControl2,
+//  UserControl3
 
 type
   p_type =
@@ -28,6 +32,9 @@ type
   strict protected
     TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
     MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
+//    UserControl1: TWebUserControl1;
+//    UserControl2: TWebUserControl2;
+//    UserControl3: TWebUserControl3;
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -65,12 +72,6 @@ begin
     p := p_type(session['UserControl_member_binder.p']);
   end else begin
     //
-    // Display controls appropriate to user's privileges.
-    //
-    if Has(string_array(session['privilege_array']),'see-roster') then begin
-      //
-      //
-    end;
     //
   end;
   //
