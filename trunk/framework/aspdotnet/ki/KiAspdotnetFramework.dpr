@@ -45,6 +45,7 @@ library KiAspdotnetFramework;
 {%AspMarkupContainer 'noninteractive\test_report.aspx'}
 {%DelphiDotNetAssemblyCompiler 'c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll'}
 {%AspMarkupContainer 'usercontrol\app\UserControl_member_binder.ascx'}
+{%AspMarkupContainer 'usercontrol\app\UserControl_about.ascx'}
 
 uses
   System.Reflection,
@@ -82,7 +83,8 @@ uses
   UserControl_postcontent in 'usercontrol\app\UserControl_postcontent.pas' {UserControl_postcontent.TWebUserControl_postcontent: ki_web_ui.usercontrol_class},
   Class_db_notifications in 'component\db\Class_db_notifications.pas',
   test_report in 'noninteractive\test_report.pas',
-  UserControl_member_binder in 'usercontrol\app\UserControl_member_binder.pas' {UserControl_member_binder.TWebUserControl_member_binder: ki_web_ui.usercontrol_class};
+  UserControl_member_binder in 'usercontrol\app\UserControl_member_binder.pas' {TWebUserControl_member_binder: ki_web_ui.usercontrol_class},
+  UserControl_about in 'usercontrol\app\UserControl_about.pas' {UserControl_about.TWebUserControl_about: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following

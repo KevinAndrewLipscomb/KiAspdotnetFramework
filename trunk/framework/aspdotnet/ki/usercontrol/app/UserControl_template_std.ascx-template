@@ -1,10 +1,10 @@
 <%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_std.pas" Inherits="UserControl_template_std.TWebUserControl_template_std"%>
-<table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
+<table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1" width="100%">
   <tr>
     <td>
       <table cellspacing="0" cellpadding="10" width="100%" border="0">
         <tr bgcolor="#f5f5f5">
-          <td>
+	  <td>
           </td>
         </tr>
         <tr>
