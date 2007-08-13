@@ -234,6 +234,7 @@
       <File FileName="noninteractive\test_report.aspx" ContainerId="AspMarkupContainer" ModuleName="test_report"/>
       <File FileName="c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="Microsoft.Web.UI.WebControls" AssemblyName="Microsoft.Web.UI.WebControls" CopyLocal="True" Version="1.0.2.226" LinkUnits="False"/>
       <File FileName="usercontrol\app\UserControl_member_binder.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_member_binder"/>
+      <File FileName="usercontrol\app\UserControl_about.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_about"/>
       <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
       <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
       <File FileName="component\biz\Class_biz_user.pas" ContainerId="" ModuleName="Class_biz_user"/>
@@ -270,6 +271,7 @@
       <File FileName="component\db\Class_db_notifications.pas" ContainerId="" ModuleName="Class_db_notifications"/>
       <File FileName="noninteractive\test_report.pas" ContainerId="" ModuleName="test_report" Parent="noninteractive\test_report.aspx"/>
       <File FileName="usercontrol\app\UserControl_member_binder.pas" ContainerId="" ModuleName="UserControl_member_binder" Parent="usercontrol\app\UserControl_member_binder.ascx"/>
+      <File FileName="usercontrol\app\UserControl_about.pas" ContainerId="" ModuleName="UserControl_about" Parent="usercontrol\app\UserControl_about.ascx"/>
     </FileList>
   </DelphiDotNet.Personality>
 </BorlandProject>
