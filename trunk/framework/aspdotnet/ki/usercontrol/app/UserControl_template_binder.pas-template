@@ -19,6 +19,7 @@ type
   p_type =
     RECORD
     be_loaded: boolean;
+    tab_index: cardinal;
     END;
   TWebUserControl_template_binder = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
@@ -34,9 +35,7 @@ type
   strict protected
     TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
     MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
-    PlaceHolder1: System.Web.UI.WebControls.PlaceHolder;
-    PlaceHolder2: System.Web.UI.WebControls.PlaceHolder;
-    PlaceHolder3: System.Web.UI.WebControls.PlaceHolder;
+    PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -84,11 +83,44 @@ begin
     and (session['UserControl_template_binder.p'].GetType.namespace = p.GetType.namespace)
   then begin
     p := p_type(session['UserControl_template_binder.p']);
+    //
+    // Dynamic controls must be re-added on each postback.
+    //
+    case p.tab_index of
+    TSSI_0:
+      AddIdentifiedControlToPlaceHolder
+        (
+        TWebUserControl1(LoadControl('~/usercontrol/app/UserControl1.ascx')),
+        'UserControl1',
+        PlaceHolder_content
+        );
+    TSSI_1:
+      AddIdentifiedControlToPlaceHolder
+        (
+        TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')),
+        'UserControl2',
+        PlaceHolder_content
+        );
+    TSSI_2:
+      AddIdentifiedControlToPlaceHolder
+        (
+        TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')),
+        'UserControl3',
+        PlaceHolder_content
+        );
+    end;
   end else begin
     //
     p.be_loaded := FALSE;
     //
-    PlaceHolder1.controls.Add(TWebUserControl1(LoadControl('~/usercontrol/app/UserControl1.ascx')).Fresh);
+    p.tab_index := 0;
+    //
+    AddIdentifiedControlToPlaceHolder
+      (
+      TWebUserControl1(LoadControl('~/usercontrol/app/UserControl1.ascx')).Fresh,
+      'UserControl1',
+      PlaceHolder_content
+      );
     //
   end;
   //
@@ -97,13 +129,33 @@ end;
 procedure TWebUserControl_template_binder.TabStrip1_SelectedIndexChange(sender: System.Object;
   e: System.EventArgs);
 begin
-  case TabStrip1.selectedindex of
+  //
+  p.tab_index := TabStrip1.selectedindex;
+  //
+  PlaceHolder_content.controls.Clear;
+  //
+  case p.tab_index of
   TSSI_0:
-    PlaceHolder1.controls.Add(TWebUserControl1(LoadControl('~/usercontrol/app/UserControl1.ascx')).Fresh);
+    AddIdentifiedControlToPlaceHolder
+      (
+      TWebUserControl1(LoadControl('~/usercontrol/app/UserControl1.ascx')).Fresh,
+      'UserControl1',
+      PlaceHolder_content
+      );
   TSSI_1:
-    PlaceHolder2.controls.Add(TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')).Fresh);
+    AddIdentifiedControlToPlaceHolder
+      (
+      TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')).Fresh,
+      'UserControl2',
+      PlaceHolder_content
+      );
   TSSI_2:
-    PlaceHolder3.controls.Add(TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')).Fresh);
+    AddIdentifiedControlToPlaceHolder
+      (
+      TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')).Fresh,
+      'UserControl3',
+      PlaceHolder_content
+      );
   end;
 end;
 
