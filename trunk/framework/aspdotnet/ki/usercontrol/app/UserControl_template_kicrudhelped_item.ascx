@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_consolidated_crud.pas" Inherits="UserControl_template_consolidated_crud.TWebUserControl_template_consolidated_crud"%>
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_kicrudhelped_item.pas" Inherits="UserControl_template_kicrudhelped_item.TWebUserControl_template_kicrudhelped_item"%>
 <%@ Register TagPrefix="uc1" TagName="UserControl_print_div" Src="~/usercontrol/ki/UserControl_print_div.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_drop_down_date" Src="~/usercontrol/ki/UserControl_drop_down_date.ascx" %>
 <uc1:UserControl_print_div id="UserControl_print_div" runat="server"></uc1:UserControl_print_div>
