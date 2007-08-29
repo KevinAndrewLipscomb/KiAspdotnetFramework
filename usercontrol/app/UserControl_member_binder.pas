@@ -11,9 +11,9 @@ uses
   System.Web.UI,
   System.Web.UI.WebControls,
   System.Web.UI.HtmlControls,
-  UserControl_about;
+  UserControl_about,
+  UserControl_config_binder;
 //  UserControl_resources,
-//  UserControl_config
 
 type
   p_type =
@@ -63,6 +63,9 @@ begin
   //
   if not p.be_loaded then begin
     //
+    if Has(string_array(session['privilege_array']),'config-users') then begin
+      TabStrip1.items[TSSI_CONFIG].enabled := TRUE;
+    end;
     //
     p.be_loaded := TRUE;
     //
@@ -87,18 +90,18 @@ begin
     // Dynamic controls must be re-added on each postback.
     //
     case p.tab_index of
+    TSSI_CONFIG:
+      AddIdentifiedControlToPlaceHolder
+        (
+        TWebUserControl_config_binder(LoadControl('~/usercontrol/app/UserControl_config_binder.ascx')),
+        'UserControl_config',
+        PlaceHolder_content
+        );
 //    TSSI_RESOURCES:
 //      AddIdentifiedControlToPlaceHolder
 //        (
 //        TWebUserControl_resources(LoadControl('~/usercontrol/app/UserControl_resources.ascx')),
 //        'UserControl_resources',
-//        PlaceHolder_content
-//        );
-//    TSSI_CONFIG:
-//      AddIdentifiedControlToPlaceHolder
-//        (
-//        TWebUserControl_config(LoadControl('~/usercontrol/app/UserControl_config.ascx')),
-//        'UserControl_config',
 //        PlaceHolder_content
 //        );
     TSSI_ABOUT:
@@ -142,13 +145,13 @@ begin
 //      'UserControl_resources',
 //      PlaceHolder_content
 //      );
-//  TSSI_CONFIG:
-//    AddIdentifiedControlToPlaceHolder
-//      (
-//      TWebUserControl_config(LoadControl('~/usercontrol/app/UserControl_config.ascx')).Fresh,
-//      'UserControl_config',
-//      PlaceHolder_content
-//      );
+  TSSI_CONFIG:
+    AddIdentifiedControlToPlaceHolder
+      (
+      TWebUserControl_config_binder(LoadControl('~/usercontrol/app/UserControl_config_binder.ascx')).Fresh,
+      'UserControl_config',
+      PlaceHolder_content
+      );
   TSSI_ABOUT:
     AddIdentifiedControlToPlaceHolder
       (

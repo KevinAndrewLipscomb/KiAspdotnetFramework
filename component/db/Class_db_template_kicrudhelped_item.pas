@@ -57,13 +57,13 @@ begin
   //
   bdr := bdpcommand.Create
     (
-    'SELECT ki_crud_helper_user_key,name FROM template_consolidated_crud WHERE ki_crud_helper_user_key like "' + partial_ki_crud_helper_user_key + '%" order by ki_crud_helper_user_key',
+    'SELECT ki_crud_helper_user_key FROM template_kicrudhelped_item WHERE ki_crud_helper_user_key like "' + partial_ki_crud_helper_user_key + '%" order by ki_crud_helper_user_key',
     connection
     )
     .ExecuteReader;
   while bdr.Read do begin
     DropDownList(target).Items.Add
-      (listitem.Create(bdr['ki_crud_helper_user_key'].tostring + ' - ' + bdr['name'].tostring,bdr['ki_crud_helper_user_key'].tostring));
+      (listitem.Create(bdr['ki_crud_helper_user_key'].tostring,bdr['ki_crud_helper_user_key'].tostring));
   end;
   bdr.Close;
   self.Close;
@@ -73,7 +73,7 @@ end;
 procedure TClass_db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string);
 begin
   self.Open;
-  bdpcommand.Create(db_trail.Saved('delete from template_consolidated_crud where ki_crud_helper_user_key = ' + ki_crud_helper_user_key),connection).ExecuteNonquery;
+  bdpcommand.Create(db_trail.Saved('delete from template_kicrudhelped_item where ki_crud_helper_user_key = ' + ki_crud_helper_user_key),connection).ExecuteNonquery;
   self.Close;
 end;
 
@@ -87,7 +87,7 @@ var
 begin
   Get := FALSE;
   self.Open;
-  bdr := bdpcommand.Create('select * from template_consolidated_crud where ki_crud_helper_user_key = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
+  bdr := bdpcommand.Create('select * from template_kicrudhelped_item where ki_crud_helper_user_key = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
   if bdr.Read then begin
     //
 //<KiCrudHelper:DbGetBody/>
@@ -109,7 +109,7 @@ begin
     (
     db_trail.Saved
       (
-      'replace template_consolidated_crud'
+      'replace template_kicrudhelped_item'
 //<KiCrudHelper:DbSetBody/>
       ),
     connection

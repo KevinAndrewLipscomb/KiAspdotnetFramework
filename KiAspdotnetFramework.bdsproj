@@ -219,7 +219,7 @@
       <File FileName="dbscript" ContainerId="AspFolderContainer" ModuleName="dbscript"/>
       <File FileName="exception.aspx" ContainerId="AspMarkupContainer" ModuleName="exception"/>
       <File FileName="timeout.aspx" ContainerId="AspMarkupContainer" ModuleName="timeout"/>
-      <File FileName="lib\ki\ki.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="ki" AssemblyName="ki" Version="1.0.2782.37870" LinkUnits="False"/>
+      <File FileName="lib\ki\ki.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="ki" AssemblyName="ki" Version="1.0.2796.27108" LinkUnits="False"/>
       <File FileName="noninteractive\.crontab" ContainerId="File"/>
       <File FileName="noninteractive\milestone_sweep.aspx" ContainerId="AspMarkupContainer" ModuleName="milestone_sweep"/>
       <File FileName="noninteractive\daily_tasks.aspx" ContainerId="AspMarkupContainer" ModuleName="daily_tasks"/>
@@ -235,6 +235,9 @@
       <File FileName="c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="Microsoft.Web.UI.WebControls" AssemblyName="Microsoft.Web.UI.WebControls" CopyLocal="True" Version="1.0.2.226" LinkUnits="False"/>
       <File FileName="usercontrol\app\UserControl_member_binder.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_member_binder"/>
       <File FileName="usercontrol\app\UserControl_about.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_about"/>
+      <File FileName="usercontrol\app\UserControl_user.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_user"/>
+      <File FileName="usercontrol\ki\UserControl_drop_down_date.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_drop_down_date"/>
+      <File FileName="usercontrol\app\UserControl_config_binder.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_config_binder"/>
       <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
       <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
       <File FileName="component\biz\Class_biz_user.pas" ContainerId="" ModuleName="Class_biz_user"/>
@@ -272,6 +275,9 @@
       <File FileName="noninteractive\test_report.pas" ContainerId="" ModuleName="test_report" Parent="noninteractive\test_report.aspx"/>
       <File FileName="usercontrol\app\UserControl_member_binder.pas" ContainerId="" ModuleName="UserControl_member_binder" Parent="usercontrol\app\UserControl_member_binder.ascx"/>
       <File FileName="usercontrol\app\UserControl_about.pas" ContainerId="" ModuleName="UserControl_about" Parent="usercontrol\app\UserControl_about.ascx"/>
+      <File FileName="usercontrol\app\UserControl_user.pas" ContainerId="" ModuleName="UserControl_user" Parent="usercontrol\app\UserControl_user.ascx"/>
+      <File FileName="usercontrol\ki\UserControl_drop_down_date.pas" ContainerId="" ModuleName="UserControl_drop_down_date" Parent="usercontrol\ki\UserControl_drop_down_date.ascx"/>
+      <File FileName="usercontrol\app\UserControl_config_binder.pas" ContainerId="" ModuleName="UserControl_config_binder" Parent="usercontrol\app\UserControl_config_binder.ascx"/>
     </FileList>
   </DelphiDotNet.Personality>
 </BorlandProject>
