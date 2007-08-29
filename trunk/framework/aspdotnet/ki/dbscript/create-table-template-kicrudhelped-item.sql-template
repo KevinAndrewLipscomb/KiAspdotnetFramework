@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS template_kicrudhelped_item;
 CREATE TABLE IF NOT EXISTS template_kicrudhelped_item (
   id SERIAL,
---<KiCrudHelper:SqlFieldDefinition/>
+#<KiCrudHelper:SqlFieldDefinition/>
   PRIMARY KEY(id),
   UNIQUE (ki_crud_helper_user_key)
 )
