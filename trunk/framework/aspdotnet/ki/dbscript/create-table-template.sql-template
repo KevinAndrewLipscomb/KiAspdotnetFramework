@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS template;
+CREATE TABLE IF NOT EXISTS template (
+  id SERIAL,
+/*KiCrudHelper:SqlFieldDefinition*/
+  PRIMARY KEY(id)/*KiCrudHelper:SqlKeyPhrase*/
+)
+ENGINE = InnoDB;
