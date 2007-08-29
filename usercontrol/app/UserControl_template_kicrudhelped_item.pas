@@ -63,7 +63,7 @@ uses
 procedure TWebUserControl_template_kicrudhelped_item.Clear;
 begin
   //
-{$REGION 'KiCrudHelper:ClearStatements'}{$ENDREGION}
+//<KiCrudHelper:ClearStatements/>
   //
   Button_delete.enabled := FALSE;
   //
@@ -87,16 +87,16 @@ end;
 
 function TWebUserControl_template_kicrudhelped_item.PresentRecord(ki_crud_helper_user_key: string): boolean;
 var
-{$REGION 'KiCrudHelper:VarBlock'}{$ENDREGION}
+//<KiCrudHelper:VarBlock/>
 begin
   PresentRecord := FALSE;
   if p.biz_template_kicrudhelped_items.Get
     (
-{$REGION 'KiCrudHelper:GetSetCalls'}{$ENDREGION}
+//<KiCrudHelper:GetSetCalls/>
     )
   then begin
     //
-{$REGION 'KiCrudHelper:PresentRecordAssignments'}{$ENDREGION}
+//<KiCrudHelper:PresentRecordAssignments/>
     //
     TextBox_ki_crud_helper_user_key.enabled := FALSE;
     Button_delete.enabled := TRUE;
@@ -170,7 +170,7 @@ begin
     //
     p.biz_template_kicrudhelped_items.&Set
       (
-{$REGION 'KiCrudHelper:SubmitSet'}{$ENDREGION}
+//<KiCrudHelper:SubmitSet/>
       );
     Alert(USER,SUCCESS,'recsaved','Record saved.');
   end else begin
