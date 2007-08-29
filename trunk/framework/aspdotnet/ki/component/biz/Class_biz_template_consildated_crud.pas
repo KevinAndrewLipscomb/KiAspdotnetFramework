@@ -20,12 +20,12 @@ type
     procedure Delete(ki_crud_helper_user_key: string);
     function Get
       (
-{$REGION 'KiCrudHelper:GetDefinition'}{$ENDREGION}
+//<KiCrudHelper:GetDefinition/>
       )
       : boolean;
     procedure &Set
       (
-{$REGION 'KiCrudHelper:SetDefinition'}{$ENDREGION}
+//<KiCrudHelper:SetDefinition/>
       );
   end;
 
@@ -55,27 +55,27 @@ end;
 
 function TClass_biz_consolidated_crud.Get
   (
-{$REGION 'KiCrudHelper:GetDefinition'}{$ENDREGION}
+//<KiCrudHelper:GetDefinition/>
   )
   : boolean;
 begin
   //
   Get := db_consolidated_crud.Get
     (
-{$REGION 'KiCrudHelper:GetSetCalls'}{$ENDREGION}
+//<KiCrudHelper:GetSetCalls/>
     );
   //
 end;
 
 procedure TClass_biz_consolidated_crud.&Set
   (
-{$REGION 'KiCrudHelper:SetDefinition'}{$ENDREGION}
+//<KiCrudHelper:SetDefinition/>
   );
 begin
   //
   db_consolidated_crud.&Set
     (
-{$REGION 'KiCrudHelper:GetSetCalls'}{$ENDREGION}
+//<KiCrudHelper:GetSetCalls/>
     );
   //
 end;

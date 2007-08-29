@@ -21,12 +21,12 @@ type
     procedure Delete(ki_crud_helper_user_key: string);
     function Get
       (
-{$REGION 'KiCrudHelper:GetDefinition'}{$ENDREGION}
+//<KiCrudHelper:GetDefinition/>
       )
       : boolean;
     procedure &Set
       (
-{$REGION 'KiCrudHelper:SetDefinition'}{$ENDREGION}
+//<KiCrudHelper:SetDefinition/>
       );
   end;
 
@@ -79,7 +79,7 @@ end;
 
 function TClass_db_template_kicrudhelped_items.Get
   (
-{$REGION 'KiCrudHelper:GetDefinition'}{$ENDREGION}
+//<KiCrudHelper:GetDefinition/>
   )
   : boolean;
 var
@@ -90,7 +90,7 @@ begin
   bdr := bdpcommand.Create('select * from template_consolidated_crud where ki_crud_helper_user_key = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
   if bdr.Read then begin
     //
-{$REGION 'KiCrudHelper:DbGetBody'}{$ENDREGION}
+//<KiCrudHelper:DbGetBody/>
     //
     Get := TRUE;
     //
@@ -101,7 +101,7 @@ end;
 
 procedure TClass_db_template_kicrudhelped_items.&Set
   (
-{$REGION 'KiCrudHelper:SetDefinition'}{$ENDREGION}
+//<KiCrudHelper:SetDefinition/>
   );
 begin
   self.Open;
@@ -110,7 +110,7 @@ begin
     db_trail.Saved
       (
       'replace template_consolidated_crud'
-{$REGION 'KiCrudHelper:DbSetBody'}{$ENDREGION}
+//<KiCrudHelper:DbSetBody/>
       ),
     connection
     )
