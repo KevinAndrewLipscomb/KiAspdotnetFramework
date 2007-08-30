@@ -52,10 +52,7 @@ type
     RequiredFieldValidator_password_reset_email_address: System.Web.UI.WebControls.RequiredFieldValidator;
     CheckBox_be_active: System.Web.UI.WebControls.CheckBox;
     TextBox_num_unsuccessful_login_attempts: System.Web.UI.WebControls.TextBox;
-    RequiredFieldValidator_num_unsuccessful_login_attempts: System.Web.UI.WebControls.RequiredFieldValidator;
     TextBox_last_login: System.Web.UI.WebControls.TextBox;
-    RequiredFieldValidator_last_login: System.Web.UI.WebControls.RequiredFieldValidator;
-    RegularExpressionValidator_num_unsuccessful_login_attempts: System.Web.UI.WebControls.RegularExpressionValidator;
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -77,6 +74,7 @@ procedure TWebUserControl_user.Clear;
 begin
   //
   TextBox_username.text := system.string.EMPTY;
+  DropDownList_username.visible := FALSE;
   TextBox_encoded_password.text := system.string.EMPTY;
   CheckBox_be_stale_password.checked := FALSE;
   TextBox_password_reset_email_address.text := system.string.EMPTY;
@@ -213,10 +211,10 @@ begin
     //
     p.biz_users.&Set
       (
-      Safe(TextBox_username.text,NARRATIVE),
-      Safe(TextBox_encoded_password.text,NARRATIVE),
+      Safe(TextBox_username.text,HYPHENATED_UNDERSCORED_ALPHANUM),
+      Safe(TextBox_encoded_password.text,HYPHENATED_UNDERSCORED_ALPHANUM),
       CheckBox_be_stale_password.checked,
-      Safe(TextBox_password_reset_email_address.text,NARRATIVE),
+      Safe(TextBox_password_reset_email_address.text,EMAIL_ADDRESS),
       CheckBox_be_active.checked,
       num_unsuccessful_login_attempts,
       last_login
