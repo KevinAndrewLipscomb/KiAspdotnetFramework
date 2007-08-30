@@ -86,11 +86,11 @@ uses
   UserControl_postcontent in 'usercontrol\app\UserControl_postcontent.pas' {UserControl_postcontent.TWebUserControl_postcontent: ki_web_ui.usercontrol_class},
   Class_db_notifications in 'component\db\Class_db_notifications.pas',
   test_report in 'noninteractive\test_report.pas',
-  UserControl_member_binder in 'usercontrol\app\UserControl_member_binder.pas' {TWebUserControl_member_binder: ki_web_ui.usercontrol_class},
+  UserControl_member_binder in 'usercontrol\app\UserControl_member_binder.pas' {UserControl_member_binder.TWebUserControl_member_binder: ki_web_ui.usercontrol_class},
   UserControl_about in 'usercontrol\app\UserControl_about.pas' {UserControl_about.TWebUserControl_about: ki_web_ui.usercontrol_class},
   UserControl_user in 'usercontrol\app\UserControl_user.pas' {UserControl_user.TWebUserControl_user: ki_web_ui.usercontrol_class},
   UserControl_drop_down_date in 'usercontrol\ki\UserControl_drop_down_date.pas' {UserControl_drop_down_date.TWebUserControl_drop_down_date: ki_web_ui.usercontrol_class},
-  UserControl_config_binder in 'usercontrol\app\UserControl_config_binder.pas' {TWebUserControl_config_binder: ki_web_ui.usercontrol_class};
+  UserControl_config_binder in 'usercontrol\app\UserControl_config_binder.pas' {UserControl_config_binder.TWebUserControl_config_binder: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following

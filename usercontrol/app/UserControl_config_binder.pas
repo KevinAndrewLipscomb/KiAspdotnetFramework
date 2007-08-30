@@ -52,7 +52,7 @@ uses
   system.configuration;
 
 const
-  TSSI_USER = 0;
+  TSSI_USERS = 0;
   TSSI_1 = 1;
   TSSI_2 = 2;
 
@@ -61,6 +61,9 @@ begin
   //
   if not p.be_loaded then begin
     //
+    if Has(string_array(session['privilege_array']),'config-users') then begin
+      TabStrip1.items[TSSI_USERS].enabled := TRUE;
+    end;
     //
     p.be_loaded := TRUE;
     //
@@ -85,7 +88,7 @@ begin
     // Dynamic controls must be re-added on each postback.
     //
     case p.tab_index of
-    TSSI_USER:
+    TSSI_USERS:
       AddIdentifiedControlToPlaceHolder
         (
         TWebUserControl_user(LoadControl('~/usercontrol/app/UserControl_user.ascx')),
@@ -133,7 +136,7 @@ begin
   PlaceHolder_content.controls.Clear;
   //
   case p.tab_index of
-  TSSI_USER:
+  TSSI_USERS:
     AddIdentifiedControlToPlaceHolder
       (
       TWebUserControl_user(LoadControl('~/usercontrol/app/UserControl_user.ascx')).Fresh,
