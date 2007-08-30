@@ -389,12 +389,12 @@ begin
       (
       'replace user'
       + ' set username = "' + username + '"'
-      + ' , encoded_password = "' + encoded_password + '"'
+//      + ' , encoded_password = "' + encoded_password + '"'
       + ' , be_stale_password = ' + be_stale_password.tostring
       + ' , password_reset_email_address = "' + password_reset_email_address + '"'
       + ' , be_active = ' + be_active.tostring
-      + ' , num_unsuccessful_login_attempts = ' + num_unsuccessful_login_attempts.tostring
-      + ' , last_login = ' + last_login.tostring
+//      + ' , num_unsuccessful_login_attempts = ' + num_unsuccessful_login_attempts.tostring
+//      + ' , last_login = ' + last_login.tostring
       ),
     connection
     )

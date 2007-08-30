@@ -8,23 +8,23 @@
     <td valign="top">
       <table cellspacing="0" cellpadding="0" border="0">
   <tr>
-    <td>Username:</td>
-    <td>
+    <td valign="top">Username:</td>
+    <td valign="top">
       <ASP:TextBox id="TextBox_username" runat="server"></ASP:TextBox>
       &nbsp;&nbsp;&nbsp;
       <ASP:LinkButton id="LinkButton_search" runat="server" causesvalidation="False">Lookup</ASP:LinkButton>
       &nbsp;&nbsp;&nbsp;
       <ASP:LinkButton id="LinkButton_reset" runat="server" causesvalidation="False">Reset</ASP:LinkButton><br>
-      <ASP:DropDownList id="DropDownList_username" runat="server" visible="False" autopostback="True"></ASP:DropDownList>
+      <ASP:DropDownList id="DropDownList_username" runat="server" visible="False" autopostback="True"></ASP:DropDownList><br>
     </td>
-    <td>
+    <td valign="top">
       <ASP:RequiredFieldValidator id="RequiredFieldValidator_username" runat="server" errormessage="Please enter Username." font-bold="True" controltovalidate="TextBox_username">!ERR!</ASP:RequiredFieldValidator>
     </td>
   </tr>
   <tr>
     <td>Encoded password:</td>
     <td>
-      <ASP:TextBox id="TextBox_encoded_password" runat="server"></ASP:TextBox>
+      <ASP:TextBox id="TextBox_encoded_password" runat="server" enabled="False"></ASP:TextBox>
     </td>
     <td>
     </td>
@@ -57,20 +57,17 @@
   <tr>
     <td>Num unsuccessful login attempts:</td>
     <td>
-      <ASP:TextBox id="TextBox_num_unsuccessful_login_attempts" runat="server"></ASP:TextBox>
+      <ASP:TextBox id="TextBox_num_unsuccessful_login_attempts" runat="server" enabled="False"></ASP:TextBox>
     </td>
     <td>
-      <ASP:RequiredFieldValidator id="RequiredFieldValidator_num_unsuccessful_login_attempts" runat="server" errormessage="Please enter Num unsuccessful login attempts." font-bold="True" controltovalidate="TextBox_num_unsuccessful_login_attempts">!ERR!</ASP:RequiredFieldValidator>
-      <ASP:RegularExpressionValidator id="RegularExpressionValidator_num_unsuccessful_login_attempts" runat="server" errormessage="Please enter a valid Num unsuccessful login attempts." font-bold="True" controltovalidate="TextBox_num_unsuccessful_login_attempts" validationexpression="\d*">!ERR!</ASP:RegularExpressionValidator>
     </td>
   </tr>
   <tr>
     <td>Last login:</td>
     <td>
-      <ASP:TextBox id="TextBox_last_login" runat="server"></ASP:TextBox>
+      <ASP:TextBox id="TextBox_last_login" runat="server" enabled="False"></ASP:TextBox>
     </td>
     <td>
-      <ASP:RequiredFieldValidator id="RequiredFieldValidator_last_login" runat="server" errormessage="Please enter Last login." font-bold="True" controltovalidate="TextBox_last_login">!ERR!</ASP:RequiredFieldValidator>
     </td>
   </tr>
       </table>
