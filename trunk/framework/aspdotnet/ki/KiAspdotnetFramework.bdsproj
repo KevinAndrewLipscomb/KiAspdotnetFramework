@@ -238,6 +238,7 @@
       <File FileName="usercontrol\app\UserControl_user.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_user"/>
       <File FileName="usercontrol\ki\UserControl_drop_down_date.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_drop_down_date"/>
       <File FileName="usercontrol\app\UserControl_config_binder.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_config_binder"/>
+      <File FileName="usercontrol\ki\UserControl_config_welcome.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_config_welcome"/>
       <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
       <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
       <File FileName="component\biz\Class_biz_user.pas" ContainerId="" ModuleName="Class_biz_user"/>
@@ -278,6 +279,7 @@
       <File FileName="usercontrol\app\UserControl_user.pas" ContainerId="" ModuleName="UserControl_user" Parent="usercontrol\app\UserControl_user.ascx"/>
       <File FileName="usercontrol\ki\UserControl_drop_down_date.pas" ContainerId="" ModuleName="UserControl_drop_down_date" Parent="usercontrol\ki\UserControl_drop_down_date.ascx"/>
       <File FileName="usercontrol\app\UserControl_config_binder.pas" ContainerId="" ModuleName="UserControl_config_binder" Parent="usercontrol\app\UserControl_config_binder.ascx"/>
+      <File FileName="usercontrol\ki\UserControl_config_welcome.pas" ContainerId="" ModuleName="UserControl_config_welcome" Parent="usercontrol\ki\UserControl_config_welcome.ascx"/>
     </FileList>
   </DelphiDotNet.Personality>
 </BorlandProject>

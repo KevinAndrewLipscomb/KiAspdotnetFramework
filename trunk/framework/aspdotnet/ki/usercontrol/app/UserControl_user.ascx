@@ -9,7 +9,7 @@
   <tr>
     <td valign="top">Username:</td>
     <td valign="top">
-      <ASP:TextBox id="TextBox_username" runat="server"></ASP:TextBox>
+      <ASP:TextBox id="TextBox_username" runat="server" columns="40" maxlength="40"></ASP:TextBox>
       &nbsp;&nbsp;&nbsp;
       <ASP:LinkButton id="LinkButton_search" runat="server" causesvalidation="False">Lookup</ASP:LinkButton>
       &nbsp;&nbsp;&nbsp;
@@ -23,7 +23,7 @@
   <tr>
     <td>Encoded password:</td>
     <td>
-      <ASP:TextBox id="TextBox_encoded_password" runat="server" enabled="False"></ASP:TextBox>
+      <ASP:TextBox id="TextBox_encoded_password" runat="server" enabled="False" columns="40" maxlength="40"></ASP:TextBox>
     </td>
     <td>
     </td>
@@ -39,7 +39,7 @@
   <tr>
     <td>Password reset email address:</td>
     <td>
-      <ASP:TextBox id="TextBox_password_reset_email_address" runat="server"></ASP:TextBox>
+      <ASP:TextBox id="TextBox_password_reset_email_address" runat="server" columns="60" maxlength="255"></ASP:TextBox>
     </td>
     <td>
       <ASP:RequiredFieldValidator id="RequiredFieldValidator_password_reset_email_address" runat="server" errormessage="Please enter Password reset email address." font-bold="True" controltovalidate="TextBox_password_reset_email_address">!ERR!</ASP:RequiredFieldValidator>
