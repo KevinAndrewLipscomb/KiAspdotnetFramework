@@ -43,6 +43,7 @@ type
     Button_delete: System.Web.UI.WebControls.Button;
     LinkButton_search: System.Web.UI.WebControls.LinkButton;
     LinkButton_reset: System.Web.UI.WebControls.LinkButton;
+//<KiCrudHelper:ControlDeclarations/>
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
