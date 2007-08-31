@@ -1,4 +1,4 @@
-unit Class_biz_template_crudhelped_items;
+unit Class_biz_template_kicrudhelped_items;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   Class_db_template_kicrudhelped_items;
 
 type
-  TClass_biz_template_crudhelped_items = class
+  TClass_biz_template_kicrudhelped_items = class
   private
     db_template_kicrudhelped_items: TClass_db_template_kicrudhelped_items;
   public
@@ -31,14 +31,14 @@ type
 
 implementation
 
-constructor TClass_biz_template_crudhelped_items.Create;
+constructor TClass_biz_template_kicrudhelped_items.Create;
 begin
   inherited Create;
   // TODO: Add any constructor code here
   db_template_kicrudhelped_items := TClass_db_template_kicrudhelped_items.Create;
 end;
 
-function TClass_biz_template_crudhelped_items.Bind
+function TClass_biz_template_kicrudhelped_items.Bind
   (
   partial_username: string;
   target: system.object
@@ -48,12 +48,12 @@ begin
   Bind := db_template_kicrudhelped_items.Bind(partial_username,target);
 end;
 
-procedure TClass_biz_template_crudhelped_items.Delete(username: string);
+procedure TClass_biz_template_kicrudhelped_items.Delete(username: string);
 begin
   db_template_kicrudhelped_items.Delete(username);
 end;
 
-function TClass_biz_template_crudhelped_items.Get
+function TClass_biz_template_kicrudhelped_items.Get
   (
 //<KiCrudHelper:GetDefinition/>
   )
@@ -67,7 +67,7 @@ begin
   //
 end;
 
-procedure TClass_biz_template_crudhelped_items.&Set
+procedure TClass_biz_template_kicrudhelped_items.&Set
   (
 //<KiCrudHelper:SetDefinition/>
   );
