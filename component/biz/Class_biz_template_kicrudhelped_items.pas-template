@@ -17,6 +17,7 @@ type
       target: system.object
       )
       : boolean;
+    procedure BindDirectToListControl(target: system.object);
     procedure Delete(username: string);
     function Get
       (
@@ -46,6 +47,11 @@ function TClass_biz_template_kicrudhelped_items.Bind
   : boolean;
 begin
   Bind := db_template_kicrudhelped_items.Bind(partial_username,target);
+end;
+
+procedure TClass_biz_template_kicrudhelped_items.BindDirectToListControl(target: system.object);
+begin
+  db_template_kicrudhelped_items.BindDirectToListControl(target);
 end;
 
 procedure TClass_biz_template_kicrudhelped_items.Delete(username: string);
