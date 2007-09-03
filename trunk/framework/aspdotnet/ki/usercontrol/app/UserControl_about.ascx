@@ -39,6 +39,8 @@
 </li>
 				  <li>Divlocsoft Actual Search &amp; Replace
 </li>
+                                  <li>GnuWin32 findutils and sed packages
+</li>
 				  <li>Michael Elsdoerfer's NTFS Link
 </li>
 				  <li>WinMerge

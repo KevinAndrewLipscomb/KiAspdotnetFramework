@@ -157,6 +157,7 @@ end;
 function TWebUserControl_template_kicrudhelped_item.Fresh: TWebUserControl_template_kicrudhelped_item;
 begin
   session.Remove('UserControl_template_kicrudhelped_item.p');
+//<KiCrudHelper:IncludedStaticUserControlFreshStatements/>
   Fresh := self;
 end;
 
