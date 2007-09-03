@@ -18,6 +18,7 @@ type
       target: system.object
       )
       : boolean;
+    procedure BindDirectToListControl(target: system.object);
     procedure Delete(ki_crud_helper_user_key: string);
     function Get
       (
@@ -68,6 +69,22 @@ begin
   bdr.Close;
   self.Close;
   Bind := DropDownList(target).items.count > 0;
+end;
+
+procedure TClass_template_kicrudhelped_items.BindDirectToListControl(target: system.object);
+var
+  bdr: bdpdatareader;
+begin
+  self.Open;
+  ListControl(target).items.Clear;
+  //
+  bdr := bdpcommand.Create('SELECT id,ki_crud_helper_user_key FROM template_kicrudhelped_item order by ki_crud_helper_user_key',connection).ExecuteReader;
+  while bdr.Read do begin
+    ListControl(target).Items.Add
+      (listitem.Create(bdr['ki_crud_helper_user_key'].tostring,bdr['id'].tostring));
+  end;
+  bdr.Close;
+  self.Close;
 end;
 
 procedure TClass_db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string);
