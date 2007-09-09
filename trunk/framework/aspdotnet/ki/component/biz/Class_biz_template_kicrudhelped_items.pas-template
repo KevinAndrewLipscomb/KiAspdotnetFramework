@@ -13,12 +13,12 @@ type
     constructor Create;
     function Bind
       (
-      partial_username: string;
+      partial_ki_crud_helper_user_key: string;
       target: system.object
       )
       : boolean;
     procedure BindDirectToListControl(target: system.object);
-    procedure Delete(username: string);
+    procedure Delete(ki_crud_helper_user_key: string);
     function Get
       (
 //<KiCrudHelper:GetDefinition/>
@@ -41,12 +41,12 @@ end;
 
 function TClass_biz_template_kicrudhelped_items.Bind
   (
-  partial_username: string;
+  partial_ki_crud_helper_user_key: string;
   target: system.object
   )
   : boolean;
 begin
-  Bind := db_template_kicrudhelped_items.Bind(partial_username,target);
+  Bind := db_template_kicrudhelped_items.Bind(partial_ki_crud_helper_user_key,target);
 end;
 
 procedure TClass_biz_template_kicrudhelped_items.BindDirectToListControl(target: system.object);
@@ -54,9 +54,9 @@ begin
   db_template_kicrudhelped_items.BindDirectToListControl(target);
 end;
 
-procedure TClass_biz_template_kicrudhelped_items.Delete(username: string);
+procedure TClass_biz_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string);
 begin
-  db_template_kicrudhelped_items.Delete(username);
+  db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key);
 end;
 
 function TClass_biz_template_kicrudhelped_items.Get
