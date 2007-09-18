@@ -223,7 +223,6 @@
       <File FileName="noninteractive\.crontab" ContainerId="File"/>
       <File FileName="noninteractive\milestone_sweep.aspx" ContainerId="AspMarkupContainer" ModuleName="milestone_sweep"/>
       <File FileName="noninteractive\daily_tasks.aspx" ContainerId="AspMarkupContainer" ModuleName="daily_tasks"/>
-      <File FileName="usercontrol\ki\UserControl_print_div.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_print_div"/>
       <File FileName="new_user_registration.aspx" ContainerId="AspMarkupContainer" ModuleName="new_user_registration"/>
       <File FileName="remind_username.aspx" ContainerId="AspMarkupContainer" ModuleName="remind_username"/>
       <File FileName="protected\overview.aspx" ContainerId="AspMarkupContainer" ModuleName="overview"/>
@@ -239,6 +238,7 @@
       <File FileName="usercontrol\ki\UserControl_drop_down_date.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_drop_down_date"/>
       <File FileName="usercontrol\app\UserControl_config_binder.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_config_binder"/>
       <File FileName="usercontrol\ki\UserControl_config_welcome.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_config_welcome"/>
+      <File FileName="usercontrol\ki\UserControl_print_div.ascx" ContainerId="AspMarkupContainer" ModuleName="UserControl_print_div"/>
       <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
       <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
       <File FileName="component\biz\Class_biz_user.pas" ContainerId="" ModuleName="Class_biz_user"/>
@@ -259,7 +259,6 @@
       <File FileName="component\db\Class_db_trail.pas" ContainerId="" ModuleName="Class_db_trail"/>
       <File FileName="component\biz\Class_biz_scheduled_tasks.pas" ContainerId="" ModuleName="Class_biz_scheduled_tasks"/>
       <File FileName="noninteractive\daily_tasks.pas" ContainerId="" ModuleName="daily_tasks" Parent="noninteractive\daily_tasks.aspx"/>
-      <File FileName="usercontrol\ki\UserControl_print_div.pas" ContainerId="" ModuleName="UserControl_print_div"/>
       <File FileName="component\biz\Class_biz_users.pas" ContainerId="" ModuleName="Class_biz_users"/>
       <File FileName="component\db\Class_db_users.pas" ContainerId="" ModuleName="Class_db_users"/>
       <File FileName="component\biz\Class_biz_notifications.pas" ContainerId="" ModuleName="Class_biz_notifications"/>
@@ -280,6 +279,7 @@
       <File FileName="usercontrol\ki\UserControl_drop_down_date.pas" ContainerId="" ModuleName="UserControl_drop_down_date" Parent="usercontrol\ki\UserControl_drop_down_date.ascx"/>
       <File FileName="usercontrol\app\UserControl_config_binder.pas" ContainerId="" ModuleName="UserControl_config_binder" Parent="usercontrol\app\UserControl_config_binder.ascx"/>
       <File FileName="usercontrol\ki\UserControl_config_welcome.pas" ContainerId="" ModuleName="UserControl_config_welcome" Parent="usercontrol\ki\UserControl_config_welcome.ascx"/>
+      <File FileName="usercontrol\ki\UserControl_print_div.pas" ContainerId="" ModuleName="UserControl_print_div" Parent="usercontrol\ki\UserControl_print_div.ascx"/>
     </FileList>
   </DelphiDotNet.Personality>
 </BorlandProject>

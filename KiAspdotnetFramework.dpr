@@ -34,7 +34,6 @@ library KiAspdotnetFramework;
 {%File 'noninteractive\.crontab'}
 {%AspMarkupContainer 'noninteractive\milestone_sweep.aspx'}
 {%AspMarkupContainer 'noninteractive\daily_tasks.aspx'}
-{%AspMarkupContainer 'usercontrol\ki\UserControl_print_div.ascx'}
 {%AspMarkupContainer 'new_user_registration.aspx'}
 {%AspMarkupContainer 'remind_username.aspx'}
 {%AspMarkupContainer 'protected\overview.aspx'}
@@ -50,6 +49,7 @@ library KiAspdotnetFramework;
 {%AspMarkupContainer 'usercontrol\ki\UserControl_drop_down_date.ascx'}
 {%AspMarkupContainer 'usercontrol\app\UserControl_config_binder.ascx'}
 {%AspMarkupContainer 'usercontrol\ki\UserControl_config_welcome.ascx'}
+{%AspMarkupContainer 'usercontrol\ki\UserControl_print_div.ascx'}
 
 uses
   System.Reflection,
@@ -72,7 +72,6 @@ uses
   Class_db_trail in 'component\db\Class_db_trail.pas',
   Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
   daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page},
-  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class},
   Class_biz_users in 'component\biz\Class_biz_users.pas',
   Class_db_users in 'component\db\Class_db_users.pas',
   Class_biz_notifications in 'component\biz\Class_biz_notifications.pas',
@@ -92,7 +91,8 @@ uses
   UserControl_user in 'usercontrol\app\UserControl_user.pas' {UserControl_user.TWebUserControl_user: ki_web_ui.usercontrol_class},
   UserControl_drop_down_date in 'usercontrol\ki\UserControl_drop_down_date.pas' {UserControl_drop_down_date.TWebUserControl_drop_down_date: ki_web_ui.usercontrol_class},
   UserControl_config_binder in 'usercontrol\app\UserControl_config_binder.pas' {TWebUserControl_config_binder: ki_web_ui.usercontrol_class},
-  UserControl_config_welcome in 'usercontrol\ki\UserControl_config_welcome.pas';
+  UserControl_config_welcome in 'usercontrol\ki\UserControl_config_welcome.pas',
+  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following
