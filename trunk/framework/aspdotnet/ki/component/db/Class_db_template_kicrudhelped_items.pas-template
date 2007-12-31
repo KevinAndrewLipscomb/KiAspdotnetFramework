@@ -34,7 +34,7 @@ type
 implementation
 
 uses
-  borland.data.provider,
+  mysql.data.mysqlclient,
   system.web.ui.webcontrols;
 
 constructor TClass_db_template_kicrudhelped_items.Create;
@@ -51,46 +51,46 @@ function TClass_db_template_kicrudhelped_items.Bind
   )
   : boolean;
 var
-  bdr: bdpdatareader;
+  dr: mysqldatareader;
 begin
   self.Open;
   DropDownList(target).items.Clear;
   //
-  bdr := bdpcommand.Create
+  dr := mysqlcommand.Create
     (
     'SELECT ki_crud_helper_user_key FROM template_kicrudhelped_item WHERE ki_crud_helper_user_key like "' + partial_ki_crud_helper_user_key + '%" order by ki_crud_helper_user_key',
     connection
     )
     .ExecuteReader;
-  while bdr.Read do begin
+  while dr.Read do begin
     DropDownList(target).Items.Add
-      (listitem.Create(bdr['ki_crud_helper_user_key'].tostring,bdr['ki_crud_helper_user_key'].tostring));
+      (listitem.Create(dr['ki_crud_helper_user_key'].tostring,dr['ki_crud_helper_user_key'].tostring));
   end;
-  bdr.Close;
+  dr.Close;
   self.Close;
   Bind := DropDownList(target).items.count > 0;
 end;
 
-procedure TClass_template_kicrudhelped_items.BindDirectToListControl(target: system.object);
+procedure TClass_db_template_kicrudhelped_items.BindDirectToListControl(target: system.object);
 var
-  bdr: bdpdatareader;
+  dr: mysqldatareader;
 begin
   self.Open;
   ListControl(target).items.Clear;
   //
-  bdr := bdpcommand.Create('SELECT id,ki_crud_helper_user_key FROM template_kicrudhelped_item order by ki_crud_helper_user_key',connection).ExecuteReader;
-  while bdr.Read do begin
+  dr := mysqlcommand.Create('SELECT id,ki_crud_helper_user_key FROM template_kicrudhelped_item order by ki_crud_helper_user_key',connection).ExecuteReader;
+  while dr.Read do begin
     ListControl(target).Items.Add
-      (listitem.Create(bdr['ki_crud_helper_user_key'].tostring,bdr['id'].tostring));
+      (listitem.Create(dr['ki_crud_helper_user_key'].tostring,dr['id'].tostring));
   end;
-  bdr.Close;
+  dr.Close;
   self.Close;
 end;
 
 procedure TClass_db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string);
 begin
   self.Open;
-  bdpcommand.Create(db_trail.Saved('delete from template_kicrudhelped_item where ki_crud_helper_user_key = ' + ki_crud_helper_user_key),connection).ExecuteNonquery;
+  mysqlcommand.Create(db_trail.Saved('delete from template_kicrudhelped_item where ki_crud_helper_user_key = ' + ki_crud_helper_user_key),connection).ExecuteNonquery;
   self.Close;
 end;
 
@@ -100,19 +100,19 @@ function TClass_db_template_kicrudhelped_items.Get
   )
   : boolean;
 var
-  bdr: bdpdatareader;
+  dr: mysqldatareader;
 begin
   Get := FALSE;
   self.Open;
-  bdr := bdpcommand.Create('select * from template_kicrudhelped_item where ki_crud_helper_user_key = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
-  if bdr.Read then begin
+  dr := mysqlcommand.Create('select * from template_kicrudhelped_item where ki_crud_helper_user_key = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
+  if dr.Read then begin
     //
 //<KiCrudHelper:DbGetBody/>
     //
     Get := TRUE;
     //
   end;
-  bdr.Close;
+  dr.Close;
   self.Close;
 end;
 
@@ -120,12 +120,27 @@ procedure TClass_db_template_kicrudhelped_items.&Set
   (
 //<KiCrudHelper:SetDefinition/>
   );
+//
+// If any fields in this table are foreign keys for a subordinate table:
+// a. Uncomment the "//1" lines.
+// b. Customize the SQL as indicated by {bracketed comments}.
+//
+//1 var
+//1   childless_field_assignments_clause: string;
 begin
+  //
+//1  childless_field_assignments_clause := // {Move childless field assignments here.}
+  //
   self.Open;
-  bdpcommand.Create
+  mysqlcommand.Create
     (
     db_trail.Saved
       (
+//1      'insert template_kicrudhelped_item'
+//1      + ' set // {Move parent field assignments here.}
+//1      + ' , ' + childless_field_assignments_clause
+//1      + ' on duplicate key update'
+//1      + childless_field_assignments_clause
       'replace template_kicrudhelped_item'
 //<KiCrudHelper:DbSetBody/>
       ),
@@ -133,6 +148,7 @@ begin
     )
     .ExecuteNonquery;
   self.Close;
+  //
 end;
 
 end.
