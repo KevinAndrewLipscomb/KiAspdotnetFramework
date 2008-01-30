@@ -79,11 +79,9 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback
-    and (session['UserControl_config_binder.p'] <> nil)
-    and (session['UserControl_config_binder.p'].GetType.namespace = p.GetType.namespace)
-  then begin
+  if session['UserControl_config_binder.p'] <> nil then begin
     p := p_type(session['UserControl_config_binder.p']);
+    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_PlaceHolder_content']) = 'UserControl_config_binder');
     //
     // Dynamic controls must be re-added on each postback.
     //
