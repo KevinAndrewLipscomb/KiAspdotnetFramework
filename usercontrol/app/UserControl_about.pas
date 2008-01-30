@@ -66,11 +66,9 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback
-    and (session['UserControl_about.p'] <> nil)
-    and (session['UserControl_about.p'].GetType.namespace = p.GetType.namespace)
-  then begin
+  if session['UserControl_about.p'] <> nil then begin
     p := p_type(session['UserControl_about.p']);
+    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_PlaceHolder_content']) = 'UserControl_about');
   end else begin
     //
     p.be_loaded := FALSE;

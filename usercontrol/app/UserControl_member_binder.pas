@@ -19,6 +19,7 @@ type
   p_type =
     RECORD
     be_loaded: boolean;
+    content_id: string;
     tab_index: cardinal;
     END;
   TWebUserControl_member_binder = class(ki_web_ui.usercontrol_class)
@@ -90,22 +91,22 @@ begin
     // Dynamic controls must be re-added on each postback.
     //
     case p.tab_index of
-    TSSI_CONFIG:
-      AddIdentifiedControlToPlaceHolder
+    TSSI_CONFIG	: 
+      p.content_id := AddIdentifiedControlToPlaceHolder
         (
         TWebUserControl_config_binder(LoadControl('~/usercontrol/app/UserControl_config_binder.ascx')),
         'UserControl_config',
         PlaceHolder_content
         );
 //    TSSI_RESOURCES:
-//      AddIdentifiedControlToPlaceHolder
+//      p.content_id := AddIdentifiedControlToPlaceHolder
 //        (
 //        TWebUserControl_resources(LoadControl('~/usercontrol/app/UserControl_resources.ascx')),
 //        'UserControl_resources',
 //        PlaceHolder_content
 //        );
     TSSI_ABOUT:
-      AddIdentifiedControlToPlaceHolder
+      p.content_id := AddIdentifiedControlToPlaceHolder
         (
         TWebUserControl_about(LoadControl('~/usercontrol/app/UserControl_about.ascx')),
         'UserControl_about',
@@ -118,7 +119,7 @@ begin
     //
     p.tab_index := 0;
     //
-//    AddIdentifiedControlToPlaceHolder
+//    p.content_id := AddIdentifiedControlToPlaceHolder
 //      (
 //      TWebUserControl_resources(LoadControl('~/usercontrol/app/UserControl_resources.ascx')).Fresh,
 //      'UserControl_resources',
@@ -139,21 +140,21 @@ begin
   //
   case p.tab_index of
 //  TSSI_RESOURCES:
-//    AddIdentifiedControlToPlaceHolder
+//    p.content_id := AddIdentifiedControlToPlaceHolder
 //      (
 //      TWebUserControl_resources(LoadControl('~/usercontrol/app/UserControl_resources.ascx')).Fresh,
 //      'UserControl_resources',
 //      PlaceHolder_content
 //      );
   TSSI_CONFIG:
-    AddIdentifiedControlToPlaceHolder
+    p.content_id := AddIdentifiedControlToPlaceHolder
       (
       TWebUserControl_config_binder(LoadControl('~/usercontrol/app/UserControl_config_binder.ascx')).Fresh,
       'UserControl_config',
       PlaceHolder_content
       );
   TSSI_ABOUT:
-    AddIdentifiedControlToPlaceHolder
+    p.content_id := AddIdentifiedControlToPlaceHolder
       (
       TWebUserControl_about(LoadControl('~/usercontrol/app/UserControl_about.ascx')).Fresh,
       'UserControl_about',
@@ -178,8 +179,16 @@ end;
 procedure TWebUserControl_member_binder.TWebUserControl_member_binder_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
+  //
+  // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
+  // not it is already loaded in the user's browser.
+  //
+  session.Remove(PlaceHolder_content.clientid);
+  session.Add(PlaceHolder_content.clientid,p.content_id);
+  //
   session.Remove('UserControl_member_binder.p');
   session.Add('UserControl_member_binder.p',p);
+  //
 end;
 
 function TWebUserControl_member_binder.Fresh: TWebUserControl_member_binder;
