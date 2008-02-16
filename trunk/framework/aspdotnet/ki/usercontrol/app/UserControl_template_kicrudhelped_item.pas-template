@@ -45,6 +45,7 @@ type
     LinkButton_search: System.Web.UI.WebControls.LinkButton;
     LinkButton_reset: System.Web.UI.WebControls.LinkButton;
 //<KiCrudHelper:ControlDeclarations/>
+  protected
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -58,7 +59,7 @@ implementation
 
 uses
   appcommon,
-  ki,
+  kix,
   System.Collections,
   system.configuration;
 
@@ -71,7 +72,7 @@ begin
   //
 end;
 
-procedure TWebUserControl_template_std.InjectPersistentClientSideScript;
+procedure TWebUserControl_template_kicrudhelped_item.InjectPersistentClientSideScript;
 begin
 //  EstablishClientSideFunction(EL);
 //  EstablishClientSideFunction(KGS_TO_LBS);
