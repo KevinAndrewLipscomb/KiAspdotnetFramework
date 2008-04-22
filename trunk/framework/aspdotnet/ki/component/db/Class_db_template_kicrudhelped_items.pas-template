@@ -139,7 +139,7 @@ begin
 //1      'insert template_kicrudhelped_item'
 //1      + ' set // {Move parent field assignments here.}
 //1      + ' , ' + childless_field_assignments_clause
-//1      + ' on duplicate key update'
+//1      + ' on duplicate key update '
 //1      + childless_field_assignments_clause
       'replace template_kicrudhelped_item'
 //<KiCrudHelper:DbSetBody/>
