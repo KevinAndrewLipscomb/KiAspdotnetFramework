@@ -18,7 +18,7 @@ type
       )
       : boolean;
     procedure BindDirectToListControl(target: system.object);
-    procedure Delete(ki_crud_helper_user_key: string);
+    function Delete(ki_crud_helper_user_key: string): boolean;
     function Get
       (
 //<KiCrudHelper:GetDefinition/>
@@ -54,9 +54,9 @@ begin
   db_template_kicrudhelped_items.BindDirectToListControl(target);
 end;
 
-procedure TClass_biz_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string);
+function TClass_biz_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string): boolean;
 begin
-  db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key);
+  Delete := db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key);
 end;
 
 function TClass_biz_template_kicrudhelped_items.Get
