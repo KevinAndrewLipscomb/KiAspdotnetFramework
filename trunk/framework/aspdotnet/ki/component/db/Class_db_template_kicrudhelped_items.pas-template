@@ -19,7 +19,7 @@ type
       )
       : boolean;
     procedure BindDirectToListControl(target: system.object);
-    procedure Delete(ki_crud_helper_user_key: string);
+    function Delete(ki_crud_helper_user_key: string): boolean;
     function Get
       (
 //<KiCrudHelper:GetDefinition/>
@@ -87,10 +87,21 @@ begin
   self.Close;
 end;
 
-procedure TClass_db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string);
+function TClass_db_template_kicrudhelped_items.Delete(ki_crud_helper_user_key: string): boolean;
 begin
+  //
+  Delete := TRUE;
+  //
   self.Open;
-  mysqlcommand.Create(db_trail.Saved('delete from template_kicrudhelped_item where ki_crud_helper_user_key = ' + ki_crud_helper_user_key),connection).ExecuteNonquery;
+  try
+    mysqlcommand.Create(db_trail.Saved('delete from template_kicrudhelped_item where ki_crud_helper_user_key = ' + ki_crud_helper_user_key),connection).ExecuteNonquery;
+  except on e: exception do
+    if e.message.StartsWith('Cannot delete or update a parent row: a foreign key constraint fails',TRUE,nil) then begin
+      Delete := FALSE;
+    end else begin
+      raise e;
+    end;
+  end;
   self.Close;
 end;
 
@@ -104,7 +115,7 @@ var
 begin
   Get := FALSE;
   self.Open;
-  dr := mysqlcommand.Create('select * from template_kicrudhelped_item where ki_crud_helper_user_key = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
+  dr := mysqlcommand.Create('select * from template_kicrudhelped_item where CAST(ki_crud_helper_user_key AS CHAR) = "' + ki_crud_helper_user_key + '"',connection).ExecuteReader;
   if dr.Read then begin
     //
 //<KiCrudHelper:DbGetBody/>
