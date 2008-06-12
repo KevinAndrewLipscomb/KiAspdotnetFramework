@@ -186,8 +186,7 @@ begin
   session.Remove(PlaceHolder_content.clientid);
   session.Add(PlaceHolder_content.clientid,p.content_id);
   //
-  session.Remove('UserControl_member_binder.p');
-  session.Add('UserControl_member_binder.p',p);
+  SessionSet('UserControl_member_binder.p',p);
   //
 end;
 

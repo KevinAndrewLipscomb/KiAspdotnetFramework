@@ -23,6 +23,7 @@ type
 implementation
 
 uses
+  kix,
   borland.data.provider,
   system.configuration;
 
@@ -46,13 +47,13 @@ var
   tier_2_match_value: string;
   tier_3_match_value: string;
 begin
-  target_of := system.string.EMPTY;
+  target_of := EMPTY;
   self.Open;
   //
   // Get tier 2 and 3 associations of target member.
   //
   bdr := bdpcommand.Create
-    ('select ' + tier_2_match_field + ',' + tier_3_match_field + ' from member where id = ' + member_id,connection).ExecuteReader;
+    ('select ' + tier_2_match_field + COMMA + tier_3_match_field + ' from member where id = ' + member_id,connection).ExecuteReader;
   bdr.Read;
   tier_2_match_value := bdr[tier_2_match_field].tostring;
   tier_3_match_value := bdr[tier_3_match_field].tostring;
@@ -75,7 +76,7 @@ begin
     .ExecuteReader;
   if bdr <> nil then begin
     while bdr.Read do begin
-      target_of := target_of + bdr['email_address'].tostring + ',';
+      target_of := target_of + bdr['email_address'].tostring + COMMA;
     end;
   end;
   bdr.Close;
@@ -98,7 +99,7 @@ begin
     .ExecuteReader;
   if bdr <> nil then begin
     while bdr.Read do begin
-      target_of := target_of + bdr['email_address'].tostring + ',';
+      target_of := target_of + bdr['email_address'].tostring + COMMA;
     end;
   end;
   bdr.Close;
@@ -122,16 +123,16 @@ begin
     .ExecuteReader;
   if bdr <> nil then begin
     while bdr.Read do begin
-      target_of := target_of + bdr['email_address'].tostring + ',';
+      target_of := target_of + bdr['email_address'].tostring + COMMA;
     end;
   end;
   bdr.Close;
   //
   self.Close;
-  if target_of <> system.string.EMPTY then begin
+  if target_of <> EMPTY then begin
     TargetOf := target_of.Substring(0,target_of.Length - 1);
   end else begin
-    TargetOf := system.string.EMPTY;
+    TargetOf := EMPTY;
   end;
 end;
 

@@ -84,8 +84,7 @@ end;
 procedure TWebForm_template_std.TWebForm_template_std_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('template_std.p');
-  session.Add('template_std.p',p);
+  SessionSet('template_std.p',p);
 end;
 
 end.

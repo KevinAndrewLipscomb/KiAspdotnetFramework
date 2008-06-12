@@ -186,7 +186,7 @@ var
   bdr: bdpdatareader;
 begin
   self.Open;
-  DropDownList(target).items.Clear;
+  ListControl(target).items.Clear;
   //
   bdr := bdpcommand.Create
     (
@@ -195,12 +195,12 @@ begin
     )
     .ExecuteReader;
   while bdr.Read do begin
-    DropDownList(target).Items.Add
+    ListControl(target).Items.Add
       (listitem.Create(bdr['username'].tostring,bdr['username'].tostring));
   end;
   bdr.Close;
   self.Close;
-  Bind := DropDownList(target).items.count > 0;
+  Bind := ListControl(target).items.count > 0;
 end;
 
 procedure TClass_db_users.Delete(username: string);

@@ -73,14 +73,14 @@ uses
 procedure TWebUserControl_user.Clear;
 begin
   //
-  TextBox_username.text := system.string.EMPTY;
+  TextBox_username.text := EMPTY;
   DropDownList_username.visible := FALSE;
-  TextBox_encoded_password.text := system.string.EMPTY;
+  TextBox_encoded_password.text := EMPTY;
   CheckBox_be_stale_password.checked := FALSE;
-  TextBox_password_reset_email_address.text := system.string.EMPTY;
+  TextBox_password_reset_email_address.text := EMPTY;
   CheckBox_be_active.checked := FALSE;
-  TextBox_num_unsuccessful_login_attempts.text := system.string.EMPTY;
-  TextBox_last_login.text := system.string.EMPTY;
+  TextBox_num_unsuccessful_login_attempts.text := EMPTY;
+  TextBox_last_login.text := EMPTY;
   //
   Button_delete.enabled := FALSE;
   //
@@ -181,8 +181,7 @@ end;
 procedure TWebUserControl_user.TWebUserControl_user_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('UserControl_user.p');
-  session.Add('UserControl_user.p',p);
+  SessionSet('UserControl_user.p',p);
 end;
 
 function TWebUserControl_user.Fresh: TWebUserControl_user;
@@ -200,10 +199,10 @@ begin
   if page.IsValid then begin
     //
     num_unsuccessful_login_attempts := 0;
-    if TextBox_num_unsuccessful_login_attempts.text <> system.string.EMPTY then begin
+    if TextBox_num_unsuccessful_login_attempts.text <> EMPTY then begin
       num_unsuccessful_login_attempts := uint32.Parse(Safe(TextBox_num_unsuccessful_login_attempts.text,NUM));
     end;
-    if TextBox_last_login.text <> system.string.EMPTY then begin
+    if TextBox_last_login.text <> EMPTY then begin
       last_login := datetime.Parse(Safe(TextBox_last_login.text,DATE_TIME));
     end;
     //
@@ -261,7 +260,7 @@ begin
       if num_matches = 1 then begin
         PresentRecord(DropDownList_username.selectedvalue);
       end else begin
-        DropDownList_username.items.Insert(0,listitem.Create('-- Select --',system.string.EMPTY));
+        DropDownList_username.items.Insert(0,listitem.Create('-- Select --',EMPTY));
       end;
     end;
   end;
