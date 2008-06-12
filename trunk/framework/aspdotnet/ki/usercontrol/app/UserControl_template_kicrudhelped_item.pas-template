@@ -39,7 +39,6 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
     function PresentRecord(ki_crud_helper_user_key: string): boolean;
   strict protected
-    Label_application_name: System.Web.UI.WebControls.Label;
     Button_submit: System.Web.UI.WebControls.Button;
     Button_delete: System.Web.UI.WebControls.Button;
     LinkButton_search: System.Web.UI.WebControls.LinkButton;
@@ -74,13 +73,14 @@ end;
 
 procedure TWebUserControl_template_kicrudhelped_item.InjectPersistentClientSideScript;
 begin
+{$REGION 'Persistent client-side script'}
 //  EstablishClientSideFunction(EL);
 //  EstablishClientSideFunction(KGS_TO_LBS);
 //  EstablishClientSideFunction(LBS_TO_KGS);
 //  EstablishClientSideFunction
 //    (
 //    'RecalculateDependentValues()',
-//    system.string.EMPTY
+//    EMPTY
 //    + 'El("' + TextBox_gain_or_loss_in_lbs.clientid + '").value ='
 //    +  ' El("' + TextBox_gross_landed_weight_in_pounds.clientid + '").value - El("' + TextBox_gross_invoiced_weight_in_lbs.clientid + '").value;'
 //    + NEW_LINE
@@ -149,6 +149,7 @@ begin
 //    'El("' + TextBox_net_landed_in_pounds.clientid + '").value = KgsToLbs(El("' + TextBox_net_landed_in_kgs.clientid + '").value);'
 //    + ' RecalculateDependentValues();'
 //    );
+{$ENDREGION}
 end;
 
 procedure TWebUserControl_template_kicrudhelped_item.Page_Load(sender: System.Object; e: System.EventArgs);
@@ -231,8 +232,7 @@ end;
 procedure TWebUserControl_template_kicrudhelped_item.TWebUserControl_template_kicrudhelped_item_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('UserControl_template_kicrudhelped_item.p');
-  session.Add('UserControl_template_kicrudhelped_item.p',p);
+  SessionSet('UserControl_template_kicrudhelped_item.p',p);
 end;
 
 function TWebUserControl_template_kicrudhelped_item.Fresh: TWebUserControl_template_kicrudhelped_item;
@@ -301,7 +301,7 @@ begin
       if num_matches = 1 then begin
         PresentRecord(DropDownList_ki_crud_helper_user_key.selectedvalue);
       end else begin
-        DropDownList_ki_crud_helper_user_key.items.Insert(0,listitem.Create('-- Select --',system.string.EMPTY));
+        DropDownList_ki_crud_helper_user_key.items.Insert(0,listitem.Create('-- Select --',EMPTY));
       end;
     end;
   end;

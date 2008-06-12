@@ -129,7 +129,7 @@ begin
     //from
     configurationsettings.appsettings['sender_email_address'],
     // to
-    configurationsettings.appsettings['membership_establishment_liaison'] + ','
+    configurationsettings.appsettings['membership_establishment_liaison'] + COMMA
     + configurationsettings.appsettings['application_name'] + '-appadmin@' + host_domain_name,
     //subject
     Merge(template_reader.ReadLine),
@@ -182,5 +182,5 @@ end;
 begin
   BreakChars[1] := ki.SPACE;
   BreakChars[2] := ki.TAB;
-  BreakChars[3] := '-';
+  BreakChars[3] := HYPHEN;
 end.

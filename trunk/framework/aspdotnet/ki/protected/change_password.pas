@@ -102,8 +102,7 @@ end;
 procedure TWebForm_change_password.TWebForm_change_password_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('change_password.p');
-  session.Add('change_password.p',p);
+  SessionSet('change_password.p',p);
 end;
 
 procedure TWebForm_change_password.LinkButton_logout_Click(sender: System.Object;

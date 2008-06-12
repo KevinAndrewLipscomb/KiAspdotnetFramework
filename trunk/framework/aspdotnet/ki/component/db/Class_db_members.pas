@@ -53,6 +53,7 @@ type
 implementation
 
 uses
+  kix,
   system.web.ui.HtmlControls;
 
 constructor TClass_db_members.Create;
@@ -81,7 +82,7 @@ begin
   if email_address_obj <> nil then begin
     EmailAddressOf := email_address_obj.tostring;
   end else begin
-    EmailAddressOf := system.string.EMPTY;
+    EmailAddressOf := EMPTY;
   end;
   self.Close;
 end;
@@ -95,7 +96,7 @@ begin
   if member_id_obj <> nil then begin
     IdOfUserId := member_id_obj.tostring;
   end else begin
-    IdOfUserId := system.string.EMPTY;
+    IdOfUserId := EMPTY;
   end;
   self.Close;
 end;
@@ -131,7 +132,7 @@ begin
   if user_id_obj <> nil then begin
     UserIdOf := user_id_obj.tostring;
   end else begin
-    UserIdOf := system.string.EMPTY;
+    UserIdOf := EMPTY;
   end;
   self.Close;
 end;

@@ -113,7 +113,7 @@ procedure TWebForm_salogin.LinkButton_forgot_password_Click(sender: System.Objec
 var
   username: string;
 begin
-  if TextBox_username.text = system.string.EMPTY then begin
+  if TextBox_username.text = EMPTY then begin
     Alert(ki.USER,ki.FAILURE,'misusrnam','Please enter your username.');
   end else begin
     username := Safe(TextBox_username.Text.trim,HYPHENATED_UNDERSCORED_ALPHANUM);
@@ -136,8 +136,7 @@ end;
 
 procedure TWebForm_salogin.TWebForm_salogin_PreRender(sender: System.Object; e: System.EventArgs);
 begin
-  session.Remove('salogin.p');
-  session.Add('salogin.p',p);
+  SessionSet('salogin.p',p);
 end;
 
 procedure TWebForm_salogin.CustomValidator_account_exists_ServerValidate(source: System.Object;
@@ -155,10 +154,8 @@ var
 begin
   username := Safe(TextBox_username.Text.trim,HYPHENATED_UNDERSCORED_ALPHANUM);
   if page.isvalid then begin
-    session.Remove('user_id');
-    session.Add('user_id',p.biz_users.IdOf(username));
-    session.Remove('username');
-    session.Add('username',username);
+    SessionSet('user_id',p.biz_users.IdOf(username));
+    SessionSet('username',username);
     formsauthentication.RedirectFromLoginPage(username,CheckBox_keep_me_logged_in.checked);
   end;
 end;

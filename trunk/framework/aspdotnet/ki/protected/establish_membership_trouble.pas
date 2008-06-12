@@ -137,7 +137,7 @@ begin
   p.biz_notifications.IssueForMembershipEstablishmentTrouble
     (
     Safe(TextBox_full_name.text,HUMAN_NAME),
-    Safe(TextBox_explanation.text,NARRATIVE)
+    Safe(TextBox_explanation.text,PUNCTUATED)
     );
   session.Clear;
   server.Transfer('~/login.aspx');
@@ -164,8 +164,7 @@ end;
 procedure TWebForm_establish_membership_trouble.TWebForm_establish_membership_trouble_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('establish_membership_trouble.p');
-  session.Add('establish_membership_trouble.p',p);
+  SessionSet('establish_membership_trouble.p',p);
 end;
 
 procedure TWebForm_establish_membership_trouble.LinkButton_logout_Click(sender: System.Object;

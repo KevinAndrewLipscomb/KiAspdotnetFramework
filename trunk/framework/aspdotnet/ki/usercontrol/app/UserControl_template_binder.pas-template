@@ -11,9 +11,10 @@ uses
   System.Web.UI,
   System.Web.UI.WebControls,
   System.Web.UI.HtmlControls,
-  UserControl1,
-  UserControl2,
-  UserControl3;
+  UserControl1
+//  ,UserControl2
+//  ,UserControl3
+;
 
 type
   p_type =
@@ -28,15 +29,15 @@ type
     procedure InitializeComponent;
     procedure TWebUserControl_template_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure TabStrip1_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
+    procedure TabStrip_control_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
-    MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
+    TabStrip_control: Microsoft.Web.UI.WebControls.TabStrip;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
+  protected
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -49,15 +50,14 @@ type
 implementation
 
 uses
-  appcommon,
-  ki,
+  kix,
   System.Collections,
   system.configuration;
 
 const
   TSSI_0 = 0;
-  TSSI_1 = 1;
-  TSSI_2 = 2;
+//  TSSI_1 = 1;
+//  TSSI_2 = 2;
 
 procedure TWebUserControl_template_binder.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
@@ -93,20 +93,20 @@ begin
         'UserControl1',
         PlaceHolder_content
         );
-    TSSI_1:
-      p.content_id := AddIdentifiedControlToPlaceHolder
-        (
-        TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')),
-        'UserControl2',
-        PlaceHolder_content
-        );
-    TSSI_2:
-      p.content_id := AddIdentifiedControlToPlaceHolder
-        (
-        TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')),
-        'UserControl3',
-        PlaceHolder_content
-        );
+//    TSSI_1:
+//      p.content_id := AddIdentifiedControlToPlaceHolder
+//        (
+//        TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')),
+//        'UserControl2',
+//        PlaceHolder_content
+//        );
+//    TSSI_2:
+//      p.content_id := AddIdentifiedControlToPlaceHolder
+//        (
+//        TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')),
+//        'UserControl3',
+//        PlaceHolder_content
+//        );
     end;
   end else begin
     //
@@ -125,11 +125,11 @@ begin
   //
 end;
 
-procedure TWebUserControl_template_binder.TabStrip1_SelectedIndexChange(sender: System.Object;
+procedure TWebUserControl_template_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
   e: System.EventArgs);
 begin
   //
-  p.tab_index := TabStrip1.selectedindex;
+  p.tab_index := TabStrip_control.selectedindex;
   //
   PlaceHolder_content.controls.Clear;
   //
@@ -141,20 +141,20 @@ begin
       'UserControl1',
       PlaceHolder_content
       );
-  TSSI_1:
-    p.content_id := AddIdentifiedControlToPlaceHolder
-      (
-      TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')).Fresh,
-      'UserControl2',
-      PlaceHolder_content
-      );
-  TSSI_2:
-    p.content_id := AddIdentifiedControlToPlaceHolder
-      (
-      TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')).Fresh,
-      'UserControl3',
-      PlaceHolder_content
-      );
+//  TSSI_1:
+//    p.content_id := AddIdentifiedControlToPlaceHolder
+//      (
+//      TWebUserControl2(LoadControl('~/usercontrol/app/UserControl2.ascx')).Fresh,
+//      'UserControl2',
+//      PlaceHolder_content
+//      );
+//  TSSI_2:
+//    p.content_id := AddIdentifiedControlToPlaceHolder
+//      (
+//      TWebUserControl3(LoadControl('~/usercontrol/app/UserControl3.ascx')).Fresh,
+//      'UserControl3',
+//      PlaceHolder_content
+//      );
   end;
 end;
 
@@ -165,7 +165,7 @@ end;
 /// </summary>
 procedure TWebUserControl_template_binder.InitializeComponent;
 begin
-  Include(Self.TabStrip1.SelectedIndexChange, Self.TabStrip1_SelectedIndexChange);
+  Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebUserControl_template_binder_PreRender);
 end;
@@ -178,11 +178,9 @@ begin
   // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
   // not it is already loaded in the user's browser.
   //
-  session.Remove(PlaceHolder_content.clientid);
-  session.Add(PlaceHolder_content.clientid,p.content_id);
+  SessionSet(PlaceHolder_content.clientid,p.content_id);
   //
-  session.Remove('UserControl_template_binder.p');
-  session.Add('UserControl_template_binder.p',p);
+  SessionSet('UserControl_template_binder.p',p);
   //
 end;
 

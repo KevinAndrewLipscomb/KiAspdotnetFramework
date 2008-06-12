@@ -6,8 +6,8 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki,
-  System.Data.Common, Borland.Data.Provider, System.Globalization,
-  Borland.Data.Common, system.configuration, system.web.security,
+  System.Data.Common, System.Globalization,
+  system.configuration, system.web.security,
   Class_biz_members,
   Class_biz_user,
   Class_biz_users,
@@ -106,20 +106,15 @@ begin
       server.Transfer('change_password.aspx');
     end;
     //
-    session.Remove('waypoint_stack');
-    waypoint_stack := system.collections.stack.Create;
-    waypoint_stack.Push('overview.aspx');
-    session.Add('waypoint_stack',waypoint_stack);
+    BeginBreadCrumbTrail;
     //
-    session.Remove('privilege_array');
-    session.Add('privilege_array',p.biz_user.Privileges);
+    SessionSet('privilege_array',p.biz_user.Privileges);
     if (session['privilege_array'] <> nil) then begin
-      session.Remove('member_id');
-      session.Add('member_id',p.biz_members.IdOfUserId(session['user_id'].tostring));
+      SessionSet('member_id',p.biz_members.IdOfUserId(session['user_id'].tostring));
     end;
   end;
   //
-  if p.biz_members.IdOfUserId(p.biz_user.IdNum) = system.string.EMPTY then begin
+  if p.biz_members.IdOfUserId(p.biz_user.IdNum) = EMPTY then begin
     //
     // Display controls appropriate ONLY to nonmembers.
     //
@@ -146,8 +141,7 @@ end;
 procedure TWebForm_overview.TWebForm_overview_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  session.Remove('overview.p');
-  session.Add('overview.p',p);
+  SessionSet('overview.p',p);
 end;
 
 procedure TWebForm_overview.LinkButton_logout_Click(sender: System.Object;
@@ -156,18 +150,6 @@ begin
   formsauthentication.SignOut;
   session.Clear;
   server.Transfer('../Default.aspx');
-end;
-
-procedure TWebForm_overview.LinkButton_change_email_address_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  server.Transfer('change_email_address.aspx');
-end;
-
-procedure TWebForm_overview.LinkButton_change_password_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  server.Transfer('change_password.aspx');
 end;
 
 end.
