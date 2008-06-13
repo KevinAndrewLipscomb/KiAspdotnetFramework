@@ -1,16 +1,16 @@
-unit UserControl_postcontent;
-//
-// UserControl_postcontent must not attempt to access session state because UserControl_postcontent is invoked on the timeout page
-// and session state is by definition nonexistent in a timeout situation.
-//
+unit UserControl_common_header_bar;
 
 interface
 
 uses
-  ki_web_ui, System.Web.UI.HtmlControls, System.Web.UI.WebControls;
+  ki_web_ui,
+  System.Web.UI.WebControls;
 
 type
-  TWebUserControl_postcontent = class(ki_web_ui.usercontrol_class)
+    /// <summary>
+    /// Summary description for WebUserControl1.
+    /// </summary>
+  TWebUserControl_common_header_bar = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
@@ -18,6 +18,7 @@ type
   strict private
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
+    Label_application_name: System.Web.UI.WebControls.Label;
   protected
     procedure OnInit(e: System.EventArgs); override;
   private
@@ -28,24 +29,21 @@ type
 
 implementation
 
-procedure TWebUserControl_postcontent.Page_Load(sender: System.Object; e: System.EventArgs);
+uses
+  system.configuration;
+ 
+procedure TWebUserControl_common_header_bar.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  //
-  if not IsPostback then begin
-    //
-    //
-  end;
-  //
+  Label_application_name.text := configurationmanager.appsettings['application_name'];
 end;
 
-procedure TWebUserControl_postcontent.OnInit(e: System.EventArgs);
+procedure TWebUserControl_common_header_bar.OnInit(e: System.EventArgs);
 begin
   //
   // Required for Designer support
   //
   InitializeComponent;
   inherited OnInit(e);
-  //
 end;
 
 {$REGION 'Designer Managed Code'}
@@ -53,10 +51,11 @@ end;
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebUserControl_postcontent.InitializeComponent;
+procedure TWebUserControl_common_header_bar.InitializeComponent;
 begin
   Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
+
 
 end.

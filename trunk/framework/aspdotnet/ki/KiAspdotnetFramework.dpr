@@ -1,7 +1,5 @@
 library KiAspdotnetFramework;
 
-
-
 uses
   System.Reflection,
   System.Runtime.CompilerServices,
@@ -43,7 +41,9 @@ uses
   UserControl_drop_down_date in 'usercontrol\ki\UserControl_drop_down_date.pas' {UserControl_drop_down_date.TWebUserControl_drop_down_date: ki_web_ui.usercontrol_class},
   UserControl_config_binder in 'usercontrol\app\UserControl_config_binder.pas' {TWebUserControl_config_binder: ki_web_ui.usercontrol_class},
   UserControl_config_welcome in 'usercontrol\ki\UserControl_config_welcome.pas',
-  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class};
+  UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class},
+  UserControl_bread_crumb_trail in 'usercontrol\ki\UserControl_bread_crumb_trail.pas' {UserControl_bread_crumb_trail.TWebUserControl_bread_crumb_trail: ki_web_ui.usercontrol_class},
+  UserControl_common_header_bar in 'usercontrol\app\UserControl_common_header_bar.pas' {UserControl_common_header_bar.TWebUserControl_common_header_bar: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following
