@@ -18,7 +18,7 @@
 		  <small>
 			<ASP:Label id="Label_username" runat="server"></ASP:Label>:&nbsp; <ASP:LinkButton id="LinkButton_logout" runat="server" causesvalidation="False">logout
 </ASP:LinkButton>| <ASP:LinkButton id="LinkButton_change_password" runat="server" causesvalidation="False">password
-</ASP:LinkButton>| <ASP:LinkButton id="LinkButton_change_email_address" runat="server" causesvalidation="False">email address
+</ASP:LinkButton>| <ASP:LinkButton id="LinkButton_change_email_address" runat="server" causesvalidation="False">email&nbsp;address
 </ASP:LinkButton>
 		  
 
