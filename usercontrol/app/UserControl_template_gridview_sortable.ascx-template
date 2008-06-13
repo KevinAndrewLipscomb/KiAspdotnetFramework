@@ -1,0 +1,37 @@
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_gridview_sortable.pas" Inherits="UserControl_template_gridview_sortable.TWebUserControl_template_gridview_sortable"%>
+<table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
+  <tr>
+    <td>
+      <table cellspacing="0" cellpadding="10" border="0">
+        <tr>
+          <td bgcolor="#dcdcdc"><strong>Filter:&nbsp; <asp:DropDownList id="DropDownList_filter" runat="server" autopostback="True"></asp:DropDownList></strong></td>
+        </tr>
+        <tr>
+          <td>
+            <asp:GridView id="GridView_control" runat="server" gridlines="Horizontal" cellpadding="10" autogeneratecolumns="False" allowsorting="True" emptydatatext="No data available">
+              <Columns>
+                <asp:CommandField selecttext="&lt;IMG src=&quot;~/protected/image/open_document16_h.png&quot; alt=&quot;Detail&quot; border=&quot;0&quot; height=&quot;16&quot; width=&quot;16&quot; /&gt;" showselectbutton="True"></asp:CommandField>
+                <asp:BoundField datafield="field_0" headertext="Field 0" sortexpression="field_0%">
+                  <HeaderStyle horizontalalign="Left"></HeaderStyle>
+                </asp:BoundField>
+                <asp:BoundField datafield="field_1" headertext="Field 1" sortexpression="field_1%">
+                  <ItemStyle horizontalalign="Right"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField datafield="field_2" dataformatstring="{0:c}" headertext="Field 2 $" sortexpression="field_2%">
+                  <ItemStyle horizontalalign="Right"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField datafield="field_3" dataformatstring="{0:c}" headertext="Field 3 $" sortexpression="field_3%">
+                  <ItemStyle horizontalalign="Right"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField datafield="field_4" dataformatstring="{0:c}" headertext="Field 4 $" sortexpression="field_4%">
+                  <ItemStyle horizontalalign="Right"></ItemStyle>
+                </asp:BoundField>
+              </Columns>
+              <HeaderStyle backcolor="WhiteSmoke"></HeaderStyle>
+            </asp:GridView>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
