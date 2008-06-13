@@ -24,15 +24,15 @@ implementation
 
 uses
   kix,
-  borland.data.provider,
+  mysql.data.mysqlclient,
   system.configuration;
 
 constructor TClass_db_notifications.Create;
 begin
   inherited Create;
   // TODO: Add any constructor code here
-  tier_2_match_field := configurationsettings.appsettings['tier_2_match_field'];
-  tier_3_match_field := configurationsettings.appsettings['tier_3_match_field'];
+  tier_2_match_field := configurationmanager.appsettings['tier_2_match_field'];
+  tier_3_match_field := configurationmanager.appsettings['tier_3_match_field'];
 end;
 
 function TClass_db_notifications.TargetOf
@@ -42,7 +42,7 @@ function TClass_db_notifications.TargetOf
   )
   : string;
 var
-  bdr: bdpdatareader;
+  dr: mysqldatareader;
   target_of: string;
   tier_2_match_value: string;
   tier_3_match_value: string;
@@ -52,16 +52,16 @@ begin
   //
   // Get tier 2 and 3 associations of target member.
   //
-  bdr := bdpcommand.Create
+  dr := mysqlcommand.Create
     ('select ' + tier_2_match_field + COMMA + tier_3_match_field + ' from member where id = ' + member_id,connection).ExecuteReader;
-  bdr.Read;
-  tier_2_match_value := bdr[tier_2_match_field].tostring;
-  tier_3_match_value := bdr[tier_3_match_field].tostring;
-  bdr.Close;
+  dr.Read;
+  tier_2_match_value := dr[tier_2_match_field].tostring;
+  tier_3_match_value := dr[tier_3_match_field].tostring;
+  dr.Close;
   //
   // Tier 1 stakeholders
   //
-  bdr := bdpcommand.Create
+  dr := mysqlcommand.Create
     (
     'select email_address'
     + ' from member'
@@ -74,16 +74,16 @@ begin
     connection
     )
     .ExecuteReader;
-  if bdr <> nil then begin
-    while bdr.Read do begin
-      target_of := target_of + bdr['email_address'].tostring + COMMA;
+  if dr <> nil then begin
+    while dr.Read do begin
+      target_of := target_of + dr['email_address'].tostring + COMMA;
     end;
   end;
-  bdr.Close;
+  dr.Close;
   //
   // Tier 2 stakeholders
   //
-  bdr := bdpcommand.Create
+  dr := mysqlcommand.Create
     (
     'select email_address'
     + ' from member'
@@ -97,16 +97,16 @@ begin
     connection
     )
     .ExecuteReader;
-  if bdr <> nil then begin
-    while bdr.Read do begin
-      target_of := target_of + bdr['email_address'].tostring + COMMA;
+  if dr <> nil then begin
+    while dr.Read do begin
+      target_of := target_of + dr['email_address'].tostring + COMMA;
     end;
   end;
-  bdr.Close;
+  dr.Close;
   //
   // Tier 3 stakeholders
   //
-  bdr := bdpcommand.Create
+  dr := mysqlcommand.Create
     (
     'select email_address'
     + ' from member'
@@ -121,12 +121,12 @@ begin
     connection
     )
     .ExecuteReader;
-  if bdr <> nil then begin
-    while bdr.Read do begin
-      target_of := target_of + bdr['email_address'].tostring + COMMA;
+  if dr <> nil then begin
+    while dr.Read do begin
+      target_of := target_of + dr['email_address'].tostring + COMMA;
     end;
   end;
-  bdr.Close;
+  dr.Close;
   //
   self.Close;
   if target_of <> EMPTY then begin

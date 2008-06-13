@@ -20,8 +20,4 @@
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\template\notification                     ready-to-deploy\template\notification                                     /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\usercontrol\app                  ready-to-deploy\usercontrol\app                 *.ascx                    /m /np /ns /z | qgrep "New "
 @robocopy C:\Inetpub\wwwroot\KiAspdotnetFramework\usercontrol\ki                   ready-to-deploy\usercontrol\ki                  *.ascx                    /A /np /ns /z | qgrep "New "
-@robocopy "C:\Program Files\Common Files\Borland Shared\BDS\Shared Assemblies\4.0" ready-to-deploy\bin                             Borland.Data.Provider.dll /m /np /ns /z | qgrep "New "
-@robocopy "C:\Program Files\Common Files\Borland Shared\BDS\Shared Assemblies\4.0" ready-to-deploy\bin                             Borland.Data.Common.dll   /m /np /ns /z | qgrep "New "
-@robocopy "C:\Program Files\Common Files\Borland Shared\BDS\Shared Assemblies\4.0" ready-to-deploy\bin                             Borland.Delphi.dll        /m /np /ns /z | qgrep "New "
-@robocopy "C:\Program Files\CoreLab\Bdp\MySql\BDS4"                                ready-to-deploy\bin                             CoreLab.Bdp.MySql.dll     /m /np /ns /z | qgrep "New "
 @pause

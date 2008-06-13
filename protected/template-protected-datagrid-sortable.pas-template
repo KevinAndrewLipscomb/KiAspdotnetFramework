@@ -6,9 +6,9 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration, system.web.security,
-  borland.data.provider,
+  mysql.data.mysqlclient,
   Class_biz1,
-  ki,
+  kix,
   ki_web_ui,
   UserControl_print_div;
 
@@ -75,7 +75,7 @@ procedure TWebForm_template_protected_datagrid_sortable.Page_Load(sender: System
 begin
   if not IsPostback then begin
     //
-    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected_datagrid_sortable';
+    Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - template_protected_datagrid_sortable';
     //
     Bind;
     //

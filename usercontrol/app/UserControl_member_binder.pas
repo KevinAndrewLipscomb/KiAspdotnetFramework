@@ -37,6 +37,7 @@ type
     TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
     MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
+  protected
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -50,7 +51,7 @@ implementation
 
 uses
   appcommon,
-  ki,
+  kix,
   System.Collections,
   system.configuration;
 

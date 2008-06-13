@@ -1,55 +1,6 @@
 library KiAspdotnetFramework;
 
-{%AspWebConfigContainer 'Web.config'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Data.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Drawing.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Web.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.XML.dll'}
-{%DelphiDotNetAssemblyCompiler 'c:\program files\common files\borland shared\bds\shared assemblies\4.0\Borland.Data.Provider.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Design.dll'}
-{%DelphiDotNetAssemblyCompiler 'c:\program files\common files\borland shared\bds\shared assemblies\4.0\Borland.Data.Common.dll'}
-{%DelphiDotNetAssemblyCompiler '$(SystemRoot)\microsoft.net\framework\v1.1.4322\mscorlib.dll'}
-{%File 'schema.sql'}
-{%ConfigurationCompiler 'unpublished.config'}
-{%File 'testdata.sql'}
-{%AspFolderContainer 'protected'}
-{%AspFolderContainer 'component'}
-{%AspFolderContainer 'component\biz'}
-{%AspFolderContainer 'component\db'}
-{%AspMarkupContainer 'Default.aspx'}
-{%AspMarkupContainer 'Global.asax'}
-{%AspMarkupContainer 'protected\change_email_address.aspx'}
-{%AspMarkupContainer 'protected\change_password.aspx'}
-{%AspWebConfigContainer 'protected\Web.config'}
-{%AspMarkupContainer 'salogin.aspx'}
-{%AspMarkupContainer 'login.aspx'}
-{%AspFolderContainer 'protected\scratch'}
-{%AspFolderContainer 'protected\image'}
-{%AspFolderContainer 'dbscript'}
-{%AspMarkupContainer 'exception.aspx'}
-{%AspMarkupContainer 'timeout.aspx'}
-{%DelphiDotNetAssemblyCompiler 'lib\ki\ki.dll'}
-{%File 'noninteractive\.crontab'}
-{%AspMarkupContainer 'noninteractive\milestone_sweep.aspx'}
-{%AspMarkupContainer 'noninteractive\daily_tasks.aspx'}
-{%AspMarkupContainer 'new_user_registration.aspx'}
-{%AspMarkupContainer 'remind_username.aspx'}
-{%AspMarkupContainer 'protected\overview.aspx'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_establish_membership.ascx'}
-{%AspMarkupContainer 'protected\establish_membership_trouble.aspx'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_precontent.ascx'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_postcontent.ascx'}
-{%AspMarkupContainer 'noninteractive\test_report.aspx'}
-{%DelphiDotNetAssemblyCompiler 'c:\program files\microsoft internet explorer webcontrols\Microsoft.Web.UI.WebControls.dll'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_member_binder.ascx'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_about.ascx'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_user.ascx'}
-{%AspMarkupContainer 'usercontrol\ki\UserControl_drop_down_date.ascx'}
-{%AspMarkupContainer 'usercontrol\app\UserControl_config_binder.ascx'}
-{%AspMarkupContainer 'usercontrol\ki\UserControl_config_welcome.ascx'}
-{%AspMarkupContainer 'usercontrol\ki\UserControl_print_div.ascx'}
+
 
 uses
   System.Reflection,

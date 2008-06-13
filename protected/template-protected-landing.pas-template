@@ -56,7 +56,7 @@ procedure TWebForm_template_protected_landing.Page_Load(sender: System.Object; e
 begin
   if not IsPostback then begin
     //
-    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_protected_landing';
+    Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - template_protected_landing';
     //
     BeginBreadCrumbTrail;
     //

@@ -15,7 +15,7 @@ type
   {$ENDREGION}
   strict private
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
-  strict protected
+  protected
     procedure OnInit(e: EventArgs); override;
     procedure Render(writer: HtmlTextWriter); override;
   private
@@ -27,7 +27,7 @@ type
 implementation
 
 uses
-  ki,
+  kix,
   system.configuration,
   system.io,
   system.text;
@@ -69,10 +69,10 @@ begin
   //
   // Send output stream as an email message.
   //
-  ki.SmtpMailSend
+  SmtpMailSend
     (
     //from
-    configurationsettings.appsettings['sender_email_address'],
+    configurationmanager.appsettings['sender_email_address'],
     //to
     'recipient@frompaper2web.com',
     //subject

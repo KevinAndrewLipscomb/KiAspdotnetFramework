@@ -6,7 +6,7 @@ interface
 uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
-  system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, borland.data.provider, system.configuration,
+  system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, kix, mysql.data.mysqlclient, system.configuration,
   system.web.security,
   Class_biz_users,
   Class_biz_user;
@@ -42,6 +42,7 @@ type
     RegularExpressionValidator_password: System.Web.UI.WebControls.RegularExpressionValidator;
     LinkButton_back_to_overview: System.Web.UI.WebControls.LinkButton;
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
+  protected
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -78,7 +79,7 @@ begin
       session.Clear;
       server.Transfer('~/login.aspx');
     end;
-    Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - change_password';
+    Title.InnerText := configurationmanager.appsettings['application_name'] + ' - change_password';
     //
     p.biz_users := TClass_biz_users.Create;
     p.biz_user := TClass_biz_user.Create;
@@ -122,7 +123,7 @@ end;
 procedure TWebForm_change_password.Button_submit_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  p.biz_users.SetPassword(p.biz_user.IdNum,ki.Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
+  p.biz_users.SetPassword(p.biz_user.IdNum,Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
   server.Transfer('overview.aspx');
 end;
 

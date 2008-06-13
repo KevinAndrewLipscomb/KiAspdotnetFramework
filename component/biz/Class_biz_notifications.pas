@@ -34,7 +34,7 @@ uses
   borland.vcl.sysutils,
   Class_biz_user,
   Class_biz_users,
-  ki,
+  kix,
   system.configuration,
   system.io,
   system.text.regularexpressions,
@@ -48,8 +48,8 @@ constructor TClass_biz_notifications.Create;
 begin
   inherited Create;
   // TODO: Add any constructor code here
-  application_name := configurationsettings.appsettings['application_name'];
-  host_domain_name := configurationsettings.appsettings['host_domain_name'];
+  application_name := configurationmanager.appsettings['application_name'];
+  host_domain_name := configurationmanager.appsettings['host_domain_name'];
 end;
 
 procedure TClass_biz_notifications.IssueForForgottenUsername
@@ -79,10 +79,10 @@ begin
   biz_user := TClass_biz_user.Create;
   biz_users := TClass_biz_users.Create;
   template_reader := &file.OpenText(httpcontext.current.server.MapPath('template/notification/username_reminder.txt'));
-  ki.SmtpMailSend
+  SmtpMailSend
     (
     //from
-    configurationsettings.appsettings['sender_email_address'],
+    configurationmanager.appsettings['sender_email_address'],
     //to
     email_address,
     //subject
@@ -113,7 +113,7 @@ var
         (
         '<explanation/>',
         WrapText
-          (explanation,(NEW_LINE + '   '),BreakChars,int16.Parse(configurationsettings.AppSettings['email_blockquote_maxcol']))
+          (explanation,(NEW_LINE + '   '),BreakChars,int16.Parse(configurationmanager.appsettings['email_blockquote_maxcol']))
         )
       .Replace('<host_domain_name/>',host_domain_name);
   END;
@@ -124,13 +124,13 @@ begin
   //
   template_reader := &file.OpenText(httpcontext.current.server.MapPath('template/notification/membership_establishment_trouble.txt'));
   user_email_address := biz_user.EmailAddress;
-  ki.SmtpMailSend
+  SmtpMailSend
     (
     //from
-    configurationsettings.appsettings['sender_email_address'],
+    configurationmanager.appsettings['sender_email_address'],
     // to
-    configurationsettings.appsettings['membership_establishment_liaison'] + COMMA
-    + configurationsettings.appsettings['application_name'] + '-appadmin@' + host_domain_name,
+    configurationmanager.appsettings['membership_establishment_liaison'] + COMMA
+    + configurationmanager.appsettings['application_name'] + '-appadmin@' + host_domain_name,
     //subject
     Merge(template_reader.ReadLine),
     //body
@@ -165,10 +165,10 @@ begin
   biz_user := TClass_biz_user.Create;
   biz_users := TClass_biz_users.Create;
   template_reader := &file.OpenText(httpcontext.current.server.MapPath('template/notification/temporary_password.txt'));
-  ki.SmtpMailSend
+  SmtpMailSend
     (
     //from
-    configurationsettings.appsettings['sender_email_address'],
+    configurationmanager.appsettings['sender_email_address'],
     //to
     biz_users.PasswordResetEmailAddressOfUsername(username),
     //subject
@@ -180,7 +180,7 @@ begin
 end;
 
 begin
-  BreakChars[1] := ki.SPACE;
-  BreakChars[2] := ki.TAB;
+  BreakChars[1] := SPACE;
+  BreakChars[2] := TAB;
   BreakChars[3] := HYPHEN;
 end.
