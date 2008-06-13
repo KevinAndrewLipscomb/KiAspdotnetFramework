@@ -81,7 +81,17 @@ begin
   //
   if session['UserControl_template_binder.p'] <> nil then begin
     p := p_type(session['UserControl_template_binder.p']);
-    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_PlaceHolder_content']) = 'UserControl_template_binder');
+    {$REGION 'Compile-time instructions'}
+    abort;
+      // if (this usercontrol is loaded dynamically, you must) begin
+      //   1. Replace "Parent" in the next uncommented line with this usercontrol's parent name.
+      //   2. Add "SessionSet('Parent_PlaceHolder_content','UserControl_template_binder');" to this usercontrol's parent code.
+      //   3. Delete this region.
+      // end else begin
+      //   Remove the "and" clause from the next uncommented line.
+      // end;
+    {$ENDREGION}
+    p.be_loaded := IsPostBack and (string(session['Parent_PlaceHolder_content']) = 'UserControl_template_binder');
     //
     // Dynamic controls must be re-added on each postback.
     //
