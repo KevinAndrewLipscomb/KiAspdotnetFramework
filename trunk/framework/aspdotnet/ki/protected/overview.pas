@@ -5,7 +5,7 @@ interface
 uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
-  system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki,
+  system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, kix,
   System.Data.Common, System.Globalization,
   system.configuration, system.web.security,
   Class_biz_members,
@@ -26,9 +26,6 @@ type
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure LinkButton_change_password_Click(sender: System.Object; e: System.EventArgs);
-    procedure LinkButton_change_email_address_Click(sender: System.Object; e: System.EventArgs);
-    procedure LinkButton_logout_Click(sender: System.Object; e: System.EventArgs);
     procedure TWebForm_overview_PreRender(sender: System.Object;
       e: System.EventArgs);
   {$ENDREGION}
@@ -44,6 +41,7 @@ type
     Label_username: System.Web.UI.WebControls.Label;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_member_binder: System.Web.UI.WebControls.PlaceHolder;
+  protected
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -62,9 +60,6 @@ uses
 /// </summary>
 procedure TWebForm_overview.InitializeComponent;
 begin
-  Include(Self.LinkButton_logout.Click, Self.LinkButton_logout_Click);
-  Include(Self.LinkButton_change_password.Click, Self.LinkButton_change_password_Click);
-  Include(Self.LinkButton_change_email_address.Click, Self.LinkButton_change_email_address_Click);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebForm_overview_PreRender);
 end;
@@ -74,15 +69,13 @@ procedure TWebForm_overview.Page_Load(sender: System.Object; e: System.EventArgs
 begin
   if not IsPostback then begin
     //
-    Title.InnerText := ConfigurationSettings.AppSettings['application_name'] + ' - overview';
+    Title.InnerText := configurationmanager.appsettings['application_name'] + ' - overview';
     Label_username.text := session['username'].ToString;
     //
   end;
 end;
 
 procedure TWebForm_overview.OnInit(e: EventArgs);
-var
-  waypoint_stack: stack;
 begin
   //
   // Required for Designer support
@@ -142,14 +135,6 @@ procedure TWebForm_overview.TWebForm_overview_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
   SessionSet('overview.p',p);
-end;
-
-procedure TWebForm_overview.LinkButton_logout_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  formsauthentication.SignOut;
-  session.Clear;
-  server.Transfer('../Default.aspx');
 end;
 
 end.

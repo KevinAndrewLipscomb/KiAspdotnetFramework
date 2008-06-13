@@ -6,7 +6,7 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration,
-  ki,
+  kix,
   ki_web_ui;
 
 type
@@ -25,6 +25,7 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;
+  protected
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -52,7 +53,7 @@ end;
 procedure TWebForm_template_std.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
   if not IsPostback then begin
-    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - template_std';
+    Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - template_std';
   end;
 end;
 

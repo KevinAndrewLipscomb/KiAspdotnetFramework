@@ -15,7 +15,7 @@ type
   strict private
   {$ENDREGION}
   strict private
-  strict protected
+  protected
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }

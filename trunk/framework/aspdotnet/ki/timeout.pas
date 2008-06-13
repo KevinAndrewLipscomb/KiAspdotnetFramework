@@ -6,16 +6,14 @@ interface
 uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
-  system.web.ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki, system.configuration,
+  system.web.ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, ki_web_ui, system.configuration,
   system.web.mail;
-
-
 
 type
   p_type =
     RECORD
     END;
-  TWebForm_timeout = class(system.web.ui.page)
+  TWebForm_timeout = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
@@ -28,6 +26,7 @@ type
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;
     HyperLink_login: System.Web.UI.WebControls.HyperLink;
+  protected
     procedure OnInit(e: EventArgs); override;
   private
     { Private Declarations }
@@ -63,7 +62,7 @@ begin
       session.Clear;
       server.Transfer('~/login.aspx');
     end;
-    Title.InnerText := server.HtmlEncode(ConfigurationSettings.AppSettings['application_name']) + ' - timeout';
+    Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - timeout';
   end;
 end;
 

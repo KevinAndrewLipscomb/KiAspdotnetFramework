@@ -26,6 +26,7 @@ type
     Label_sponsor: System.Web.UI.WebControls.Label;
     ValidationSummary1: System.Web.UI.WebControls.ValidationSummary;
     Label_application_name: System.Web.UI.WebControls.Label;
+  protected
     procedure OnInit(e: System.EventArgs); override;
   private
     { Private Declarations }
@@ -43,17 +44,17 @@ begin
   //
   if not IsPostback then begin
     //
-    Label_sponsor.text := configurationsettings.appsettings['sponsor'];
-    Label_application_name.text := configurationsettings.appsettings['application_name'];
+    Label_sponsor.text := configurationmanager.appsettings['sponsor'];
+    Label_application_name.text := configurationmanager.appsettings['application_name'];
     HtmlImage_sponsor_logoseal.src := HtmlImage_sponsor_logoseal.src
       .Replace('\','/')
-      .Replace('~','/' + configurationsettings.appsettings['virtual_directory_name']);
+      .Replace('~','/' + configurationmanager.appsettings['virtual_directory_name']);
     HtmlImage_partner_banner.src := HtmlImage_partner_banner.src
       .Replace('\','/')
-      .Replace('~','/' + configurationsettings.appsettings['virtual_directory_name']);
+      .Replace('~','/' + configurationmanager.appsettings['virtual_directory_name']);
     HtmlImage_sponsor_sponsor_logoseal.src := HtmlImage_sponsor_sponsor_logoseal.src
       .Replace('\','/')
-      .Replace('~','/' + configurationsettings.appsettings['virtual_directory_name']);
+      .Replace('~','/' + configurationmanager.appsettings['virtual_directory_name']);
     //
   end;
   //

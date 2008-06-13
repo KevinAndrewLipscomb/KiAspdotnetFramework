@@ -3,10 +3,9 @@ unit Class_db_members;
 interface
 
 uses
-  borland.data.provider,
+  mysql.data.mysqlclient,
   Class_db,
   Class_db_trail,
-  ki,
   system.web.ui.webcontrols;
 
 //const
@@ -67,7 +66,7 @@ function TClass_db_members.BeValidProfile(id: string): boolean;
 begin
   self.Open;
   BeValidProfile :=
-    ('1' = bdpCommand.Create('select be_valid_profile from member where id = ' + id,connection).ExecuteScalar.tostring);
+    ('1' = mysqlCommand.Create('select be_valid_profile from member where id = ' + id,connection).ExecuteScalar.tostring);
   self.Close;
 end;
 
@@ -78,7 +77,7 @@ begin
   //
   self.Open;
   email_address_obj :=
-    bdpcommand.Create('select email_address from member where id = ' + member_id,connection).ExecuteScalar.tostring;
+    mysqlcommand.Create('select email_address from member where id = ' + member_id,connection).ExecuteScalar.tostring;
   if email_address_obj <> nil then begin
     EmailAddressOf := email_address_obj.tostring;
   end else begin
@@ -92,7 +91,7 @@ var
   member_id_obj: system.object;
 begin
   self.Open;
-  member_id_obj := bdpcommand.Create('select member_id from user_member_map where user_id = ' + user_id,connection).ExecuteScalar;
+  member_id_obj := mysqlcommand.Create('select member_id from user_member_map where user_id = ' + user_id,connection).ExecuteScalar;
   if member_id_obj <> nil then begin
     IdOfUserId := member_id_obj.tostring;
   end else begin
@@ -108,7 +107,7 @@ procedure TClass_db_members.SetEmailAddress
   );
 begin
   self.Open;
-  borland.data.provider.bdpcommand.Create
+  mysqlcommand.Create
     (
     db_trail.Saved
       (
@@ -128,7 +127,7 @@ var
 begin
   //
   self.Open;
-  user_id_obj := bdpcommand.Create('select user_id from user_member_map where member_id = ' + member_id,connection).ExecuteScalar;
+  user_id_obj := mysqlcommand.Create('select user_id from user_member_map where member_id = ' + member_id,connection).ExecuteScalar;
   if user_id_obj <> nil then begin
     UserIdOf := user_id_obj.tostring;
   end else begin
