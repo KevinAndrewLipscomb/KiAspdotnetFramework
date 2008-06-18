@@ -13,7 +13,6 @@ uses
   change_password in 'protected\change_password.pas' {change_password.TWebForm_change_password: ki_web_ui.page_class},
   login in 'login.pas' {login.TWebForm_login: ki_web_ui.page_class},
   exception in 'exception.pas' {exception.TWebForm_exception: ki_web_ui.page_class},
-  timeout in 'timeout.pas' {timeout.TWebForm_timeout: system.web.ui.page},
   milestone_sweep in 'noninteractive\milestone_sweep.pas' {milestone_sweep.TWebForm_milestone_sweep: system.web.ui.page},
   Class_biz_milestones in 'component\biz\Class_biz_milestones.pas',
   Class_db_milestones in 'component\db\Class_db_milestones.pas',
