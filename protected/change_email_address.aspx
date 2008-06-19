@@ -11,7 +11,7 @@
     <script type="text/javascript" src="../js/gradient.js"></script>
   </head>
 
-  <body>
+  <body bgcolor="white">
 	 <form runat="server"><uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent><table cellspacing="0" cellpadding="0" width="100%" bgcolor="#d3d3d3" border="0">
 			  <tr>
 				<td><small><ASP:Label id="Label_account_descriptor" runat="server"></ASP:Label>:&nbsp;[
