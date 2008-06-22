@@ -159,7 +159,7 @@ end;
 procedure TWebForm_establish_membership_trouble.LinkButton_back_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  server.Transfer(stack(session['waypoint_stack']).Pop.tostring);
+  BackTrack;
 end;
 
 procedure TWebForm_establish_membership_trouble.TWebForm_establish_membership_trouble_PreRender(sender: System.Object;
