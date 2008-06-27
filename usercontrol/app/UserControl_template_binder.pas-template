@@ -64,6 +64,7 @@ begin
   //
   if not p.be_loaded then begin
     //
+    TabStrip_control.selectedindex := p.tab_index;
     //
     p.be_loaded := TRUE;
     //
@@ -94,6 +95,16 @@ begin
       // end;
     {$ENDREGION}
     p.be_loaded := IsPostBack and (string(session['Parent_PlaceHolder_content']) = 'UserControl_template_binder');
+    //
+    if assigned(session['UserControl_template_binder_selected_tab']) then begin
+      p.tab_index := session['UserControl_template_binder_selected_tab'].GetHashCode;
+      session.Remove('UserControl_template_binder_selected_tab');
+      {$REGION 'Retrofit hint'}
+      //
+      // Make sure set "TabStrip_control.selectedindex := p.tab_index;" in Page_Load, then delete this region.
+      //
+      {$ENDREGION}
+    end;
     //
     // Dynamic controls must be re-added on each postback.
     //
