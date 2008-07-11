@@ -127,9 +127,6 @@ begin
     name := dr['name'].tostring;
     tier_id := dr['tier_id'].tostring;
     soft_hyphenation_text := dr['soft_hyphenation_text'].tostring;
-    name := dr['name'].tostring;
-    tier_id := dr['tier_id'].tostring;
-    soft_hyphenation_text := dr['soft_hyphenation_text'].tostring;
     //
     Get := TRUE;
     //
@@ -167,9 +164,6 @@ begin
 //1      + childless_field_assignments_clause
       'replace role'
       + ' set name = NULLIF("' + name + '","")'
-      + ' , tier_id = NULLIF("' + tier_id + '","")'
-      + ' , soft_hyphenation_text = NULLIF("' + soft_hyphenation_text + '","")'
-      + ' , name = NULLIF("' + name + '","")'
       + ' , tier_id = NULLIF("' + tier_id + '","")'
       + ' , soft_hyphenation_text = NULLIF("' + soft_hyphenation_text + '","")'
       ),
