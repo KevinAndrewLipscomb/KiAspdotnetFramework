@@ -26,6 +26,8 @@
     <DCC_ResourcePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols</DCC_ResourcePath>
     <DCC_IncludePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols</DCC_IncludePath>
     <DCC_Define>RELEASE</DCC_Define>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_Optimize>False</DCC_Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Version>7.0</Version>
@@ -41,13 +43,12 @@
     <DCC_ResourcePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0</DCC_ResourcePath>
     <DCC_IncludePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0</DCC_IncludePath>
     <DCC_Define>DEBUG</DCC_Define>
-    <DCC_Platform>x86</DCC_Platform>
   </PropertyGroup>
   <ProjectExtensions>
     <Borland.Personality>DelphiDotNet.Personality</Borland.Personality>
     <Borland.ProjectType>AspProject</Borland.ProjectType>
     <BorlandProject>
-<BorlandProject><DelphiDotNet.Personality><Parameters><Parameters Name="HostApplication">http://localhost/KiAspdotnetFramework/login.aspx</Parameters><Parameters Name="DebugSourceDirs">C:\Inetpub\wwwroot\KiAspdotnetFramework\component\biz\</Parameters><Parameters Name="Launcher">"C:\Program Files\Internet Explorer\iexplore.exe"</Parameters><Parameters Name="UseLauncher">True</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1033</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Options><Options Name="AspNetUseHostServer">True</Options><Options Name="AspNetLaunchBrowser">True</Options><Options Name="AspNetStartPage">login.aspx</Options><Options Name="AspNetHostServer">IIS</Options><Options Name="AspNetCassiniPortIndex">0</Options><Options Name="AspNetCassiniStartup">ProjectRun</Options><Options Name="AspNetIISVirtualDirectory">KiAspdotnetFramework</Options><Options Name="AspNetHTTPAddress"></Options><Options Name="AspNetCassiniHTTPAddress"></Options></Options><Source><Source Name="MainSource">KiAspdotnetFramework.dpr</Source></Source></DelphiDotNet.Personality></BorlandProject></BorlandProject>
+<BorlandProject><DelphiDotNet.Personality><Parameters><Parameters Name="HostApplication">http://localhost/KiAspdotnetFramework/login.aspx</Parameters><Parameters Name="DebugSourceDirs">C:\Inetpub\wwwroot\KiAspdotnetFramework\component\biz\</Parameters><Parameters Name="Launcher">"C:\Program Files\Internet Explorer\IEXPLORE.EXE"</Parameters><Parameters Name="UseLauncher">True</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1033</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Options><Options Name="AspNetUseHostServer">True</Options><Options Name="AspNetLaunchBrowser">True</Options><Options Name="AspNetStartPage">login.aspx</Options><Options Name="AspNetHostServer">IIS</Options><Options Name="AspNetCassiniPortIndex">0</Options><Options Name="AspNetCassiniStartup">ProjectRun</Options><Options Name="AspNetIISVirtualDirectory">KiAspdotnetFramework</Options><Options Name="AspNetHTTPAddress"></Options><Options Name="AspNetCassiniHTTPAddress"></Options></Options><Source><Source Name="MainSource">KiAspdotnetFramework.dpr</Source></Source></DelphiDotNet.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
   <ItemGroup>
@@ -117,7 +118,7 @@
     </Reference>
     <Reference Include="lib\ki\ki.dll">
       <AssemblyName>ki</AssemblyName>
-      <Version>1.0.3091.20216</Version>
+      <Version>1.0.3114.28969</Version>
       <HintPath>lib\ki\ki.dll</HintPath>
       <AssemblyTag>lib\ki\ki.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
@@ -131,6 +132,8 @@
     <DCCReference Include="component\biz\Class_biz_members.pas" />
     <DCCReference Include="component\biz\Class_biz_milestones.pas" />
     <DCCReference Include="component\biz\Class_biz_notifications.pas" />
+    <DCCReference Include="component\biz\Class_biz_roles.pas" />
+    <DCCReference Include="component\biz\Class_biz_role_member_map.pas" />
     <DCCReference Include="component\biz\Class_biz_scheduled_tasks.pas" />
     <DCCReference Include="component\biz\Class_biz_user.pas" />
     <DCCReference Include="component\biz\Class_biz_users.pas" />
@@ -138,6 +141,8 @@
     <DCCReference Include="component\db\Class_db_members.pas" />
     <DCCReference Include="component\db\Class_db_milestones.pas" />
     <DCCReference Include="component\db\Class_db_notifications.pas" />
+    <DCCReference Include="component\db\Class_db_roles.pas" />
+    <DCCReference Include="component\db\Class_db_role_member_map.pas" />
     <DCCReference Include="component\db\Class_db_trail.pas" />
     <DCCReference Include="component\db\Class_db_user.pas" />
     <DCCReference Include="component\db\Class_db_users.pas" />
@@ -221,7 +226,7 @@
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_config_binder.pas">
       <DependentUpon>usercontrol\app\UserControl_config_binder.ascx</DependentUpon>
-      <Form>TWebUserControl_config_binder</Form>
+      <Form>UserControl_config_binder.TWebUserControl_config_binder</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_establish_membership.pas">
@@ -242,6 +247,11 @@
     <DCCReference Include="usercontrol\app\UserControl_precontent.pas">
       <DependentUpon>usercontrol\app\UserControl_precontent.ascx</DependentUpon>
       <Form>UserControl_precontent.TWebUserControl_precontent</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_role_member_matrix.pas">
+      <DependentUpon>usercontrol\app\UserControl_role_member_matrix.ascx</DependentUpon>
+      <Form>UserControl_role_member_matrix.TWebUserControl_role_member_matrix</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_user.pas">
@@ -265,6 +275,16 @@
     <DCCReference Include="usercontrol\ki\UserControl_print_div.pas">
       <DependentUpon>usercontrol\ki\UserControl_print_div.ascx</DependentUpon>
       <Form>UserControl_print_div.TWebUserControl_print_div</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
+    <DCCReference Include="usercontrol\ki\UserControl_role.pas">
+      <DependentUpon>usercontrol\ki\UserControl_role.ascx</DependentUpon>
+      <Form>UserControl_role.TWebUserControl_role</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
+    <DCCReference Include="usercontrol\ki\UserControl_roles_and_matrices_binder.pas">
+      <DependentUpon>usercontrol\ki\UserControl_roles_and_matrices_binder.ascx</DependentUpon>
+      <Form>UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <None Include="component" />
@@ -300,11 +320,14 @@
     <None Include="usercontrol\app\UserControl_member_binder.ascx" />
     <None Include="usercontrol\app\UserControl_postcontent.ascx" />
     <None Include="usercontrol\app\UserControl_precontent.ascx" />
+    <None Include="usercontrol\app\UserControl_role_member_matrix.ascx" />
     <None Include="usercontrol\app\UserControl_user.ascx" />
     <None Include="usercontrol\ki\UserControl_bread_crumb_trail.ascx" />
     <None Include="usercontrol\ki\UserControl_config_welcome.ascx" />
     <None Include="usercontrol\ki\UserControl_drop_down_date.ascx" />
     <None Include="usercontrol\ki\UserControl_print_div.ascx" />
+    <None Include="usercontrol\ki\UserControl_role.ascx" />
+    <None Include="usercontrol\ki\UserControl_roles_and_matrices_binder.ascx" />
     <None Include="Web.config" />
   </ItemGroup>
 </Project>

@@ -4,31 +4,19 @@
 <%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_print_div" Src="~/usercontrol/ki/UserControl_print_div.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
   <head>
-	<title id="Title" runat="server"></title>
-<link REL="StyleSheet" HREF="../standard.css" TYPE="text/css" />
-	<!-- $Id$ -->
+    <title id="Title" runat="server"></title>
+    <link REL="StyleSheet" HREF="../standard.css" TYPE="text/css" />
+    <!-- $Id$ -->
   </head>
   <body bgcolor="white">
-	<form runat="server">
-	  <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
-	  <p>
-          <table cellspacing="0" cellpadding="0" width="100%" border="0" bgcolor="#d3d3d3">
-              <tr>
-				<td>
-				<small><ASP:Label id="Label_username" runat="server"></ASP:Label>:&nbsp;[
-		  <ASP:LinkButton id="LinkButton_logout" runat="server" causesvalidation="False">Logout</ASP:LinkButton>&nbsp;] [ 
-		  Change <ASP:LinkButton id="LinkButton_change_password" runat="server" causesvalidation="False">password</ASP:LinkButton>&nbsp;| <ASP:LinkButton id="LinkButton_change_email_address" runat="server" causesvalidation="False">email address</ASP:LinkButton>&nbsp;]</small>
-	  </td>
-			  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td align="right"><uc1:UserControl_print_div id="UserControl_print_div" runat="server" visible="False"></uc1:UserControl_print_div></td>
-			  </tr>
-		  </table></p>
-	  <p></p>
+    <form runat="server">
+      <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
+      <p><uc1:UserControl_print_div id="UserControl_print_div" runat="server" visible="False"></uc1:UserControl_print_div></p>
       <p><ASP:PlaceHolder id="PlaceHolder_establish_membership" runat="server"></ASP:PlaceHolder><ASP:PlaceHolder id="PlaceHolder_member_binder" runat="server"></ASP:PlaceHolder></p>
       <uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent>
-    <p><sstchur:SmartScroller runat="server" /></p></form>
+      <p><sstchur:SmartScroller runat="server" /></p>
+    </form>
   </body>
 </html>

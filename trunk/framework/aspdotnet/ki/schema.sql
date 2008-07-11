@@ -82,13 +82,14 @@ CREATE TABLE role (
   id int unsigned NOT NULL auto_increment,
   `name` varchar(63) NOT NULL,
   tier_id TINYINT UNSIGNED,
+  `soft_hyphenation_text` VARCHAR(127) NOT NULL,
   PRIMARY KEY  (id),
   UNIQUE KEY (`name`),
   KEY tier_id (tier_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO role (id,`name`) VALUES
-(1,'Application Administrator');
+INSERT INTO role (id,`name`,tier_id,`soft_hyphenation_text`) VALUES
+(1,'Application Administrator',1,"Ap&shy;pli&shy;ca&shy;tion Ad&shy;min&shy;is&shy;tra&shy;tor");
 
 --
 -- table structure for table `role_member_map`
