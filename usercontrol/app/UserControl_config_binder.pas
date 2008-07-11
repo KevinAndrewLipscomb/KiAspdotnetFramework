@@ -11,13 +11,15 @@ uses
   System.Web.UI,
   System.Web.UI.WebControls,
   System.Web.UI.HtmlControls,
-  UserControl_user,
-  UserControl_config_welcome;
+  UserControl_config_welcome,
+  UserControl_roles_and_matrices_binder,
+  UserControl_user;
 
 type
   p_type =
     RECORD
     be_loaded: boolean;
+    content_id: string;
     tab_index: cardinal;
     END;
   TWebUserControl_config_binder = class(ki_web_ui.usercontrol_class)
@@ -26,13 +28,13 @@ type
     procedure InitializeComponent;
     procedure TWebUserControl_config_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure TabStrip1_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
+    procedure TabStrip_control_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
+    TabStrip_control: Microsoft.Web.UI.WebControls.TabStrip;
     MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
   protected
@@ -56,6 +58,7 @@ uses
 const
   TSSI_WELCOME = 0;
   TSSI_USERS = 1;
+  TSSI_ROLES_AND_MATRICES = 2;
 
 procedure TWebUserControl_config_binder.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
@@ -63,7 +66,10 @@ begin
   if not p.be_loaded then begin
     //
     if Has(string_array(session['privilege_array']),'config-users') then begin
-      TabStrip1.items[TSSI_USERS].enabled := TRUE;
+      TabStrip_control.items[TSSI_USERS].enabled := TRUE;
+    end;
+    if Has(string_array(session['privilege_array']),'config-roles-and-matrices') then begin
+      TabStrip_control.items[TSSI_ROLES_AND_MATRICES].enabled := TRUE;
     end;
     //
     p.be_loaded := TRUE;
@@ -101,12 +107,19 @@ begin
         'UserControl_user',
         PlaceHolder_content
         );
+    TSSI_ROLES_AND_MATRICES:
+      p.content_id := AddIdentifiedControlToPlaceHolder
+        (
+        TWebUserControl_roles_and_matrices_binder(LoadControl('~/usercontrol/ki/UserControl_roles_and_matrices_binder.ascx')),
+        'UserControl_roles_and_matrices_binder',
+        PlaceHolder_content
+        );
     end;
   end else begin
     //
     p.be_loaded := FALSE;
     //
-    p.tab_index := 0;
+    p.tab_index := TSSI_WELCOME;
     //
     AddIdentifiedControlToPlaceHolder
       (
@@ -119,11 +132,11 @@ begin
   //
 end;
 
-procedure TWebUserControl_config_binder.TabStrip1_SelectedIndexChange(sender: System.Object;
+procedure TWebUserControl_config_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
   e: System.EventArgs);
 begin
   //
-  p.tab_index := TabStrip1.selectedindex;
+  p.tab_index := TabStrip_control.selectedindex;
   //
   PlaceHolder_content.controls.Clear;
   //
@@ -142,6 +155,13 @@ begin
       'UserControl_user',
       PlaceHolder_content
       );
+  TSSI_ROLES_AND_MATRICES:
+    p.content_id := AddIdentifiedControlToPlaceHolder
+      (
+      TWebUserControl_roles_and_matrices_binder(LoadControl('~/usercontrol/ki/UserControl_roles_and_matrices_binder.ascx')).Fresh,
+      'UserControl_roles_and_matrices_binder',
+      PlaceHolder_content
+      );
   end;
 end;
 
@@ -152,7 +172,7 @@ end;
 /// </summary>
 procedure TWebUserControl_config_binder.InitializeComponent;
 begin
-  Include(Self.TabStrip1.SelectedIndexChange, Self.TabStrip1_SelectedIndexChange);
+  Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebUserControl_config_binder_PreRender);
 end;
@@ -161,7 +181,14 @@ end;
 procedure TWebUserControl_config_binder.TWebUserControl_config_binder_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
+  //
+  // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
+  // not it is already loaded in the user's browser.
+  //
+  SessionSet(PlaceHolder_content.clientid,p.content_id);
+  //
   SessionSet('UserControl_config_binder.p',p);
+  //
 end;
 
 function TWebUserControl_config_binder.Fresh: TWebUserControl_config_binder;

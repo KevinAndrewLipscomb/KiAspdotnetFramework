@@ -38,11 +38,18 @@ uses
   UserControl_about in 'usercontrol\app\UserControl_about.pas' {UserControl_about.TWebUserControl_about: ki_web_ui.usercontrol_class},
   UserControl_user in 'usercontrol\app\UserControl_user.pas' {UserControl_user.TWebUserControl_user: ki_web_ui.usercontrol_class},
   UserControl_drop_down_date in 'usercontrol\ki\UserControl_drop_down_date.pas' {UserControl_drop_down_date.TWebUserControl_drop_down_date: ki_web_ui.usercontrol_class},
-  UserControl_config_binder in 'usercontrol\app\UserControl_config_binder.pas' {TWebUserControl_config_binder: ki_web_ui.usercontrol_class},
+  UserControl_config_binder in 'usercontrol\app\UserControl_config_binder.pas' {UserControl_config_binder.TWebUserControl_config_binder: ki_web_ui.usercontrol_class},
   UserControl_config_welcome in 'usercontrol\ki\UserControl_config_welcome.pas',
   UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class},
   UserControl_bread_crumb_trail in 'usercontrol\ki\UserControl_bread_crumb_trail.pas' {UserControl_bread_crumb_trail.TWebUserControl_bread_crumb_trail: ki_web_ui.usercontrol_class},
-  UserControl_common_header_bar in 'usercontrol\app\UserControl_common_header_bar.pas' {UserControl_common_header_bar.TWebUserControl_common_header_bar: ki_web_ui.usercontrol_class};
+  UserControl_common_header_bar in 'usercontrol\app\UserControl_common_header_bar.pas' {UserControl_common_header_bar.TWebUserControl_common_header_bar: ki_web_ui.usercontrol_class},
+  UserControl_roles_and_matrices_binder in 'usercontrol\ki\UserControl_roles_and_matrices_binder.pas' {UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder: ki_web_ui.usercontrol_class},
+  UserControl_role in 'usercontrol\ki\UserControl_role.pas' {UserControl_role.TWebUserControl_role: ki_web_ui.usercontrol_class},
+  Class_biz_roles in 'component\biz\Class_biz_roles.pas',
+  Class_biz_role_member_map in 'component\biz\Class_biz_role_member_map.pas',
+  Class_db_roles in 'component\db\Class_db_roles.pas',
+  Class_db_role_member_map in 'component\db\Class_db_role_member_map.pas',
+  UserControl_role_member_matrix in 'usercontrol\app\UserControl_role_member_matrix.pas' {UserControl_role_member_matrix.TWebUserControl_role_member_matrix: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following

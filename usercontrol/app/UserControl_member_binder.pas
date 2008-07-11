@@ -28,14 +28,13 @@ type
     procedure InitializeComponent;
     procedure TWebUserControl_member_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure TabStrip1_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
+    procedure TabStrip_control_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    TabStrip1: Microsoft.Web.UI.WebControls.TabStrip;
-    MultiPage1: Microsoft.Web.UI.WebControls.MultiPage;
+    TabStrip_control: Microsoft.Web.UI.WebControls.TabStrip;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
   protected
     procedure OnInit(e: System.EventArgs); override;
@@ -65,8 +64,10 @@ begin
   //
   if not p.be_loaded then begin
     //
-    if Has(string_array(session['privilege_array']),'config-users') then begin
-      TabStrip1.items[TSSI_CONFIG].enabled := TRUE;
+    if Has(string_array(session['privilege_array']),'config-users')
+      or  Has(string_array(session['privilege_array']),'config-roles-and-matrices')
+    then begin
+      TabStrip_control.items[TSSI_CONFIG].enabled := TRUE;
     end;
     //
     p.be_loaded := TRUE;
@@ -131,11 +132,11 @@ begin
   //
 end;
 
-procedure TWebUserControl_member_binder.TabStrip1_SelectedIndexChange(sender: System.Object;
+procedure TWebUserControl_member_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
   e: System.EventArgs);
 begin
   //
-  p.tab_index := TabStrip1.selectedindex;
+  p.tab_index := TabStrip_control.selectedindex;
   //
   PlaceHolder_content.controls.Clear;
   //
@@ -171,7 +172,7 @@ end;
 /// </summary>
 procedure TWebUserControl_member_binder.InitializeComponent;
 begin
-  Include(Self.TabStrip1.SelectedIndexChange, Self.TabStrip1_SelectedIndexChange);
+  Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebUserControl_member_binder_PreRender);
 end;
@@ -184,8 +185,7 @@ begin
   // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
   // not it is already loaded in the user's browser.
   //
-  session.Remove(PlaceHolder_content.clientid);
-  session.Add(PlaceHolder_content.clientid,p.content_id);
+  SessionSet(PlaceHolder_content.clientid,p.content_id);
   //
   SessionSet('UserControl_member_binder.p',p);
   //

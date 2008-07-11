@@ -38,7 +38,6 @@ type
     LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
     LinkButton_logout: System.Web.UI.WebControls.LinkButton;
     UserControl_print_div: TWebUserControl_print_div;
-    Label_username: System.Web.UI.WebControls.Label;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_member_binder: System.Web.UI.WebControls.PlaceHolder;
   protected
@@ -70,7 +69,6 @@ begin
   if not IsPostback then begin
     //
     Title.InnerText := configurationmanager.appsettings['application_name'] + ' - overview';
-    Label_username.text := session['username'].ToString;
     //
   end;
 end;
