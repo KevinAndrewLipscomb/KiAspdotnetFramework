@@ -11,6 +11,7 @@ const
   CI_MEMBER_ID = 0;
   CI_MEMBER_NAME = 1;
   CI_FIRST_CROSSTAB = 2;
+  ROLE_HOLDER_EMAIL_ADDRESS_CI = 2;
 
   type
   crosstab_metadata_rec_type =
@@ -33,6 +34,11 @@ const
       be_sort_order_ascending: boolean;
       target: system.object;
       out crosstab_metadata_rec_arraylist: arraylist
+      );
+    procedure BindHolders
+      (
+      role_name: string;
+      target: system.object
       );
     procedure Save
       (
@@ -121,6 +127,28 @@ begin
   GridView(target).DataBind;
   self.Close;
   //
+end;
+
+procedure TClass_db_role_member_map.BindHolders
+  (
+  role_name: string;
+  target: system.object
+  );
+begin
+  self.Open;
+  GridView(target).datasource := mysqlcommand.Create
+    (
+    'select concat(last_name,", ",first_name) as member_name'
+    + ' , email_address'
+    + ' from role_member_map'
+    +   ' join member on (member.id=role_member_map.member_id)'
+    +   ' join role on (role.id=role_member_map.role_id)'
+    + ' where role.name = "' + role_name + '"',
+    connection
+    )
+    .ExecuteReader;
+  GridView(target).DataBind;
+  self.Close;
 end;
 
 procedure TClass_db_role_member_map.Save
