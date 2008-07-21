@@ -76,8 +76,6 @@ type
     Label_author_email_address: System.Web.UI.WebControls.Label;
     Label_distribution_list: System.Web.UI.WebControls.Label;
     TableRow_soft_hyphenation_text: System.Web.UI.HtmlControls.HtmlTableRow;
-    DropDownList_tier: System.Web.UI.WebControls.DropDownList;
-    RequiredFieldValidator_tier: System.Web.UI.WebControls.RequiredFieldValidator;
     Anchor_quick_message_shortcut: System.Web.UI.HtmlControls.HtmlAnchor;
   protected
     procedure OnInit(e: System.EventArgs); override;
@@ -103,7 +101,6 @@ begin
   //
   TextBox_name.text := EMPTY;
   DropDownList_name.visible := FALSE;
-  DropDownList_tier.ClearSelection;
   TextBox_soft_hyphenation_text.text := EMPTY;
   //
   Button_delete.enabled := FALSE;
@@ -205,7 +202,6 @@ begin
     if not assigned(session['mode:report']) then begin
       Label_author_email_address.text := p.biz_user.EmailAddress;
       if Has(string_array(session['privilege_array']),'config-roles-and-matrices') then begin
-        DropDownList_tier.enabled := TRUE;
         TableRow_soft_hyphenation_text.visible := TRUE;
         Button_submit.enabled := TRUE;
       end;
@@ -230,20 +226,17 @@ end;
 
 function TWebUserControl_role.PresentRecord(name: string): boolean;
 var
-  tier_id: string;
   soft_hyphenation_text: string;
 begin
   PresentRecord := FALSE;
   if p.biz_roles.Get
     (
     name,
-    tier_id,
     soft_hyphenation_text
     )
   then begin
     //
     TextBox_name.text := name;
-    DropDownList_tier.selectedvalue := tier_id;
     TextBox_soft_hyphenation_text.text := soft_hyphenation_text;
     //
     TextBox_name.enabled := FALSE;
@@ -362,7 +355,7 @@ begin
     // body
     '-- From ' + p.biz_user.Roles[0]
 {$REGION 'Compile-time instructions'}
-{$MESSAGE ERROR 'Design decision required'}
+{$MESSAGE WARN 'Design decision required'}
 // Revise the following to match the kind of name that is associated with a member.
 //    + SPACE + p.biz_members.FirstNameOfMemberId(session['member_id'].tostring)
 //    + SPACE + p.biz_members.LastNameOfMemberId(session['member_id'].tostring)
@@ -392,7 +385,6 @@ begin
     p.biz_roles.&Set
       (
       Safe(TextBox_name.text,HUMAN_NAME).trim,
-      Safe(DropDownList_tier.selectedvalue,NUM).trim,
       Safe(TextBox_soft_hyphenation_text.text,PUNCTUATED).trim
       );
     Alert(USER,SUCCESS,'recsaved','Record saved.');

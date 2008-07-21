@@ -6,7 +6,6 @@
         <tr>
           <td bgcolor="#dcdcdc">
             <p><small><em>Please wait for system to refresh after each change.</em></small></p>
-            <p><strong>Filter:</strong>&nbsp; <asp:DropDownList id="DropDownList_filter" runat="server" autopostback="True"></asp:DropDownList></p>
           </td>
         </tr>
         <tr>
