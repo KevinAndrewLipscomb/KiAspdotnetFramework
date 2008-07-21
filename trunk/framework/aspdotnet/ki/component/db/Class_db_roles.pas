@@ -23,14 +23,13 @@ type
     function Get
       (
       name: string;
-      out tier_id: string;
       out soft_hyphenation_text: string
       )
       : boolean;
+    function NameOfId(id: string): string;
     procedure &Set
       (
       name: string;
-      tier_id: string;
       soft_hyphenation_text: string
       );
   end;
@@ -112,7 +111,6 @@ end;
 function TClass_db_roles.Get
   (
   name: string;
-  out tier_id: string;
   out soft_hyphenation_text: string
   )
   : boolean;
@@ -125,7 +123,6 @@ begin
   if dr.Read then begin
     //
     name := dr['name'].tostring;
-    tier_id := dr['tier_id'].tostring;
     soft_hyphenation_text := dr['soft_hyphenation_text'].tostring;
     //
     Get := TRUE;
@@ -135,10 +132,16 @@ begin
   self.Close;
 end;
 
+function TClass_db_roles.NameOfId(id: string): string;
+begin
+  self.Open;
+  NameOfId := mysqlcommand.Create('select name from role where id = "' + id + '"',connection).ExecuteScalar.tostring;
+  self.Close;
+end;
+
 procedure TClass_db_roles.&Set
   (
   name: string;
-  tier_id: string;
   soft_hyphenation_text: string
   );
 //
@@ -164,7 +167,6 @@ begin
 //1      + childless_field_assignments_clause
       'replace role'
       + ' set name = NULLIF("' + name + '","")'
-      + ' , tier_id = NULLIF("' + tier_id + '","")'
       + ' , soft_hyphenation_text = NULLIF("' + soft_hyphenation_text + '","")'
       ),
     connection

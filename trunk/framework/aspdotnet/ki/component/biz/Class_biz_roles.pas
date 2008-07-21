@@ -22,14 +22,13 @@ type
     function Get
       (
       name: string;
-      out tier_id: string;
       out soft_hyphenation_text: string
       )
       : boolean;
+    function NameOfId(id: string): string;
     procedure &Set
       (
       name: string;
-      tier_id: string;
       soft_hyphenation_text: string
       );
   end;
@@ -66,7 +65,6 @@ end;
 function TClass_biz_roles.Get
   (
   name: string;
-  out tier_id: string;
   out soft_hyphenation_text: string
   )
   : boolean;
@@ -75,16 +73,19 @@ begin
   Get := db_roles.Get
     (
     name,
-    tier_id,
     soft_hyphenation_text
     );
   //
 end;
 
+function TClass_biz_roles.NameOfId(id: string): string;
+begin
+  NameOfId := db_roles.NameOfId(id);
+end;
+
 procedure TClass_biz_roles.&Set
   (
   name: string;
-  tier_id: string;
   soft_hyphenation_text: string
   );
 begin
@@ -92,7 +93,6 @@ begin
   db_roles.&Set
     (
     name,
-    tier_id,
     soft_hyphenation_text
     );
   //
