@@ -255,10 +255,26 @@
       <Form>UserControl_precontent.TWebUserControl_precontent</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_role.pas">
+      <DependentUpon>usercontrol\app\UserControl_role.ascx</DependentUpon>
+      <Form>UserControl_role.TWebUserControl_role</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_roles_and_matrices_binder.pas">
+      <DependentUpon>usercontrol\app\UserControl_roles_and_matrices_binder.ascx</DependentUpon>
+      <Form>UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_role_member_matrix.pas">
       <DependentUpon>usercontrol\app\UserControl_role_member_matrix.ascx</DependentUpon>
       <Form>UserControl_role_member_matrix.TWebUserControl_role_member_matrix</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_role_notification_matrix.pas">
+      <DependentUpon>usercontrol\app\UserControl_role_notification_matrix.ascx</DependentUpon>
+    </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_role_privilege_matrix.pas">
+      <DependentUpon>usercontrol\app\UserControl_role_privilege_matrix.ascx</DependentUpon>
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_user.pas">
       <DependentUpon>usercontrol\app\UserControl_user.ascx</DependentUpon>
@@ -281,26 +297,6 @@
     <DCCReference Include="usercontrol\ki\UserControl_print_div.pas">
       <DependentUpon>usercontrol\ki\UserControl_print_div.ascx</DependentUpon>
       <Form>UserControl_print_div.TWebUserControl_print_div</Form>
-      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
-    </DCCReference>
-    <DCCReference Include="usercontrol\ki\UserControl_role.pas">
-      <DependentUpon>usercontrol\ki\UserControl_role.ascx</DependentUpon>
-      <Form>UserControl_role.TWebUserControl_role</Form>
-      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
-    </DCCReference>
-    <DCCReference Include="usercontrol\ki\UserControl_roles_and_matrices_binder.pas">
-      <DependentUpon>usercontrol\ki\UserControl_roles_and_matrices_binder.ascx</DependentUpon>
-      <Form>UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder</Form>
-      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
-    </DCCReference>
-    <DCCReference Include="usercontrol\ki\UserControl_role_notification_matrix.pas">
-      <DependentUpon>usercontrol\ki\UserControl_role_notification_matrix.ascx</DependentUpon>
-      <Form>UserControl_role_notification_matrix.TWebUserControl_role_notification_matrix</Form>
-      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
-    </DCCReference>
-    <DCCReference Include="usercontrol\ki\UserControl_role_privilege_matrix.pas">
-      <DependentUpon>usercontrol\ki\UserControl_role_privilege_matrix.ascx</DependentUpon>
-      <Form>UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <None Include="component" />
@@ -336,16 +332,16 @@
     <None Include="usercontrol\app\UserControl_member_binder.ascx" />
     <None Include="usercontrol\app\UserControl_postcontent.ascx" />
     <None Include="usercontrol\app\UserControl_precontent.ascx" />
+    <None Include="usercontrol\app\UserControl_role.ascx" />
+    <None Include="usercontrol\app\UserControl_roles_and_matrices_binder.ascx" />
     <None Include="usercontrol\app\UserControl_role_member_matrix.ascx" />
+    <None Include="usercontrol\app\UserControl_role_notification_matrix.ascx" />
+    <None Include="usercontrol\app\UserControl_role_privilege_matrix.ascx" />
     <None Include="usercontrol\app\UserControl_user.ascx" />
     <None Include="usercontrol\ki\UserControl_bread_crumb_trail.ascx" />
     <None Include="usercontrol\ki\UserControl_config_welcome.ascx" />
     <None Include="usercontrol\ki\UserControl_drop_down_date.ascx" />
     <None Include="usercontrol\ki\UserControl_print_div.ascx" />
-    <None Include="usercontrol\ki\UserControl_role.ascx" />
-    <None Include="usercontrol\ki\UserControl_roles_and_matrices_binder.ascx" />
-    <None Include="usercontrol\ki\UserControl_role_notification_matrix.ascx" />
-    <None Include="usercontrol\ki\UserControl_role_privilege_matrix.ascx" />
     <None Include="Web.config" />
   </ItemGroup>
 </Project>

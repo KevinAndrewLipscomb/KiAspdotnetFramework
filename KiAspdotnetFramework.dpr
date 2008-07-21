@@ -43,8 +43,6 @@ uses
   UserControl_print_div in 'usercontrol\ki\UserControl_print_div.pas' {UserControl_print_div.TWebUserControl_print_div: ki_web_ui.usercontrol_class},
   UserControl_bread_crumb_trail in 'usercontrol\ki\UserControl_bread_crumb_trail.pas' {UserControl_bread_crumb_trail.TWebUserControl_bread_crumb_trail: ki_web_ui.usercontrol_class},
   UserControl_common_header_bar in 'usercontrol\app\UserControl_common_header_bar.pas' {UserControl_common_header_bar.TWebUserControl_common_header_bar: ki_web_ui.usercontrol_class},
-  UserControl_roles_and_matrices_binder in 'usercontrol\ki\UserControl_roles_and_matrices_binder.pas' {UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder: ki_web_ui.usercontrol_class},
-  UserControl_role in 'usercontrol\ki\UserControl_role.pas' {UserControl_role.TWebUserControl_role: ki_web_ui.usercontrol_class},
   Class_biz_roles in 'component\biz\Class_biz_roles.pas',
   Class_biz_role_member_map in 'component\biz\Class_biz_role_member_map.pas',
   Class_db_roles in 'component\db\Class_db_roles.pas',
@@ -56,8 +54,10 @@ uses
   Class_db_role_privilege_map in 'component\db\Class_db_role_privilege_map.pas',
   Class_db_privileges in 'component\db\Class_db_privileges.pas',
   Class_db_role_notification_map in 'component\db\Class_db_role_notification_map.pas',
-  UserControl_role_privilege_matrix in 'usercontrol\ki\UserControl_role_privilege_matrix.pas' {UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix: ki_web_ui.usercontrol_class},
-  UserControl_role_notification_matrix in 'usercontrol\ki\UserControl_role_notification_matrix.pas' {UserControl_role_notification_matrix.TWebUserControl_role_notification_matrix: ki_web_ui.usercontrol_class};
+  UserControl_roles_and_matrices_binder in 'usercontrol\app\UserControl_roles_and_matrices_binder.pas' {UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder: ki_web_ui.usercontrol_class},
+  UserControl_role_notification_matrix in 'usercontrol\app\UserControl_role_notification_matrix.pas',
+  UserControl_role_privilege_matrix in 'usercontrol\app\UserControl_role_privilege_matrix.pas',
+  UserControl_role in 'usercontrol\app\UserControl_role.pas' {UserControl_role.TWebUserControl_role: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following
