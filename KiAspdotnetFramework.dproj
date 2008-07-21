@@ -272,9 +272,13 @@
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_role_notification_matrix.pas">
       <DependentUpon>usercontrol\app\UserControl_role_notification_matrix.ascx</DependentUpon>
+      <Form>UserControl_role_notification_matrix.TWebUserControl_role_notification_matrix</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_role_privilege_matrix.pas">
       <DependentUpon>usercontrol\app\UserControl_role_privilege_matrix.ascx</DependentUpon>
+      <Form>UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_user.pas">
       <DependentUpon>usercontrol\app\UserControl_user.ascx</DependentUpon>

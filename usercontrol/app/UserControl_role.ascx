@@ -17,14 +17,6 @@
               <ASP:RequiredFieldValidator id="RequiredFieldValidator_name" runat="server" errormessage="Please enter Name." font-bold="True" controltovalidate="TextBox_name" display="Dynamic">!ERR!</ASP:RequiredFieldValidator>
             </td>
           </tr>
-          <tr>
-            <td><font class="">Tier:</font></td>
-            <td><font class="">
-                    <asp:DropDownList id="DropDownList_tier" runat="server" enabled="False"></asp:DropDownList></font></td>
-            <td>
-                  <asp:RequiredFieldValidator id="RequiredFieldValidator_tier" runat="server" errormessage="Please select a Tier." display="Dynamic" font-bold="True" controltovalidate="DropDownList_tier">!ERR!</asp:RequiredFieldValidator>
-            </td>
-          </tr>
           <tr id="TableRow_soft_hyphenation_text" runat="server" visible="False">
             <td><font class="">Soft hyphenation text:</font></td>
             <td><font class=""><ASP:TextBox id="TextBox_soft_hyphenation_text" runat="server" columns="72" maxlength="127" cssclass=""></ASP:TextBox></font></td>

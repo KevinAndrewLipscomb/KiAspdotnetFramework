@@ -32,8 +32,6 @@ type
     procedure InitializeComponent;
     procedure TWebUserControl_role_member_matrix_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure DropDownList_filter_SelectedIndexChanged(sender: System.Object; 
-      e: System.EventArgs);
     procedure GridView_control_Sorting(sender: System.Object; e: System.Web.UI.WebControls.GridViewSortEventArgs);
     procedure GridView_control_RowDataBound(sender: System.Object; e: System.Web.UI.WebControls.GridViewRowEventArgs);
     procedure Changed(sender: System.Object; e: System.EventArgs);
@@ -46,7 +44,6 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     GridView_control: System.Web.UI.WebControls.GridView;
-    DropDownList_filter: System.Web.UI.WebControls.DropDownList;
   protected
     procedure OnInit(e: System.EventArgs); override;
   private
@@ -60,6 +57,7 @@ type
 implementation
 
 uses
+  Class_db_roles,
   Class_db_role_member_map,
   kix,
   system.configuration;
@@ -181,11 +179,7 @@ begin
   //
   if not p.be_loaded then begin
     //
-//    p.biz_agencies.BindListControlShortDashLong(DropDownList_filter);
-    p.filter := Safe(DropDownList_filter.selectedvalue,NUM);
-    //
     if not p.be_interactive then begin
-      DropDownList_filter.enabled := FALSE;
       GridView_control.allowsorting := FALSE;
     end;
     //
@@ -240,7 +234,6 @@ end;
 /// </summary>
 procedure TWebUserControl_role_member_matrix.InitializeComponent;
 begin
-  Include(Self.DropDownList_filter.SelectedIndexChanged, Self.DropDownList_filter_SelectedIndexChanged);
   Include(Self.GridView_control.Sorting, Self.GridView_control_Sorting);
   Include(Self.GridView_control.RowDataBound, Self.GridView_control_RowDataBound);
   Include(Self.PreRender, Self.TWebUserControl_role_member_matrix_PreRender);
@@ -298,19 +291,12 @@ begin
   Bind;
 end;
 
-procedure TWebUserControl_role_member_matrix.DropDownList_filter_SelectedIndexChanged(sender: System.Object;
-  e: System.EventArgs);
-begin
-  p.filter := Safe(DropDownList_filter.selectedvalue,NUM);
-  Bind;
-end;
-
 procedure TWebUserControl_role_member_matrix.Bind;
 var
   metadata: crosstab_metadata_rec_type;
   i: cardinal;
 begin
-  p.biz_role_member_map.Bind(p.filter,p.sort_order,p.be_sort_order_ascending,GridView_control,p.crosstab_metadata_rec_arraylist);
+  p.biz_role_member_map.Bind(p.sort_order,p.be_sort_order_ascending,GridView_control,p.crosstab_metadata_rec_arraylist);
   LinkButton(GridView_control.headerrow.cells.item[1].controls.item[0]).text := 'Member';
   for i := 0 to (p.crosstab_metadata_rec_arraylist.Count - 1) do begin
     metadata := crosstab_metadata_rec_type(p.crosstab_metadata_rec_arraylist[i]);

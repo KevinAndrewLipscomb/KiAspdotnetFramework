@@ -14,15 +14,6 @@ const
   ROLE_HOLDER_EMAIL_ADDRESS_CI = 2;
 
   type
-  crosstab_metadata_rec_type =
-    RECORD
-    index: cardinal;
-    sql_name: string;
-    id: string;
-    natural_text: string;
-    soft_hyphenation_text: string;
-//    tier_id: string;
-    END;
   TClass_db_role_member_map = class(TClass_db)
   private
     db_trail: TClass_db_trail;
@@ -55,6 +46,7 @@ const
 implementation
 
 uses
+  Class_db_roles,
   kix,
   mysql.data.mysqlclient,
   system.web.ui.webcontrols;
@@ -108,7 +100,6 @@ begin
     crosstab_metadata_rec.natural_text := dr['name'].tostring;
     crosstab_metadata_rec.soft_hyphenation_text := dr['soft_hyphenation_text'].tostring;
     crosstab_metadata_rec.sql_name := Safe(crosstab_metadata_rec.natural_text,ECMASCRIPT_WORD);
-    crosstab_metadata_rec.tier_id := dr['tier_id'].tostring;
     crosstab_sql := crosstab_sql
     + COMMA_SPACE
     + 'IFNULL((select 1 from role_member_map where role_id = "'
@@ -140,14 +131,6 @@ begin
     + ' from member'
     +   ' left outer join role_member_map on (role_member_map.member_id=member.id)'
     +   ' left outer join role on (role.id=role_member_map.role_id)'
-    +   ' join enrollment_history'
-    +     ' on'
-    +       ' ('
-    +       '   enrollment_history.member_id=member.id'
-    +       ' and'
-    +       '   (enrollment_history.end_date is null)'
-    +       ' )'
-    +   ' join enrollment_level on (enrollment_level.code=enrollment_history.level_code)'
     + where_clause
     + ' group by member.id'
     + ' order by ' + sort_order,
@@ -183,7 +166,6 @@ begin
     + ' , email_address'
     + ' from role_member_map'
     +   ' join member on (member.id=role_member_map.member_id)'
-    +   ' join agency on (agency.id=member.agency_id)'
     +   ' join role on (role.id=role_member_map.role_id)'
     + ' where role.name = "' + role_name + '"'
     + ' order by ' + sort_order,

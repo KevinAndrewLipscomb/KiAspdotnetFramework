@@ -16,9 +16,8 @@ type
     constructor Create;
     procedure Bind
       (
-      filter: string;
       sort_order: string;
-      be_sort_order_ascending: boolean;
+      be_sort_order_descending: boolean;
       target: system.object;
       out crosstab_metadata: arraylist
       );
@@ -41,14 +40,13 @@ end;
 
 procedure TClass_biz_role_notification_map.Bind
   (
-  filter: string;
   sort_order: string;
-  be_sort_order_ascending: boolean;
+  be_sort_order_descending: boolean;
   target: system.object;
   out crosstab_metadata: arraylist
   );
 begin
-  db_role_notification_map.Bind(filter,sort_order,be_sort_order_ascending,target,crosstab_metadata);
+  db_role_notification_map.Bind(sort_order,be_sort_order_descending,target,crosstab_metadata);
 end;
 
 procedure TClass_biz_role_notification_map.Save

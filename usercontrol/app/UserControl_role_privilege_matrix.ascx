@@ -6,12 +6,6 @@
         <tr>
           <td bgcolor="whitesmoke">
             <p><small><em>Please wait for system to refresh after each change.</em></small></p>
-            <table cellspacing="0" cellpadding="5" border="0">
-              <tr>
-                <td><b><small>Filters:</small></b></td>
-                <td><p align="center"><small>Role level</small><br><ASP:DropDownList id="DropDownList_tier_filter" runat="server" autopostback="True"></ASP:DropDownList></td>
-              </tr>
-            </table>
           </td>
         </tr>
         <tr>

@@ -164,7 +164,6 @@ var
   actor: string;
   actor_email_address: string;
   actor_member_id: string;
-  agency_name: string;
   biz_members: TClass_biz_members;
   biz_roles: TClass_biz_roles;
   biz_user: TClass_biz_user;
@@ -203,7 +202,7 @@ begin
   actor_member_id := biz_members.IdOfUserId(biz_user.IdNum);
   actor := biz_user.Roles[0]
 {$REGION 'Compile-time instructions'}
-{$MESSAGE ERROR 'Design decision required'}
+{$MESSAGE WARN 'Design decision required'}
 // Revise the following to match the kind of name that is associated with a member.
 //  + SPACE + biz_members.FirstNameOfMemberId(actor_member_id)
 //  + SPACE + biz_members.LastNameOfMemberId(actor_member_id)
@@ -218,7 +217,7 @@ begin
     to_or_from := 'from';
   end;
 {$REGION 'Compile-time instructions'}
-{$MESSAGE ERROR 'Design decision required'}
+{$MESSAGE WARN 'Design decision required'}
 // Revise the following to match the kind of name that is associated with a member.
 //  first_name := biz_members.FirstNameOfMemberId(member_id);
 //  last_name := biz_members.LastNameOfMemberId(member_id);

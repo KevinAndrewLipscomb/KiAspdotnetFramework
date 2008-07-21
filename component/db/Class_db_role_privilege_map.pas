@@ -13,14 +13,6 @@ const
   CI_FIRST_CROSSTAB = 2;
 
   type
-  crosstab_metadata_rec_type =
-    RECORD
-    index: cardinal;
-    sql_name: string;
-    id: string;
-    natural_text: string;
-    soft_hyphenation_text: string;
-    END;
   TClass_db_role_privilege_map = class(TClass_db)
   private
     db_trail: TClass_db_trail;
@@ -28,9 +20,8 @@ const
     constructor Create;
     procedure Bind
       (
-      filter: string;
       sort_order: string;
-      be_sort_order_ascending: boolean;
+      be_sort_order_descending: boolean;
       target: system.object;
       out crosstab_metadata_rec_arraylist: arraylist
       );
@@ -45,6 +36,7 @@ const
 implementation
 
 uses
+  Class_db_roles,
   kix,
   mysql.data.mysqlclient,
   system.web.ui.webcontrols;
@@ -57,9 +49,8 @@ end;
 
 procedure TClass_db_role_privilege_map.Bind
   (
-  filter: string;
   sort_order: string;
-  be_sort_order_ascending: boolean;
+  be_sort_order_descending: boolean;
   target: system.object;
   out crosstab_metadata_rec_arraylist: arraylist
   );
@@ -92,16 +83,16 @@ begin
   end;
   dr.Close;
   //
-  if filter = EMPTY then begin
+//  if filter = EMPTY then begin
     where_clause := EMPTY;
-  end else begin
-    // where_clause := ' where agency_id = "' + filter + '"';
-  end;
+//  end else begin
+//    // where_clause := ' where agency_id = "' + filter + '"';
+//  end;
   //
-  if be_sort_order_ascending then begin
-    sort_order := sort_order.Replace('%',' asc');
-  end else begin
+  if be_sort_order_descending then begin
     sort_order := sort_order.Replace('%',' desc');
+  end else begin
+    sort_order := sort_order.Replace('%',' asc');
   end;
   //
   GridView(target).datasource := mysqlcommand.Create

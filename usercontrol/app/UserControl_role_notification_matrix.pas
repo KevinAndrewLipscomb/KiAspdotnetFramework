@@ -4,7 +4,6 @@ interface
 
 uses
   Class_biz_role_notification_map,
-  Class_biz_tiers,
   ki_web_ui,
   System.Collections,
   System.Data,
@@ -20,11 +19,8 @@ type
     be_interactive: boolean;
     be_loaded: boolean;
     be_sort_order_descending: boolean;
-    be_user_privileged_to_see_all_squads: boolean;
     biz_role_notification_map: TClass_biz_role_notification_map;
-    biz_tiers: TClass_biz_tiers;
     crosstab_metadata_rec_arraylist: arraylist;
-    tier_filter: string;
     sort_order: string;
     END;
   TWebUserControl_role_notification_matrix = class(ki_web_ui.usercontrol_class)
@@ -32,8 +28,6 @@ type
   strict private
     procedure InitializeComponent;
     procedure TWebUserControl_role_notification_matrix_PreRender(sender: System.Object;
-      e: System.EventArgs);
-    procedure DropDownList_tier_filter_SelectedIndexChanged(sender: System.Object; 
       e: System.EventArgs);
     procedure GridView_control_Sorting(sender: System.Object; e: System.Web.UI.WebControls.GridViewSortEventArgs);
     procedure GridView_control_RowDataBound(sender: System.Object; e: System.Web.UI.WebControls.GridViewRowEventArgs);
@@ -47,7 +41,6 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     GridView_control: System.Web.UI.WebControls.GridView;
-    DropDownList_tier_filter: System.Web.UI.WebControls.DropDownList;
   protected
     procedure OnInit(e: System.EventArgs); override;
   private
@@ -61,6 +54,7 @@ type
 implementation
 
 uses
+  Class_db_roles,
   Class_db_role_notification_map,
   kix,
   system.configuration;
@@ -186,11 +180,7 @@ begin
   //
   if not p.be_loaded then begin
     //
-    p.biz_tiers.BindListControl(DropDownList_tier_filter,EMPTY,TRUE,'All');
-    DropDownList_tier_filter.selectedvalue := p.tier_filter;
-    //
     if not p.be_interactive then begin
-      DropDownList_tier_filter.enabled := FALSE;
       GridView_control.allowsorting := FALSE;
     end;
     //
@@ -227,14 +217,6 @@ begin
   end else begin
     //
     p.biz_role_notification_map := TClass_biz_role_notification_map.Create;
-    p.biz_tiers := TClass_biz_tiers.Create;
-    //
-    p.be_user_privileged_to_see_all_squads := Has(string_array(session['privilege_array']),'see-all-squads');
-    if p.be_user_privileged_to_see_all_squads then begin
-      p.tier_filter := p.biz_tiers.IdOfName('Department');
-    end else begin
-      p.tier_filter := p.biz_tiers.IdOfName('Squad');
-    end;
     //
     p.be_interactive := not assigned(session['mode:report']);
     p.be_loaded := FALSE;
@@ -252,7 +234,6 @@ end;
 /// </summary>
 procedure TWebUserControl_role_notification_matrix.InitializeComponent;
 begin
-  Include(Self.DropDownList_tier_filter.SelectedIndexChanged, Self.DropDownList_tier_filter_SelectedIndexChanged);
   Include(Self.GridView_control.Sorting, Self.GridView_control_Sorting);
   Include(Self.GridView_control.RowDataBound, Self.GridView_control_RowDataBound);
   Include(Self.PreRender, Self.TWebUserControl_role_notification_matrix_PreRender);
@@ -310,19 +291,12 @@ begin
   Bind;
 end;
 
-procedure TWebUserControl_role_notification_matrix.DropDownList_tier_filter_SelectedIndexChanged(sender: System.Object;
-  e: System.EventArgs);
-begin
-  p.tier_filter := Safe(DropDownList_tier_filter.selectedvalue,NUM);
-  Bind;
-end;
-
 procedure TWebUserControl_role_notification_matrix.Bind;
 var
   metadata: crosstab_metadata_rec_type;
   i: cardinal;
 begin
-  p.biz_role_notification_map.Bind(p.tier_filter,p.sort_order,p.be_sort_order_descending,GridView_control,p.crosstab_metadata_rec_arraylist);
+  p.biz_role_notification_map.Bind(p.sort_order,p.be_sort_order_descending,GridView_control,p.crosstab_metadata_rec_arraylist);
   LinkButton(GridView_control.headerrow.cells.item[1].controls.item[0]).text := 'Notification';
   for i := 0 to (p.crosstab_metadata_rec_arraylist.Count - 1) do begin
     metadata := crosstab_metadata_rec_type(p.crosstab_metadata_rec_arraylist[i]);
