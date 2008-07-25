@@ -72,21 +72,33 @@ type
 var
   check_box: CheckBox;
   i: crosstab_index_type;
+  update_panel: UpdatePanel;
 begin
   for i := CI_FIRST_CROSSTAB to (row.cells.count - 1) do begin
     if row.rowtype = datacontrolrowtype.datarow then begin
       row.cells.item[i].horizontalalign := horizontalalign.CENTER;
       check_box := CheckBox.Create;
       check_box.autopostback := TRUE;
+      check_box.enabled := p.be_interactive
+//        and
+//          p.biz_role_member_map.BePrivilegedToModifyTuple
+//            (
+//            Has(string_array(session['privilege_array']),'config-roles-and-matrices'),
+//            Has(string_array(session['privilege_array']),'assign-department-roles-to-members'),
+//            Has(string_array(session['privilege_array']),'assign-squad-roles-to-members'),
+//            crosstab_metadata_rec.tier_id,
+//            crosstab_metadata_rec.natural_text
+//            )
+        ;
       check_box.id := EMPTY
       + CHECKBOX_ID_PREFIX_MEMBER_ID + row.cells.item[CI_MEMBER_ID].text
       + CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec_type(p.crosstab_metadata_rec_arraylist[i - CI_FIRST_CROSSTAB]).id;
       check_box.checked := (row.cells.item[i].text = '1');
       Include(check_box.checkedchanged,Changed);
-      row.cells.item[i].controls.Add(check_box);
-      if not p.be_interactive then begin
-        CheckBox(row.cells.item[i].controls[0]).enabled := FALSE;
-      end;
+      update_panel := UpdatePanel.Create;
+      update_panel.updatemode := updatepanelupdatemode.CONDITIONAL;
+      update_panel.contenttemplatecontainer.controls.Add(check_box);
+      row.cells.item[i].controls.Add(update_panel);
     end;
   end;
 end;
