@@ -57,7 +57,8 @@ uses
   UserControl_roles_and_matrices_binder in 'usercontrol\app\UserControl_roles_and_matrices_binder.pas' {UserControl_roles_and_matrices_binder.TWebUserControl_roles_and_matrices_binder: ki_web_ui.usercontrol_class},
   UserControl_role_notification_matrix in 'usercontrol\app\UserControl_role_notification_matrix.pas' {UserControl_role_notification_matrix.TWebUserControl_role_notification_matrix: ki_web_ui.usercontrol_class},
   UserControl_role_privilege_matrix in 'usercontrol\app\UserControl_role_privilege_matrix.pas' {UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix: ki_web_ui.usercontrol_class},
-  UserControl_role in 'usercontrol\app\UserControl_role.pas' {UserControl_role.TWebUserControl_role: ki_web_ui.usercontrol_class};
+  UserControl_role in 'usercontrol\app\UserControl_role.pas' {UserControl_role.TWebUserControl_role: ki_web_ui.usercontrol_class},
+  UserControl_update_progress_blocker in 'usercontrol\app\UserControl_update_progress_blocker.pas' {UserControl_update_progress_blocker.TWebUserControl_update_progress_blocker: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following

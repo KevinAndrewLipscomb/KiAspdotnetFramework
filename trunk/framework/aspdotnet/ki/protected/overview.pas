@@ -11,6 +11,7 @@ uses
   Class_biz_members,
   Class_biz_user,
   Class_biz_users,
+  sstchur.web.SmartNav,
   UserControl_establish_membership,
   UserControl_print_div,
   UserControl_member_binder;
@@ -34,12 +35,11 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;
-    LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
-    LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
-    LinkButton_logout: System.Web.UI.WebControls.LinkButton;
+    ScriptManager_control: System.Web.UI.ScriptManager;
     UserControl_print_div: TWebUserControl_print_div;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_member_binder: System.Web.UI.WebControls.PlaceHolder;
+    SmartScroller_control: sstchur.web.SmartNav.SmartScroller;
   protected
     procedure OnInit(e: EventArgs); override;
   private

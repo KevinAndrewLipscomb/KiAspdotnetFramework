@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_EnabledPackages>true</DCC_EnabledPackages>
-    <DCC_UsePackage>ki;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\MySql.Data.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\Microsoft.Web.UI.WebControls.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.XML.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Design.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</DCC_UsePackage>
+    <DCC_UsePackage>ki;"C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll";C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\sstchur.web.SmartNav.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\MySql.Data.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\Microsoft.Web.UI.WebControls.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.XML.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Design.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</DCC_UsePackage>
     <DCC_DCCCompiler>DCCIL</DCC_DCCCompiler>
     <DCC_DependencyCheckOutputName>bin\KiAspdotnetFramework.dll</DCC_DependencyCheckOutputName>
   </PropertyGroup>
@@ -39,9 +39,9 @@
     <DCC_DebugInfoInExe>True</DCC_DebugInfoInExe>
     <DCC_DebugVN>True</DCC_DebugVN>
     <DCC_ExeOutput>.\bin</DCC_ExeOutput>
-    <DCC_UnitSearchPath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0</DCC_UnitSearchPath>
-    <DCC_ResourcePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0</DCC_ResourcePath>
-    <DCC_IncludePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0</DCC_IncludePath>
+    <DCC_UnitSearchPath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_UnitSearchPath>
+    <DCC_ResourcePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_ResourcePath>
+    <DCC_IncludePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_IncludePath>
     <DCC_Define>DEBUG</DCC_Define>
   </PropertyGroup>
   <ProjectExtensions>
@@ -116,9 +116,23 @@
       <AssemblyTag>bin\MySql.Data.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
     </Reference>
+    <Reference Include="bin\sstchur.web.SmartNav.dll">
+      <AssemblyName>sstchur.web.SmartNav</AssemblyName>
+      <Version>1.0.1782.13333</Version>
+      <HintPath>bin\sstchur.web.SmartNav.dll</HintPath>
+      <AssemblyTag>bin\sstchur.web.SmartNav.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
+    <Reference Include="C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll">
+      <AssemblyName>System.Web.Extensions</AssemblyName>
+      <Version>1.0.61025.0</Version>
+      <HintPath>C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll</HintPath>
+      <AssemblyTag>C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
     <Reference Include="lib\ki\ki.dll">
       <AssemblyName>ki</AssemblyName>
-      <Version>1.0.3114.28969</Version>
+      <Version>1.0.3127.27981</Version>
       <HintPath>lib\ki\ki.dll</HintPath>
       <AssemblyTag>lib\ki\ki.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
@@ -280,6 +294,11 @@
       <Form>UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_update_progress_blocker.pas">
+      <DependentUpon>usercontrol\app\UserControl_update_progress_blocker.ascx</DependentUpon>
+      <Form>UserControl_update_progress_blocker.TWebUserControl_update_progress_blocker</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_user.pas">
       <DependentUpon>usercontrol\app\UserControl_user.ascx</DependentUpon>
       <Form>UserControl_user.TWebUserControl_user</Form>
@@ -341,6 +360,7 @@
     <None Include="usercontrol\app\UserControl_role_member_matrix.ascx" />
     <None Include="usercontrol\app\UserControl_role_notification_matrix.ascx" />
     <None Include="usercontrol\app\UserControl_role_privilege_matrix.ascx" />
+    <None Include="usercontrol\app\UserControl_update_progress_blocker.ascx" />
     <None Include="usercontrol\app\UserControl_user.ascx" />
     <None Include="usercontrol\ki\UserControl_bread_crumb_trail.ascx" />
     <None Include="usercontrol\ki\UserControl_config_welcome.ascx" />
