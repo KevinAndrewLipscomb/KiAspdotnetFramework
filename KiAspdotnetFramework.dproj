@@ -125,6 +125,7 @@
     </Reference>
     <Reference Include="C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll">
       <AssemblyName>System.Web.Extensions</AssemblyName>
+      <CopyLocal>True</CopyLocal>
       <Version>1.0.61025.0</Version>
       <HintPath>C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll</HintPath>
       <AssemblyTag>C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll</AssemblyTag>

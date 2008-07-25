@@ -202,7 +202,7 @@ begin
   actor_member_id := biz_members.IdOfUserId(biz_user.IdNum);
   actor := biz_user.Roles[0]
 {$REGION 'Compile-time instructions'}
-{$MESSAGE WARN 'Design decision required'}
+{$MESSAGE HINT 'Design decision required'}
 // Revise the following to match the kind of name that is associated with a member.
 //  + SPACE + biz_members.FirstNameOfMemberId(actor_member_id)
 //  + SPACE + biz_members.LastNameOfMemberId(actor_member_id)
@@ -217,7 +217,7 @@ begin
     to_or_from := 'from';
   end;
 {$REGION 'Compile-time instructions'}
-{$MESSAGE WARN 'Design decision required'}
+{$MESSAGE HINT 'Design decision required'}
 // Revise the following to match the kind of name that is associated with a member.
 //  first_name := biz_members.FirstNameOfMemberId(member_id);
 //  last_name := biz_members.LastNameOfMemberId(member_id);
