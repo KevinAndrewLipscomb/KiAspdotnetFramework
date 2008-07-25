@@ -8,8 +8,9 @@
 <html>
   <head>
     <title id="Title" runat="server"></title>
-    <link REL="StyleSheet" HREF="../standard.css" TYPE="text/css" />
     <!-- $Id$ -->
+    <link href="../css/standard.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 7]> <style type="text/css">@import "../css/standard-overrides-for-ie6.css";</style><![endif]-->
   </head>
   <body bgcolor="white">
     <form runat="server">

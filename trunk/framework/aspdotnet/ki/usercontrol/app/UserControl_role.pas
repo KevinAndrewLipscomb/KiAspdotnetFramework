@@ -355,7 +355,7 @@ begin
     // body
     '-- From ' + p.biz_user.Roles[0]
 {$REGION 'Compile-time instructions'}
-{$MESSAGE WARN 'Design decision required'}
+{$MESSAGE HINT 'Design decision required'}
 // Revise the following to match the kind of name that is associated with a member.
 //    + SPACE + p.biz_members.FirstNameOfMemberId(session['member_id'].tostring)
 //    + SPACE + p.biz_members.LastNameOfMemberId(session['member_id'].tostring)
