@@ -4,7 +4,8 @@ interface
 
 uses
 //  Class_biz_notifications,
-  Class_db_members;
+  Class_db_members,
+  kix;
 
 type
   TClass_biz_members = class
@@ -19,6 +20,12 @@ type
 //      )
       : boolean;
     function BeValidProfile(id: string): boolean;
+    procedure BindDirectToListControl
+      (
+      target: system.object;
+      unselected_literal: string = '-- Member --';
+      selected_value: string = EMPTY
+      );
     function EmailAddressOf(member_id: string): string;
     function FirstNameOfMemberId(member_id: string): string;
     function IdOfUserId(user_id: string): string;
@@ -59,6 +66,16 @@ end;
 function TClass_biz_members.BeValidProfile(id: string): boolean;
 begin
   BeValidProfile := db_members.BeValidProfile(id);
+end;
+
+procedure TClass_biz_members.BindDirectToListControl
+  (
+  target: system.object;
+  unselected_literal: string = '-- Member --';
+  selected_value: string = EMPTY
+  );
+begin
+  db_members.BindDirectToListControl(target,unselected_literal,selected_value);
 end;
 
 function TClass_biz_members.EmailAddressOf(member_id: string): string;

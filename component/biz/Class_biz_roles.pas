@@ -3,7 +3,8 @@ unit Class_biz_roles;
 interface
 
 uses
-  Class_db_roles;
+  Class_db_roles,
+  kix;
 
 type
   TClass_biz_roles = class
@@ -17,7 +18,13 @@ type
       target: system.object
       )
       : boolean;
-    procedure BindDirectToListControl(target: system.object);
+    procedure BindDirectToListControl
+      (
+      target: system.object;
+      has_config_roles_and_matrices: boolean;
+      unselected_literal: string = '-- Role --';
+      selected_value: string = EMPTY
+      );
     function Delete(name: string): boolean;
     function Get
       (
@@ -52,9 +59,15 @@ begin
   Bind := db_roles.Bind(partial_name,target);
 end;
 
-procedure TClass_biz_roles.BindDirectToListControl(target: system.object);
+procedure TClass_biz_roles.BindDirectToListControl
+  (
+  target: system.object;
+  has_config_roles_and_matrices: boolean;
+  unselected_literal: string = '-- Role --';
+  selected_value: string = EMPTY
+  );
 begin
-  db_roles.BindDirectToListControl(target);
+  db_roles.BindDirectToListControl(target,has_config_roles_and_matrices,unselected_literal,selected_value);
 end;
 
 function TClass_biz_roles.Delete(name: string): boolean;
