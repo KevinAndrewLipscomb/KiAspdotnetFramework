@@ -11,7 +11,7 @@ const
   CI_MEMBER_ID = 0;
   CI_MEMBER_NAME = 1;
   CI_FIRST_CROSSTAB = 2;
-  ROLE_HOLDER_EMAIL_ADDRESS_CI = 2;
+  ROLE_HOLDER_EMAIL_ADDRESS_CI = 1;
 
   type
   TClass_db_role_member_map = class(TClass_db)
@@ -126,7 +126,7 @@ begin
   GridView(target).datasource := mysqlcommand.Create
     (
     'select member.id as member_id'
-    + ' , concat(last_name,"' + COMMA_SPACE + '",first_name," (",IFNULL(cad_num,""),")") as member_name'
+    + ' , concat(last_name,"' + COMMA_SPACE + '",first_name) as member_name'
     + crosstab_sql
     + ' from member'
     +   ' left outer join role_member_map on (role_member_map.member_id=member.id)'
@@ -162,7 +162,6 @@ begin
   GridView(target).datasource := mysqlcommand.Create
     (
     'select concat(last_name,", ",first_name) as member_name'
-    + ' , short_designator as agency_designator'
     + ' , email_address'
     + ' from role_member_map'
     +   ' join member on (member.id=role_member_map.member_id)'

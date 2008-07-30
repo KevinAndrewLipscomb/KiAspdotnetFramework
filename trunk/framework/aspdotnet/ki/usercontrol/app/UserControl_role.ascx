@@ -28,8 +28,7 @@
       </td>
     </tr>
   </table>
-  <ASP:Button id="Button_submit" text="Submit" runat="server" enabled="False"></ASP:Button>&nbsp;&nbsp;<ASP:Button id="Button_delete" text="Delete" runat="server" enabled="False"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uc1:UserControl_print_div id="UserControl_print_div" runat="server"></uc1:UserControl_print_div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Anchor_quick_message_shortcut" runat="server" visible="False">QuickMessage
-  </a>
+  <ASP:Button id="Button_submit" text="Submit" runat="server" enabled="False"></ASP:Button>&nbsp;&nbsp;<ASP:Button id="Button_delete" text="Delete" runat="server" enabled="False"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uc1:UserControl_print_div id="UserControl_print_div" runat="server"></uc1:UserControl_print_div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Anchor_quick_message_shortcut" runat="server" visible="False">QuickMessage</a>
   <p>
     <table id="Table_holders" runat="server" bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1" visible="False">
       <tr>
@@ -42,9 +41,6 @@
                       <Columns>
                         <asp:BoundField datafield="member_name" headertext="Name" sortexpression="member_name%">
                           <ItemStyle wrap="False" font-size="X-Small"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField datafield="agency_designator" headertext="Agen&#173;cy" sortexpression="agency_designator%">
-                          <ItemStyle font-size="X-Small"></ItemStyle>
                         </asp:BoundField>
                         <asp:BoundField datafield="email_address"></asp:BoundField>
                       </Columns>

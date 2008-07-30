@@ -30,10 +30,17 @@ drop table if exists member;
 create table if not exists member
   (
   id int unsigned AUTO_INCREMENT,
-  be_valid boolean NOT NULL default 0,
-  email_address varchar(255),
-  PRIMARY KEY  (id)
+  `last_name` VARCHAR(31) NOT NULL,
+  `first_name` VARCHAR(31) NOT NULL,
+  `email_address` VARCHAR(255),
+  `registration_code` VARCHAR(15),
+  PRIMARY KEY  (id),
+  INDEX `last_name` (`last_name`),
+  INDEX `first_name` (`first_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert member (last_name,first_name,email_address,registration_code) values
+("Administrator","Application","kiaspdotnetframework@frompaper2web.com","1");
 
 -- --------------------------------------------------------
 
@@ -73,6 +80,8 @@ create table privilege
   PRIMARY KEY (id),
   UNIQUE KEY (`name`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert privilege set name = "send-quickmessages";
 
 --
 -- Table structure for table `role`
@@ -148,7 +157,7 @@ CREATE TABLE user (
   password_reset_email_address varchar(255) NOT NULL,
   be_active boolean NOT NULL default 1,
   num_unsuccessful_login_attempts int unsigned NOT NULL default 0,
-  last_login datetime NOT NULL,
+  last_login datetime default NULL,
   PRIMARY KEY (id),
   UNIQUE KEY (username),
   UNIQUE KEY (password_reset_email_address)

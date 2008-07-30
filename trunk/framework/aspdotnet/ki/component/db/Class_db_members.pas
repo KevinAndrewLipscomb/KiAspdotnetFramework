@@ -40,7 +40,9 @@ type
 //      : boolean;
     function BeValidProfile(id: string): boolean;
     function EmailAddressOf(member_id: string): string;
+    function FirstNameOfMemberId(member_id: string): string;
     function IdOfUserId(user_id: string): string;
+    function LastNameOfMemberId(member_id: string): string;
     procedure SetEmailAddress
       (
       id: string;
@@ -86,6 +88,14 @@ begin
   self.Close;
 end;
 
+function TClass_db_members.FirstNameOfMemberId(member_id: string): string;
+begin
+  self.Open;
+  FirstNameOfMemberId :=
+    mysqlcommand.Create('select first_name from member where id = "' + member_id + '"',connection).ExecuteScalar.tostring;
+  self.Close;
+end;
+
 function TClass_db_members.IdOfUserId(user_id: string): string;
 var
   member_id_obj: system.object;
@@ -97,6 +107,14 @@ begin
   end else begin
     IdOfUserId := EMPTY;
   end;
+  self.Close;
+end;
+
+function TClass_db_members.LastNameOfMemberId(member_id: string): string;
+begin
+  self.Open;
+  LastNameOfMemberId :=
+    mysqlcommand.Create('select last_name from member where id = "' + member_id + '"',connection).ExecuteScalar.tostring;
   self.Close;
 end;
 
