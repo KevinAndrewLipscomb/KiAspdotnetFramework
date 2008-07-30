@@ -90,15 +90,14 @@ DROP TABLE IF EXISTS role;
 CREATE TABLE role (
   id int unsigned NOT NULL auto_increment,
   `name` varchar(63) NOT NULL,
-  tier_id TINYINT UNSIGNED,
   `soft_hyphenation_text` VARCHAR(127) NOT NULL,
+  `pecking_order` INTEGER UNSIGNED NOT NULL,
   PRIMARY KEY  (id),
   UNIQUE KEY (`name`),
-  KEY tier_id (tier_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO role (id,`name`,tier_id,`soft_hyphenation_text`) VALUES
-(1,'Application Administrator',1,"Ap&shy;pli&shy;ca&shy;tion Ad&shy;min&shy;is&shy;tra&shy;tor");
+INSERT INTO role (id,`name`,`soft_hyphenation_text`,`pecking_order`) VALUES
+(1,'Application Administrator',"Ap&shy;pli&shy;ca&shy;tion Ad&shy;min&shy;is&shy;tra&shy;tor",11000);
 
 --
 -- table structure for table `role_member_map`
@@ -134,17 +133,6 @@ CREATE TABLE role_privilege_map (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `tier`
---
-DROP TABLE IF EXISTS tier;
-CREATE TABLE tier (
-  id tinyint unsigned NOT NULL,
-  name varchar(31) NOT NULL,
-  PRIMARY KEY id (id),
-  UNIQUE KEY name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
 -- Table structure for table `user`
 --   Framework-required info about user
 --
@@ -174,9 +162,6 @@ CREATE TABLE user_member_map (
   UNIQUE KEY (member_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-ALTER TABLE role
-  ADD CONSTRAINT tier_id FOREIGN KEY tier_id (tier_id) REFERENCES tier (id);
 
 ALTER TABLE role_member_map
   ADD CONSTRAINT FOREIGN KEY (member_id) REFERENCES member (id),

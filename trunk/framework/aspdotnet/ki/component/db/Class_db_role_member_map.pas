@@ -21,12 +21,16 @@ const
     constructor Create;
     procedure Bind
       (
-//      tier_quoted_value_list: string;
-//      agency_filter: string;
       sort_order: string;
       be_sort_order_descending: boolean;
       target: system.object;
       out crosstab_metadata_rec_arraylist: arraylist
+      );
+    procedure BindActuals
+      (
+      sort_order: string;
+      be_sort_order_ascending: boolean;
+      target: system.object
       );
     procedure BindHolders
       (
@@ -59,8 +63,6 @@ end;
 
 procedure TClass_db_role_member_map.Bind
   (
-//  tier_quoted_value_list: string;
-//  agency_filter: string;
   sort_order: string;
   be_sort_order_descending: boolean;
   target: system.object;
@@ -77,11 +79,6 @@ begin
   crosstab_metadata_rec.index := 1;  // init to index of last non-dependent column
   crosstab_metadata_rec_arraylist := arraylist.Create;
   crosstab_sql := EMPTY;
-//  if tier_quoted_value_list = EMPTY then begin
-//    crosstab_where_clause := EMPTY;
-//  end else begin
-//    crosstab_where_clause := ' and tier_id in (' + tier_quoted_value_list + ')';
-//  end;
   //
   self.Open;
   //
@@ -109,13 +106,7 @@ begin
   end;
   dr.Close;
   //
-  where_clause := EMPTY
-//  + ' where enrollment_level.description in ("Applicant","Associate","Regular","Life","Tenured","Atypical","Recruit","Admin"'
-//  +   ',"Reduced (1)","Reduced (2)","Reduced (3)","SpecOps","Transferring","Suspended","New trainee") '
-    ;
-//  if agency_filter <> EMPTY then begin
-//    where_clause := where_clause + ' and agency_id = "' + agency_filter + '"';
-//  end;
+  where_clause := EMPTY;
   //
   if be_sort_order_descending then begin
     sort_order := sort_order.Replace('%',' desc');
@@ -133,6 +124,45 @@ begin
     +   ' left outer join role on (role.id=role_member_map.role_id)'
     + where_clause
     + ' group by member.id'
+    + ' order by ' + sort_order,
+    connection
+    )
+    .ExecuteReader;
+  GridView(target).DataBind;
+  self.Close;
+  //
+end;
+
+procedure TClass_db_role_member_map.BindActuals
+  (
+  sort_order: string;
+  be_sort_order_ascending: boolean;
+  target: system.object
+  );
+var
+  where_clause: string;
+begin
+  //
+  where_clause := ' where role.name <> "Member"';
+  //
+  if be_sort_order_ascending then begin
+    sort_order := sort_order.Replace('%',' asc');
+  end else begin
+    sort_order := sort_order.Replace('%',' desc');
+  end;
+  //
+  self.Open;
+  GridView(target).datasource := mysqlcommand.Create
+    (
+    'select role_id'
+    + ' , pecking_order as role_pecking_order'
+    + ' , role.name as role_name'
+    + ' , concat(member.last_name,", ",first_name) as member_designator'
+    + ' , member_id'
+    + ' from role_member_map'
+    +   ' join member on (member.id=role_member_map.member_id)'
+    +   ' join role on (role.id=role_member_map.role_id)'
+    + where_clause
     + ' order by ' + sort_order,
     connection
     )

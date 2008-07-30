@@ -6,6 +6,7 @@ uses
   mysql.data.mysqlclient,
   Class_db,
   Class_db_trail,
+  kix,
   system.web.ui.webcontrols;
 
 //const
@@ -39,6 +40,12 @@ type
 //      )
 //      : boolean;
     function BeValidProfile(id: string): boolean;
+    procedure BindDirectToListControl
+      (
+      target: system.object;
+      unselected_literal: string = '-- Member --';
+      selected_value: string = EMPTY
+      );
     function EmailAddressOf(member_id: string): string;
     function FirstNameOfMemberId(member_id: string): string;
     function IdOfUserId(user_id: string): string;
@@ -54,7 +61,6 @@ type
 implementation
 
 uses
-  kix,
   system.web.ui.HtmlControls;
 
 constructor TClass_db_members.Create;
@@ -70,6 +76,43 @@ begin
   BeValidProfile :=
     ('1' = mysqlCommand.Create('select be_valid_profile from member where id = ' + id,connection).ExecuteScalar.tostring);
   self.Close;
+end;
+
+procedure TClass_db_members.BindDirectToListControl
+  (
+  target: system.object;
+  unselected_literal: string = '-- Member --';
+  selected_value: string = EMPTY
+  );
+var
+  dr: mysqldatareader;
+begin
+  //
+  ListControl(target).items.Clear;
+  if unselected_literal <> EMPTY then begin
+    ListControl(target).items.Add(listitem.Create(unselected_literal,EMPTY));
+  end;
+  //
+  self.Open;
+  dr := mysqlcommand.Create
+    (
+    'select member.id as member_id'
+    + ' , concat(last_name,", ",first_name) as member_designator'
+    + ' from member'
+    + ' order by member_designator',
+    connection
+    )
+    .ExecuteReader;
+  while dr.Read do begin
+    ListControl(target).items.Add(listitem.Create(dr['member_designator'].tostring,dr['member_id'].tostring));
+  end;
+  dr.Close;
+  self.Close;
+  //
+  if selected_value <> EMPTY then begin
+    ListControl(target).selectedvalue := selected_value;
+  end;
+  //
 end;
 
 function TClass_db_members.EmailAddressOf(member_id: string): string;
