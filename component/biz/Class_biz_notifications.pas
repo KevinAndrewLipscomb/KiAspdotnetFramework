@@ -169,8 +169,8 @@ var
   biz_user: TClass_biz_user;
   biz_users: TClass_biz_users;
   changed: string;
-//  first_name: string;
-//  last_name: string;
+  first_name: string;
+  last_name: string;
   role_name: string;
   template_reader: streamreader;
   to_or_from: string;
@@ -186,8 +186,8 @@ var
       .Replace('<actor_email_address/>',actor_email_address)
       .Replace('<changed/>',changed)
       .Replace('<to_or_from/>',to_or_from)
-//      .Replace('<first_name/>',first_name)
-//      .Replace('<last_name/>',last_name)
+      .Replace('<first_name/>',first_name)
+      .Replace('<last_name/>',last_name)
       .Replace('<role_name/>',role_name)
       .Replace('<runtime_root_fullspec/>',runtime_root_fullspec);
   END;
@@ -201,13 +201,8 @@ begin
   //
   actor_member_id := biz_members.IdOfUserId(biz_user.IdNum);
   actor := biz_user.Roles[0]
-{$REGION 'Compile-time instructions'}
-{$MESSAGE HINT 'Design decision required'}
-// Revise the following to match the kind of name that is associated with a member.
-//  + SPACE + biz_members.FirstNameOfMemberId(actor_member_id)
-//  + SPACE + biz_members.LastNameOfMemberId(actor_member_id)
-{$ENDREGION}
-  ;
+  + SPACE + biz_members.FirstNameOfMemberId(actor_member_id)
+  + SPACE + biz_members.LastNameOfMemberId(actor_member_id);
   actor_email_address := biz_users.PasswordResetEmailAddressOfId(biz_user.IdNum);
   if be_granted then begin
     changed := 'granted';
@@ -216,12 +211,8 @@ begin
     changed := 'removed';
     to_or_from := 'from';
   end;
-{$REGION 'Compile-time instructions'}
-{$MESSAGE HINT 'Design decision required'}
-// Revise the following to match the kind of name that is associated with a member.
-//  first_name := biz_members.FirstNameOfMemberId(member_id);
-//  last_name := biz_members.LastNameOfMemberId(member_id);
-{$ENDREGION}
+  first_name := biz_members.FirstNameOfMemberId(member_id);
+  last_name := biz_members.LastNameOfMemberId(member_id);
   role_name := biz_roles.NameOfId(role_id);
   template_reader := &file.OpenText(httpcontext.current.server.MapPath('template/notification/role_change.txt'));
   //

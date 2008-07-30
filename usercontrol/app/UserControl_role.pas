@@ -354,12 +354,8 @@ begin
     TextBox_quick_message_subject.text,
     // body
     '-- From ' + p.biz_user.Roles[0]
-{$REGION 'Compile-time instructions'}
-{$MESSAGE HINT 'Design decision required'}
-// Revise the following to match the kind of name that is associated with a member.
-//    + SPACE + p.biz_members.FirstNameOfMemberId(session['member_id'].tostring)
-//    + SPACE + p.biz_members.LastNameOfMemberId(session['member_id'].tostring)
-{$ENDREGION}
+    + SPACE + p.biz_members.FirstNameOfMemberId(session['member_id'].tostring)
+    + SPACE + p.biz_members.LastNameOfMemberId(session['member_id'].tostring)
     + ' (' + p.biz_user.EmailAddress + ') [via '
     + configurationmanager.appsettings['application_name'] + ']' + NEW_LINE
     + NEW_LINE
