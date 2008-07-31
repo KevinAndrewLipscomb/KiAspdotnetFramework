@@ -133,7 +133,7 @@
     </Reference>
     <Reference Include="lib\ki\ki.dll">
       <AssemblyName>ki</AssemblyName>
-      <Version>1.0.3130.28239</Version>
+      <Version>1.0.3133.34105</Version>
       <HintPath>lib\ki\ki.dll</HintPath>
       <AssemblyTag>lib\ki\ki.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
@@ -290,9 +290,19 @@
       <Form>UserControl_role_member_matrix.TWebUserControl_role_member_matrix</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_role_notification_mapping.pas">
+      <DependentUpon>usercontrol\app\UserControl_role_notification_mapping.ascx</DependentUpon>
+      <Form>UserControl_role_notification_mapping.TWebUserControl_role_notification_mapping</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_role_notification_matrix.pas">
       <DependentUpon>usercontrol\app\UserControl_role_notification_matrix.ascx</DependentUpon>
       <Form>UserControl_role_notification_matrix.TWebUserControl_role_notification_matrix</Form>
+      <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
+    </DCCReference>
+    <DCCReference Include="usercontrol\app\UserControl_role_privilege_mapping.pas">
+      <DependentUpon>usercontrol\app\UserControl_role_privilege_mapping.ascx</DependentUpon>
+      <Form>UserControl_role_privilege_mapping.TWebUserControl_role_privilege_mapping</Form>
       <DesignClass>ki_web_ui.usercontrol_class</DesignClass>
     </DCCReference>
     <DCCReference Include="usercontrol\app\UserControl_role_privilege_matrix.pas">
@@ -365,7 +375,9 @@
     <None Include="usercontrol\app\UserControl_roles_and_matrices_binder.ascx" />
     <None Include="usercontrol\app\UserControl_role_member_mapping.ascx" />
     <None Include="usercontrol\app\UserControl_role_member_matrix.ascx" />
+    <None Include="usercontrol\app\UserControl_role_notification_mapping.ascx" />
     <None Include="usercontrol\app\UserControl_role_notification_matrix.ascx" />
+    <None Include="usercontrol\app\UserControl_role_privilege_mapping.ascx" />
     <None Include="usercontrol\app\UserControl_role_privilege_matrix.ascx" />
     <None Include="usercontrol\app\UserControl_update_progress_blocker.ascx" />
     <None Include="usercontrol\app\UserControl_user.ascx" />

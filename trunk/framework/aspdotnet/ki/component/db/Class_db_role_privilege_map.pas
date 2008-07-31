@@ -25,6 +25,12 @@ const
       target: system.object;
       out crosstab_metadata_rec_arraylist: arraylist
       );
+    procedure BindActuals
+      (
+      sort_order: string;
+      be_sort_order_ascending: boolean;
+      target: system.object
+      );
     procedure Save
       (
       privilege_id: string;
@@ -105,6 +111,40 @@ begin
     +   ' left outer join role on (role.id=role_privilege_map.role_id)'
     + where_clause
     + ' group by privilege.id'
+    + ' order by ' + sort_order,
+    connection
+    )
+    .ExecuteReader;
+  GridView(target).DataBind;
+  self.Close;
+  //
+end;
+
+procedure TClass_db_role_privilege_map.BindActuals
+  (
+  sort_order: string;
+  be_sort_order_ascending: boolean;
+  target: system.object
+  );
+begin
+  //
+  if be_sort_order_ascending then begin
+    sort_order := sort_order.Replace('%',' asc');
+  end else begin
+    sort_order := sort_order.Replace('%',' desc');
+  end;
+  //
+  self.Open;
+  GridView(target).datasource := mysqlcommand.Create
+    (
+    'select role_id'
+    + ' , pecking_order as role_pecking_order'
+    + ' , role.name as role_name'
+    + ' , privilege.name as privilege_name'
+    + ' , privilege_id'
+    + ' from role_privilege_map'
+    +   ' join privilege on (privilege.id=role_privilege_map.privilege_id)'
+    +   ' join role on (role.id=role_privilege_map.role_id)'
     + ' order by ' + sort_order,
     connection
     )

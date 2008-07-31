@@ -12,16 +12,7 @@
   </head>
 
   <body bgcolor="white">
-     <form runat="server"><uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent><p>
-          <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#d3d3d3" border="0">
-              <tr>
-				<td><small><ASP:Label id="Label_account_descriptor" runat="server"></ASP:Label>:&nbsp;[
-		  <ASP:LinkButton id="LinkButton_logout" runat="server" causesvalidation="False">Logout</ASP:LinkButton>&nbsp;] [ <ASP:LinkButton id="LinkButton_back_to_overview" runat="server" causesvalidation="False">Overview</ASP:LinkButton>&nbsp;]</small></td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td></td>
-			  </tr>
-		  </table>
-		</p>
+     <form runat="server"><uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
         <p>
         <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
             <tr>
@@ -31,9 +22,7 @@
                       <td bgcolor="#f5f5f5"><strong>Change password</strong></td>
                     </tr>
                     <tr>
-                      <td>
-						If you logged in using a temporary password, you must change your password before proceeding.<br>
-					  </td>
+                      <td>If you logged in using a temporary password, you must change your password before proceeding.<br></td>
                     </tr>
                     <tr>
 					  <td>
