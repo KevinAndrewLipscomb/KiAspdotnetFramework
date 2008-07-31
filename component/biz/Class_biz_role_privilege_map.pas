@@ -21,6 +21,12 @@ type
       target: system.object;
       out crosstab_metadata: arraylist
       );
+    procedure BindActuals
+      (
+      sort_order: string;
+      be_sort_order_ascending: boolean;
+      target: system.object
+      );
     procedure Save
       (
       member_id: string;
@@ -47,6 +53,16 @@ procedure TClass_biz_role_privilege_map.Bind
   );
 begin
   db_role_privilege_map.Bind(sort_order,be_sort_order_descending,target,crosstab_metadata);
+end;
+
+procedure TClass_biz_role_privilege_map.BindActuals
+  (
+  sort_order: string;
+  be_sort_order_ascending: boolean;
+  target: system.object
+  );
+begin
+  db_role_privilege_map.BindActuals(sort_order,be_sort_order_ascending,target);
 end;
 
 procedure TClass_biz_role_privilege_map.Save

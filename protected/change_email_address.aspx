@@ -1,17 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %><%@ Page language="c#" Debug="true" Codebehind="change_email_address.pas" AutoEventWireup="false" Inherits="change_email_address.TWebForm_change_email_address" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_precontent" Src="~/usercontrol/app/UserControl_precontent.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_postcontent" Src="~/usercontrol/app/UserControl_postcontent.ascx" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
   <head>
 	<title id="Title" runat="server"></title>
-<link REL="StyleSheet" HREF="../standard.css" TYPE="text/css" />
+    <link href="../css/standard.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 7]> <style type="text/css">@import "../css/standard-overrides-for-ie6.css";</style><![endif]-->
 	<!-- $Id$ -->
   </head>
 
   <body bgcolor="white">
-	 <form runat="server"><uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent><table cellspacing="0" cellpadding="0" width="100%" bgcolor="#d3d3d3" border="0">
+	 <form runat="server">
+<uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent><table cellspacing="0" cellpadding="0" width="100%" bgcolor="#d3d3d3" border="0">
 			  <tr>
 				<td><small><ASP:Label id="Label_account_descriptor" runat="server"></ASP:Label>:&nbsp;[
 		  <ASP:LinkButton id="LinkButton_logout" runat="server" causesvalidation="False">Logout</ASP:LinkButton>&nbsp;] [ <ASP:LinkButton id="LinkButton_back_to_overview" runat="server" causesvalidation="False">Overview</ASP:LinkButton>]</small></td>

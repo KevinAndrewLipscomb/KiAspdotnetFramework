@@ -25,6 +25,12 @@ const
       target: system.object;
       out crosstab_metadata_rec_arraylist: arraylist
       );
+    procedure BindActuals
+      (
+      sort_order: string;
+      be_sort_order_ascending: boolean;
+      target: system.object
+      );
     procedure Save
       (
       notification_id: string;
@@ -105,6 +111,40 @@ begin
     +   ' left outer join role on (role.id=role_notification_map.role_id)'
     + where_clause
     + ' group by notification.id'
+    + ' order by ' + sort_order,
+    connection
+    )
+    .ExecuteReader;
+  GridView(target).DataBind;
+  self.Close;
+  //
+end;
+
+procedure TClass_db_role_notification_map.BindActuals
+  (
+  sort_order: string;
+  be_sort_order_ascending: boolean;
+  target: system.object
+  );
+begin
+  //
+  if be_sort_order_ascending then begin
+    sort_order := sort_order.Replace('%',' asc');
+  end else begin
+    sort_order := sort_order.Replace('%',' desc');
+  end;
+  //
+  self.Open;
+  GridView(target).datasource := mysqlcommand.Create
+    (
+    'select role_id'
+    + ' , pecking_order as role_pecking_order'
+    + ' , role.name as role_name'
+    + ' , notification.name as notification_name'
+    + ' , notification_id'
+    + ' from role_notification_map'
+    +   ' join notification on (notification.id=role_notification_map.notification_id)'
+    +   ' join role on (role.id=role_notification_map.role_id)'
     + ' order by ' + sort_order,
     connection
     )

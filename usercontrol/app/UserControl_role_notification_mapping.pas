@@ -1,9 +1,11 @@
-unit UserControl_role_privilege_matrix;
+unit UserControl_role_notification_mapping;
 
 interface
 
 uses
-  Class_biz_role_privilege_map,
+  Class_biz_notifications,
+  Class_biz_role_notification_map,
+  Class_biz_roles,
   ki_web_ui,
   System.Collections,
   System.Data,
@@ -18,29 +20,37 @@ type
     RECORD
     be_interactive: boolean;
     be_loaded: boolean;
-    be_sort_order_descending: boolean;
-    biz_role_privilege_map: TClass_biz_role_privilege_map;
-    crosstab_metadata_rec_arraylist: arraylist;
+    be_sort_order_ascending: boolean;
+    biz_notifications: TClass_biz_notifications;
+    biz_role_notification_map: TClass_biz_role_notification_map;
+    biz_roles: TClass_biz_roles;
+    may_add_mappings: boolean;
     sort_order: string;
     END;
-  TWebUserControl_role_privilege_matrix = class(ki_web_ui.usercontrol_class)
+  TWebUserControl_role_notification_mapping = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure TWebUserControl_role_privilege_matrix_PreRender(sender: System.Object;
+    procedure TWebUserControl_role_notification_mapping_PreRender(sender: System.Object;
       e: System.EventArgs);
     procedure GridView_control_Sorting(sender: System.Object; e: System.Web.UI.WebControls.GridViewSortEventArgs);
+    procedure Button_add_Click(sender: System.Object; e: System.EventArgs);
     procedure GridView_control_RowDataBound(sender: System.Object; e: System.Web.UI.WebControls.GridViewRowEventArgs);
-    procedure Changed(sender: System.Object; e: System.EventArgs);
+    procedure GridView_control_RowDeleting(sender: System.Object; e: System.Web.UI.WebControls.GridViewDeleteEventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
     procedure Bind;
-    procedure Checkboxify(row: gridviewrow);
     procedure InjectPersistentClientSideScript;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     GridView_control: System.Web.UI.WebControls.GridView;
+    Button_add: System.Web.UI.WebControls.Button;
+    DropDownList_role: System.Web.UI.WebControls.DropDownList;
+    DropDownList_notification: System.Web.UI.WebControls.DropDownList;
+    RequiredFieldValidator_role: System.Web.UI.WebControls.RequiredFieldValidator;
+    RequiredFieldValidator_notification: System.Web.UI.WebControls.RequiredFieldValidator;
+    TableCell_add_mapping: System.Web.UI.HtmlControls.HtmlTableCell;
   protected
     procedure OnInit(e: System.EventArgs); override;
   private
@@ -48,53 +58,27 @@ type
   public
     { Public Declarations }
   published
-    function Fresh: TWebUserControl_role_privilege_matrix;
+    function Fresh: TWebUserControl_role_notification_mapping;
   end;
 
 implementation
 
 uses
   Class_db_roles,
-  Class_db_role_privilege_map,
+  Class_db_role_notification_map,
   kix,
   system.configuration;
 
 const
-  CHECKBOX_ID_PREFIX_PRIVILEGE_ID = 'CheckBox_privilege_';
-  CHECKBOX_ID_PREFIX_ROLE_ID = '_role_';
+  CI_UNMAP = 0;
+  CI_ROLE_ID = 1;
+  CI_ROLE_PECKING_ORDER = 2;
+  CI_ROLE_NAME = 3;
+  CI_NOTIFICATION_NAME = 4;
+  CI_NOTIFICATION_ID = 5;
+  INITIAL_SORT_ORDER = 'role_pecking_order%,notification_name';
 
-procedure TWebUserControl_role_privilege_matrix.Checkboxify(row: gridviewrow);
-type
-  crosstab_index_type = CI_FIRST_CROSSTAB..MAXINT;
-var
-  check_box: CheckBox;
-  crosstab_metadata_rec: crosstab_metadata_rec_type;
-  i: crosstab_index_type;
-begin
-  if row.cells.count > CI_FIRST_CROSSTAB then begin
-    for i := CI_FIRST_CROSSTAB to (row.cells.count - 1) do begin
-      if row.rowtype = datacontrolrowtype.datarow then begin
-        row.cells.item[i].horizontalalign := horizontalalign.CENTER;
-        crosstab_metadata_rec := crosstab_metadata_rec_type(p.crosstab_metadata_rec_arraylist[i - CI_FIRST_CROSSTAB]);
-        check_box := CheckBox.Create;
-        check_box.autopostback := TRUE;
-        check_box.checked := (row.cells.item[i].text = '1');
-        check_box.enabled := Has(string_array(session['privilege_array']),'config-roles-and-matrices');
-        check_box.id := EMPTY
-        + CHECKBOX_ID_PREFIX_PRIVILEGE_ID + row.cells.item[CI_PRIVILEGE_ID].text
-        + CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
-        check_box.tooltip := crosstab_metadata_rec.natural_text;
-        Include(check_box.checkedchanged,Changed);
-        row.cells.item[i].controls.Add(check_box);
-        if not p.be_interactive then begin
-          CheckBox(row.cells.item[i].controls[0]).enabled := FALSE;
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure TWebUserControl_role_privilege_matrix.InjectPersistentClientSideScript;
+procedure TWebUserControl_role_notification_mapping.InjectPersistentClientSideScript;
 begin
 {$REGION 'Persistent client-side script'}
 //  EstablishClientSideFunction(EL);
@@ -175,9 +159,7 @@ begin
 {$ENDREGION}
 end;
 
-procedure TWebUserControl_role_privilege_matrix.Page_Load(sender: System.Object; e: System.EventArgs);
-var
-  row_index: cardinal;
+procedure TWebUserControl_role_notification_mapping.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
   //
   if not p.be_loaded then begin
@@ -192,20 +174,14 @@ begin
     //
   end else begin
     //
-    // Dynamic controls must be re-added on each postback.
     //
-    if GridView_control.rows.count > 0 then begin
-      for row_index := 0 to (GridView_control.rows.count - 1) do begin
-        Checkboxify(GridView_control.rows.item[row_index]);
-      end;
-    end;
   end;
   //
   InjectPersistentClientSideScript;
   //
 end;
 
-procedure TWebUserControl_role_privilege_matrix.OnInit(e: System.EventArgs);
+procedure TWebUserControl_role_notification_mapping.OnInit(e: System.EventArgs);
 begin
   //
   // Required for Designer support
@@ -213,19 +189,22 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if session['UserControl_role_privilege_matrix.p'] <> nil then begin
+  if session['UserControl_role_notification_mapping.p'] <> nil then begin
     //
-    p := p_type(session['UserControl_role_privilege_matrix.p']);
-    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_UserControl_config_UserControl_roles_and_matrices_binder_PlaceHolder_content']) = 'UserControl_role_privilege_matrix');
+    p := p_type(session['UserControl_role_notification_mapping.p']);
+    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_UserControl_config_UserControl_roles_and_matrices_binder_PlaceHolder_content']) = 'UserControl_role_notification_mapping');
     //
   end else begin
     //
-    p.biz_role_privilege_map := TClass_biz_role_privilege_map.Create;
+    p.biz_notifications := TClass_biz_notifications.Create;
+    p.biz_role_notification_map := TClass_biz_role_notification_map.Create;
+    p.biz_roles := TClass_biz_roles.Create;
     //
     p.be_interactive := not assigned(session['mode:report']);
     p.be_loaded := FALSE;
-    p.be_sort_order_descending := FALSE;
-    p.sort_order := 'privilege_name%';
+    p.be_sort_order_ascending := TRUE;
+    p.may_add_mappings := Has(string_array(session['privilege_array']),'config-roles-and-matrices');
+    p.sort_order := INITIAL_SORT_ORDER;
     //
   end;
   //
@@ -236,83 +215,103 @@ end;
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebUserControl_role_privilege_matrix.InitializeComponent;
+procedure TWebUserControl_role_notification_mapping.InitializeComponent;
 begin
   Include(Self.GridView_control.Sorting, Self.GridView_control_Sorting);
   Include(Self.GridView_control.RowDataBound, Self.GridView_control_RowDataBound);
-  Include(Self.PreRender, Self.TWebUserControl_role_privilege_matrix_PreRender);
+  Include(Self.GridView_control.RowDeleting, Self.GridView_control_RowDeleting);
+  Include(Self.Button_add.Click, Self.Button_add_Click);
+  Include(Self.PreRender, Self.TWebUserControl_role_notification_mapping_PreRender);
   Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
 
-procedure TWebUserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix_PreRender(sender: System.Object;
+procedure TWebUserControl_role_notification_mapping.TWebUserControl_role_notification_mapping_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  SessionSet('UserControl_role_privilege_matrix.p',p);
+  SessionSet('UserControl_role_notification_mapping.p',p);
 end;
 
-function TWebUserControl_role_privilege_matrix.Fresh: TWebUserControl_role_privilege_matrix;
+function TWebUserControl_role_notification_mapping.Fresh: TWebUserControl_role_notification_mapping;
 begin
-  session.Remove('UserControl_role_privilege_matrix.p');
+  session.Remove('UserControl_role_notification_mapping.p');
   Fresh := self;
 end;
 
-procedure TWebUserControl_role_privilege_matrix.Changed(sender: System.Object;
-  e: System.EventArgs);
-const
-  TUPLE_INDEX_PRIVILEGE_ID = 0;
-  TUPLE_INDEX_ROLE_ID = 1;
-var
-  check_box: CheckBox;
-  tuple: string_array;
+procedure TWebUserControl_role_notification_mapping.GridView_control_RowDeleting(sender: System.Object;
+  e: System.Web.UI.WebControls.GridViewDeleteEventArgs);
 begin
-  check_box := CheckBox(sender);
-  tuple := check_box.id.Split([CHECKBOX_ID_PREFIX_PRIVILEGE_ID,CHECKBOX_ID_PREFIX_ROLE_ID],stringsplitoptions.REMOVEEMPTYENTRIES);
-  p.biz_role_privilege_map.Save(Safe(tuple[TUPLE_INDEX_PRIVILEGE_ID],NUM),Safe(tuple[TUPLE_INDEX_ROLE_ID],NUM),check_box.checked);
+  p.biz_role_notification_map.Save
+    (
+    Safe(GridView_control.rows[e.rowindex].cells[CI_NOTIFICATION_ID].text,NUM),
+    Safe(GridView_control.rows[e.rowindex].cells[CI_ROLE_ID].text,NUM),
+    FALSE
+    );
+  Bind;
 end;
 
-procedure TWebUserControl_role_privilege_matrix.GridView_control_RowDataBound(sender: System.Object;
+procedure TWebUserControl_role_notification_mapping.GridView_control_RowDataBound(sender: System.Object;
   e: System.Web.UI.WebControls.GridViewRowEventArgs);
+var
+  be_ok_to_delete: boolean;
 begin
-  //
   if e.row.rowtype <> datacontrolrowtype.EMPTYDATAROW then begin
-    e.row.cells.item[CI_PRIVILEGE_ID].visible := FALSE;
-    e.row.cells.item[CI_PRIVILEGE_NAME].wrap := FALSE;
-    Checkboxify(e.row);
+    be_ok_to_delete := p.be_interactive and Has(string_array(session['privilege_array']),'config-roles-and-matrices');
+    if be_ok_to_delete then begin
+// Appears to clobber a necessary ASP.NET onclick event.  Should probably use AJAX instead.
+//      RequireConfirmation
+//        (
+//        ImageButton(e.row.cells[CI_UNMAP].controls[0]),
+//        'Are you sure you want to unmap the ' + e.row.cells[CI_ROLE_NAME].text + ' role from notification '
+//        + e.row.cells[CI_NOTIFICATION_NAME].text + '?' + NEW_LINE
+//        + NEW_LINE
+//        + 'Clicking Ok will prevent role holders from receiving the notifications.'
+//        );
+    end else begin
+      e.row.cells[CI_UNMAP].enabled := FALSE;
+      e.row.cells[CI_UNMAP].text := EMPTY;
+    end;
+    e.row.cells[CI_ROLE_ID].visible := FALSE;
+    e.row.cells[CI_ROLE_PECKING_ORDER].visible := FALSE;
+    e.row.cells[CI_NOTIFICATION_ID].visible := FALSE;
   end;
-  //
 end;
 
-procedure TWebUserControl_role_privilege_matrix.GridView_control_Sorting(sender: System.Object;
+procedure TWebUserControl_role_notification_mapping.Button_add_Click(sender: System.Object;
+  e: System.EventArgs);
+begin
+  p.biz_role_notification_map.Save(Safe(DropDownList_notification.selectedvalue,NUM),Safe(DropDownList_role.selectedvalue,NUM),TRUE);
+  Bind;
+end;
+
+procedure TWebUserControl_role_notification_mapping.GridView_control_Sorting(sender: System.Object;
   e: System.Web.UI.WebControls.GridViewSortEventArgs);
 begin
-  if (e.SortExpression + '%,privilege_name') = p.sort_order then begin
-    p.be_sort_order_descending := not p.be_sort_order_descending;
+  if e.SortExpression = p.sort_order then begin
+    p.be_sort_order_ascending := not p.be_sort_order_ascending;
   end else begin
-    p.sort_order := e.SortExpression + '%,privilege_name';
-    p.be_sort_order_descending := TRUE;
+    p.sort_order := e.SortExpression;
+    p.be_sort_order_ascending := TRUE;
   end;
   GridView_control.editindex := -1;
   Bind;
 end;
 
-procedure TWebUserControl_role_privilege_matrix.Bind;
-var
-  metadata: crosstab_metadata_rec_type;
-  i: cardinal;
+procedure TWebUserControl_role_notification_mapping.Bind;
 begin
-  p.biz_role_privilege_map.Bind(p.sort_order,p.be_sort_order_descending,GridView_control,p.crosstab_metadata_rec_arraylist);
-  if assigned(GridView_control.headerrow) then begin
-    LinkButton(GridView_control.headerrow.cells.item[1].controls.item[0]).text := 'Privilege';
-    if p.crosstab_metadata_rec_arraylist.count > 0 then begin
-      for i := 0 to (p.crosstab_metadata_rec_arraylist.count - 1) do begin
-        metadata := crosstab_metadata_rec_type(p.crosstab_metadata_rec_arraylist[i]);
-        LinkButton(GridView_control.headerrow.cells.item[metadata.index].controls.item[0]).text := metadata.soft_hyphenation_text;
-        LinkButton(GridView_control.headerrow.cells.item[metadata.index].controls.item[0]).font.bold := FALSE;
-        LinkButton(GridView_control.headerrow.cells.item[metadata.index].controls.item[0]).font.size := fontunit.SMALLER;
-      end;
-    end;
+  //
+  p.biz_role_notification_map.BindActuals(p.sort_order,p.be_sort_order_ascending,GridView_control);
+  //
+  TableCell_add_mapping.visible := p.may_add_mappings;
+  if TableCell_add_mapping.visible then begin
+    p.biz_roles.BindDirectToListControl
+      (
+      DropDownList_role,
+      Has(string_array(session['privilege_array']),'config-roles-and-matrices')
+      );
+    p.biz_notifications.BindDirectToListControl(DropDownList_notification);
   end;
+  //
 end;
 
 end.

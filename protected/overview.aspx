@@ -4,7 +4,6 @@
 <%@ Register TagPrefix="uc1" TagName="UserControl_postcontent" Src="~/usercontrol/app/UserControl_postcontent.ascx" %>
 <%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_print_div" Src="~/usercontrol/ki/UserControl_print_div.ascx" %>
-<%@ Register TagPrefix="uc2" TagName="UserControl_update_progress_blocker" Src="~/usercontrol/app/UserControl_update_progress_blocker.ascx" %>
 <html>
   <head>
     <title id="Title" runat="server"></title>
@@ -14,7 +13,6 @@
   </head>
   <body bgcolor="white">
     <form runat="server">
-      <asp:ScriptManager id="ScriptManager_control" runat="server"></asp:ScriptManager>
       <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
       <p><uc1:UserControl_print_div id="UserControl_print_div" runat="server" visible="False"></uc1:UserControl_print_div></p>
       <p><ASP:PlaceHolder id="PlaceHolder_establish_membership" runat="server"></ASP:PlaceHolder><ASP:PlaceHolder id="PlaceHolder_member_binder" runat="server"></ASP:PlaceHolder></p>
