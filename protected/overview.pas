@@ -59,8 +59,8 @@ uses
 /// </summary>
 procedure TWebForm_overview.InitializeComponent;
 begin
-  Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebForm_overview_PreRender);
+  Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
 

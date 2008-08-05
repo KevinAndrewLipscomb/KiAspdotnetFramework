@@ -135,7 +135,7 @@ begin
     //
     p.be_loaded := FALSE;
     //
-    p.tab_index := 0;
+    p.tab_index := TSSI_0;
     //
     p.content_id := AddIdentifiedControlToPlaceHolder
       (

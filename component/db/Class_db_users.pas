@@ -34,6 +34,12 @@ type
       target: system.object
       )
       : boolean;
+    procedure BindDirectToListControl
+      (
+      target: system.object;
+      unselected_literal: string = '-- User --';
+      selected_value: string = EMPTY
+      );
     procedure Delete(username: string);
     function Get
       (
@@ -198,6 +204,43 @@ begin
   dr.Close;
   self.Close;
   Bind := ListControl(target).items.count > 0;
+end;
+
+procedure TClass_db_users.BindDirectToListControl
+  (
+  target: system.object;
+  unselected_literal: string = '-- User --';
+  selected_value: string = EMPTY
+  );
+var
+  dr: mysqldatareader;
+begin
+  //
+  ListControl(target).items.Clear;
+  if unselected_literal <> EMPTY then begin
+    ListControl(target).items.Add(listitem.Create(unselected_literal,EMPTY));
+  end;
+  //
+  self.Open;
+  dr := mysqlcommand.Create
+    (
+    'select user.id as user_id'
+    + ' , name as user_name'
+    + ' from user'
+    + ' order by user_name',
+    connection
+    )
+    .ExecuteReader;
+  while dr.Read do begin
+    ListControl(target).items.Add(listitem.Create(dr['user_name'].tostring,dr['user_id'].tostring));
+  end;
+  dr.Close;
+  self.Close;
+  //
+  if selected_value <> EMPTY then begin
+    ListControl(target).selectedvalue := selected_value;
+  end;
+  //
 end;
 
 procedure TClass_db_users.Delete(username: string);
