@@ -38,6 +38,12 @@ type
       target: system.object
       )
       : boolean;
+    procedure BindDirectToListControl
+      (
+      target: system.object;
+      unselected_literal: string = '-- User --';
+      selected_value: string = EMPTY
+      );
     procedure Delete(username: string);
     function Get
       (
@@ -156,6 +162,16 @@ function TClass_biz_users.Bind
   : boolean;
 begin
   Bind := db_users.Bind(partial_username,target);
+end;
+
+procedure TClass_biz_users.BindDirectToListControl
+  (
+  target: system.object;
+  unselected_literal: string = '-- User --';
+  selected_value: string = EMPTY
+  );
+begin
+  db_users.BindDirectToListControl(target,unselected_literal,selected_value);
 end;
 
 procedure TClass_biz_users.Delete(username: string);

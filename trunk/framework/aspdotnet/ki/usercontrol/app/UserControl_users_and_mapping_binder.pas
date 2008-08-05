@@ -1,4 +1,4 @@
-unit UserControl_config_binder;
+unit UserControl_users_and_mapping_binder;
 
 interface
 
@@ -11,8 +11,8 @@ uses
   System.Web.UI,
   System.Web.UI.WebControls,
   System.Web.UI.HtmlControls,
-  UserControl_roles_and_matrices_binder,
-  UserControl_users_and_mapping_binder;
+  UserControl_user,
+  UserControl_user_member_mapping;
 
 type
   p_type =
@@ -21,11 +21,11 @@ type
     content_id: string;
     tab_index: cardinal;
     END;
-  TWebUserControl_config_binder = class(ki_web_ui.usercontrol_class)
+  TWebUserControl_users_and_mapping_binder = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure TWebUserControl_config_binder_PreRender(sender: System.Object;
+    procedure TWebUserControl_users_and_mapping_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
     procedure TabStrip_control_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
@@ -42,29 +42,26 @@ type
   public
     { Public Declarations }
   published
-    function Fresh: TWebUserControl_config_binder;
+    function Fresh: TWebUserControl_users_and_mapping_binder;
   end;
 
 implementation
 
 uses
-  appcommon,
   kix,
   System.Collections,
   system.configuration;
 
 const
-  TSSI_ROLES_AND_MATRICES = 0;
-  TSSI_USERS_AND_MAPPING = 1;
+  TSSI_USERS = 0;
+  TSSI_USER_MEMBER_MAPPINGS = 1;
 
-procedure TWebUserControl_config_binder.Page_Load(sender: System.Object; e: System.EventArgs);
+procedure TWebUserControl_users_and_mapping_binder.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
   //
   if not p.be_loaded then begin
     //
-    if Has(string_array(session['privilege_array']),'config-users') then begin
-      TabStrip_control.items[TSSI_USERS_AND_MAPPING].enabled := TRUE;
-    end;
+    TabStrip_control.selectedindex := p.tab_index;
     //
     p.be_loaded := TRUE;
     //
@@ -72,7 +69,7 @@ begin
   //
 end;
 
-procedure TWebUserControl_config_binder.OnInit(e: System.EventArgs);
+procedure TWebUserControl_users_and_mapping_binder.OnInit(e: System.EventArgs);
 begin
   //
   // Required for Designer support
@@ -80,25 +77,30 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if session['UserControl_config_binder.p'] <> nil then begin
-    p := p_type(session['UserControl_config_binder.p']);
-    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_PlaceHolder_content']) = 'UserControl_config_binder');
+  if session['UserControl_users_and_mapping_binder.p'] <> nil then begin
+    p := p_type(session['UserControl_users_and_mapping_binder.p']);
+    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_UserControl_config_PlaceHolder_content']) = 'UserControl_users_and_mapping_binder');
+    //
+    if assigned(session['UserControl_users_and_mapping_binder_selected_tab']) then begin
+      p.tab_index := session['UserControl_users_and_mapping_binder_selected_tab'].GetHashCode;
+      session.Remove('UserControl_users_and_mapping_binder_selected_tab');
+    end;
     //
     // Dynamic controls must be re-added on each postback.
     //
     case p.tab_index of
-    TSSI_ROLES_AND_MATRICES:
+    TSSI_USERS:
       p.content_id := AddIdentifiedControlToPlaceHolder
         (
-        TWebUserControl_roles_and_matrices_binder(LoadControl('~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx')),
-        'UserControl_roles_and_matrices_binder',
+        TWebUserControl_user(LoadControl('~/usercontrol/app/UserControl_user.ascx')),
+        'UserControl_user',
         PlaceHolder_content
         );
-    TSSI_USERS_AND_MAPPING:
-      AddIdentifiedControlToPlaceHolder
+    TSSI_USER_MEMBER_MAPPINGS:
+      p.content_id := AddIdentifiedControlToPlaceHolder
         (
-        TWebUserControl_users_and_mapping_binder(LoadControl('~/usercontrol/app/UserControl_users_and_mapping_binder.ascx')),
-        'UserControl_users_and_mapping_binder',
+        TWebUserControl_user_member_mapping(LoadControl('~/usercontrol/app/UserControl_user_member_mapping.ascx')),
+        'UserControl_user_member_mapping',
         PlaceHolder_content
         );
     end;
@@ -106,12 +108,12 @@ begin
     //
     p.be_loaded := FALSE;
     //
-    p.tab_index := TSSI_ROLES_AND_MATRICES;
+    p.tab_index := TSSI_USERS;
     //
     p.content_id := AddIdentifiedControlToPlaceHolder
       (
-      TWebUserControl_roles_and_matrices_binder(LoadControl('~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx')).Fresh,
-      'UserControl_roles_and_matrices_binder',
+      TWebUserControl_user(LoadControl('~/usercontrol/app/UserControl_user.ascx')).Fresh,
+      'UserControl_user',
       PlaceHolder_content
       );
     //
@@ -119,7 +121,7 @@ begin
   //
 end;
 
-procedure TWebUserControl_config_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
+procedure TWebUserControl_users_and_mapping_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
   e: System.EventArgs);
 begin
   //
@@ -128,18 +130,18 @@ begin
   PlaceHolder_content.controls.Clear;
   //
   case p.tab_index of
-  TSSI_ROLES_AND_MATRICES:
+  TSSI_USERS:
     p.content_id := AddIdentifiedControlToPlaceHolder
       (
-      TWebUserControl_roles_and_matrices_binder(LoadControl('~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx')).Fresh,
-      'UserControl_roles_and_matrices_binder',
+      TWebUserControl_user(LoadControl('~/usercontrol/app/UserControl_user.ascx')).Fresh,
+      'UserControl_user',
       PlaceHolder_content
       );
-  TSSI_USERS_AND_MAPPING:
+  TSSI_USER_MEMBER_MAPPINGS:
     p.content_id := AddIdentifiedControlToPlaceHolder
       (
-      TWebUserControl_users_and_mapping_binder(LoadControl('~/usercontrol/app/UserControl_users_and_mapping_binder.ascx')).Fresh,
-      'UserControl_users_and_mapping_binder',
+      TWebUserControl_user_member_mapping(LoadControl('~/usercontrol/app/UserControl_user_member_mapping.ascx')).Fresh,
+      'UserControl_user_member_mapping',
       PlaceHolder_content
       );
   end;
@@ -150,15 +152,15 @@ end;
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebUserControl_config_binder.InitializeComponent;
+procedure TWebUserControl_users_and_mapping_binder.InitializeComponent;
 begin
   Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
   Include(Self.Load, Self.Page_Load);
-  Include(Self.PreRender, Self.TWebUserControl_config_binder_PreRender);
+  Include(Self.PreRender, Self.TWebUserControl_users_and_mapping_binder_PreRender);
 end;
 {$ENDREGION}
 
-procedure TWebUserControl_config_binder.TWebUserControl_config_binder_PreRender(sender: System.Object;
+procedure TWebUserControl_users_and_mapping_binder.TWebUserControl_users_and_mapping_binder_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
   //
@@ -167,13 +169,13 @@ begin
   //
   SessionSet(PlaceHolder_content.clientid,p.content_id);
   //
-  SessionSet('UserControl_config_binder.p',p);
+  SessionSet('UserControl_users_and_mapping_binder.p',p);
   //
 end;
 
-function TWebUserControl_config_binder.Fresh: TWebUserControl_config_binder;
+function TWebUserControl_users_and_mapping_binder.Fresh: TWebUserControl_users_and_mapping_binder;
 begin
-  session.Remove('UserControl_config_binder.p');
+  session.Remove('UserControl_users_and_mapping_binder.p');
   Fresh := self;
 end;
 
