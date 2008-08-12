@@ -33,7 +33,7 @@ uses
   UserControl_precontent in 'usercontrol\app\UserControl_precontent.pas' {UserControl_precontent.TWebUserControl_precontent: ki_web_ui.usercontrol_class},
   UserControl_postcontent in 'usercontrol\app\UserControl_postcontent.pas' {UserControl_postcontent.TWebUserControl_postcontent: ki_web_ui.usercontrol_class},
   Class_db_notifications in 'component\db\Class_db_notifications.pas',
-  test_report in 'noninteractive\test_report.pas',
+  test_report in 'noninteractive\test_report.pas' {test_report.TWebForm_test_report: system.web.ui.page},
   UserControl_member_binder in 'usercontrol\app\UserControl_member_binder.pas' {UserControl_member_binder.TWebUserControl_member_binder: ki_web_ui.usercontrol_class},
   UserControl_about in 'usercontrol\app\UserControl_about.pas' {UserControl_about.TWebUserControl_about: ki_web_ui.usercontrol_class},
   UserControl_user in 'usercontrol\app\UserControl_user.pas' {UserControl_user.TWebUserControl_user: ki_web_ui.usercontrol_class},
@@ -65,7 +65,8 @@ uses
   Class_db_user_member_map in 'component\db\Class_db_user_member_map.pas',
   Class_biz_user_member_map in 'component\biz\Class_biz_user_member_map.pas',
   UserControl_user_member_mapping in 'usercontrol\app\UserControl_user_member_mapping.pas' {UserControl_user_member_mapping.TWebUserControl_user_member_mapping: ki_web_ui.usercontrol_class},
-  UserControl_users_and_mapping_binder in 'usercontrol\app\UserControl_users_and_mapping_binder.pas' {UserControl_users_and_mapping_binder.TWebUserControl_users_and_mapping_binder: ki_web_ui.usercontrol_class};
+  UserControl_users_and_mapping_binder in 'usercontrol\app\UserControl_users_and_mapping_binder.pas' {UserControl_users_and_mapping_binder.TWebUserControl_users_and_mapping_binder: ki_web_ui.usercontrol_class},
+  UserControl_session_interrupted in 'usercontrol\ki\UserControl_session_interrupted.pas';
 
 //
 // General Information about an assembly is controlled through the following

@@ -75,13 +75,9 @@ procedure TWebForm_change_email_address.Page_Load(sender: System.Object; e: Syst
 var
   email_address: string;
 begin
-  if IsPostback and (session['change_email_password.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['change_email_password.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end;
+  case NatureOfVisit('change_email_password.p') of
+  VISIT_INITIAL:
+    BEGIN
     Title.InnerText := configurationmanager.appsettings['application_name'] + ' - change_email_address';
     p.biz_user:= TClass_biz_user.Create;
     p.biz_users := TClass_biz_users.Create;
@@ -97,7 +93,11 @@ begin
     TextBox_confirmation_email_address.Text := email_address;
     //
     Focus(TextBox_nominal_email_address);
-    //
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['change_email_password.p']);
+    END;
   end;
 end;
 

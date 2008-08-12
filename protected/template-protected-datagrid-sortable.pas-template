@@ -94,17 +94,9 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['template_protected_datagrid_sortable.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['template_protected_datagrid_sortable.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      //
-      // The request for this page could not have been the result of a server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
-      //
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
-      //
+  case NatureOfVisit('template_protected_datagrid_sortable.p') of
+  VISIT_INITIAL:
+    BEGIN
       p.biz1 := TClass_biz1.Create;
       //
       p.be_sort_order_ascending := TRUE;
@@ -113,8 +105,11 @@ begin
       p.tcci_field2 := 3;
       p.num_datagrid_rows := 0;
       p.sort_order := 'field1';
-      //
-    end;
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['template_protected_datagrid_sortable.p']);
+    END;
   end;
   //
 end;

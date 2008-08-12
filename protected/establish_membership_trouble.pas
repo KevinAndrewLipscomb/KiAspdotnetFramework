@@ -22,14 +22,8 @@ type
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure LinkButton_logout_Click(sender: System.Object; e: System.EventArgs);
     procedure TWebForm_establish_membership_trouble_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure LinkButton_change_password_Click(sender: System.Object;
-      e: System.EventArgs);
-    procedure LinkButton_change_email_address_Click(sender: System.Object;
-      e: System.EventArgs);
-    procedure LinkButton_back_Click(sender: System.Object; e: System.EventArgs);
     procedure Button_submit_Click(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   //
@@ -43,11 +37,6 @@ type
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;
-    LinkButton_logout: System.Web.UI.WebControls.LinkButton;
-    LinkButton_change_password: System.Web.UI.WebControls.LinkButton;
-    LinkButton_change_email_address: System.Web.UI.WebControls.LinkButton;
-    Label_account_descriptor: System.Web.UI.WebControls.Label;
-    LinkButton_back: System.Web.UI.WebControls.LinkButton;
     UserControl_print_div: TWebUserControl_print_div;
     TextBox_full_name: System.Web.UI.WebControls.TextBox;
     RequiredFieldValidator_full_name: System.Web.UI.WebControls.RequiredFieldValidator;
@@ -79,13 +68,9 @@ uses
 /// </summary>
 procedure TWebForm_establish_membership_trouble.InitializeComponent;
 begin
-  Include(Self.LinkButton_logout.Click, Self.LinkButton_logout_Click);
-  Include(Self.LinkButton_back.Click, Self.LinkButton_back_Click);
-  Include(Self.LinkButton_change_password.Click, Self.LinkButton_change_password_Click);
-  Include(Self.LinkButton_change_email_address.Click, Self.LinkButton_change_email_address_Click);
   Include(Self.Button_submit.Click, Self.Button_submit_Click);
-  Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebForm_establish_membership_trouble_PreRender);
+  Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
 
@@ -94,7 +79,6 @@ begin
   if not IsPostback then begin
     //
     Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - establish_membership_trouble';
-    Label_account_descriptor.text := session['username'].tostring;
     //
     Label_sponsor_1.text := configurationmanager.appsettings['sponsor'];
     Label_sponsor_2.text := configurationmanager.appsettings['sponsor'];
@@ -115,18 +99,16 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['establish_membership_trouble.p'].GetType.namespace = p.GetType.namespace) then begin
+  case NatureOfVisit('establish_membership_trouble.p') of
+  VISIT_INITIAL:
+    BEGIN
+    p.biz_notifications := TClass_biz_notifications.Create;
+    p.biz_user := TClass_biz_user.Create;
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
     p := p_type(session['establish_membership_trouble.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
-      //
-      p.biz_notifications := TClass_biz_notifications.Create;
-      p.biz_user := TClass_biz_user.Create;
-      //
-    end;
+    END;
   end;
   //
 end;
@@ -144,36 +126,10 @@ begin
   server.Transfer('~/login.aspx');
 end;
 
-procedure TWebForm_establish_membership_trouble.LinkButton_change_email_address_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  server.Transfer('change_email_address.aspx');
-end;
-
-procedure TWebForm_establish_membership_trouble.LinkButton_change_password_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  server.Transfer('change_password.aspx');
-end;
-
-procedure TWebForm_establish_membership_trouble.LinkButton_back_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  BackTrack;
-end;
-
 procedure TWebForm_establish_membership_trouble.TWebForm_establish_membership_trouble_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
   SessionSet('establish_membership_trouble.p',p);
-end;
-
-procedure TWebForm_establish_membership_trouble.LinkButton_logout_Click(sender: System.Object;
-  e: System.EventArgs);
-begin
-  formsauthentication.SignOut;
-  session.Clear;
-  server.Transfer('../Default.aspx');
 end;
 
 end.

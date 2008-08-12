@@ -78,14 +78,18 @@ end;
 
 procedure TWebForm_login.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  if IsPostback and (session['login.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['login.p']);
-  end else begin
+  case NatureOfVisitUnlimited('login.p') of
+  VISIT_COLD_CALL,
+  VISIT_INITIAL:
+    BEGIN
     Title.InnerText := configurationmanager.appsettings['application_name'] + ' - login';
     p.biz_users := TClass_biz_users.Create;
-    //
     Focus(TextBox_username);
-    //
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['login.p']);
+    END;
   end;
 end;
 

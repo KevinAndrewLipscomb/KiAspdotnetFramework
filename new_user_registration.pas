@@ -86,25 +86,18 @@ end;
 
 procedure TWebForm_new_user_registration.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  if IsPostback and (session['new_user_registration.p'].GetType.namespace = p.GetType.namespace) then begin
+  case NatureOfVisit('new_user_registration.p') of
+  VISIT_INITIAL:
+    BEGIN
+    Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - new_user_registration';
+    p.biz_users := TClass_biz_users.Create;
+    Label_application_name.text := configurationmanager.appsettings['application_name'];
+    Focus(TextBox_username);
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
     p := p_type(session['new_user_registration.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      //
-      // The request for this page could not have been the result of a server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
-      //
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
-      Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - new_user_registration';
-      //
-      p.biz_users := TClass_biz_users.Create;
-      //
-      Label_application_name.text := configurationmanager.appsettings['application_name'];
-      //
-      Focus(TextBox_username);
-      //
-    end;
+    END;
   end;
 end;
 

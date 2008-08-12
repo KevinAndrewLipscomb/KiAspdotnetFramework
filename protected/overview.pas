@@ -81,14 +81,9 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['overview.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['overview.p']);
-  end else begin
-    if (session['user_id'] = nil) or (session['username'] = nil) then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end;
-    //
+  case NatureOfLanding('overview.p') of
+  VISIT_INITIAL:
+    BEGIN
     p.biz_user := TClass_biz_user.Create;
     p.biz_users := TClass_biz_users.Create;
     p.biz_members := TClass_biz_members.Create;
@@ -103,6 +98,11 @@ begin
     if (session['privilege_array'] <> nil) then begin
       SessionSet('member_id',p.biz_members.IdOfUserId(session['user_id'].tostring));
     end;
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['overview.p']);
+    END;
   end;
   //
   if p.biz_members.IdOfUserId(p.biz_user.IdNum) = EMPTY then begin
