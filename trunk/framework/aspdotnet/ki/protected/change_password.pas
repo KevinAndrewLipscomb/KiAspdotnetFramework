@@ -65,20 +65,20 @@ end;
 
 procedure TWebForm_change_password.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  if IsPostback and (session['change_password.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['change_password.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end;
+  case NatureOfVisit('change_password.p') of
+  VISIT_INITIAL:
+    BEGIN
     Title.InnerText := configurationmanager.appsettings['application_name'] + ' - change_password';
     //
     p.biz_users := TClass_biz_users.Create;
     p.biz_user := TClass_biz_user.Create;
     //
     Focus(TextBox_nominal_password);
-    //
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['change_password.p']);
+    END;
   end;
 end;
 

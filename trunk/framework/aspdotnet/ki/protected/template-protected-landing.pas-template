@@ -71,14 +71,14 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['template_protected_landing.p'].GetType.namespace = p.GetType.namespace) then begin
+  case NatureOfLanding('template_protected_landing.p') of
+  VISIT_INITIAL:
+    BEGIN
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
     p := p_type(session['template_protected_landing.p']);
-  end else begin
-    if (session['user_id'] = nil) or (session['username'] = nil) then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end;
-    //
+    END;
   end;
   //
 end;

@@ -65,13 +65,9 @@ var
   lcv: cardinal;
   user_designator: string;
 begin
-  if IsPostback and (session['p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end;
+  case NatureOfVisit('p') of
+  VISIT_INITIAL:
+    BEGIN
     Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - exception';
     p.biz_user := TClass_biz_user.Create;
     //
@@ -123,10 +119,15 @@ begin
         user_designator
         );
     end;
-    //
-    server.ClearError;
-    //
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['p']);
+    END;
   end;
+  //
+  server.ClearError;
+  //
 end;
 
 procedure TWebForm_exception.OnInit(e: EventArgs);

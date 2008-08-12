@@ -78,14 +78,18 @@ end;
 
 procedure TWebForm_salogin.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  if IsPostback and (session['salogin.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['salogin.p']);
-  end else begin
+  case NatureOfVisitUnlimited('salogin.p') of
+  VISIT_COLD_CALL,
+  VISIT_INITIAL:
+    BEGIN
     Title.InnerText := configurationmanager.appsettings['application_name'] + ' - salogin';
     p.biz_users := TClass_biz_users.Create;
-    //
     Focus(TextBox_username);
-    //
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['salogin.p']);
+    END;
   end;
 end;
 

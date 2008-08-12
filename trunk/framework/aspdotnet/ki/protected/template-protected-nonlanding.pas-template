@@ -68,16 +68,14 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if IsPostback and (session['template_protected_nonlanding.p'].GetType.namespace = p.GetType.namespace) then begin
+  case NatureOfVisit('template_protected_nonlanding.p') of
+  VISIT_INITIAL:
+    BEGIN
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
     p := p_type(session['template_protected_nonlanding.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
-      //
-      //
-    end;
+    END;
   end;
   //
 end;

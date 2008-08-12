@@ -74,16 +74,9 @@ end;
 
 procedure TWebForm_remind_username.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
-  if IsPostback and (session['remind_username.p'].GetType.namespace = p.GetType.namespace) then begin
-    p := p_type(session['remind_username.p']);
-  end else begin
-    if request.servervariables['URL'] = request.currentexecutionfilepath then begin
-      //
-      // The request for this page could not have been the result of a server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
-      //
-      session.Clear;
-      server.Transfer('~/login.aspx');
-    end else begin
+  case NatureOfVisit('remind_username.p') of
+  VISIT_INITIAL:
+    BEGIN
       Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - remind_username';
       //
       p.biz_users := TClass_biz_users.Create;
@@ -93,8 +86,11 @@ begin
       Label_application_name_3.text := configurationmanager.appsettings['application_name'];
       //
       Focus(TextBox_email_address);
-      //
-    end;
+    END;
+  VISIT_POSTBACK_STANDARD:
+    BEGIN
+    p := p_type(session['remind_username.p']);
+    END;
   end;
 end;
 
