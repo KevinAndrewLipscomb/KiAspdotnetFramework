@@ -10,10 +10,7 @@ uses
   System.Web,
   System.Web.UI,
   System.Web.UI.WebControls,
-  System.Web.UI.HtmlControls,
-  UserControl_about,
-  UserControl_config_binder;
-//  UserControl_resources,
+  System.Web.UI.HtmlControls;
 
 type
   p_type =
@@ -49,10 +46,13 @@ type
 implementation
 
 uses
-  appcommon,
   kix,
   System.Collections,
-  system.configuration;
+  system.configuration,
+  UserControl_about,
+  UserControl_config_binder
+//  ,UserControl_resources
+  ;
 
 const
   TSSI_RESOURCES = 0;

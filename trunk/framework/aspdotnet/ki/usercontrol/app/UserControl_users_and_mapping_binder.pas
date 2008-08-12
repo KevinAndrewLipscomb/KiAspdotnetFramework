@@ -10,9 +10,7 @@ uses
   System.Web,
   System.Web.UI,
   System.Web.UI.WebControls,
-  System.Web.UI.HtmlControls,
-  UserControl_user,
-  UserControl_user_member_mapping;
+  System.Web.UI.HtmlControls;
 
 type
   p_type =
@@ -50,7 +48,9 @@ implementation
 uses
   kix,
   System.Collections,
-  system.configuration;
+  system.configuration,
+  UserControl_user,
+  UserControl_user_member_mapping;
 
 const
   TSSI_USERS = 0;

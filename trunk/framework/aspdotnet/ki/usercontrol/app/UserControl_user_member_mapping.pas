@@ -61,8 +61,6 @@ type
 implementation
 
 uses
-  Class_db_users,
-  Class_db_user_member_map,
   kix,
   system.configuration;
 

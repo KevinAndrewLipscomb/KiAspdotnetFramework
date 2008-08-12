@@ -6,7 +6,6 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration, system.web.security,
-  appcommon,
   Class_biz_notifications,
   Class_biz_user,
   ki_web_ui,
