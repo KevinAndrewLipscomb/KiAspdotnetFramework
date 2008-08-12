@@ -10,11 +10,7 @@ uses
   System.Web,
   System.Web.UI,
   System.Web.UI.WebControls,
-  System.Web.UI.HtmlControls,
-  UserControl_role,
-  UserControl_role_member_mapping,
-  UserControl_role_notification_mapping,
-  UserControl_role_privilege_mapping;
+  System.Web.UI.HtmlControls;
 
 type
   p_type =
@@ -52,7 +48,11 @@ implementation
 uses
   kix,
   System.Collections,
-  system.configuration;
+  system.configuration,
+  UserControl_role,
+  UserControl_role_member_mapping,
+  UserControl_role_notification_mapping,
+  UserControl_role_privilege_mapping;
 
 const
   TSSI_ROLES = 0;

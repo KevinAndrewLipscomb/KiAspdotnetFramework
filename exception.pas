@@ -44,9 +44,6 @@ type
 
 implementation
 
-uses
-  appcommon;
-
 {$REGION 'Designer Managed Code'}
 /// <summary>
 /// Required method for Designer support -- do not modify
