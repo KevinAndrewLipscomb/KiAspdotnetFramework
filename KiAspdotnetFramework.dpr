@@ -16,7 +16,6 @@ uses
   milestone_sweep in 'noninteractive\milestone_sweep.pas' {milestone_sweep.TWebForm_milestone_sweep: system.web.ui.page},
   Class_biz_milestones in 'component\biz\Class_biz_milestones.pas',
   Class_db_milestones in 'component\db\Class_db_milestones.pas',
-  appcommon in 'appcommon.pas',
   Class_db_trail in 'component\db\Class_db_trail.pas',
   Class_biz_scheduled_tasks in 'component\biz\Class_biz_scheduled_tasks.pas',
   daily_tasks in 'noninteractive\daily_tasks.pas' {daily_tasks.TWebForm1: system.web.ui.page},

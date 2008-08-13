@@ -143,7 +143,6 @@
     <DelphiCompile Include="KiAspdotnetFramework.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
-    <DCCReference Include="appcommon.pas" />
     <DCCReference Include="component\biz\Class_biz_members.pas" />
     <DCCReference Include="component\biz\Class_biz_milestones.pas" />
     <DCCReference Include="component\biz\Class_biz_notifications.pas" />
