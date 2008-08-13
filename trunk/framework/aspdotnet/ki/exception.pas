@@ -119,7 +119,7 @@ begin
     END;
   VISIT_POSTBACK_STANDARD:
     BEGIN
-    p := p_type(session['p']);
+    p := p_type(session['exception.p']);
     END;
   end;
   //
@@ -159,7 +159,7 @@ end;
 procedure TWebForm_exception.TWebForm_exception_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  SessionSet('p',p);
+  SessionSet('exception.p',p);
 end;
 
 end.
