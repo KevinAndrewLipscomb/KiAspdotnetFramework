@@ -81,7 +81,7 @@ begin
     BEGIN
     Title.InnerText := configurationmanager.appsettings['application_name'] + ' - salogin';
     p.biz_users := TClass_biz_users.Create;
-    Focus(TextBox_username);
+    Focus(TextBox_username,TRUE);
     END;
   VISIT_POSTBACK_STANDARD:
     BEGIN

@@ -94,7 +94,7 @@ begin
         PlaceHolder_content
         );
     TSSI_USERS_AND_MAPPING:
-      AddIdentifiedControlToPlaceHolder
+      p.content_id := AddIdentifiedControlToPlaceHolder
         (
         TWebUserControl_users_and_mapping_binder(LoadControl('~/usercontrol/app/UserControl_users_and_mapping_binder.ascx')),
         'UserControl_users_and_mapping_binder',
@@ -152,8 +152,8 @@ end;
 procedure TWebUserControl_config_binder.InitializeComponent;
 begin
   Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
-  Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebUserControl_config_binder_PreRender);
+  Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
 

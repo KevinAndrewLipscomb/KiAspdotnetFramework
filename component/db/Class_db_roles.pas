@@ -38,14 +38,16 @@ type
     function Get
       (
       name: string;
-      out soft_hyphenation_text: string
+      out soft_hyphenation_text: string;
+      out pecking_order: string
       )
       : boolean;
     function NameOfId(id: string): string;
     procedure &Set
       (
       name: string;
-      soft_hyphenation_text: string
+      soft_hyphenation_text: string;
+      pecking_order: string
       );
   end;
 
@@ -146,7 +148,8 @@ end;
 function TClass_db_roles.Get
   (
   name: string;
-  out soft_hyphenation_text: string
+  out soft_hyphenation_text: string;
+  out pecking_order: string
   )
   : boolean;
 var
@@ -159,6 +162,7 @@ begin
     //
     name := dr['name'].tostring;
     soft_hyphenation_text := dr['soft_hyphenation_text'].tostring;
+    pecking_order := dr['pecking_order'].tostring;
     //
     Get := TRUE;
     //
@@ -177,32 +181,26 @@ end;
 procedure TClass_db_roles.&Set
   (
   name: string;
-  soft_hyphenation_text: string
+  soft_hyphenation_text: string;
+  pecking_order: string
   );
-//
-// If any fields in this table are foreign keys for a subordinate table:
-// a. Uncomment the "//1" lines.
-// b. Customize the SQL as indicated by {bracketed comments}.
-//
-//1 var
-//1   childless_field_assignments_clause: string;
+var
+  childless_field_assignments_clause: string;
 begin
   //
-//1  childless_field_assignments_clause := // {Move childless field assignments here.}
+  childless_field_assignments_clause := ' soft_hyphenation_text = NULLIF("' + soft_hyphenation_text + '","")'
+  + ' , pecking_order = NULLIF("' + pecking_order + '","")';
   //
   self.Open;
   mysqlcommand.Create
     (
     db_trail.Saved
       (
-//1      'insert role'
-//1      + ' set // {Move parent field assignments here.}
-//1      + ' , ' + childless_field_assignments_clause
-//1      + ' on duplicate key update '
-//1      + childless_field_assignments_clause
-      'replace role'
+      'insert role'
       + ' set name = NULLIF("' + name + '","")'
-      + ' , soft_hyphenation_text = NULLIF("' + soft_hyphenation_text + '","")'
+      + ' , ' + childless_field_assignments_clause
+      + ' on duplicate key update '
+      + childless_field_assignments_clause
       ),
     connection
     )

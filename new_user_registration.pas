@@ -91,7 +91,7 @@ begin
     Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - new_user_registration';
     p.biz_users := TClass_biz_users.Create;
     Label_application_name.text := configurationmanager.appsettings['application_name'];
-    Focus(TextBox_username);
+    Focus(TextBox_username,TRUE);
     END;
   VISIT_POSTBACK_STANDARD:
     BEGIN

@@ -93,7 +93,7 @@ begin
     //
     RequireConfirmation(Button_delete,'Are you sure you want to delete this record?');
     //
-    Focus(TextBox_username);
+    Focus(TextBox_username,TRUE);
     //
     p.be_loaded := TRUE;
     //
@@ -172,8 +172,8 @@ begin
   Include(Self.DropDownList_username.SelectedIndexChanged, Self.DropDownList_username_SelectedIndexChanged);
   Include(Self.Button_submit.Click, Self.Button_submit_Click);
   Include(Self.Button_delete.Click, Self.Button_delete_Click);
-  Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebUserControl_user_PreRender);
+  Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
 
@@ -224,7 +224,7 @@ procedure TWebUserControl_user.LinkButton_reset_Click(sender: System.Object;
 begin
   Clear;
   TextBox_username.enabled := TRUE;
-  Focus(TextBox_username);
+  Focus(TextBox_username,TRUE);
 end;
 
 procedure TWebUserControl_user.LinkButton_search_Click(sender: System.Object;
