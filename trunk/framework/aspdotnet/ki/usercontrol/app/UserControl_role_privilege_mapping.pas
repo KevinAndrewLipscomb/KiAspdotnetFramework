@@ -215,10 +215,10 @@ end;
 /// </summary>
 procedure TWebUserControl_role_privilege_mapping.InitializeComponent;
 begin
+  Include(Self.Button_add.Click, Self.Button_add_Click);
   Include(Self.GridView_control.Sorting, Self.GridView_control_Sorting);
   Include(Self.GridView_control.RowDataBound, Self.GridView_control_RowDataBound);
   Include(Self.GridView_control.RowDeleting, Self.GridView_control_RowDeleting);
-  Include(Self.Button_add.Click, Self.Button_add_Click);
   Include(Self.PreRender, Self.TWebUserControl_role_privilege_mapping_PreRender);
   Include(Self.Load, Self.Page_Load);
 end;

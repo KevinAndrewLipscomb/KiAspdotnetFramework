@@ -13,8 +13,6 @@ uses
 type
   p_type =
     RECORD
-    biz_user: TClass_biz_user;
-    exception: system.exception;
     notification_message: string;
     END;
   TWebForm_exception = class(ki_web_ui.page_class)
@@ -59,62 +57,25 @@ end;
 
 procedure TWebForm_exception.Page_Load(sender: System.Object; e: System.EventArgs);
 var
-  lcv: cardinal;
-  user_designator: string;
+  the_exception: system.exception;
 begin
   case NatureOfVisit('p') of
   VISIT_INITIAL:
     BEGIN
     Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - exception';
-    p.biz_user := TClass_biz_user.Create;
     //
-    p.exception := server.GetLastError.GetBaseException;
+    the_exception := server.GetLastError.GetBaseException;
     //
-    if regex.IsMatch(p.exception.message,'Connection.*to MySQL server',regexoptions.IGNORECASE)
-      or (p.exception.message = 'Connection open failed. Too many connections')
+    if regex.IsMatch(the_exception.message,'Connection.*to MySQL server',regexoptions.IGNORECASE)
+      or (the_exception.message = 'Connection open failed. Too many connections')
     then begin
       Table_oops.visible := FALSE;
     end else begin
       Table_db_down.visible := FALSE;
-      Focus(TextArea_user_comment);
+      Focus(TextArea_user_comment,TRUE);
       //
-      if user.identity.name = EMPTY then begin
-        user_designator := 'unknown';
-      end else begin
-        user_designator := user.identity.name;
-      end;
+      p.notification_message := EscalatedException(the_exception,user.identity.name,session);
       //
-      p.notification_message := EMPTY
-      + '[EXCEPTION]' + NEW_LINE
-      + p.exception.tostring + NEW_LINE
-      + NEW_LINE
-      + '[HRESULT]' + NEW_LINE
-      + HresultAnalysis(p.exception) + NEW_LINE
-      + NEW_LINE
-      + '[USER]' + NEW_LINE
-      + user_designator + NEW_LINE
-      + NEW_LINE
-      + '[SESSION]' + NEW_LINE;
-      if session.count > 0 then begin
-        for lcv := 0 to (session.count - 1) do begin
-          p.notification_message := p.notification_message + session.keys[lcv].tostring + ' = ' + session.item[lcv].tostring + NEW_LINE;
-        end;
-      end;
-      //
-      SmtpMailSend
-        (
-        configurationmanager.appsettings['sender_email_address'],
-        configurationmanager.appsettings['sender_email_address'],
-        'EXCEPTION REPORT',
-        p.notification_message
-        );
-      SmtpMailSend
-        (
-        configurationmanager.appsettings['sender_email_address'],
-        configurationmanager.appsettings['sysadmin_sms_address'],
-        'CRASH',
-        user_designator
-        );
     end;
     END;
   VISIT_POSTBACK_STANDARD:

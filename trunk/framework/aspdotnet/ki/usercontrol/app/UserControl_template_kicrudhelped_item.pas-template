@@ -160,7 +160,7 @@ begin
     //
     RequireConfirmation(Button_delete,'Are you sure you want to delete this record?');
     //
-    Focus(TextBox_ki_crud_helper_user_key);
+    Focus(TextBox_ki_crud_helper_user_key,TRUE);
     //
     p.be_loaded := TRUE;
     //
@@ -281,7 +281,7 @@ procedure TWebUserControl_template_kicrudhelped_item.LinkButton_reset_Click(send
 begin
   Clear;
   TextBox_ki_crud_helper_user_key.enabled := TRUE;
-  Focus(TextBox_ki_crud_helper_user_key);
+  Focus(TextBox_ki_crud_helper_user_key,TRUE);
 end;
 
 procedure TWebUserControl_template_kicrudhelped_item.LinkButton_search_Click(sender: System.Object;

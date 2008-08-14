@@ -61,6 +61,7 @@ type
     LinkButton_reset: System.Web.UI.WebControls.LinkButton;
     TextBox_name: System.Web.UI.WebControls.TextBox;
     DropDownList_name: System.Web.UI.WebControls.DropDownList;
+    TextBox_pecking_order: System.Web.UI.WebControls.TextBox;
     TextBox_soft_hyphenation_text: System.Web.UI.WebControls.TextBox;
     RequiredFieldValidator_name: System.Web.UI.WebControls.RequiredFieldValidator;
     RequiredFieldValidator_soft_hyphenation_text: System.Web.UI.WebControls.RequiredFieldValidator;
@@ -74,8 +75,11 @@ type
     Table_quick_message: System.Web.UI.HtmlControls.HtmlTable;
     Label_author_email_address: System.Web.UI.WebControls.Label;
     Label_distribution_list: System.Web.UI.WebControls.Label;
+    TableRow_pecking_order: System.Web.UI.HtmlControls.HtmlTableRow;
     TableRow_soft_hyphenation_text: System.Web.UI.HtmlControls.HtmlTableRow;
     Anchor_quick_message_shortcut: System.Web.UI.HtmlControls.HtmlAnchor;
+    RegularExpressionValidator_pecking_order: System.Web.UI.WebControls.RegularExpressionValidator;
+    RequiredFieldValidator_pecking_order: System.Web.UI.WebControls.RequiredFieldValidator;
   protected
     procedure OnInit(e: System.EventArgs); override;
   private
@@ -99,6 +103,7 @@ begin
   //
   TextBox_name.text := EMPTY;
   DropDownList_name.visible := FALSE;
+  TextBox_pecking_order.text := EMPTY;
   TextBox_soft_hyphenation_text.text := EMPTY;
   //
   Button_delete.enabled := FALSE;
@@ -200,6 +205,7 @@ begin
     if not assigned(session['mode:report']) then begin
       Label_author_email_address.text := p.biz_user.EmailAddress;
       if Has(string_array(session['privilege_array']),'config-roles-and-matrices') then begin
+        TableRow_pecking_order.visible := TRUE;
         TableRow_soft_hyphenation_text.visible := TRUE;
         Button_submit.enabled := TRUE;
       end;
@@ -212,7 +218,7 @@ begin
     //
     RequireConfirmation(Button_delete,'Are you sure you want to delete this record?');
     //
-    Focus(TextBox_name);
+    Focus(TextBox_name,TRUE);
     //
     p.be_loaded := TRUE;
     //
@@ -225,17 +231,20 @@ end;
 function TWebUserControl_role.PresentRecord(name: string): boolean;
 var
   soft_hyphenation_text: string;
+  pecking_order: string;
 begin
   PresentRecord := FALSE;
   if p.biz_roles.Get
     (
     name,
-    soft_hyphenation_text
+    soft_hyphenation_text,
+    pecking_order
     )
   then begin
     //
     TextBox_name.text := name;
     TextBox_soft_hyphenation_text.text := soft_hyphenation_text;
+    TextBox_pecking_order.text := pecking_order;
     //
     TextBox_name.enabled := FALSE;
     Button_delete.enabled := Has(string_array(session['privilege_array']),'config-roles-and-matrices');
@@ -284,15 +293,15 @@ end;
 /// </summary>
 procedure TWebUserControl_role.InitializeComponent;
 begin
-  Include(Self.LinkButton_search.Click, Self.LinkButton_search_Click);
-  Include(Self.LinkButton_reset.Click, Self.LinkButton_reset_Click);
-  Include(Self.DropDownList_name.SelectedIndexChanged, Self.DropDownList_name_SelectedIndexChanged);
-  Include(Self.Button_submit.Click, Self.Button_submit_Click);
-  Include(Self.Button_delete.Click, Self.Button_delete_Click);
+  Include(Self.Button_send.Click, Self.Button_send_Click);
   Include(Self.GridView_holders.Sorting, Self.GridView_holders_Sorting);
   Include(Self.GridView_holders.RowDataBound, Self.GridView_holders_RowDataBound);
   Include(Self.GridView_holders.RowCreated, Self.GridView_holders_RowCreated);
-  Include(Self.Button_send.Click, Self.Button_send_Click);
+  Include(Self.Button_delete.Click, Self.Button_delete_Click);
+  Include(Self.Button_submit.Click, Self.Button_submit_Click);
+  Include(Self.DropDownList_name.SelectedIndexChanged, Self.DropDownList_name_SelectedIndexChanged);
+  Include(Self.LinkButton_reset.Click, Self.LinkButton_reset_Click);
+  Include(Self.LinkButton_search.Click, Self.LinkButton_search_Click);
   Include(Self.PreRender, Self.TWebUserControl_role_PreRender);
   Include(Self.Load, Self.Page_Load);
 end;
@@ -379,7 +388,8 @@ begin
     p.biz_roles.&Set
       (
       Safe(TextBox_name.text,HUMAN_NAME).trim,
-      Safe(TextBox_soft_hyphenation_text.text,PUNCTUATED).trim
+      Safe(TextBox_soft_hyphenation_text.text,PUNCTUATED).trim,
+      Safe(TextBox_pecking_order.text,NUM).trim
       );
     Alert(USER,SUCCESS,'recsaved','Record saved.',TRUE);
   end else begin
@@ -409,7 +419,7 @@ procedure TWebUserControl_role.LinkButton_reset_Click(sender: System.Object;
 begin
   Clear;
   TextBox_name.enabled := TRUE;
-  Focus(TextBox_name);
+  Focus(TextBox_name,TRUE);
 end;
 
 procedure TWebUserControl_role.LinkButton_search_Click(sender: System.Object;

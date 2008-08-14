@@ -29,14 +29,16 @@ type
     function Get
       (
       name: string;
-      out soft_hyphenation_text: string
+      out soft_hyphenation_text: string;
+      out pecking_order: string
       )
       : boolean;
     function NameOfId(id: string): string;
     procedure &Set
       (
       name: string;
-      soft_hyphenation_text: string
+      soft_hyphenation_text: string;
+      pecking_order: string
       );
   end;
 
@@ -78,7 +80,8 @@ end;
 function TClass_biz_roles.Get
   (
   name: string;
-  out soft_hyphenation_text: string
+  out soft_hyphenation_text: string;
+  out pecking_order: string
   )
   : boolean;
 begin
@@ -86,7 +89,8 @@ begin
   Get := db_roles.Get
     (
     name,
-    soft_hyphenation_text
+    soft_hyphenation_text,
+    pecking_order
     );
   //
 end;
@@ -99,14 +103,16 @@ end;
 procedure TClass_biz_roles.&Set
   (
   name: string;
-  soft_hyphenation_text: string
+  soft_hyphenation_text: string;
+  pecking_order: string
   );
 begin
   //
   db_roles.&Set
     (
     name,
-    soft_hyphenation_text
+    soft_hyphenation_text,
+    pecking_order
     );
   //
 end;
