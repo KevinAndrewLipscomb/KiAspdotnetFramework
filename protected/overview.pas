@@ -32,7 +32,7 @@ type
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    Title: System.Web.UI.HtmlControls.HtmlGenericControl;
+    Title: System.Web.UI.HtmlControls.HtmlTitle;
     ScriptManager_control: System.Web.UI.ScriptManager;
     UserControl_print_div: TWebUserControl_print_div;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
@@ -67,7 +67,7 @@ procedure TWebForm_overview.Page_Load(sender: System.Object; e: System.EventArgs
 begin
   if not IsPostback then begin
     //
-    Title.InnerText := configurationmanager.appsettings['application_name'] + ' - overview';
+    Title.text := configurationmanager.appsettings['application_name'] + ' - overview';
     //
   end;
 end;

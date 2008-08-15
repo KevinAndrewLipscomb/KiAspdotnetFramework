@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_EnabledPackages>true</DCC_EnabledPackages>
-    <DCC_UsePackage>ki;"C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll";C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\sstchur.web.SmartNav.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\MySql.Data.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\Microsoft.Web.UI.WebControls.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.XML.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Design.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</DCC_UsePackage>
+    <DCC_UsePackage>ki;"C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll";"C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.Design.dll";C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\sstchur.web.SmartNav.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\MySql.Data.dll;C:\Inetpub\wwwroot\KiAspdotnetFramework\bin\AjaxControlToolkit.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.XML.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Design.dll;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</DCC_UsePackage>
     <DCC_DCCCompiler>DCCIL</DCC_DCCCompiler>
     <DCC_DependencyCheckOutputName>bin\KiAspdotnetFramework.dll</DCC_DependencyCheckOutputName>
   </PropertyGroup>
@@ -38,9 +38,9 @@
     <DCC_DebugInfoInExe>True</DCC_DebugInfoInExe>
     <DCC_DebugVN>True</DCC_DebugVN>
     <DCC_ExeOutput>.\bin</DCC_ExeOutput>
-    <DCC_UnitSearchPath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_UnitSearchPath>
-    <DCC_ResourcePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_ResourcePath>
-    <DCC_IncludePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--trunk\lib\ki;c:\inetpub\wwwroot\kiaspdotnetframework--feature-robust-user-role-priv-model\lib\ki;c:\program files\microsoft internet explorer webcontrols;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_IncludePath>
+    <DCC_UnitSearchPath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_UnitSearchPath>
+    <DCC_ResourcePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_ResourcePath>
+    <DCC_IncludePath>c:\inetpub\wwwroot\KiAspdotnetFramework;c:\windows\microsoft.net\framework\v1.1.4322;c:\inetpub\wwwroot\KiAspdotnetFramework\component\biz;c:\inetpub\wwwroot\KiAspdotnetFramework\component\db;c:\inetpub\wwwroot\KiAspdotnetFramework\bin;c:\inetpub\wwwroot\KiAspdotnetFramework\lib\ki;c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Common Files\CodeGear Shared\Rad Studio\Shared Assemblies\5.0;C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025</DCC_IncludePath>
     <DCC_Define>DEBUG</DCC_Define>
     <DCC_Optimize>False</DCC_Optimize>
   </PropertyGroup>
@@ -87,6 +87,13 @@
       <AssemblyTag>$(SystemRoot)\Microsoft.NET\Framework\v2.0.50727\System.Web.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
     </Reference>
+    <Reference Include="$(SystemRoot)\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll">
+      <AssemblyName>System.Web.Services</AssemblyName>
+      <Version>2.0.0.0</Version>
+      <HintPath>$(SystemRoot)\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll</HintPath>
+      <AssemblyTag>$(SystemRoot)\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
     <Reference Include="$(SystemRoot)\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll">
       <AssemblyName>System.Windows.Forms</AssemblyName>
       <Version>2.0.0.0</Version>
@@ -101,12 +108,11 @@
       <AssemblyTag>$(SystemRoot)\Microsoft.NET\Framework\v2.0.50727\System.XML.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
     </Reference>
-    <Reference Include="bin\Microsoft.Web.UI.WebControls.dll">
-      <AssemblyName>Microsoft.Web.UI.WebControls</AssemblyName>
-      <CopyLocal>True</CopyLocal>
-      <Version>1.0.2.226</Version>
-      <HintPath>bin\Microsoft.Web.UI.WebControls.dll</HintPath>
-      <AssemblyTag>bin\Microsoft.Web.UI.WebControls.dll</AssemblyTag>
+    <Reference Include="bin\AjaxControlToolkit.dll">
+      <AssemblyName>AjaxControlToolkit</AssemblyName>
+      <Version>1.0.20229.20821</Version>
+      <HintPath>bin\AjaxControlToolkit.dll</HintPath>
+      <AssemblyTag>bin\AjaxControlToolkit.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
     </Reference>
     <Reference Include="bin\MySql.Data.dll">
@@ -123,6 +129,13 @@
       <AssemblyTag>bin\sstchur.web.SmartNav.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
     </Reference>
+    <Reference Include="C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.Design.dll">
+      <AssemblyName>System.Web.Extensions.Design</AssemblyName>
+      <Version>1.0.61025.0</Version>
+      <HintPath>C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.Design.dll</HintPath>
+      <AssemblyTag>C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.Design.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
     <Reference Include="C:\Program Files\Microsoft ASP.NET\ASP.NET 2.0 AJAX Extensions\v1.0.61025\System.Web.Extensions.dll">
       <AssemblyName>System.Web.Extensions</AssemblyName>
       <CopyLocal>True</CopyLocal>
@@ -133,7 +146,7 @@
     </Reference>
     <Reference Include="lib\ki\ki.dll">
       <AssemblyName>ki</AssemblyName>
-      <Version>1.0.3145.35855</Version>
+      <Version>1.0.3148.18314</Version>
       <HintPath>lib\ki\ki.dll</HintPath>
       <AssemblyTag>lib\ki\ki.dll</AssemblyTag>
       <LinkUnits>False</LinkUnits>
