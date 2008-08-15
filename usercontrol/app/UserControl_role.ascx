@@ -37,7 +37,6 @@
         </table></td>
     </tr>
   </table>
-</div>
 <ASP:Button id="Button_submit" runat="server" enabled="False" text="Submit"></ASP:Button>&nbsp;&nbsp;
 <ASP:Button id="Button_delete" runat="server" enabled="False" text="Delete"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <uc1:UserControl_print_div id="UserControl_print_div" runat="server"></uc1:UserControl_print_div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Anchor_quick_message_shortcut" runat="server" visible="False">QuickMessage</a>
@@ -66,6 +65,7 @@
     </tr>
   </table>
 </p>
+</div>
 <p>
   <table id="Table_quick_message" bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" width="100%" border="1" runat="server" visible="False">
     <tr>
