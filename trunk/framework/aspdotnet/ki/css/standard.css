@@ -23,3 +23,19 @@
   background-color:#fff;
   border:solid 1px black;
   }
+#UserControl_member_binder_TabContainer_control_body
+  {
+  border-bottom:none;
+  }
+#UserControl_member_binder_UserControl_config_TabContainer_control_body
+  {
+  border-bottom:none;
+  }
+#UserControl_member_binder_UserControl_config_UserControl_roles_and_matrices_binder_TabContainer_control_body
+  {
+  border-bottom:none;
+  }
+#UserControl_member_binder_UserControl_config_UserControl_users_and_mapping_binder_TabContainer_control_body
+  {
+  border-bottom:none;
+  }

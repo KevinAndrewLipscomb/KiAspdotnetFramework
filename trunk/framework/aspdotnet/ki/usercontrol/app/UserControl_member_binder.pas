@@ -3,8 +3,8 @@ unit UserControl_member_binder;
 interface
 
 uses
+  AjaxControlToolkit,
   ki_web_ui,
-  Microsoft.Web.UI.WebControls,
   System.Data,
   System.Drawing,
   System.Web,
@@ -25,14 +25,15 @@ type
     procedure InitializeComponent;
     procedure TWebUserControl_member_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure TabStrip_control_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
+    procedure TabContainer_control_ActiveTabChanged(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    TabStrip_control: Microsoft.Web.UI.WebControls.TabStrip;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
+    TabContainer_control: AjaxControlToolkit.TabContainer;
+    TabPanel_config: AjaxControlToolkit.TabPanel;
   protected
     procedure OnInit(e: System.EventArgs); override;
   private
@@ -67,7 +68,7 @@ begin
     if Has(string_array(session['privilege_array']),'config-users')
       or  Has(string_array(session['privilege_array']),'config-roles-and-matrices')
     then begin
-      TabStrip_control.items[TSSI_CONFIG].enabled := TRUE;
+      TabPanel_config.enabled := TRUE;
     end;
     //
     p.be_loaded := TRUE;
@@ -93,7 +94,7 @@ begin
     // Dynamic controls must be re-added on each postback.
     //
     case p.tab_index of
-    TSSI_CONFIG	: 
+    TSSI_CONFIG:
       p.content_id := AddIdentifiedControlToPlaceHolder
         (
         TWebUserControl_config_binder(LoadControl('~/usercontrol/app/UserControl_config_binder.ascx')),
@@ -119,7 +120,7 @@ begin
     //
     p.be_loaded := FALSE;
     //
-    p.tab_index := 0;
+    p.tab_index := TSSI_RESOURCES;
     //
 //    p.content_id := AddIdentifiedControlToPlaceHolder
 //      (
@@ -132,11 +133,43 @@ begin
   //
 end;
 
-procedure TWebUserControl_member_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
+{$REGION 'Designer Managed Code'}
+/// <summary>
+/// Required method for Designer support -- do not modify
+/// the contents of this method with the code editor.
+/// </summary>
+procedure TWebUserControl_member_binder.InitializeComponent;
+begin
+  Include(Self.TabContainer_control.ActiveTabChanged, Self.TabContainer_control_ActiveTabChanged);
+  Include(Self.PreRender, Self.TWebUserControl_member_binder_PreRender);
+  Include(Self.Load, Self.Page_Load);
+end;
+{$ENDREGION}
+
+procedure TWebUserControl_member_binder.TWebUserControl_member_binder_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
   //
-  p.tab_index := TabStrip_control.selectedindex;
+  // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
+  // not it is already loaded in the user's browser.
+  //
+  SessionSet(PlaceHolder_content.clientid,p.content_id);
+  //
+  SessionSet('UserControl_member_binder.p',p);
+  //
+end;
+
+function TWebUserControl_member_binder.Fresh: TWebUserControl_member_binder;
+begin
+  session.Remove('UserControl_member_binder.p');
+  Fresh := self;
+end;
+
+procedure TWebUserControl_member_binder.TabContainer_control_ActiveTabChanged(sender: System.Object;
+  e: System.EventArgs);
+begin
+  //
+  p.tab_index := TabContainer_control.activetabindex;
   //
   PlaceHolder_content.controls.Clear;
   //
@@ -163,38 +196,7 @@ begin
       PlaceHolder_content
       );
   end;
-end;
 
-{$REGION 'Designer Managed Code'}
-/// <summary>
-/// Required method for Designer support -- do not modify
-/// the contents of this method with the code editor.
-/// </summary>
-procedure TWebUserControl_member_binder.InitializeComponent;
-begin
-  Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
-  Include(Self.PreRender, Self.TWebUserControl_member_binder_PreRender);
-  Include(Self.Load, Self.Page_Load);
-end;
-{$ENDREGION}
-
-procedure TWebUserControl_member_binder.TWebUserControl_member_binder_PreRender(sender: System.Object;
-  e: System.EventArgs);
-begin
-  //
-  // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
-  // not it is already loaded in the user's browser.
-  //
-  SessionSet(PlaceHolder_content.clientid,p.content_id);
-  //
-  SessionSet('UserControl_member_binder.p',p);
-  //
-end;
-
-function TWebUserControl_member_binder.Fresh: TWebUserControl_member_binder;
-begin
-  session.Remove('UserControl_member_binder.p');
-  Fresh := self;
 end;
 
 end.

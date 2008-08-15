@@ -3,18 +3,14 @@ unit UserControl_template_binder;
 interface
 
 uses
+  AjaxControlToolkit,
   ki_web_ui,
-  Microsoft.Web.UI.WebControls,
   System.Data,
   System.Drawing,
   System.Web,
   System.Web.UI,
   System.Web.UI.WebControls,
-  System.Web.UI.HtmlControls,
-  UserControl1
-//  ,UserControl2
-//  ,UserControl3
-;
+  System.Web.UI.HtmlControls;
 
 type
   p_type =
@@ -29,13 +25,13 @@ type
     procedure InitializeComponent;
     procedure TWebUserControl_template_binder_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure TabStrip_control_SelectedIndexChange(sender: System.Object; e: System.EventArgs);
+    procedure TabContainer_control_ActiveTabChanged(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    TabStrip_control: Microsoft.Web.UI.WebControls.TabStrip;
+    TabContainer_control: AjaxControlToolkit.TabContainer;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
   protected
     procedure OnInit(e: System.EventArgs); override;
@@ -52,7 +48,11 @@ implementation
 uses
   kix,
   System.Collections,
-  system.configuration;
+  system.configuration
+// ,UserControl_0,
+// ,UserControl_1
+// ,UserControl_2
+  ;
 
 const
   TSSI_0 = 0;
@@ -64,7 +64,7 @@ begin
   //
   if not p.be_loaded then begin
     //
-    TabStrip_control.selectedindex := p.tab_index;
+    TabContainer_control.activetabindex := p.tab_index;
     //
     p.be_loaded := TRUE;
     //
@@ -74,6 +74,18 @@ end;
 
 procedure TWebUserControl_template_binder.OnInit(e: System.EventArgs);
 begin
+  {$REGION 'Compile-time instructions'}
+    {$MESSAGE ERROR 'Design-time action required.'}
+    //
+    // 1. Replace FULLY_QUALIFIED_PARENT_NAME in the following CSS code with the fully qualified name of this usercontrol's parent.
+    // 2. Add the following CSS code to ~/css/standard.css:
+    //
+    //   #FULLY_QUALIFIED_PARENT_NAME_UserControl_template_binder_TabContainer_control_body
+    //     {
+    //     border-bottom:none;
+    //     }
+    //
+  {$ENDREGION}
   //
   // Required for Designer support
   //
@@ -84,6 +96,7 @@ begin
     p := p_type(session['UserControl_template_binder.p']);
     {$REGION 'Compile-time instructions'}
       {$MESSAGE ERROR 'Design decision required.'}
+      //
       // if (this usercontrol is loaded dynamically, you must) begin
       //   1. Replace "Parent" in the next uncommented line with this usercontrol's parent name.
       //   2. Make sure that ONE OF the following statements exists in the parent's PreRender method:
@@ -93,6 +106,7 @@ begin
       // end else begin
       //   Remove the "and" clause from the next uncommented line.
       // end;
+      //
     {$ENDREGION}
     p.be_loaded := IsPostBack and (string(session['Parent_PlaceHolder_content']) = 'UserControl_template_binder');
     //
@@ -101,7 +115,7 @@ begin
       session.Remove('UserControl_template_binder_selected_tab');
       {$REGION 'Retrofit hint'}
       //
-      // Make sure set "TabStrip_control.selectedindex := p.tab_index;" in Page_Load, then delete this region.
+      // Make sure set "TabContainer_control.activetabindex := p.tab_index;" in Page_Load, then delete this region.
       //
       {$ENDREGION}
     end;
@@ -148,11 +162,11 @@ begin
   //
 end;
 
-procedure TWebUserControl_template_binder.TabStrip_control_SelectedIndexChange(sender: System.Object;
+procedure TWebUserControl_template_binder.TabContainer_control_ActiveTabChanged(sender: System.Object;
   e: System.EventArgs);
 begin
   //
-  p.tab_index := TabStrip_control.selectedindex;
+  p.tab_index := TabContainer_control.activetabindex;
   //
   PlaceHolder_content.controls.Clear;
   //
@@ -188,7 +202,7 @@ end;
 /// </summary>
 procedure TWebUserControl_template_binder.InitializeComponent;
 begin
-  Include(Self.TabStrip_control.SelectedIndexChange, Self.TabStrip_control_SelectedIndexChange);
+  Include(Self.TabContainer_control.ActiveTabChanged, Self.TabContainer_control_ActiveTabChanged);
   Include(Self.Load, Self.Page_Load);
   Include(Self.PreRender, Self.TWebUserControl_template_binder_PreRender);
 end;
