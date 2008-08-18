@@ -1,3 +1,6 @@
+/*
+** PROGRESS INDICATOR
+*/
 #Div_progress_indicator_outer
   {
   position:fixed;
@@ -23,19 +26,78 @@
   background-color:#fff;
   border:solid 1px black;
   }
-#UserControl_member_binder_TabContainer_control_body
+
+/*
+** AJAX__TAB_KI and KI_TAB_BODY (horizontal)
+*/
+.ajax__tab_ki .ajax__tab_header {}
+.ajax__tab_ki .ajax__tab_outer
   {
-  border-bottom:none;
+  border-right:thin solid white;
   }
-#UserControl_member_binder_UserControl_config_TabContainer_control_body
+.ajax__tab_ki .ajax__tab_inner {}
+.ajax__tab_ki .ajax__tab_tab
   {
-  border-bottom:none;
+  color:blue;
+  background-color:silver;
+  padding:8px;
   }
-#UserControl_member_binder_UserControl_config_UserControl_roles_and_matrices_binder_TabContainer_control_body
+.ajax__tab_ki .ajax__tab_hover .ajax__tab_outer {}
+.ajax__tab_ki .ajax__tab_hover .ajax__tab_inner {}
+.ajax__tab_ki .ajax__tab_hover .ajax__tab_tab
   {
-  border-bottom:none;
+  background-color:gainsboro;
   }
-#UserControl_member_binder_UserControl_config_UserControl_users_and_mapping_binder_TabContainer_control_body
+.ajax__tab_ki .ajax__tab_active .ajax__tab_outer {}
+.ajax__tab_ki .ajax__tab_active .ajax__tab_inner
   {
-  border-bottom:none;
+  border-top:thin solid silver;
+  border-left:thin solid silver;
+  border-right:thin solid silver;
+  }
+.ajax__tab_ki .ajax__tab_active .ajax__tab_tab
+  {
+  background-color:white;
+  font-weight:bold;
+  }
+
+/*
+** AJAX__TAB_KI_VERTICAL and KI_TAB_BODY_VERTICAL
+*/
+.ajax__tab_ki_vertical .ajax__tab_header
+  {
+  float:left;
+  }
+.ajax__tab_ki_vertical .ajax__tab_outer
+  {
+  display:block !important;
+  border-bottom:thin solid white;
+  }
+.ajax__tab_ki_vertical .ajax__tab_inner {}
+.ajax__tab_ki_vertical .ajax__tab_tab
+  {
+  /* min-width:200px; */
+  width:100px;
+  height:auto !important;
+  color:blue;
+  background-color:silver;
+  padding:8px;
+  }
+.ajax__tab_ki_vertical .ajax__tab_hover .ajax__tab_outer {}
+.ajax__tab_ki_vertical .ajax__tab_hover .ajax__tab_inner {}
+.ajax__tab_ki_vertical .ajax__tab_hover .ajax__tab_tab
+  {
+  background-color:gainsboro;
+  }
+.ajax__tab_ki_vertical .ajax__tab_active .ajax__tab_outer {}
+.ajax__tab_ki_vertical .ajax__tab_active .ajax__tab_inner
+  {
+  border-top:thin solid silver;
+  border-bottom:thin solid silver;
+  border-left:thin solid silver;
+  }
+.ajax__tab_ki_vertical .ajax__tab_active .ajax__tab_tab
+  {
+  background-color:white;
+  font-weight:bold;
   }
