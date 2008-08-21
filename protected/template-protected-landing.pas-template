@@ -26,7 +26,7 @@ type
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    Title: System.Web.UI.HtmlControls.HtmlGenericControl;
+    Title: System.Web.UI.HtmlControls.HtmlTitle;
     LinkButton_drill_down: System.Web.UI.WebControls.LinkButton;
     UserControl_print_div: TWebUserControl_print_div;
   protected

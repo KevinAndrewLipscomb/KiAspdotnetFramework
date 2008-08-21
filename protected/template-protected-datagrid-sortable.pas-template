@@ -39,7 +39,7 @@ type
     procedure Bind;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    Title: System.Web.UI.HtmlControls.HtmlGenericControl;
+    Title: System.Web.UI.HtmlControls.HtmlTitle;
     DataGrid1: System.Web.UI.WebControls.DataGrid;
     TableRow_none: System.Web.UI.HtmlControls.HtmlTableRow;
     UserControl_print_div: TWebUserControl_print_div;
