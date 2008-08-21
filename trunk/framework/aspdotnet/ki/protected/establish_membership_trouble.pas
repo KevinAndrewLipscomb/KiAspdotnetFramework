@@ -35,7 +35,7 @@ type
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    Title: System.Web.UI.HtmlControls.HtmlGenericControl;
+    Title: System.Web.UI.HtmlControls.HtmlTitle;
     UserControl_print_div: TWebUserControl_print_div;
     TextBox_full_name: System.Web.UI.WebControls.TextBox;
     RequiredFieldValidator_full_name: System.Web.UI.WebControls.RequiredFieldValidator;

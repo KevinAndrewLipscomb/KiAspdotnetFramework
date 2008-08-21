@@ -29,7 +29,7 @@ type
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    Title: System.Web.UI.HtmlControls.HtmlGenericControl;
+    Title: System.Web.UI.HtmlControls.HtmlTitle;
     Button_submit: System.Web.UI.WebControls.Button;
     TextBox_nominal_password: System.Web.UI.WebControls.TextBox;
     TextBox_confirmation_password: System.Web.UI.WebControls.TextBox;
