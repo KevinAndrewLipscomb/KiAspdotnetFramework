@@ -61,7 +61,6 @@ type
 implementation
 
 uses
-  appcommon,
   kix,
   System.Collections,
   system.configuration;
@@ -255,7 +254,7 @@ begin
     //
     p.biz_template_trivial_items.&Set
       (
-      Safe(TextBox_id.text,PUNCTUATED),
+      Safe(TextBox_id.text,NUM),
       Safe(TextBox_description.text,PUNCTUATED)
       );
     Alert(USER,SUCCESS,'recsaved','Record saved.');
