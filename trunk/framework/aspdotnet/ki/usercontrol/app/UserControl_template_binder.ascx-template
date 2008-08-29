@@ -5,8 +5,7 @@
     <table cellspacing="0" cellpadding="0" border="0" width="100%">
       <tr>
         <td>
-          <cc1:TabContainer id="TabContainer_control" runat="server" autopostback="True">
-            <!-- cssclass attribute must not be present on the TabContainer element if custom CSS code is to work -->
+          <cc1:TabContainer id="TabContainer_control" runat="server" autopostback="True" cssclass="ajax__tab_ki">
             <cc1:TabPanel runat="server" headertext="Tab 0" id="TabPanel_0"></cc1:TabPanel>
             <cc1:TabPanel runat="server" headertext="Tab 1" id="TabPanel_1"></cc1:TabPanel>
             <cc1:TabPanel runat="server" headertext="Tab 2" id="TabPanel_2"></cc1:TabPanel>
@@ -14,7 +13,7 @@
         </td>
       </tr>
       <tr>
-        <td style="BORDER-RIGHT: #999999 1px solid; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; BORDER-LEFT: #999999 1px solid; PADDING-TOP: 10px; BORDER-BOTTOM: #999999 1px solid">
+        <td style="PADDING:8px; BORDER-BOTTOM:thin solid silver; BORDER-LEFT:thin solid silver; BORDER-RIGHT:thin solid silver;">
           <ASP:PlaceHolder id="PlaceHolder_content" runat="server"></ASP:PlaceHolder>
         </td>
       </tr>

@@ -77,7 +77,7 @@ procedure TWebForm_establish_membership_trouble.Page_Load(sender: System.Object;
 begin
   if not IsPostback then begin
     //
-    Title.InnerText := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - establish_membership_trouble';
+    Title.text := server.HtmlEncode(configurationmanager.appsettings['application_name']) + ' - establish_membership_trouble';
     //
     Label_sponsor_1.text := configurationmanager.appsettings['sponsor'];
     Label_sponsor_2.text := configurationmanager.appsettings['sponsor'];

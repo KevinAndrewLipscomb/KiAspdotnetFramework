@@ -65,7 +65,7 @@ begin
   case NatureOfVisit('change_password.p') of
   VISIT_INITIAL:
     BEGIN
-    Title.InnerText := configurationmanager.appsettings['application_name'] + ' - change_password';
+    Title.text := configurationmanager.appsettings['application_name'] + ' - change_password';
     //
     p.biz_users := TClass_biz_users.Create;
     p.biz_user := TClass_biz_user.Create;
