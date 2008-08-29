@@ -17,7 +17,12 @@ type
       target: system.object
       )
       : boolean;
-    procedure BindDirectToListControl(target: system.object);
+    procedure BindDirectToListControl
+      (
+      target: system.object;
+      unselected_literal: string = '-- template_trivial_item --';
+      selected_value: string = EMPTY
+      );
     function Delete(code: string): boolean;
     function Get
       (
@@ -51,9 +56,14 @@ begin
   Bind := db_template_trivial_items.Bind(partial_code,target);
 end;
 
-procedure TClass_biz_template_trivial_items.BindDirectToListControl(target: system.object);
+procedure TClass_biz_template_trivial_items.BindDirectToListControl
+  (
+  target: system.object;
+  unselected_literal: string = '-- template_trivial_item --';
+  selected_value: string = EMPTY
+  );
 begin
-  db_template_trivial_items.BindDirectToListControl(target);
+  db_template_trivial_items.BindDirectToListControl(target,unselected_literal,selected_value);
 end;
 
 function TClass_biz_template_trivial_items.Delete(code: string): boolean;
