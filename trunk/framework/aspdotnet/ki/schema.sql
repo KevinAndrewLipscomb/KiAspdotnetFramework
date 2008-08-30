@@ -93,7 +93,7 @@ CREATE TABLE role (
   `soft_hyphenation_text` VARCHAR(127) NOT NULL,
   `pecking_order` INTEGER UNSIGNED NOT NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY (`name`),
+  UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO role (id,`name`,`soft_hyphenation_text`,`pecking_order`) VALUES
