@@ -65,7 +65,9 @@ uses
   Class_biz_user_member_map in 'component\biz\Class_biz_user_member_map.pas',
   UserControl_user_member_mapping in 'usercontrol\app\UserControl_user_member_mapping.pas' {UserControl_user_member_mapping.TWebUserControl_user_member_mapping: ki_web_ui.usercontrol_class},
   UserControl_users_and_mapping_binder in 'usercontrol\app\UserControl_users_and_mapping_binder.pas' {UserControl_users_and_mapping_binder.TWebUserControl_users_and_mapping_binder: ki_web_ui.usercontrol_class},
-  UserControl_session_interrupted in 'usercontrol\ki\UserControl_session_interrupted.pas';
+  UserControl_session_interrupted in 'usercontrol\ki\UserControl_session_interrupted.pas',
+  UserControl_about_by in 'usercontrol\ki\UserControl_about_by.pas' {UserControl_about_by.TWebUserControl_about_by: ki_web_ui.usercontrol_class},
+  UserControl_about_tools in 'usercontrol\ki\UserControl_about_tools.pas' {UserControl_about_tools.TWebUserControl_about_tools: ki_web_ui.usercontrol_class};
 
 //
 // General Information about an assembly is controlled through the following
