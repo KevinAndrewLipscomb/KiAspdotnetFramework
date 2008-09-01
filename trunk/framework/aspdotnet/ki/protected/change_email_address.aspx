@@ -35,7 +35,10 @@
               </tr>
               <tr>
                 <td></td>
-                <td><ASP:Button id="Button_submit" runat="server" text="Submit"></ASP:Button></td>
+                <td>
+                  <ASP:Button id="Button_submit" runat="server" text="Submit"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <asp:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False"></asp:Button>
+                </td>
                 <td></td>
               </tr>
             </table>
@@ -45,4 +48,5 @@
       <uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent>
       <p><sstchur:SmartScroller runat="server" /></p>
     </form>
-  </body></html>
+  </body>
+</html>

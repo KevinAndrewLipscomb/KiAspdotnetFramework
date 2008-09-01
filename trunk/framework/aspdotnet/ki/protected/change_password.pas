@@ -9,7 +9,7 @@ uses
   system.web.ui, ki_web_ui, System.Web.UI.WebControls, System.Web.UI.HtmlControls, kix, mysql.data.mysqlclient, system.configuration,
   system.web.security,
   Class_biz_users,
-  Class_biz_user;
+  Class_biz_user, sstchur.web.SmartNav;
 
 type
   p_type =
@@ -24,6 +24,7 @@ type
     procedure Button_submit_Click(sender: System.Object; e: System.EventArgs);
     procedure TWebForm_change_password_PreRender(sender: System.Object;
       e: System.EventArgs);
+    procedure Button_cancel_Click(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
@@ -37,6 +38,9 @@ type
     RequiredFieldValidator_confirmation_password: System.Web.UI.WebControls.RequiredFieldValidator;
     CompareValidator1: System.Web.UI.WebControls.CompareValidator;
     RegularExpressionValidator_password: System.Web.UI.WebControls.RegularExpressionValidator;
+    CompareValidator_confirmation_password: System.Web.UI.WebControls.CompareValidator;
+    SmartScroller_control: sstchur.web.SmartNav.SmartScroller;
+    Button_cancel: System.Web.UI.WebControls.Button;
   protected
     procedure OnInit(e: EventArgs); override;
   private
@@ -55,6 +59,7 @@ implementation
 procedure TWebForm_change_password.InitializeComponent;
 begin
   Include(Self.Button_submit.Click, Self.Button_submit_Click);
+  Include(Self.Button_cancel.Click, Self.Button_cancel_Click);
   Include(Self.PreRender, Self.TWebForm_change_password_PreRender);
   Include(Self.Load, Self.Page_Load);
 end;
@@ -88,6 +93,12 @@ begin
   inherited OnInit(e);
 end;
 
+procedure TWebForm_change_password.Button_cancel_Click(sender: System.Object;
+  e: System.EventArgs);
+begin
+  BackTrack;
+end;
+
 procedure TWebForm_change_password.TWebForm_change_password_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
@@ -98,7 +109,7 @@ procedure TWebForm_change_password.Button_submit_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   p.biz_users.SetPassword(p.biz_user.IdNum,Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
-  server.Transfer('overview.aspx');
+  BackTrack;
 end;
 
 end.
