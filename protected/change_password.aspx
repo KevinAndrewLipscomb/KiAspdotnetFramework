@@ -38,7 +38,10 @@
                     </tr>
                     <tr>
                       <td></td>
-                      <td><ASP:Button id="Button_submit" runat="server" text="Submit"></ASP:Button></td>
+                      <td>
+                        <ASP:Button id="Button_submit" runat="server" text="Submit"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False"></asp:Button>
+                      </td>
                       <td></td>
                     </tr>
                   </table>
