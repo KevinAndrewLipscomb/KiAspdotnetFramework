@@ -56,18 +56,7 @@ create table notification
   UNIQUE KEY (`name`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `profile`
---
-drop table if exists member;
-create table member
-  (
-  id int unsigned AUTO_INCREMENT,
-  user_id int unsigned,
-  be_valid boolean NOT NULL default 0,
-  PRIMARY KEY (id),
-  UNIQUE KEY user_id (user_id)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `privilege`

@@ -54,7 +54,10 @@
                               <li><p>A&nbsp;liaison from <ASP:Label id="Label_sponsor_2" runat="server"></ASP:Label>&nbsp;will advise you how to get your membership record updated.</p></li>
                               <li><p>The <ASP:Label id="Label_application_name_2" runat="server"></ASP:Label>&nbsp;Application Administrator will advise you when to log into <ASP:Label id="Label_application_name_3" runat="server"></ASP:Label>&nbsp;again.</p></li>
                             </ul>
-                            <p><ASP:Button id="Button_submit" runat="server" text="Send message and LOG OUT"></ASP:Button></p>
+                            <p>
+                              <ASP:Button id="Button_submit" runat="server" text="Send message and LOG OUT"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                              <asp:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False"></asp:Button>
+                            </p>
                           </td>
                           <td></td>
                         </tr>

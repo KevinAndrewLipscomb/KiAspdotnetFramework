@@ -38,7 +38,9 @@ type
     Label_sponsor_1: System.Web.UI.WebControls.Label;
     Label_sponsor_2: System.Web.UI.WebControls.Label;
     Label_sponsor_3: System.Web.UI.WebControls.Label;
-    Label_shared_secret_description: System.Web.UI.WebControls.Label;
+    Label_sponsor_4: System.Web.UI.WebControls.Label;
+    Label_shared_secret_description_1: System.Web.UI.WebControls.Label;
+    Label_shared_secret_description_2: System.Web.UI.WebControls.Label;
     Button_submit: System.Web.UI.WebControls.Button;
     TextBox_shared_secret: System.Web.UI.WebControls.TextBox;
     RequiredFieldValidator_shared_secret: System.Web.UI.WebControls.RequiredFieldValidator;
@@ -73,7 +75,9 @@ begin
     Label_sponsor_1.text := configurationmanager.appsettings['sponsor'];
     Label_sponsor_2.text := configurationmanager.appsettings['sponsor'];
     Label_sponsor_3.text := configurationmanager.appsettings['sponsor'];
-    Label_shared_secret_description.text := configurationmanager.appsettings['shared_secret_description'];
+    Label_sponsor_4.text := configurationmanager.appsettings['sponsor'];
+    Label_shared_secret_description_1.text := configurationmanager.appsettings['shared_secret_description'];
+    Label_shared_secret_description_2.text := configurationmanager.appsettings['shared_secret_description'];
     //
     Focus(TextBox_shared_secret,TRUE);
     //
@@ -116,13 +120,15 @@ end;
 procedure TWebUserControl_establish_membership.LinkButton_trouble_handler_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  server.Transfer('establish_membership_trouble.aspx');
+  DropCrumbAndTransferTo('establish_membership_trouble.aspx');
 end;
 
 procedure TWebUserControl_establish_membership.Button_submit_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  if p.biz_users.AcceptAsMember(Safe(TextBox_shared_secret.text,NUM),p.biz_user.IdNum) then begin
+  {$MESSAGE HINT 'ASPX code and safe hint for shared secret may require modification.'}
+  if p.biz_users.AcceptAsMember(Safe(TextBox_shared_secret.text,ALPHA),p.biz_user.IdNum) then begin
+    SessionSet('privilege_array',p.biz_user.Privileges);  // User was an unprivileged user until now, so reset privs.
     Alert(kix.USER,kix.SUCCESS,'memaccept','Link to membership record established.  Membership privileges granted.',TRUE);
     Table_proceed.visible := TRUE;
   end else begin
