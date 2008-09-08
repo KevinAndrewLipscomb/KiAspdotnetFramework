@@ -9,7 +9,7 @@ uses
   Class_biz_notifications,
   Class_biz_user,
   ki_web_ui,
-  UserControl_print_div;
+  UserControl_print_div, sstchur.web.SmartNav;
 
 type
   p_type =
@@ -24,6 +24,7 @@ type
     procedure TWebForm_establish_membership_trouble_PreRender(sender: System.Object;
       e: System.EventArgs);
     procedure Button_submit_Click(sender: System.Object; e: System.EventArgs);
+    procedure Button_cancel_Click(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   //
   // Expected session objects:
@@ -47,6 +48,8 @@ type
     Label_application_name_2: System.Web.UI.WebControls.Label;
     TextBox_explanation: System.Web.UI.WebControls.TextBox;
     RequiredFieldValidator_explanation: System.Web.UI.WebControls.RequiredFieldValidator;
+    Button_cancel: System.Web.UI.WebControls.Button;
+    SmartScroller_control: sstchur.web.SmartNav.SmartScroller;
   protected
     procedure OnInit(e: EventArgs); override;
   private
@@ -68,6 +71,7 @@ uses
 procedure TWebForm_establish_membership_trouble.InitializeComponent;
 begin
   Include(Self.Button_submit.Click, Self.Button_submit_Click);
+  Include(Self.Button_cancel.Click, Self.Button_cancel_Click);
   Include(Self.PreRender, Self.TWebForm_establish_membership_trouble_PreRender);
   Include(Self.Load, Self.Page_Load);
 end;
@@ -110,6 +114,12 @@ begin
     END;
   end;
   //
+end;
+
+procedure TWebForm_establish_membership_trouble.Button_cancel_Click(sender: System.Object;
+  e: System.EventArgs);
+begin
+  BackTrack;
 end;
 
 procedure TWebForm_establish_membership_trouble.Button_submit_Click(sender: System.Object;

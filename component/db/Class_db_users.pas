@@ -115,8 +115,8 @@ var
 begin
   accept_as_member := FALSE;
   self.Open;
-  member_id_obj := mysqlcommand.Create('select id from member where id = "' + shared_secret + '"',connection).ExecuteScalar;
-    // For robust shared secret functionality, change "where id = " to one or more shared secret fields.
+  {$MESSAGE HINT 'Use or nature of registration_code may require modification.'}
+  member_id_obj := mysqlcommand.Create('select id from member where registration_code = "' + shared_secret + '"',connection).ExecuteScalar;
   if member_id_obj <> nil then begin
     mysqlcommand.Create
       (
