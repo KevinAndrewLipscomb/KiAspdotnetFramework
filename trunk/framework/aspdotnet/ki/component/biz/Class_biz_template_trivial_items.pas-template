@@ -3,14 +3,12 @@ unit Class_biz_template_trivial_items;
 interface
 
 uses
-  Class_db_template_trivial_items;
+  Class_db_template_trivial_items,
+  kix;
 
 type
   TClass_biz_template_trivial_items = class
-  private
-    db_template_trivial_items: TClass_db_template_trivial_items;
-  public
-    constructor Create;
+  published
     function Bind
       (
       partial_code: string;
@@ -35,6 +33,10 @@ type
       code: string;
       description: string
       );
+  public
+    constructor Create;
+  strict private
+    db_template_trivial_items: TClass_db_template_trivial_items;
   end;
 
 implementation
