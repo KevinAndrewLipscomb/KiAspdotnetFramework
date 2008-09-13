@@ -74,18 +74,6 @@ end;
 
 procedure TWebUserControl_template_binder.OnInit(e: System.EventArgs);
 begin
-  {$REGION 'Compile-time instructions'}
-    {$MESSAGE ERROR 'Design-time action required.'}
-    //
-    // 1. Replace FULLY_QUALIFIED_PARENT_NAME in the following CSS code with the fully qualified name of this usercontrol's parent.
-    // 2. Add the following CSS code to ~/css/standard.css:
-    //
-    //   #FULLY_QUALIFIED_PARENT_NAME_UserControl_template_binder_TabContainer_control_body
-    //     {
-    //     border-bottom:none;
-    //     }
-    //
-  {$ENDREGION}
   //
   // Required for Designer support
   //

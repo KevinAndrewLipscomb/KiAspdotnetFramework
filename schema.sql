@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS journal (
   actor VARCHAR(31) NOT NULL,
   action VARCHAR(2047) NOT NULL,
   PRIMARY KEY(`id`),
-  INDEX actor (actor)
+  KEY actor (actor)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -35,8 +35,9 @@ create table if not exists member
   `email_address` VARCHAR(255),
   `registration_code` VARCHAR(15),
   PRIMARY KEY  (id),
-  INDEX `last_name` (`last_name`),
-  INDEX `first_name` (`first_name`)
+  KEY `last_name` (`last_name`),
+  KEY `first_name` (`first_name`),
+  UNIQUE `registration_code`(`registration_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert member (last_name,first_name,email_address,registration_code) values
@@ -53,7 +54,7 @@ create table notification
   id int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(63) NOT NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY (`name`)
+  UNIQUE (`name`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -67,7 +68,7 @@ create table privilege
   id int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(63) NOT NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY (`name`)
+  UNIQUE (`name`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert privilege set name = "send-quickmessages";
@@ -82,7 +83,7 @@ CREATE TABLE role (
   `soft_hyphenation_text` VARCHAR(127) NOT NULL,
   `pecking_order` INTEGER UNSIGNED NOT NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY (`name`)
+  UNIQUE (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO role (id,`name`,`soft_hyphenation_text`,`pecking_order`) VALUES
@@ -136,8 +137,8 @@ CREATE TABLE user (
   num_unsuccessful_login_attempts int unsigned NOT NULL default 0,
   last_login datetime default NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY (username),
-  UNIQUE KEY (password_reset_email_address)
+  UNIQUE (username),
+  UNIQUE (password_reset_email_address)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -148,7 +149,7 @@ CREATE TABLE user_member_map (
   user_id int unsigned NOT NULL,
   member_id int unsigned NOT NULL,
   PRIMARY KEY  (user_id),
-  UNIQUE KEY (member_id)
+  UNIQUE (member_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

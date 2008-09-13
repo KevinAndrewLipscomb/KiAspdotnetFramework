@@ -14,12 +14,34 @@ uses
   UserControl_drop_down_date;
 
 type
-  p_type =
-    RECORD
-    be_loaded: boolean;
-    biz_template_trivial_items: TClass_biz_template_trivial_items;
-    END;
   TWebUserControl_template_trivial_item = class(ki_web_ui.usercontrol_class)
+  published
+    function Fresh: TWebUserControl_template_trivial_item;
+  protected
+    procedure OnInit(e: System.EventArgs); override;
+  strict protected
+    Label_application_name: System.Web.UI.WebControls.Label;
+    Button_submit: System.Web.UI.WebControls.Button;
+    Button_delete: System.Web.UI.WebControls.Button;
+    LinkButton_search: System.Web.UI.WebControls.LinkButton;
+    LinkButton_reset: System.Web.UI.WebControls.LinkButton;
+    TextBox_id: System.Web.UI.WebControls.TextBox;
+    DropDownList_spec: System.Web.UI.WebControls.DropDownList;
+    TextBox_description: System.Web.UI.WebControls.TextBox;
+    RequiredFieldValidator_description: System.Web.UI.WebControls.RequiredFieldValidator;
+  strict private
+    type
+      p_type =
+        RECORD
+        be_loaded: boolean;
+        biz_template_trivial_items: TClass_biz_template_trivial_items;
+        END;
+  strict private
+    p: p_type;
+    procedure Clear;
+    procedure InjectPersistentClientSideScript;
+    procedure Page_Load(sender: System.Object; e: System.EventArgs);
+    function PresentRecord(id: string): boolean;
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
@@ -32,30 +54,6 @@ type
       e: System.EventArgs);
     procedure Button_submit_Click(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
-  strict private
-    p: p_type;
-    procedure Clear;
-    procedure InjectPersistentClientSideScript;
-    procedure Page_Load(sender: System.Object; e: System.EventArgs);
-    function PresentRecord(id: string): boolean;
-  strict protected
-    Label_application_name: System.Web.UI.WebControls.Label;
-    Button_submit: System.Web.UI.WebControls.Button;
-    Button_delete: System.Web.UI.WebControls.Button;
-    LinkButton_search: System.Web.UI.WebControls.LinkButton;
-    LinkButton_reset: System.Web.UI.WebControls.LinkButton;
-    TextBox_id: System.Web.UI.WebControls.TextBox;
-    DropDownList_spec: System.Web.UI.WebControls.DropDownList;
-    TextBox_description: System.Web.UI.WebControls.TextBox;
-    RequiredFieldValidator_description: System.Web.UI.WebControls.RequiredFieldValidator;
-  protected
-    procedure OnInit(e: System.EventArgs); override;
-  private
-    { Private Declarations }
-  public
-    { Public Declarations }
-  published
-    function Fresh: TWebUserControl_template_trivial_item;
   end;
 
 implementation

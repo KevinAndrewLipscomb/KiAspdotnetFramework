@@ -4,14 +4,12 @@ interface
 
 uses
   Class_db,
-  Class_db_trail;
+  Class_db_trail,
+  kix;
 
 type
   TClass_db_template_trivial_items = class(TClass_db)
-  private
-    db_trail: TClass_db_trail;
-  public
-    constructor Create;
+  published
     function Bind
       (
       partial_spec: string;
@@ -36,12 +34,15 @@ type
       id: string;
       description: string
       );
+  public
+    constructor Create;
+  strict private
+    db_trail: TClass_db_trail;
   end;
 
 implementation
 
 uses
-  kix,
   mysql.data.mysqlclient,
   system.web.ui.webcontrols;
 
