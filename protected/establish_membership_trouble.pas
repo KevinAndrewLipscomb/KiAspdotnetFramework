@@ -49,7 +49,6 @@ type
     TextBox_explanation: System.Web.UI.WebControls.TextBox;
     RequiredFieldValidator_explanation: System.Web.UI.WebControls.RequiredFieldValidator;
     Button_cancel: System.Web.UI.WebControls.Button;
-    SmartScroller_control: sstchur.web.SmartNav.SmartScroller;
   protected
     procedure OnInit(e: EventArgs); override;
   private
