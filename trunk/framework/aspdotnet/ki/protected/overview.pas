@@ -37,7 +37,6 @@ type
     UserControl_print_div: TWebUserControl_print_div;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_member_binder: System.Web.UI.WebControls.PlaceHolder;
-    SmartScroller_control: sstchur.web.SmartNav.SmartScroller;
   protected
     procedure OnInit(e: EventArgs); override;
   private
@@ -87,11 +86,11 @@ begin
     p.biz_users := TClass_biz_users.Create;
     p.biz_members := TClass_biz_members.Create;
     //
-    if p.biz_users.BeStalePassword(p.biz_user.IdNum) then begin
-      server.Transfer('change_password.aspx');
-    end;
-    //
     BeginBreadCrumbTrail;
+    //
+    if p.biz_users.BeStalePassword(p.biz_user.IdNum) then begin
+      DropCrumbAndTransferTo('change_password.aspx');
+    end;
     //
     SessionSet('privilege_array',p.biz_user.Privileges);
     if (session['privilege_array'] <> nil) then begin

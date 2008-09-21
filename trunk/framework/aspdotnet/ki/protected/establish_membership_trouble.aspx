@@ -2,7 +2,6 @@
 <%@ Page language="c#" Debug="true" Codebehind="establish_membership_trouble.pas" AutoEventWireup="false" Inherits="establish_membership_trouble.TWebForm_establish_membership_trouble" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_precontent" Src="~/usercontrol/app/UserControl_precontent.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_postcontent" Src="~/usercontrol/app/UserControl_postcontent.ascx" %>
-<%@ Register TagPrefix="sstchur" Namespace="sstchur.web.SmartNav" Assembly="sstchur.web.smartnav" %>
 <html>
   <head runat="server">
     <title id="Title" runat="server"></title>
@@ -71,7 +70,6 @@
         </table>
       </p>
       <uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent>
-      <p><sstchur:SmartScroller id="SmartScroller_control" runat="server" /></p>
     </form>
   </body>
 </html>

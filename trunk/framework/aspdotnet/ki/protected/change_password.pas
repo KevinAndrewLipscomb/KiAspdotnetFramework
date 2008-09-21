@@ -39,7 +39,6 @@ type
     CompareValidator1: System.Web.UI.WebControls.CompareValidator;
     RegularExpressionValidator_password: System.Web.UI.WebControls.RegularExpressionValidator;
     CompareValidator_confirmation_password: System.Web.UI.WebControls.CompareValidator;
-    SmartScroller_control: sstchur.web.SmartNav.SmartScroller;
     Button_cancel: System.Web.UI.WebControls.Button;
   protected
     procedure OnInit(e: EventArgs); override;
