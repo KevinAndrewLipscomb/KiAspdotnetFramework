@@ -257,9 +257,9 @@ begin
       Safe(TextBox_id.text,NUM),
       Safe(TextBox_description.text,PUNCTUATED)
       );
-    Alert(USER,SUCCESS,'recsaved','Record saved.');
+    Alert(USER,SUCCESS,'recsaved','Record saved.',TRUE);
   end else begin
-    ValidationAlert;
+    ValidationAlert(TRUE);
   end;
 end;
 
@@ -275,7 +275,7 @@ begin
   if p.biz_template_trivial_items.Delete(Safe(TextBox_id.text,ALPHANUM)) then begin
     Clear;
   end else begin
-    Alert(kix.APPDATA,kix.FAILURE,'dependency',' Cannot delete this record because another record depends on it.');
+    Alert(kix.APPDATA,kix.FAILURE,'dependency',' Cannot delete this record because another record depends on it.',TRUE);
   end;
 end;
 
