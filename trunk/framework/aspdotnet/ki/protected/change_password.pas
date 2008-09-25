@@ -25,6 +25,10 @@ type
     procedure TWebForm_change_password_PreRender(sender: System.Object;
       e: System.EventArgs);
     procedure Button_cancel_Click(sender: System.Object; e: System.EventArgs);
+    procedure CustomValidator_confirmation_password_ServerValidate(source: System.Object; 
+      args: System.Web.UI.WebControls.ServerValidateEventArgs);
+    procedure CustomValidator_confirmation_password_ServerValidate(source: System.Object; 
+      args: System.Web.UI.WebControls.ServerValidateEventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
@@ -38,8 +42,8 @@ type
     RequiredFieldValidator_confirmation_password: System.Web.UI.WebControls.RequiredFieldValidator;
     CompareValidator1: System.Web.UI.WebControls.CompareValidator;
     RegularExpressionValidator_password: System.Web.UI.WebControls.RegularExpressionValidator;
-    CompareValidator_confirmation_password: System.Web.UI.WebControls.CompareValidator;
     Button_cancel: System.Web.UI.WebControls.Button;
+    CustomValidator_confirmation_password: System.Web.UI.WebControls.CustomValidator;
   protected
     procedure OnInit(e: EventArgs); override;
   private
@@ -57,6 +61,8 @@ implementation
 /// </summary>
 procedure TWebForm_change_password.InitializeComponent;
 begin
+  Include(Self.CustomValidator_confirmation_password.ServerValidate, Self.CustomValidator_confirmation_password_ServerValidate);
+  Include(Self.CustomValidator_confirmation_password.ServerValidate, Self.CustomValidator_confirmation_password_ServerValidate);
   Include(Self.Button_submit.Click, Self.Button_submit_Click);
   Include(Self.Button_cancel.Click, Self.Button_cancel_Click);
   Include(Self.PreRender, Self.TWebForm_change_password_PreRender);
@@ -92,6 +98,18 @@ begin
   inherited OnInit(e);
 end;
 
+procedure TWebForm_change_password.CustomValidator_confirmation_password_ServerValidate(source: System.Object;
+  args: System.Web.UI.WebControls.ServerValidateEventArgs);
+begin
+  args.isvalid := (TextBox_nominal_password.text.trim = TextBox_confirmation_password.text.trim);
+end;
+
+procedure TWebForm_change_password.CustomValidator_confirmation_password_ServerValidate(source: System.Object;
+  args: System.Web.UI.WebControls.ServerValidateEventArgs);
+begin
+  args.isvalid := (TextBox_nominal_password.text.trim = TextBox_confirmation_password.text.trim);
+end;
+
 procedure TWebForm_change_password.Button_cancel_Click(sender: System.Object;
   e: System.EventArgs);
 begin
@@ -107,8 +125,16 @@ end;
 procedure TWebForm_change_password.Button_submit_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  p.biz_users.SetPassword(p.biz_user.IdNum,Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
-  BackTrack;
+  if page.isvalid then begin
+  if page.isvalid then begin
+    p.biz_users.SetPassword(p.biz_user.IdNum,Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
+    BackTrack;
+  end else begin
+    ValidationAlert(TRUE);
+  end;
+  end else begin
+    ValidationAlert(TRUE);
+  end;
 end;
 
 end.
