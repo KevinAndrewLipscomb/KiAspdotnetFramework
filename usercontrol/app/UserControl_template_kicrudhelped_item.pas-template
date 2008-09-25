@@ -251,6 +251,7 @@ begin
     //
     p.biz_template_kicrudhelped_items.&Set
       (
+{$MESSAGE HINT 'Safe_hint values should be tightened.'}
 //<KiCrudHelper:SubmitSet/>
       );
     Alert(USER,SUCCESS,'recsaved','Record saved.',TRUE);
