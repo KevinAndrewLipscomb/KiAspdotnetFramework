@@ -27,8 +27,6 @@ type
     procedure Button_cancel_Click(sender: System.Object; e: System.EventArgs);
     procedure CustomValidator_confirmation_password_ServerValidate(source: System.Object; 
       args: System.Web.UI.WebControls.ServerValidateEventArgs);
-    procedure CustomValidator_confirmation_password_ServerValidate(source: System.Object; 
-      args: System.Web.UI.WebControls.ServerValidateEventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
@@ -61,7 +59,6 @@ implementation
 /// </summary>
 procedure TWebForm_change_password.InitializeComponent;
 begin
-  Include(Self.CustomValidator_confirmation_password.ServerValidate, Self.CustomValidator_confirmation_password_ServerValidate);
   Include(Self.CustomValidator_confirmation_password.ServerValidate, Self.CustomValidator_confirmation_password_ServerValidate);
   Include(Self.Button_submit.Click, Self.Button_submit_Click);
   Include(Self.Button_cancel.Click, Self.Button_cancel_Click);
@@ -104,12 +101,6 @@ begin
   args.isvalid := (TextBox_nominal_password.text.trim = TextBox_confirmation_password.text.trim);
 end;
 
-procedure TWebForm_change_password.CustomValidator_confirmation_password_ServerValidate(source: System.Object;
-  args: System.Web.UI.WebControls.ServerValidateEventArgs);
-begin
-  args.isvalid := (TextBox_nominal_password.text.trim = TextBox_confirmation_password.text.trim);
-end;
-
 procedure TWebForm_change_password.Button_cancel_Click(sender: System.Object;
   e: System.EventArgs);
 begin
@@ -126,12 +117,8 @@ procedure TWebForm_change_password.Button_submit_Click(sender: System.Object;
   e: System.EventArgs);
 begin
   if page.isvalid then begin
-  if page.isvalid then begin
     p.biz_users.SetPassword(p.biz_user.IdNum,Digest(Safe(TextBox_nominal_password.Text.trim,ALPHANUM)));
     BackTrack;
-  end else begin
-    ValidationAlert(TRUE);
-  end;
   end else begin
     ValidationAlert(TRUE);
   end;
