@@ -1,45 +1,43 @@
 <%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_role.pas" Inherits="UserControl_role.TWebUserControl_role"%>
-<%@ Register TagPrefix="uc1" TagName="UserControl_print_div" Src="~/usercontrol/ki/UserControl_print_div.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_drop_down_date" Src="~/usercontrol/ki/UserControl_drop_down_date.ascx" %>
-<div id="Div_print_area">
-  <table cellspacing="0" cellpadding="5" width="100%" border="0">
-    <tr>
-      <td valign="top">
-        <table cellspacing="0" cellpadding="5" border="0">
-          <tr>
-            <td valign="top"><font class="">Title:</font></td>
-            <td valign="top"><font class="">
-                <ASP:TextBox id="TextBox_name" runat="server" cssclass="" maxlength="63" columns="63"></ASP:TextBox>&nbsp;&nbsp;&nbsp;&nbsp; <ASP:LinkButton id="LinkButton_search" runat="server"
-                                font-bold="True" causesvalidation="False">Lookup</ASP:LinkButton>&nbsp;&nbsp;&nbsp;&nbsp; <ASP:LinkButton id="LinkButton_reset" runat="server"
-                                causesvalidation="False">Reset</ASP:LinkButton><br>
-                <ASP:DropDownList id="DropDownList_name" runat="server" autopostback="True" visible="False"></ASP:DropDownList><br>
-              </font></td>
-            <td valign="top">
-              <ASP:RequiredFieldValidator id="RequiredFieldValidator_name" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_name" errormessage="Please enter Name.">!ERR!</ASP:RequiredFieldValidator></td>
-          </tr>
-          <tr id="TableRow_pecking_order" runat="server" visible="False">
-            <td><font class="">Pecking order:</font></td>
-            <td><font class="">
-                <ASP:TextBox id="TextBox_pecking_order" runat="server" cssclass="" maxlength="10" columns="10"></ASP:TextBox>
-              </font></td>
-            <td>
-              <asp:RequiredFieldValidator id="RequiredFieldValidator_pecking_order" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_pecking_order" errormessage="Please enter Pecking order.">!ERR!</asp:RequiredFieldValidator>
-              <asp:RegularExpressionValidator id="RegularExpressionValidator_pecking_order" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_pecking_order" errormessage="Please enter a valid Pecking order." validationexpression="\d{1,10}">!ERR!</asp:RegularExpressionValidator></td>
-          </tr>
-          <tr id="TableRow_soft_hyphenation_text" runat="server" visible="False">
-            <td><font class="">Soft hyphenation text:</font></td>
-            <td><font class="">
-                <ASP:TextBox id="TextBox_soft_hyphenation_text" runat="server" cssclass="" maxlength="127" columns="72"></ASP:TextBox>
-              </font></td>
-            <td>
-              <ASP:RequiredFieldValidator id="RequiredFieldValidator_soft_hyphenation_text" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_soft_hyphenation_text" errormessage="Please enter Soft hyphenation text.">!ERR!</ASP:RequiredFieldValidator></td>
-          </tr>
-        </table></td>
-    </tr>
-  </table>
+<table cellspacing="0" cellpadding="5" width="100%" border="0">
+  <tr>
+    <td valign="top">
+      <table cellspacing="0" cellpadding="5" border="0">
+        <tr>
+          <td valign="top"><font class="">Title:</font></td>
+          <td valign="top"><font class="">
+              <ASP:TextBox id="TextBox_name" runat="server" cssclass="" maxlength="63" columns="63"></ASP:TextBox>&nbsp;&nbsp;&nbsp;&nbsp; <ASP:LinkButton id="LinkButton_search" runat="server"
+                              font-bold="True" causesvalidation="False">Lookup</ASP:LinkButton>&nbsp;&nbsp;&nbsp;&nbsp; <ASP:LinkButton id="LinkButton_reset" runat="server"
+                              causesvalidation="False">Reset</ASP:LinkButton><br>
+              <ASP:DropDownList id="DropDownList_name" runat="server" autopostback="True" visible="False"></ASP:DropDownList><br>
+            </font></td>
+          <td valign="top">
+            <ASP:RequiredFieldValidator id="RequiredFieldValidator_name" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_name" errormessage="Please enter Name.">!ERR!</ASP:RequiredFieldValidator></td>
+        </tr>
+        <tr id="TableRow_pecking_order" runat="server" visible="False">
+          <td><font class="">Pecking order:</font></td>
+          <td><font class="">
+              <ASP:TextBox id="TextBox_pecking_order" runat="server" cssclass="" maxlength="10" columns="10"></ASP:TextBox>
+            </font></td>
+          <td>
+            <asp:RequiredFieldValidator id="RequiredFieldValidator_pecking_order" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_pecking_order" errormessage="Please enter Pecking order.">!ERR!</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator id="RegularExpressionValidator_pecking_order" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_pecking_order" errormessage="Please enter a valid Pecking order." validationexpression="\d{1,10}">!ERR!</asp:RegularExpressionValidator></td>
+        </tr>
+        <tr id="TableRow_soft_hyphenation_text" runat="server" visible="False">
+          <td><font class="">Soft hyphenation text:</font></td>
+          <td><font class="">
+              <ASP:TextBox id="TextBox_soft_hyphenation_text" runat="server" cssclass="" maxlength="127" columns="72"></ASP:TextBox>
+            </font></td>
+          <td>
+            <ASP:RequiredFieldValidator id="RequiredFieldValidator_soft_hyphenation_text" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_soft_hyphenation_text" errormessage="Please enter Soft hyphenation text.">!ERR!</ASP:RequiredFieldValidator></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
 <ASP:Button id="Button_submit" runat="server" enabled="False" text="Submit"></ASP:Button>&nbsp;&nbsp;
 <ASP:Button id="Button_delete" runat="server" enabled="False" text="Delete"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<uc1:UserControl_print_div id="UserControl_print_div" runat="server"></uc1:UserControl_print_div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Anchor_quick_message_shortcut" runat="server" visible="False">QuickMessage</a>
+<a id="Anchor_quick_message_shortcut" runat="server" visible="False">QuickMessage</a>
 <p>
   <table id="Table_holders" bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1" runat="server" visible="False">
     <tr>
@@ -65,7 +63,6 @@
     </tr>
   </table>
 </p>
-</div>
 <p>
   <table id="Table_quick_message" bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" width="100%" border="1" runat="server" visible="False">
     <tr>

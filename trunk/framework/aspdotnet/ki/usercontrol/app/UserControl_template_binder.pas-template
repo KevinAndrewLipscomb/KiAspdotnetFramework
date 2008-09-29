@@ -13,12 +13,6 @@ uses
   System.Web.UI.HtmlControls;
 
 type
-  p_type =
-    RECORD
-    be_loaded: boolean;
-    content_id: string;
-    tab_index: cardinal;
-    END;
   TWebUserControl_template_binder = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
@@ -28,6 +22,14 @@ type
     procedure TabContainer_control_ActiveTabChanged(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
+    type
+      p_type =
+        RECORD
+        be_loaded: boolean;
+        content_id: string;
+        tab_index: cardinal;
+        END;
+  strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
@@ -35,10 +37,6 @@ type
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
   protected
     procedure OnInit(e: System.EventArgs); override;
-  private
-    { Private Declarations }
-  public
-    { Public Declarations }
   published
     function Fresh: TWebUserControl_template_binder;
   end;

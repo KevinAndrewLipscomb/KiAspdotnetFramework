@@ -12,10 +12,6 @@ uses
   System.Web.UI.HtmlControls;
 
 type
-  p_type =
-    RECORD
-    be_loaded: boolean;
-    END;
   TWebUserControl_template_std = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
@@ -24,15 +20,17 @@ type
       e: System.EventArgs);
   {$ENDREGION}
   strict private
+    type
+      p_type =
+        RECORD
+        be_loaded: boolean;
+        END;
+  strict private
     p: p_type;
     procedure InjectPersistentClientSideScript;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   protected
     procedure OnInit(e: System.EventArgs); override;
-  private
-    { Private Declarations }
-  public
-    { Public Declarations }
   published
     function Fresh: TWebUserControl_template_std;
   end;
