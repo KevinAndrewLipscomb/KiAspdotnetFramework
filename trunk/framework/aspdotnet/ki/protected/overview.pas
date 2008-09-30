@@ -10,17 +10,9 @@ uses
   system.configuration, system.web.security,
   Class_biz_members,
   Class_biz_user,
-  Class_biz_users,
-  sstchur.web.SmartNav,
-  UserControl_print_div;
+  Class_biz_users;
 
 type
-  p_type =
-    RECORD
-    biz_user: TClass_biz_user;
-    biz_users: TClass_biz_users;
-    biz_members: TClass_biz_members;
-    END;
   TWebForm_overview = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
   strict private
@@ -29,19 +21,23 @@ type
       e: System.EventArgs);
   {$ENDREGION}
   strict private
+    type
+      p_type =
+        RECORD
+        biz_user: TClass_biz_user;
+        biz_users: TClass_biz_users;
+        biz_members: TClass_biz_members;
+        END;
+  strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlTitle;
     ScriptManager_control: System.Web.UI.ScriptManager;
-    UserControl_print_div: TWebUserControl_print_div;
     PlaceHolder_establish_membership: System.Web.UI.WebControls.PlaceHolder;
     PlaceHolder_member_binder: System.Web.UI.WebControls.PlaceHolder;
   protected
     procedure OnInit(e: EventArgs); override;
-  private
-    { Private Declarations }
-  public
   end;
 
 implementation
