@@ -6,13 +6,9 @@ uses
   System.Collections, System.ComponentModel,
   System.Data, System.Drawing, System.Web, System.Web.SessionState,
   System.Web.UI, System.Web.UI.WebControls, System.Web.UI.HtmlControls, system.configuration, system.web.security,
-  ki_web_ui,
-  UserControl_print_div;
+  ki_web_ui;
 
 type
-  p_type =
-    RECORD
-    END;
   TWebForm_template_protected_nonlanding = class(ki_web_ui.page_class)
   {$REGION 'Designer Managed Code'}
   strict private
@@ -20,20 +16,19 @@ type
     procedure TWebForm_template_protected_nonlanding_PreRender(sender: System.Object;
       e: System.EventArgs);
   {$ENDREGION}
-  //
+  strict private
+    type
+      p_type =
+        RECORD
+        END;
   strict private
     p: p_type;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlTitle;
     LinkButton_drill_down: System.Web.UI.WebControls.LinkButton;
-    UserControl_print_div: TWebUserControl_print_div;
   protected
     procedure OnInit(e: EventArgs); override;
-  private
-    { Private Declarations }
-  public
-    { Public Declarations }
   end;
 
 implementation
