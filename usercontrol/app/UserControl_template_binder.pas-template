@@ -35,6 +35,9 @@ type
   strict protected
     TabContainer_control: AjaxControlToolkit.TabContainer;
     PlaceHolder_content: System.Web.UI.WebControls.PlaceHolder;
+    TabPanel_0: tabpanel;
+    TabPanel_1: tabpanel;
+    TabPanel_2: tabpanel;
   protected
     procedure OnInit(e: System.EventArgs); override;
   published
@@ -63,6 +66,16 @@ begin
   if not p.be_loaded then begin
     //
     TabContainer_control.activetabindex := p.tab_index;
+    //
+    if Has(string_array(session['privilege_array']),'privilege-0') then begin
+      TabPanel_0.enabled := TRUE;
+    end;
+    if Has(string_array(session['privilege_array']),'privilege-1') then begin
+      TabPanel_1.enabled := TRUE;
+    end;
+    if Has(string_array(session['privilege_array']),'privilege-2') then begin
+      TabPanel_2.enabled := TRUE;
+    end;
     //
     p.be_loaded := TRUE;
     //
