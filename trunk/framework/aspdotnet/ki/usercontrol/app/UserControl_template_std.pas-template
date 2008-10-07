@@ -147,7 +147,21 @@ begin
   //
   if session['UserControl_template_std.p'] <> nil then begin
     p := p_type(session['UserControl_template_std.p']);
-    p.be_loaded := IsPostBack and (string(session['UserControl_member_binder_PlaceHolder_content']) = 'UserControl_template_std');
+    {$REGION 'Compile-time instructions'}
+      {$MESSAGE ERROR 'Design decision required.'}
+      //
+      // if (this usercontrol is loaded dynamically, you must) begin
+      //   1. Replace "Parent" in the next uncommented line with this usercontrol's parent name.
+      //   2. Make sure that ONE OF the following statements exists in the parent's PreRender method:
+      //         SessionSet('Parent_PlaceHolder_content','UserControl_template_binder');"
+      //         SessionSet(PlaceHolder_content.clientid,p.content_id);
+      //   3. Delete this region.
+      // end else begin
+      //   Remove the "and" clause from the next uncommented line.
+      // end;
+      //
+    {$ENDREGION}
+    p.be_loaded := IsPostBack and (string(session['Parent_PlaceHolder_content']) = 'UserControl_template_std');
   end else begin
     //
     p.be_loaded := FALSE;
