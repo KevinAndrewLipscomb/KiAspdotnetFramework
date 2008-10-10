@@ -33,6 +33,7 @@ type
       p_type =
         RECORD
         be_loaded: boolean;
+        be_ok_to_config_template_trivial_items: boolean;
         biz_template_trivial_items: TClass_biz_template_trivial_items;
         END;
   strict private
@@ -163,6 +164,7 @@ begin
   //
   if not p.be_loaded then begin
     //
+    LinkButton_new_record.visible := p.be_ok_to_config_template_trivial_items;
     //
     RequireConfirmation(Button_delete,'Are you sure you want to delete this record?');
     //
@@ -196,9 +198,9 @@ begin
     Label_lookup_hint.enabled := FALSE;
     LinkButton_reset.enabled := TRUE;
     TextBox_id.enabled := FALSE;
-    TextBox_description.enabled := TRUE;
-    Button_submit.enabled := TRUE;
-    Button_delete.enabled := TRUE;
+    TextBox_description.enabled := p.be_ok_to_config_template_trivial_items;
+    Button_submit.enabled := p.be_ok_to_config_template_trivial_items;
+    Button_delete.enabled := p.be_ok_to_config_template_trivial_items;
     //
     PresentRecord := TRUE;
     //
@@ -221,6 +223,8 @@ begin
     p.be_loaded := FALSE;
     //
     p.biz_template_trivial_items := TClass_biz_template_trivial_items.Create;
+    //
+    p.be_ok_to_config_template_trivial_items := Has(string_array(session['privilege_array']),'config-template_trivial_items');
     //
   end;
   //
@@ -300,8 +304,8 @@ begin
   Label_lookup_hint.enabled := FALSE;
   LinkButton_reset.enabled := TRUE;
   LinkButton_new_record.enabled := FALSE;
-  TextBox_description.enabled := TRUE;
-  Button_submit.enabled := TRUE;
+  TextBox_description.enabled := p.be_ok_to_config_template_trivial_items;
+  Button_submit.enabled := p.be_ok_to_config_template_trivial_items;
   Button_delete.enabled := FALSE;
   Focus(TextBox_id,TRUE);
 end;
@@ -315,7 +319,7 @@ begin
   Label_lookup_arrow.enabled := TRUE;
   Label_lookup_hint.enabled := TRUE;
   LinkButton_reset.enabled := FALSE;
-  LinkButton_new_record.enabled := TRUE;
+  LinkButton_new_record.enabled := p.be_ok_to_config_template_trivial_items;
   TextBox_description.enabled := FALSE;
   Focus(TextBox_id,TRUE);
 end;

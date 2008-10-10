@@ -34,6 +34,7 @@ type
         RECORD
         be_loaded: boolean;
         biz_template_kicrudhelped_items: TClass_biz_template_kicrudhelped_items;
+        be_ok_to_config_template_kicrudhelped_items: boolean;
         END;
   strict private
     p: p_type;
@@ -159,6 +160,7 @@ begin
   //
   if not p.be_loaded then begin
     //
+    LinkButton_new_record.enabled := ;
     //
     RequireConfirmation(Button_delete,'Are you sure you want to delete this record?');
     //
@@ -193,8 +195,8 @@ begin
     //
 //<KiCrudHelper:DependentFieldEnablements/>
     //
-    Button_submit.enabled := TRUE;
-    Button_delete.enabled := TRUE;
+    Button_submit.enabled := p.be_ok_to_config_template_kicrudhelped_items;
+    Button_delete.enabled := p.be_ok_to_config_template_kicrudhelped_items;
     //
     PresentRecord := TRUE;
     //
@@ -217,6 +219,8 @@ begin
     p.be_loaded := FALSE;
     //
     p.biz_template_kicrudhelped_items := TClass_biz_template_kicrudhelped_items.Create;
+    //
+    p.be_ok_to_config_template_kicrudhelped_items := Has(string_array(session['privilege_array']),'config-template_kicrudhelped_items');
     //
   end;
   //
@@ -293,6 +297,7 @@ procedure TWebUserControl_template_kicrudhelped_item.LinkButton_new_record_Click
 begin
   //
   Clear;
+  {$MESSAGE HINT 'Review appropriateness of the following two lines.'}
   TextBox_ki_crud_helper_user_key.text := '*';
   TextBox_ki_crud_helper_user_key.enabled := False;
   Button_lookup.enabled := FALSE;
@@ -303,7 +308,7 @@ begin
   //
 //<KiCrudHelper:DependentFieldEnablements/>
   //
-  Button_submit.enabled := TRUE;
+  Button_submit.enabled := p.be_ok_to_config_template_kicrudhelped_items;
   Button_delete.enabled := FALSE;
   Focus(TextBox_ki_crud_helper_user_key,TRUE);
   //
