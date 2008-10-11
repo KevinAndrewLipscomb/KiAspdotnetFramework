@@ -1,4 +1,5 @@
 unit UserControl_template_trivial_item;
+  // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~trivial~item.pas
 
 interface
 

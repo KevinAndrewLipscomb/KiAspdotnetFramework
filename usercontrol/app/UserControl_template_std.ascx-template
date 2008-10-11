@@ -1,4 +1,5 @@
 <%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_std.pas" Inherits="UserControl_template_std.TWebUserControl_template_std"%>
+<!-- Derived from KiAspdotnetFramework/usercontrol/app/UserControl~template~std.ascx-template -->
 <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1" width="100%">
   <tr>
     <td>

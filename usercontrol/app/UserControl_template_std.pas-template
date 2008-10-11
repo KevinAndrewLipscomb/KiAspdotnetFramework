@@ -1,4 +1,5 @@
 unit UserControl_template_std;
+  // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~std.pas
 
 interface
 

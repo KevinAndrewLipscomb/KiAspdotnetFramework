@@ -1,4 +1,5 @@
 unit UserControl_template_binder;
+  // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~binder.pas
 
 interface
 
