@@ -40,7 +40,7 @@ type
     p: p_type;
     procedure Clear;
     procedure InjectPersistentClientSideScript;
-    procedure ManageDependentFieldEnablements;
+    procedure SetDependentFieldAblements(ablement: boolean);
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
     function PresentRecord(ki_crud_helper_user_key: string): boolean;
     procedure SetLookupMode;
@@ -72,10 +72,7 @@ begin
 //<KiCrudHelper:ClearStatements/>
   //
   //
-  // Disable dependent fields.
-  //
-//<KiCrudHelper:DependentFieldDisablements/>
-  //
+  SetDependentFieldAblements(FALSE);
   Button_submit.enabled := FALSE;
   Button_delete.enabled := FALSE;
   //
@@ -199,7 +196,7 @@ begin
     Label_lookup_arrow.enabled := FALSE;
     Label_lookup_hint.enabled := FALSE;
     LinkButton_reset.enabled := TRUE;
-    ManageDependentFieldEnablements;
+    SetDependentFieldAblements(p.be_ok_to_config_template_kicrudhelped_items);
     Button_submit.enabled := p.be_ok_to_config_template_kicrudhelped_items;
     Button_delete.enabled := p.be_ok_to_config_template_kicrudhelped_items;
     //
@@ -323,7 +320,7 @@ begin
   Label_lookup_hint.enabled := FALSE;
   LinkButton_reset.enabled := TRUE;
   LinkButton_new_record.enabled := FALSE;
-  ManageDependentFieldEnablements;
+  SetDependentFieldAblements(p.be_ok_to_config_template_kicrudhelped_items);
   Button_submit.enabled := p.be_ok_to_config_template_kicrudhelped_items;
   Button_delete.enabled := FALSE;
   Focus(TextBox_ki_crud_helper_user_key,TRUE);
@@ -336,7 +333,7 @@ begin
   SetLookupMode;
 end;
 
-procedure TWebUserControl_template_kicrudhelped_item.ManageDependentFieldEnablements;
+procedure TWebUserControl_template_kicrudhelped_item.SetDependentFieldAblements(ablement: boolean);
 begin
 //<KiCrudHelper:DependentFieldEnablements/>
 end;
