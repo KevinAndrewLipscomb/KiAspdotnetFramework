@@ -1,5 +1,5 @@
-unit UserControl_template_gridview_sortable;
-  // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~gridview~sortable.pas
+unit UserControl_template_datagrid_sortable;
+  // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.pas
 
 interface
 
@@ -25,17 +25,17 @@ type
     filter: string;
     sort_order: string;
     END;
-  TWebUserControl_template_gridview_sortable = class(ki_web_ui.usercontrol_class)
+  TWebUserControl_template_datagrid_sortable = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
     procedure InitializeComponent;
-    procedure TWebUserControl_template_gridview_sortable_PreRender(sender: System.Object;
+    procedure TWebUserControl_template_datagrid_sortable_PreRender(sender: System.Object;
       e: System.EventArgs);
-    procedure DropDownList_filter_SelectedIndexChanged(sender: System.Object; 
+    procedure DropDownList_filter_SelectedIndexChanged(sender: System.Object;
       e: System.EventArgs);
-    procedure GridView_control_Sorting(sender: System.Object; e: System.Web.UI.WebControls.GridViewSortEventArgs);
-    procedure GridView_control_RowDataBound(sender: System.Object; e: System.Web.UI.WebControls.GridViewRowEventArgs);
-    procedure GridView_control_SelectedIndexChanged(sender: System.Object; e: System.EventArgs);
+    procedure DataGrid_control_SortCommand(source: System.Object; e: System.Web.UI.WebControls.DataGridSortCommandEventArgs);
+    procedure DataGrid_control_ItemDataBound(sender: System.Object; e: System.Web.UI.WebControls.DataGridItemEventArgs);
+    procedure DataGrid_control_ItemCommand(source: System.Object; e: System.Web.UI.WebControls.DataGridCommandEventArgs);
   {$ENDREGION}
   strict private
     p: p_type;
@@ -43,7 +43,7 @@ type
     procedure InjectPersistentClientSideScript;
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
-    GridView_control: System.Web.UI.WebControls.GridView;
+    DataGrid_control: System.Web.UI.WebControls.DataGrid;
     DropDownList_filter: System.Web.UI.WebControls.DropDownList;
   protected
     procedure OnInit(e: System.EventArgs); override;
@@ -52,7 +52,7 @@ type
   public
     { Public Declarations }
   published
-    function Fresh: TWebUserControl_template_gridview_sortable;
+    function Fresh: TWebUserControl_template_datagrid_sortable;
   end;
 
 implementation
@@ -62,7 +62,7 @@ uses
   System.Collections,
   system.configuration;
 
-procedure TWebUserControl_template_gridview_sortable.InjectPersistentClientSideScript;
+procedure TWebUserControl_template_datagrid_sortable.InjectPersistentClientSideScript;
 begin
 {$REGION 'Persistent client-side script'}
 //  EstablishClientSideFunction(EL);
@@ -143,7 +143,7 @@ begin
 {$ENDREGION}
 end;
 
-procedure TWebUserControl_template_gridview_sortable.Page_Load(sender: System.Object; e: System.EventArgs);
+procedure TWebUserControl_template_datagrid_sortable.Page_Load(sender: System.Object; e: System.EventArgs);
 begin
   //
   if not p.be_loaded then begin
@@ -153,7 +153,7 @@ begin
     //
     if not p.be_interactive then begin
       DropDownList_filter.enabled := FALSE;
-      GridView_control.allowsorting := FALSE;
+      DataGrid_control.allowsorting := FALSE;
     end;
     //
     Bind;
@@ -166,7 +166,7 @@ begin
   //
 end;
 
-procedure TWebUserControl_template_gridview_sortable.OnInit(e: System.EventArgs);
+procedure TWebUserControl_template_datagrid_sortable.OnInit(e: System.EventArgs);
 begin
   //
   // Required for Designer support
@@ -174,9 +174,9 @@ begin
   InitializeComponent;
   inherited OnInit(e);
   //
-  if session['UserControl_template_gridview_sortable.p'] <> nil then begin
-    p := p_type(session['UserControl_template_gridview_sortable.p']);
-    p.be_loaded := IsPostBack and (string(session['Parent_PlaceHolder_content']) = 'UserControl_template_gridview_sortable');
+  if session['UserControl_template_datagrid_sortable.p'] <> nil then begin
+    p := p_type(session['UserControl_template_datagrid_sortable.p']);
+    p.be_loaded := IsPostBack and (string(session['Parent_PlaceHolder_content']) = 'UserControl_template_datagrid_sortable');
   end else begin
     //
     p.biz1 := TClass_biz1.Create;
@@ -196,52 +196,58 @@ end;
 /// Required method for Designer support -- do not modify
 /// the contents of this method with the code editor.
 /// </summary>
-procedure TWebUserControl_template_gridview_sortable.InitializeComponent;
+procedure TWebUserControl_template_datagrid_sortable.InitializeComponent;
 begin
   Include(Self.DropDownList_filter.SelectedIndexChanged, Self.DropDownList_filter_SelectedIndexChanged);
-  Include(Self.GridView_control.Sorting, Self.GridView_control_Sorting);
-  Include(Self.GridView_control.RowDataBound, Self.GridView_control_RowDataBound);
-  Include(Self.GridView_control.SelectedIndexChanged, Self.GridView_control_SelectedIndexChanged);
-  Include(Self.PreRender, Self.TWebUserControl_template_gridview_sortable_PreRender);
+  Include(Self.DataGrid_control.ItemDataBound, Self.DataGrid_control_ItemDataBound);
+  Include(Self.DataGrid_control.SortCommand, Self.DataGrid_control_SortCommand);
+  Include(Self.DataGrid_control.ItemCommand, Self.DataGrid_control_ItemCommand);
+  Include(Self.PreRender, Self.TWebUserControl_template_datagrid_sortable_PreRender);
   Include(Self.Load, Self.Page_Load);
 end;
 {$ENDREGION}
 
-procedure TWebUserControl_template_gridview_sortable.TWebUserControl_template_gridview_sortable_PreRender(sender: System.Object;
+procedure TWebUserControl_template_datagrid_sortable.TWebUserControl_template_datagrid_sortable_PreRender(sender: System.Object;
   e: System.EventArgs);
 begin
-  SessionSet('UserControl_template_gridview_sortable.p',p);
+  SessionSet('UserControl_template_datagrid_sortable.p',p);
 end;
 
-function TWebUserControl_template_gridview_sortable.Fresh: TWebUserControl_template_gridview_sortable;
+function TWebUserControl_template_datagrid_sortable.Fresh: TWebUserControl_template_datagrid_sortable;
 begin
-  session.Remove('UserControl_template_gridview_sortable.p');
+  session.Remove('UserControl_template_datagrid_sortable.p');
   Fresh := self;
 end;
 
-procedure TWebUserControl_template_gridview_sortable.GridView_control_SelectedIndexChanged(sender: System.Object;
-  e: System.EventArgs);
+procedure TWebUserControl_template_datagrid_sortable.DataGrid_control_ItemCommand(source: System.Object;
+  e: System.Web.UI.WebControls.DataGridCommandEventArgs);
 begin
-  abort;
-end;
-
-procedure TWebUserControl_template_gridview_sortable.GridView_control_RowDataBound(sender: System.Object;
-  e: System.Web.UI.WebControls.GridViewRowEventArgs);
-const
-  TCI_SELECT = 0;
-begin
-  if p.be_interactive then begin
-    if e.row.rowtype = datacontrolrowtype.datarow then begin
-      linkbutton(e.row.cells.item[TCI_SELECT].controls.item[0]).text :=
-        ExpandTildePath(linkbutton(e.row.cells.item[TCI_SELECT].controls.item[0]).text);
-    end;
-  end else begin
-    e.row.cells.item[TCI_SELECT].visible := FALSE;
+  if e.item.itemtype in [listitemtype.ALTERNATINGITEM,listitemtype.ITEM,listitemtype.EDITITEM,listitemtype.SELECTEDITEM] then begin
+    SessionSet('template_datagrid_sortable_filter',p.filter);
+    SessionSet('template_datagrid_sortable_code',Safe(e.item.cells.item[TCI_CODE].text,NUM));
+    DropCrumbAndTransferTo('template_datagrid_sortable_detail.aspx');
   end;
 end;
 
-procedure TWebUserControl_template_gridview_sortable.GridView_control_Sorting(sender: System.Object;
-  e: System.Web.UI.WebControls.GridViewSortEventArgs);
+procedure TWebUserControl_template_datagrid_sortable.DataGrid_control_ItemDataBound(sender: System.Object;
+  e: System.Web.UI.WebControls.DataGridItemEventArgs);
+var
+  link_button: linkbutton;
+begin
+  e.item.cells.item[TCI_CODE].visible := FALSE;
+  if p.be_interactive then begin
+    if e.item.itemtype in [listitemtype.ALTERNATINGITEM,listitemtype.ITEM,listitemtype.EDITITEM,listitemtype.SELECTEDITEM] then begin
+      link_button := linkbutton(e.item.cells.item[TCI_SELECT].controls.item[0]);
+      link_button.text := ExpandTildePath(link_button.text);
+      scriptmanager.GetCurrent(page).RegisterPostBackControl(link_button);
+    end;
+  end else begin
+    e.item.cells.item[TCI_SELECT].visible := FALSE;
+  end;
+end;
+
+procedure TWebUserControl_template_datagrid_sortable.DataGrid_control_SortCommand(source: System.Object;
+  e: System.Web.UI.WebControls.DataGridSortCommandEventArgs);
 begin
   if e.SortExpression = p.sort_order then begin
     p.be_sort_order_ascending := not p.be_sort_order_ascending;
@@ -249,20 +255,27 @@ begin
     p.sort_order := Safe(e.SortExpression,KI_SORT_EXPRESSION);
     p.be_sort_order_ascending := TRUE;
   end;
-  GridView_control.editindex := -1;
+  DataGrid_control.edititemindex := -1;
   Bind;
 end;
 
-procedure TWebUserControl_template_gridview_sortable.DropDownList_filter_SelectedIndexChanged(sender: System.Object;
+procedure TWebUserControl_template_datagrid_sortable.DropDownList_filter_SelectedIndexChanged(sender: System.Object;
   e: System.EventArgs);
 begin
   p.filter := Safe(DropDownList_filter.selectedvalue,NUM);
   Bind;
 end;
 
-procedure TWebUserControl_template_gridview_sortable.Bind;
+procedure TWebUserControl_template_datagrid_sortable.Bind;
 begin
-  p.biz1.BindTemplateGridViewSortable(p.filter,p.sort_order,p.be_sort_order_ascending,GridView_control);
+  p.biz1.BindTemplateDataGridSortable
+    (
+    p.filter,
+    p.sort_order,
+    p.be_sort_order_ascending,
+    DataGrid_control,
+    not p.be_interactive
+    );
 end;
 
 end.
