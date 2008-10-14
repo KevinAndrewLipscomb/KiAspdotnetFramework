@@ -15,16 +15,6 @@ uses
   System.Web.UI.HtmlControls;
 
 type
-  p_type =
-    RECORD
-    be_interactive: boolean;
-    be_loaded: boolean;
-    be_sort_order_ascending: boolean;
-    biz1: TClass_biz1;
-    biz2: TClass_biz2;
-    filter: string;
-    sort_order: string;
-    END;
   TWebUserControl_template_gridview_sortable = class(ki_web_ui.usercontrol_class)
   {$REGION 'Designer Managed Code'}
   strict private
@@ -38,6 +28,18 @@ type
     procedure GridView_control_SelectedIndexChanged(sender: System.Object; e: System.EventArgs);
   {$ENDREGION}
   strict private
+    type
+      p_type =
+        RECORD
+        be_interactive: boolean;
+        be_loaded: boolean;
+        be_sort_order_ascending: boolean;
+        biz1: TClass_biz1;
+        biz2: TClass_biz2;
+        filter: string;
+        sort_order: string;
+        END;
+  strict private
     p: p_type;
     procedure Bind;
     procedure InjectPersistentClientSideScript;
@@ -47,10 +49,6 @@ type
     DropDownList_filter: System.Web.UI.WebControls.DropDownList;
   protected
     procedure OnInit(e: System.EventArgs); override;
-  private
-    { Private Declarations }
-  public
-    { Public Declarations }
   published
     function Fresh: TWebUserControl_template_gridview_sortable;
   end;
