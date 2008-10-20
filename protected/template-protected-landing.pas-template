@@ -1,4 +1,5 @@
 unit template_protected_landing;
+  // Derived from KiAspdotnetFramework/protected/template~protected~landing.pas~template
 
 interface
 

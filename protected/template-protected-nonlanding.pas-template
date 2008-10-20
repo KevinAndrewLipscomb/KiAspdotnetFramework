@@ -1,4 +1,5 @@
 unit template_protected_nonlanding;
+  // Derived from KiAspdotnetFramework/protected/template~protected~nonlanding.pas~template
 
 interface
 
@@ -50,7 +51,7 @@ procedure TWebForm_template_protected_nonlanding.Page_Load(sender: System.Object
 begin
   if not IsPostback then begin
     //
-    Title.innertext := configurationmanager.appsettings['application_name'] + ' - template_protected_nonlanding';
+    Title.text := configurationmanager.appsettings['application_name'] + ' - template_protected_nonlanding';
     //
   end;
 end;
