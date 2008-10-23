@@ -241,7 +241,15 @@ begin
     //subject
     Merge(template_reader.ReadLine),
     //body
-    Merge(template_reader.ReadToEnd)
+    Merge(template_reader.ReadToEnd),
+    //be_html
+    FALSE,
+    //cc
+    EMPTY,
+    //bcc
+    EMPTY,
+    //reply_to
+    actor_email_address
     );
   template_reader.Close;
 end;
