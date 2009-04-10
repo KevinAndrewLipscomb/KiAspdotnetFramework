@@ -48,6 +48,7 @@ type
     procedure SetDependentFieldAblements(ablement: boolean);
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
     function PresentRecord(ki_crud_helper_user_key: string): boolean;
+    procedure SetDataEntryMode;
     procedure SetLookupMode;
   strict protected
     Button_lookup: System.Web.UI.WebControls.Button;
@@ -177,7 +178,7 @@ begin
   //
   if not p.be_loaded then begin
     //
-    LinkButton_new_record.enabled := ;
+    LinkButton_new_record.visible := p.be_ok_to_config_template_kicrudhelped_items;
     LinkButton_go_to_match_first.text := ExpandTildePath(LinkButton_go_to_match_first.text);
     LinkButton_go_to_match_prior.text := ExpandTildePath(LinkButton_go_to_match_prior.text);
     LinkButton_go_to_match_next.text := ExpandTildePath(LinkButton_go_to_match_next.text);
@@ -220,6 +221,23 @@ begin
     PresentRecord := TRUE;
     //
   end;
+end;
+
+procedure TWebUserControl_template_kicrudhelped_item.SetDataEntryMode;
+begin
+  Clear;
+  {$MESSAGE HINT 'Review appropriateness of the following two lines.'}
+  TextBox_ki_crud_helper_user_key.text := '*';
+  TextBox_ki_crud_helper_user_key.enabled := False;
+  Button_lookup.enabled := FALSE;
+  Label_lookup_arrow.enabled := FALSE;
+  Label_lookup_hint.enabled := FALSE;
+  LinkButton_reset.enabled := TRUE;
+  LinkButton_new_record.enabled := FALSE;
+  SetDependentFieldAblements(p.be_ok_to_config_template_kicrudhelped_items);
+  Button_submit.enabled := p.be_ok_to_config_template_kicrudhelped_items;
+  Button_delete.enabled := FALSE;
+  Focus(TextBox_ki_crud_helper_user_key,TRUE);
 end;
 
 procedure TWebUserControl_template_kicrudhelped_item.SetLookupMode;
@@ -364,21 +382,7 @@ end;
 procedure TWebUserControl_template_kicrudhelped_item.LinkButton_new_record_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  //
-  Clear;
-  {$MESSAGE HINT 'Review appropriateness of the following two lines.'}
-  TextBox_ki_crud_helper_user_key.text := '*';
-  TextBox_ki_crud_helper_user_key.enabled := False;
-  Button_lookup.enabled := FALSE;
-  Label_lookup_arrow.enabled := FALSE;
-  Label_lookup_hint.enabled := FALSE;
-  LinkButton_reset.enabled := TRUE;
-  LinkButton_new_record.enabled := FALSE;
-  SetDependentFieldAblements(p.be_ok_to_config_template_kicrudhelped_items);
-  Button_submit.enabled := p.be_ok_to_config_template_kicrudhelped_items;
-  Button_delete.enabled := FALSE;
-  Focus(TextBox_ki_crud_helper_user_key,TRUE);
-  //
+  SetDataEntryMode;
 end;
 
 procedure TWebUserControl_template_kicrudhelped_item.LinkButton_reset_Click(sender: System.Object;

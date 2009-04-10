@@ -48,6 +48,7 @@ type
     procedure SetDependentFieldAblements(ablement: boolean);
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
     function PresentRecord(id: string): boolean;
+    procedure SetDataEntryMode;
     procedure SetLookupMode;
   strict protected
     Label_application_name: System.Web.UI.WebControls.Label;
@@ -228,6 +229,22 @@ begin
   end;
 end;
 
+procedure TWebUserControl_template_trivial_item.SetDataEntryMode;
+begin
+  Clear;
+  TextBox_id.text := '*';
+  TextBox_id.enabled := False;
+  Button_lookup.enabled := FALSE;
+  Label_lookup_arrow.enabled := FALSE;
+  Label_lookup_hint.enabled := FALSE;
+  LinkButton_reset.enabled := TRUE;
+  LinkButton_new_record.enabled := FALSE;
+  SetDependentFieldAblements(p.be_ok_to_config_template_trivial_items);
+  Button_submit.enabled := p.be_ok_to_config_template_trivial_items;
+  Button_delete.enabled := FALSE;
+  Focus(TextBox_id,TRUE);
+end;
+
 procedure TWebUserControl_template_trivial_item.SetLookupMode;
 begin
   Clear;
@@ -367,18 +384,7 @@ end;
 procedure TWebUserControl_template_trivial_item.LinkButton_new_record_Click(sender: System.Object;
   e: System.EventArgs);
 begin
-  Clear;
-  TextBox_id.text := '*';
-  TextBox_id.enabled := False;
-  Button_lookup.enabled := FALSE;
-  Label_lookup_arrow.enabled := FALSE;
-  Label_lookup_hint.enabled := FALSE;
-  LinkButton_reset.enabled := TRUE;
-  LinkButton_new_record.enabled := FALSE;
-  SetDependentFieldAblements(p.be_ok_to_config_template_trivial_items);
-  Button_submit.enabled := p.be_ok_to_config_template_trivial_items;
-  Button_delete.enabled := FALSE;
-  Focus(TextBox_id,TRUE);
+  SetDataEntryMode;
 end;
 
 procedure TWebUserControl_template_trivial_item.LinkButton_reset_Click(sender: System.Object;
