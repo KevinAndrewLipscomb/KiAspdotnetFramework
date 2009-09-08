@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_role.pas" Inherits="UserControl_role.TWebUserControl_role"%>
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_role.ascx.cs" Inherits="UserControl_role.TWebUserControl_role"%>
 <%@ Register TagPrefix="uc1" TagName="UserControl_drop_down_date" Src="~/usercontrol/ki/UserControl_drop_down_date.ascx" %>
 <table cellspacing="0" cellpadding="5" width="100%" border="0">
   <tr>
@@ -13,7 +13,7 @@
                     <table cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td>
-              <ASP:TextBox id="TextBox_name" runat="server" cssclass="" maxlength="63" columns="63"></ASP:TextBox><ASP:Button id="Button_lookup" runat="server" causesvalidation="False" text="LOOKUP"></ASP:Button>
+              <ASP:TextBox id="TextBox_name" runat="server" cssclass="" maxlength="63" columns="63"></ASP:TextBox><ASP:Button id="Button_lookup" runat="server" causesvalidation="False" text="LOOKUP" onclick="Button_lookup_Click"></ASP:Button>
                         </td>
                         <td nowrap="True"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
                         <td><small><small><em><asp:Label id="Label_lookup_hint" runat="server">Lookup by partial or full Role title</asp:Label></em></small></small></td>
@@ -23,19 +23,19 @@
                   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td valign="middle">
                     <small>
-                      <ASP:LinkButton id="LinkButton_reset" runat="server" causesvalidation="False" enabled="False">New lookup</ASP:LinkButton>
+                      <ASP:LinkButton id="LinkButton_reset" runat="server" causesvalidation="False" enabled="False" onclick="LinkButton_reset_Click">New lookup</ASP:LinkButton>
                     </small>
                   </td>
                   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td valign="middle">
                     <small>
-                      <ASP:LinkButton id="LinkButton_new_record" runat="server" causesvalidation="False" visible="False">Enter brand new Role</ASP:LinkButton>
+                      <ASP:LinkButton id="LinkButton_new_record" runat="server" causesvalidation="False" visible="False" onclick="LinkButton_new_record_Click">Enter brand new Role</ASP:LinkButton>
                     </small>
                   </td>
                 </tr>
               </table>
-      <asp:LinkButton id="LinkButton_go_to_match_first" runat="server" text='<IMG src="~/protected/image/first_track_blue16_h.png" alt="First match" border="0" height="16" width="16" />' causesvalidation="False" visible="False"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_prior" runat="server" text='<IMG src="~/protected/image/play_blue16_h-flipped.png" alt="Prior match" border="0" height="16" width="16" />' causesvalidation="False" visible="False"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_next" runat="server" text='<IMG src="~/protected/image/play_blue16_h.png" alt="Next match" border="0" height="16" width="16" />' causesvalidation="False" visible="False"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_last" runat="server" text='<IMG src="~/protected/image/last_track_blue16_h.png" alt="Last match" border="0" height="16" width="16" />' causesvalidation="False" visible="False"></asp:LinkButton>
-      <ASP:DropDownList id="DropDownList_name" runat="server" autopostback="True" visible="False"></ASP:DropDownList><br>
+      <asp:LinkButton id="LinkButton_go_to_match_first" runat="server" text='<IMG src="~/protected/image/first_track_blue16_h.png" alt="First match" border="0" height="16" width="16" />' causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_first_Click"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_prior" runat="server" text='<IMG src="~/protected/image/play_blue16_h-flipped.png" alt="Prior match" border="0" height="16" width="16" />' causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_prior_Click"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_next" runat="server" text='<IMG src="~/protected/image/play_blue16_h.png" alt="Next match" border="0" height="16" width="16" />' causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_next_Click"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_last" runat="server" text='<IMG src="~/protected/image/last_track_blue16_h.png" alt="Last match" border="0" height="16" width="16" />' causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_last_Click"></asp:LinkButton>
+      <ASP:DropDownList id="DropDownList_name" runat="server" autopostback="True" visible="False" onselectedindexchanged="DropDownList_name_SelectedIndexChanged"></ASP:DropDownList><br>
             </font></td>
           <td nowrap="True" valign="top">
             <ASP:RequiredFieldValidator id="RequiredFieldValidator_name" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_name" errormessage="Please enter Name.">!ERR!</ASP:RequiredFieldValidator>
@@ -62,8 +62,8 @@
       </table></td>
   </tr>
 </table>
-<ASP:Button id="Button_submit" runat="server" enabled="False" text="Submit"></ASP:Button>&nbsp;&nbsp;
-<ASP:Button id="Button_delete" runat="server" enabled="False" text="Delete"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<ASP:Button id="Button_submit" runat="server" enabled="False" text="Submit" onclick="Button_submit_Click"></ASP:Button>&nbsp;&nbsp;
+<ASP:Button id="Button_delete" runat="server" enabled="False" text="Delete" onclick="Button_delete_Click"></ASP:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a id="Anchor_quick_message_shortcut" runat="server" visible="False">QuickMessage</a>
 <p>
   <table id="Table_holders" bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1" runat="server" visible="False">
@@ -129,7 +129,7 @@
                 <tr>
                   <td></td>
                   <td>
-                    <ASP:Button id="Button_send" runat="server" text="Send" validationgroup="QuickMessage"></ASP:Button></td>
+                    <ASP:Button id="Button_send" runat="server" text="Send" validationgroup="QuickMessage" onclick="Button_send_Click"></ASP:Button></td>
                   <td></td>
                 </tr>
                 <tr>

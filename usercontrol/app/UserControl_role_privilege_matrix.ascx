@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_role_privilege_matrix.pas" Inherits="UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix"%>
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_role_privilege_matrix.ascx.cs" Inherits="UserControl_role_privilege_matrix.TWebUserControl_role_privilege_matrix"%>
 <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
   <tr>
     <td>

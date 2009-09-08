@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_role_member_matrix.pas" Inherits="UserControl_role_member_matrix.TWebUserControl_role_member_matrix"%>
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_role_member_matrix.ascx.cs" Inherits="UserControl_role_member_matrix.TWebUserControl_role_member_matrix"%>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
   <tr>
