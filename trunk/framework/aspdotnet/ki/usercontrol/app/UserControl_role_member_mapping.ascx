@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_role_member_mapping.pas" Inherits="UserControl_role_member_mapping.TWebUserControl_role_member_mapping"%>
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_role_member_mapping.ascx.cs" Inherits="UserControl_role_member_mapping.TWebUserControl_role_member_mapping"%>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <table cellspacing="0" cellpadding="10" border="0">
   <tr>
@@ -43,7 +43,7 @@
           <td><asp:RequiredFieldValidator id="RequiredFieldValidator_member" runat="server" errormessage="Please select a Member." font-bold="True" controltovalidate="DropDownList_member" setfocusonerror="True" display="Dynamic">!ERR!</asp:RequiredFieldValidator></td>
         </tr>
         <tr>
-          <td><asp:Button id="Button_add" runat="server" text="<--&nbsp;Add"></asp:Button></td>
+          <td><asp:Button id="Button_add" runat="server" text="<--&nbsp;Add" onclick="Button_add_Click"></asp:Button></td>
           <td></td>
         </tr>
       </table>
