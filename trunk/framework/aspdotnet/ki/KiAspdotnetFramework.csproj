@@ -10,7 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KiAspdotnetFramework</RootNamespace>
     <AssemblyName>KiAspdotnetFramework</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,20 +40,9 @@
     <Reference Include="MySql.Data, Version=5.0.8.1, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -328,6 +319,9 @@
       <DependentUpon>UserControl_attachment_explorer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="usercontrol\ki\UserControl_attachment_explorer.ascx.designer.cs">
+      <DependentUpon>UserControl_attachment_explorer.ascx</DependentUpon>
+    </Compile>
     <Compile Include="usercontrol\ki\UserControl_bread_crumb_trail.ascx.cs">
       <DependentUpon>UserControl_bread_crumb_trail.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -345,6 +339,9 @@
     <Compile Include="usercontrol\ki\UserControl_drop_down_date.ascx.cs">
       <DependentUpon>UserControl_drop_down_date.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\ki\UserControl_drop_down_date.ascx.designer.cs">
+      <DependentUpon>UserControl_drop_down_date.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_print_div.ascx.cs">
       <DependentUpon>UserControl_print_div.ascx</DependentUpon>
@@ -402,6 +399,8 @@
     <Content Include="usercontrol\app\UserControl_user.ascx" />
     <Content Include="usercontrol\app\UserControl_users_and_mapping_binder.ascx" />
     <Content Include="usercontrol\app\UserControl_user_member_mapping.ascx" />
+    <Content Include="usercontrol\ki\image\delete_x16_h.png" />
+    <Content Include="usercontrol\ki\image\paperclip_16x16.gif" />
     <Content Include="usercontrol\ki\UserControl_about_by.ascx" />
     <Content Include="usercontrol\ki\UserControl_about_tools.ascx" />
     <Content Include="usercontrol\ki\UserControl_attachment_explorer.ascx" />
