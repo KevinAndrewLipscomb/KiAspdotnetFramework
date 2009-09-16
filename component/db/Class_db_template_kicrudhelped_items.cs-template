@@ -1,0 +1,133 @@
+// Derived from KiAspdotnetFramework/component/db/Class~db~template~kicrudhelped~items.cs~template
+
+using Class_db;
+using Class_db_trail;
+using kix;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections;
+using System.Web.UI.WebControls;
+using UserControl_drop_down_date;
+
+namespace Class_db_template_kicrudhelped_items
+{
+    public class TClass_db_template_kicrudhelped_items: TClass_db
+    {
+        private TClass_db_trail db_trail = null;
+
+        public TClass_db_template_kicrudhelped_items() : base()
+        {
+            // TODO: Add any constructor code here
+            db_trail = new TClass_db_trail();
+        }
+        public bool Bind(string partial_spec, object target)
+        {
+            bool result;
+            MySqlDataReader dr;
+            this.Open();
+            ((target) as ListControl).Items.Clear();
+            dr = new MySqlCommand("select template_kicrudhelped_item.id as template_kicrudhelped_item_id" + " , CONVERT(" + spec_clause + " USING utf8) as spec" + " from template_kicrudhelped_item" + " join client on (client.id=template_kicrudhelped_item.client_code)" + " where " + spec_clause + " like \"%" + partial_spec.ToUpper() + "%\"" + " order by template_kicrudhelped_item.id", this.connection).ExecuteReader();
+            while (dr.Read())
+            {
+                ((target) as ListControl).Items.Add(new ListItem(dr["ki_crud_helper_user_key"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
+            }
+            dr.Close();
+            this.Close();
+            result = ((target) as ListControl).Items.Count > 0;
+            return result;
+        }
+
+        public void BindDirectToListControl(object target)
+        {
+            MySqlDataReader dr;
+            this.Open();
+            ((target) as ListControl).Items.Clear();
+            dr = new MySqlCommand("SELECT id, FROM template_kicrudhelped_item order by ", this.connection).ExecuteReader();
+            while (dr.Read())
+            {
+                ((target) as ListControl).Items.Add(new ListItem(dr["ki_crud_helper_user_key"].ToString(), dr["id"].ToString()));
+            }
+            dr.Close();
+            this.Close();
+        }
+
+        public bool Delete(string id)
+        {
+            bool result;
+            result = true;
+            this.Open();
+            try {
+                new MySqlCommand(db_trail.Saved("delete from template_kicrudhelped_item where id = \"" + id + "\""), this.connection).ExecuteNonQuery();
+            }
+            catch(System.Exception e) {
+                if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
+                {
+                    result = false;
+                }
+                else
+                {
+                    throw e;
+                }
+            }
+            this.Close();
+            return result;
+        }
+
+        public bool Get
+          (
+//<KiCrudHelper:GetDefinition/>
+          )
+        {
+            bool result;
+            MySqlDataReader dr;
+//<KiCrudHelper:GetOutArgInit/>
+            result = false;
+            this.Open();
+            dr = new MySqlCommand("select * from template_kicrudhelped_item where CAST(id AS CHAR) = \"" + id + "\"", this.connection).ExecuteReader();
+            if (dr.Read())
+            {
+//<KiCrudHelper:DbGetBody/>
+                result = true;
+            }
+            dr.Close();
+            this.Close();
+
+            return result;
+        }
+
+        public void Set
+          (
+//<KiCrudHelper:SetDefinition/>
+          )
+//
+// If any fields in this table are foreign keys for a subordinate table:
+// a. Uncomment the "//1" lines.
+// b. Customize the SQL as indicated by {bracketed comments}.
+//
+        {
+//1            string childless_field_assignments_clause;
+            uint i;
+//1            childless_field_assignments_clause = // {Move childless field assignments here.}
+            this.Open();
+            new MySqlCommand
+              (
+              db_trail.Saved
+                (
+//1      'insert template_kicrudhelped_item'
+//1      + ' set // {Move parent field assignments here.}
+//1      + ' , ' + childless_field_assignments_clause
+//1      + ' on duplicate key update '
+//1      + childless_field_assignments_clause
+      'replace template_kicrudhelped_item'
+//<KiCrudHelper:DbSetBody/>
+                ),
+                this.connection
+              )
+              .ExecuteNonQuery();
+            this.Close();
+
+        }
+
+    } // end TClass_db_template_kicrudhelped_items
+
+}
