@@ -227,7 +227,7 @@ namespace UserControl_role
             this.GridView_holders.RowDataBound += new System.Web.UI.WebControls.GridViewRowEventHandler(this.GridView_holders_RowDataBound);
             this.GridView_holders.RowCreated += new System.Web.UI.WebControls.GridViewRowEventHandler(this.GridView_holders_RowCreated);
             this.PreRender += this.TWebUserControl_role_PreRender;
-            this.Load += this.Page_Load;
+            //this.Load += this.Page_Load;
         }
 
         private void TWebUserControl_role_PreRender(object sender, System.EventArgs e)
@@ -405,7 +405,7 @@ namespace UserControl_role
             p.biz_role_member_map.BindHolders(role_name, GridView_holders, p.sort_order, p.be_sort_order_ascending);
             p.be_gridview_empty = (p.num_gridview_rows == 0);
             Table_holders.Visible = !p.be_gridview_empty;
-            Label_distribution_list.Text = (p.distribution_list + k.SPACE).TrimEnd(new char[] {k.COMMA, k.SPACE});
+            Label_distribution_list.Text = (p.distribution_list + k.SPACE).TrimEnd(new char[] {Convert.ToChar(k.COMMA), Convert.ToChar(k.SPACE)});
             Label_num_rows.Text = p.num_gridview_rows.ToString();
             be_user_authorized_to_send_quickmessages = k.Has((string[])(Session["privilege_array"]), "send-quickmessages") && !p.be_gridview_empty;
             Anchor_quick_message_shortcut.Visible = be_user_authorized_to_send_quickmessages;

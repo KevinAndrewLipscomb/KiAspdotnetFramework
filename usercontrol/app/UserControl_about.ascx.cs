@@ -52,7 +52,7 @@ namespace UserControl_about
         private void InitializeComponent()
         {
             this.PreRender += this.TWebUserControl_about_PreRender;
-            this.Load += this.Page_Load;
+            //this.Load += this.Page_Load;
         }
 
         private void TWebUserControl_about_PreRender(object sender, System.EventArgs e)
