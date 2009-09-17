@@ -26,10 +26,19 @@ namespace Class_db_template_kicrudhelped_items
       MySqlDataReader dr;
       this.Open();
       ((target) as ListControl).Items.Clear();
-      dr = new MySqlCommand("select template_kicrudhelped_item.id as template_kicrudhelped_item_id" + " , CONVERT(" + spec_clause + " USING utf8) as spec" + " from template_kicrudhelped_item" + " join client on (client.id=template_kicrudhelped_item.client_code)" + " where " + spec_clause + " like \"%" + partial_spec.ToUpper() + "%\"" + " order by template_kicrudhelped_item.id", this.connection).ExecuteReader();
+      dr = new MySqlCommand
+        (
+        "select template_kicrudhelped_item.id as template_kicrudhelped_item_id"
+        + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
+        + " from template_kicrudhelped_item"
+        + " where concat(ki_crud_helper_spec_clause) like '%" + partial_spec.ToUpper() + "%'"
+        + " order by spec",
+        this.connection
+        )
+        .ExecuteReader();
       while (dr.Read())
         {
-        ((target) as ListControl).Items.Add(new ListItem(dr["ki_crud_helper_user_key"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
+        ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
         }
       dr.Close();
       this.Close();
@@ -42,23 +51,31 @@ namespace Class_db_template_kicrudhelped_items
       MySqlDataReader dr;
       this.Open();
       ((target) as ListControl).Items.Clear();
-      dr = new MySqlCommand("SELECT id, FROM template_kicrudhelped_item order by ", this.connection).ExecuteReader();
+      dr = new MySqlCommand
+        (
+        "SELECT ki_crud_helper_user_key,"
+        + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
+        + " FROM template_kicrudhelped_item"
+        + " order by spec",
+        this.connection
+        )
+        .ExecuteReader();
       while (dr.Read())
         {
-        ((target) as ListControl).Items.Add(new ListItem(dr["ki_crud_helper_user_key"].ToString(), dr["id"].ToString()));
+        ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
         }
       dr.Close();
       this.Close();
       }
 
-    public bool Delete(string id)
+    public bool Delete(string ki_crud_helper_user_key)
       {
       bool result;
       result = true;
       this.Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from template_kicrudhelped_item where id = \"" + id + "\""), this.connection).ExecuteNonQuery();
+        new MySqlCommand(db_trail.Saved("delete from template_kicrudhelped_item where ki_crud_helper_user_key = \"" + ki_crud_helper_user_key + "\""), this.connection).ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -87,7 +104,7 @@ namespace Class_db_template_kicrudhelped_items
       result = false;
       //
       this.Open();
-      dr = new MySqlCommand("select * from template_kicrudhelped_item where CAST(id AS CHAR) = \"" + id + "\"", this.connection).ExecuteReader();
+      dr = new MySqlCommand("select * from template_kicrudhelped_item where CAST(ki_crud_helper_user_key AS CHAR) = \"" + ki_crud_helper_user_key + "\"", this.connection).ExecuteReader();
       if (dr.Read())
         {
 //<KiCrudHelper:DbGetBody/>
