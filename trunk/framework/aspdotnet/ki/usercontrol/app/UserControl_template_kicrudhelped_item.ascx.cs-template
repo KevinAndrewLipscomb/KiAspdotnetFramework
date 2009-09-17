@@ -139,7 +139,7 @@ namespace UserControl_template_kicrudhelped_item
         (
         p.biz_template_kicrudhelped_items.Get
           (
-//<KiCrudHelper:BizGetSetCalls/>
+//<KiCrudHelper:BizGetCalls/>
           )
         )
         {
@@ -160,7 +160,7 @@ namespace UserControl_template_kicrudhelped_item
     private void SetDataEntryMode()
       {
       Clear();
-#WARN:'Review appropriateness of the following two lines.'
+#warning Review appropriateness of the following two lines.
       TextBox_ki_crud_helper_user_key.Text = "*";
       TextBox_ki_crud_helper_user_key.Enabled = false;
       Button_lookup.Enabled = false;
@@ -235,7 +235,7 @@ namespace UserControl_template_kicrudhelped_item
 //<KiCrudHelper:SubmitSetPrep/>
         p.biz_template_kicrudhelped_items.Set
           (
-#WARN:'Safe_hint values should be tightened.'
+#warning Safe_hint values should be tightened.
 //<KiCrudHelper:SubmitSet/>
           );
         Alert(k.alert_cause_type.USER, k.alert_state_type.SUCCESS, "recsaved", "Record saved.", true);
@@ -249,35 +249,35 @@ namespace UserControl_template_kicrudhelped_item
 
     protected void DropDownList_id_SelectedIndexChanged(object sender, System.EventArgs e)
       {
-#WARN:'Review safe-hint and tighten if necessary'
+#warning Review safe-hint and tighten if necessary
       PresentRecord(k.Safe(DropDownList_ki_crud_helper_user_key.SelectedValue, k.safe_hint_type.PUNCTUATED));
       }
 
     protected void LinkButton_go_to_match_first_Click(object sender, System.EventArgs e)
       {
       DropDownList_ki_crud_helper_user_key.SelectedIndex = 1;
-#WARN:'Review safe-hint and tighten if necessary'
+#warning Review safe-hint and tighten if necessary
       PresentRecord(k.Safe(DropDownList_ki_crud_helper_user_key.SelectedValue, k.safe_hint_type.PUNCTUATED));
       }
 
     protected void LinkButton_go_to_match_prior_Click(object sender, System.EventArgs e)
       {
       DropDownList_ki_crud_helper_user_key.SelectedIndex = Math.Max(1, (DropDownList_ki_crud_helper_user_key.SelectedIndex - 1));
-#WARN:'Review safe-hint and tighten if necessary'
+#warning Review safe-hint and tighten if necessary
       PresentRecord(k.Safe(DropDownList_ki_crud_helper_user_key.SelectedValue, k.safe_hint_type.PUNCTUATED));
       }
 
     protected void LinkButton_go_to_match_next_Click(object sender, System.EventArgs e)
       {
       DropDownList_ki_crud_helper_user_key.SelectedIndex = Math.Min((DropDownList_ki_crud_helper_user_key.SelectedIndex + 1), (DropDownList_ki_crud_helper_user_key.Items.Count - 1));
-#WARN:'Review safe-hint and tighten if necessary'
+#warning Review safe-hint and tighten if necessary
       PresentRecord(k.Safe(DropDownList_ki_crud_helper_user_key.SelectedValue, k.safe_hint_type.PUNCTUATED));
       }
 
     protected void LinkButton_go_to_match_last_Click(object sender, System.EventArgs e)
       {
       DropDownList_ki_crud_helper_user_key.SelectedIndex = DropDownList_ki_crud_helper_user_key.Items.Count - 1;
-#WARN:'Review safe-hint and tighten if necessary'
+#warning Review safe-hint and tighten if necessary
       PresentRecord(k.Safe(DropDownList_ki_crud_helper_user_key.SelectedValue, k.safe_hint_type.PUNCTUATED));
       }
 

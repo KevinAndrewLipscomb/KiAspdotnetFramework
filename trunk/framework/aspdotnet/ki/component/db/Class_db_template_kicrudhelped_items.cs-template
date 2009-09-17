@@ -82,8 +82,10 @@ namespace Class_db_template_kicrudhelped_items
       {
       bool result;
       MySqlDataReader dr;
-//<KiCrudHelper:GetOutArgInit/>
+      //
+//<KiCrudHelper:InitGetOutArgs/>
       result = false;
+      //
       this.Open();
       dr = new MySqlCommand("select * from template_kicrudhelped_item where CAST(id AS CHAR) = \"" + id + "\"", this.connection).ExecuteReader();
       if (dr.Read())
@@ -117,7 +119,7 @@ namespace Class_db_template_kicrudhelped_items
 //1          + ' , ' + childless_field_assignments_clause
 //1          + ' on duplicate key update '
 //1          + childless_field_assignments_clause
-          'replace template_kicrudhelped_item'
+          "replace template_kicrudhelped_item"
 //<KiCrudHelper:DbSetBody/>
           ),
           this.connection
