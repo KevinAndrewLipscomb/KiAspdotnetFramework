@@ -28,7 +28,7 @@ namespace Class_db_template_kicrudhelped_items
       ((target) as ListControl).Items.Clear();
       dr = new MySqlCommand
         (
-        "select template_kicrudhelped_item.id as template_kicrudhelped_item_id"
+        "select ki_crud_helper_user_key"
         + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
         + " from template_kicrudhelped_item"
         + " where concat(ki_crud_helper_spec_clause) like '%" + partial_spec.ToUpper() + "%'"
@@ -94,7 +94,8 @@ namespace Class_db_template_kicrudhelped_items
 
     public bool Get
       (
-//<KiCrudHelper:GetDefinition/>
+      string ki_crud_helper_user_key,
+//<KiCrudHelper:GetOutArgs/>
       )
       {
       bool result;

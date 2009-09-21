@@ -5,6 +5,44 @@
   <tr>
     <td valign="top">
       <table cellspacing="0" cellpadding="5" border="0">
+  <tr>
+    <td bgcolor="gainsboro" valign="top"><font class="">ki_crud_helper_user_key:</font></td>
+    <td valign="top"><font class="">
+      <table cellspacing="0" cellpadding="0" width="100%" border="0">
+         <tr>
+           <td valign="middle">
+             <table cellspacing="0" cellpadding="0" border="0">
+               <tr>
+                 <td>
+      <ASP:TextBox id="TextBox_ki_crud_helper_user_key" runat="server"  cssclass=""></ASP:TextBox><ASP:Button id="Button_lookup" runat="server" causesvalidation="False" text="LOOKUP" onclick="Button_lookup_Click"></ASP:Button>
+                </td>
+                <td nowrap="True"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
+                <td><small><small><em><asp:Label id="Label_lookup_hint" runat="server">Lookup by partial or full field value</asp:Label></em></small></small></td>
+              </tr>
+            </table>
+          </td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle">
+            <small>
+              <ASP:LinkButton id="LinkButton_reset" runat="server" causesvalidation="False" enabled="False" onclick="LinkButton_reset_Click">New lookup</ASP:LinkButton>
+            </small>
+          </td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle">
+            <small>
+              <ASP:LinkButton id="LinkButton_new_record" runat="server" causesvalidation="False" visible="False" onclick="LinkButton_new_record_Click">Enter&nbsp;brand&nbsp;new&nbsp;record</ASP:LinkButton>
+            </small>
+          </td>
+        </tr>
+      </table>
+      <asp:LinkButton id="LinkButton_go_to_match_first" runat="server" text="<IMG src=&quot;~/protected/image/first_track_blue16_h.png&quot; alt=&quot;First match&quot; border=&quot;0&quot; height=&quot;16&quot; width=&quot;16&quot; />" causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_first_Click"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_prior" runat="server" text="<IMG src=&quot;~/protected/image/play_blue16_h-flipped.png&quot; alt=&quot;Prior match&quot; border=&quot;0&quot; height=&quot;16&quot; width=&quot;16&quot; />" causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_prior_Click"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_next" runat="server" text="<IMG src=&quot;~/protected/image/play_blue16_h.png&quot; alt=&quot;Next match&quot; border=&quot;0&quot; height=&quot;16&quot; width=&quot;16&quot; />" causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_next_Click"></asp:LinkButton><asp:LinkButton id="LinkButton_go_to_match_last" runat="server" text="<IMG src=&quot;~/protected/image/last_track_blue16_h.png&quot; alt=&quot;Last match&quot; border=&quot;0&quot; height=&quot;16&quot; width=&quot;16&quot; />" causesvalidation="False" visible="False" onclick="LinkButton_go_to_match_last_Click"></asp:LinkButton>
+      <ASP:DropDownList id="DropDownList_ki_crud_helper_user_key" runat="server" visible="False" autopostback="True" onselectedindexchanged="DropDownList_ki_crud_helper_user_key_SelectedIndexChanged"></ASP:DropDownList><br>
+    </font>
+    </td>
+    <td nowrap="True" valign="top">
+      <ASP:RequiredFieldValidator id="RequiredFieldValidator_ki_crud_helper_user_key" runat="server" errormessage="Please enter ki_crud_helper_user_key." font-bold="True" controltovalidate="TextBox_ki_crud_helper_user_key">!ERR!</ASP:RequiredFieldValidator>
+    </td>
+  </tr>
 <!-- KiCrudHelper:FormRows -->
       </table>
     </td>

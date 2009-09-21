@@ -33,11 +33,13 @@ namespace Class_biz_template_kicrudhelped_items
 
     public bool Get
       (
-//<KiCrudHelper:GetDefinition/>
+      string ki_crud_helper_user_key,
+//<KiCrudHelper:GetOutArgs/>
       )
       {
       return db_template_kicrudhelped_items.Get
         (
+        ki_crud_helper_user_key,
 //<KiCrudHelper:DbGetCalls/>
         );
       }

@@ -19,6 +19,8 @@ namespace UserControl_template_kicrudhelped_item
 
     private void Clear()
       {
+      TextBox_ki_crud_helper_user_key.Text = k.EMPTY;
+      DropDownList_ki_crud_helper_user_key.Visible = false;
 //<KiCrudHelper:ClearStatements/>
       LinkButton_go_to_match_prior.Visible = false;
       LinkButton_go_to_match_next.Visible = false;
@@ -138,12 +140,14 @@ namespace UserControl_template_kicrudhelped_item
         (
         p.biz_template_kicrudhelped_items.Get
           (
+          ki_crud_helper_user_key,
 //<KiCrudHelper:BizGetCalls/>
           )
         )
         {
-//<KiCrudHelper:PresentRecordAssignments/>
+        TextBox_ki_crud_helper_user_key.Text = ki_crud_helper_user_key;
         TextBox_ki_crud_helper_user_key.Enabled = false;
+//<KiCrudHelper:PresentRecordAssignments/>
         Button_lookup.Enabled = false;
         Label_lookup_arrow.Enabled = false;
         Label_lookup_hint.Enabled = false;
@@ -159,7 +163,7 @@ namespace UserControl_template_kicrudhelped_item
     private void SetDataEntryMode()
       {
       Clear();
-#warning Review appropriateness of the following two lines.
+#warning Only keep the following line if it exactly matches "TextBox_id.Text = "*";".
       TextBox_ki_crud_helper_user_key.Text = "*";
       TextBox_ki_crud_helper_user_key.Enabled = false;
       Button_lookup.Enabled = false;
@@ -193,7 +197,8 @@ namespace UserControl_template_kicrudhelped_item
       if (Session["UserControl_template_kicrudhelped_item.p"] != null)
         {
         p = (p_type)(Session["UserControl_template_kicrudhelped_item.p"]);
-        p.be_loaded = IsPostBack && ((Session["UserControl_member_binder_UserControl_template_kicrudhelped_item_binder_PlaceHolder_content"] as string) == "UserControl_template_kicrudhelped_item");
+#warning Revise the following line if the usercontrol will not be a direct child of the member binder.
+        p.be_loaded = IsPostBack && ((Session["UserControl_member_binder_PlaceHolder_content"] as string) == "UserControl_template_kicrudhelped_item");
         }
       else
         {
@@ -246,7 +251,7 @@ namespace UserControl_template_kicrudhelped_item
         }
       }
 
-    protected void DropDownList_id_SelectedIndexChanged(object sender, System.EventArgs e)
+    protected void DropDownList_ki_crud_helper_user_key_SelectedIndexChanged(object sender, System.EventArgs e)
       {
 #warning Review safe-hint and tighten if necessary
       PresentRecord(k.Safe(DropDownList_ki_crud_helper_user_key.SelectedValue, k.safe_hint_type.PUNCTUATED));
