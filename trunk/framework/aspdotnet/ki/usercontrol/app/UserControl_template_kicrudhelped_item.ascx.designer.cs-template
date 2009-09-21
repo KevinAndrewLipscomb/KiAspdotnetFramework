@@ -114,6 +114,8 @@ namespace UserControl_template_kicrudhelped_item {
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_delete;
         
+        protected global::System.Web.UI.WebControls.TextBox TextBox_ki_crud_helper_user_key;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_ki_crud_helper_user_key;
 //<KiCrudHelper:ControlDeclarations/>
 
     }
