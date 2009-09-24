@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("KiAspdotnetFramework")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("IBM")]
+[assembly: AssemblyCompany("Kalips'o Infogistics LLC")]
 [assembly: AssemblyProduct("KiAspdotnetFramework")]
-[assembly: AssemblyCopyright("Copyright © IBM 2009")]
+[assembly: AssemblyCopyright("Copyright © Kalips'o Infogistics LLC 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
