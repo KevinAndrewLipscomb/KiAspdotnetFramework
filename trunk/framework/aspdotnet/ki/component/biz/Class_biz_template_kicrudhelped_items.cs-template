@@ -46,11 +46,13 @@ namespace Class_biz_template_kicrudhelped_items
 
     public void Set
       (
+      string ki_crud_helper_user_key,
 //<KiCrudHelper:SetDefinition/>
       )
       {
       db_template_kicrudhelped_items.Set
         (
+        ki_crud_helper_user_key,
 //<KiCrudHelper:DbSetCalls/>
         );
       }

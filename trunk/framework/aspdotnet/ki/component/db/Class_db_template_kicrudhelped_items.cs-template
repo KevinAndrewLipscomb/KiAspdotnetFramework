@@ -22,16 +22,15 @@ namespace Class_db_template_kicrudhelped_items
 
     public bool Bind(string partial_spec, object target)
       {
-      bool result;
-      MySqlDataReader dr;
+      var concat_clause = "concat(ki_crud_helper_spec_clause)";
       this.Open();
       ((target) as ListControl).Items.Clear();
-      dr = new MySqlCommand
+      var dr = new MySqlCommand
         (
         "select ki_crud_helper_user_key"
-        + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
+        + " , CONVERT(" + concat_clause + " USING utf8) as spec"
         + " from template_kicrudhelped_item"
-        + " where concat(ki_crud_helper_spec_clause) like '%" + partial_spec.ToUpper() + "%'"
+        + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
         + " order by spec",
         this.connection
         )
@@ -42,18 +41,16 @@ namespace Class_db_template_kicrudhelped_items
         }
       dr.Close();
       this.Close();
-      result = ((target) as ListControl).Items.Count > 0;
-      return result;
+      return ((target) as ListControl).Items.Count > 0;
       }
 
     public void BindDirectToListControl(object target)
       {
-      MySqlDataReader dr;
       this.Open();
       ((target) as ListControl).Items.Clear();
-      dr = new MySqlCommand
+      var dr = new MySqlCommand
         (
-        "SELECT ki_crud_helper_user_key,"
+        "SELECT ki_crud_helper_user_key"
         + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
         + " FROM template_kicrudhelped_item"
         + " order by spec",
@@ -118,27 +115,23 @@ namespace Class_db_template_kicrudhelped_items
 
     public void Set
       (
+      string ki_crud_helper_user_key,
 //<KiCrudHelper:SetDefinition/>
       )
-//
-// If any fields in this table are foreign keys for a subordinate table:
-// a. Uncomment the "//1" lines.
-// b. Customize the SQL as indicated by {bracketed comments}.
-//
       {
-//1      string childless_field_assignments_clause = // {Move childless field assignments here.}
+      string childless_field_assignments_clause = k.EMPTY
+//<KiCrudHelper:DbSetBody/>
+      + k.EMPTY;
       this.Open();
       new MySqlCommand
         (
         db_trail.Saved
           (
-//1          'insert template_kicrudhelped_item'
-//1          + ' set // {Move parent field assignments here.}
-//1          + ' , ' + childless_field_assignments_clause
-//1          + ' on duplicate key update '
-//1          + childless_field_assignments_clause
-          "replace template_kicrudhelped_item"
-//<KiCrudHelper:DbSetBody/>
+          "insert template_kicrudhelped_item"
+          + " set ki_crud_helper_user_key = NULLIF('" + ki_crud_helper_user_key + "','')"
+          + " , " + childless_field_assignments_clause
+          + " on duplicate key update "
+          + childless_field_assignments_clause
           ),
           this.connection
         )
