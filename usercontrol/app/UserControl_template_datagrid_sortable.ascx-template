@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_datagrid_sortable.pas" Inherits="UserControl_template_datagrid_sortable.TWebUserControl_template_datagrid_sortable"%>
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_template_datagrid_sortable.ascx.cs" Inherits="UserControl_template_datagrid_sortable.TWebUserControl_template_datagrid_sortable"%>
 <!-- Derived from KiAspdotnetFramework/usercontrol/app/UserControl~template~datagrid~sortable.ascx-template -->
 <asp:UpdatePanel id="UpdatePanel_control" runat="server" updatemode="Conditional">
   <ContentTemplate>
@@ -7,7 +7,18 @@
         <td>
           <table cellspacing="0" cellpadding="10" border="0">
             <tr>
-              <td bgcolor="#dcdcdc"><strong>Filter:&nbsp;<asp:DropDownList id="DropDownList_filter" runat="server" autopostback="True"></asp:DropDownList></strong></td>
+              <td bgcolor="#dcdcdc">
+                <table cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td>
+                      <strong>Filter:&nbsp;<asp:DropDownList id="DropDownList_filter" runat="server" autopostback="True"></asp:DropDownList></strong>
+                    </td>
+                    <td align="right">
+                      <asp:Literal ID="Literal_num_0s" runat="server"></asp:Literal> 0s
+                    </td>
+                  </tr>
+                </table>
+              </td>
             </tr>
             <tr>
               <td>
