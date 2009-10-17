@@ -176,7 +176,7 @@ namespace UserControl_template_datagrid_sortable
       {
       if (new ArrayList(new object[] {ListItemType.AlternatingItem, ListItemType.Item, ListItemType.EditItem, ListItemType.SelectedItem}).Contains(e.Item.ItemType))
         {
-        SessionSet("0_id", k.Safe(e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].Text, k.safe_hint_type.NUM));
+        SessionSet("0_summary",p.biz_0s.Summary(k.Safe(e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].Text,k.safe_hint_type.NUM)));
         DropCrumbAndTransferTo("template_datagrid_sortable_detail.aspx");
         }
       }
@@ -191,6 +191,15 @@ namespace UserControl_template_datagrid_sortable
           link_button = ((e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_SELECT].Controls[0]) as LinkButton);
           link_button.Text = k.ExpandTildePath(link_button.Text);
           ScriptManager.GetCurrent(Page).RegisterPostBackControl(link_button);
+          //
+          // Remove all cell controls from viewstate except for the one at TCI_ID.
+          //
+          foreach (TableCell cell in e.Item.Cells)
+            {
+            cell.EnableViewState = false;
+            }
+          e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].EnableViewState = true;
+          //
           p.num_0s++;
           }
         }
