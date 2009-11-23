@@ -33,29 +33,9 @@ namespace template_protected_nonlanding
 
     protected void Page_Load(object sender, System.EventArgs e)
       {
-      if (IsPostBack)
+      if (!IsPostBack)
         {
-        if ((Session["template_protected_nonlanding.p"] != null))
-          {
-          p = (p_type)(Session["template_protected_nonlanding.p"]);
-          }
-        else
-          {
-          Server.Transfer("~/timeout.aspx");
-          }
-        }
-      else
-        {
-        if (Request.ServerVariables["URL"] == Request.CurrentExecutionFilePath)
-          {
-          // The request for this page could not have been the result of a Server.Transfer call, and the session state is therefore unknown.  This is rarely allowed.
-          Session.Clear();
-          Server.Transfer("~/login.aspx");
-          }
-        else
-          {
-          Title = Server.HtmlEncode(ConfigurationManager.AppSettings["application_name"]) + " - template_protected_nonlanding";
-          }
+        Title = Server.HtmlEncode(ConfigurationManager.AppSettings["application_name"]) + " - template_protected_nonlanding";
         }
       }
 
@@ -64,6 +44,17 @@ namespace template_protected_nonlanding
       // Required for Designer support
       InitializeComponent();
       base.OnInit(e);
+      var nature_of_visit = NatureOfVisit("mark_vehicle_down.p");
+      if (nature_of_visit == nature_of_visit_type.VISIT_INITIAL)
+        {
+        //
+        // Initialize p.~ objects here.
+        //
+        }
+      else if (nature_of_visit == nature_of_visit_type.VISIT_POSTBACK_STANDARD)
+        {
+        p = (p_type)(Session["mark_vehicle_down.p"]);
+        }
       }
 
     private void TWebForm_template_protected_nonlanding_PreRender(object sender, System.EventArgs e)
