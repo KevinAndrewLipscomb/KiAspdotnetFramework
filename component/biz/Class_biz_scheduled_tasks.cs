@@ -1,20 +1,22 @@
-using System;
+using KiAspdotnetFramework.component.os;
+
 namespace Class_biz_scheduled_tasks
-{
-    public class TClass_biz_scheduled_tasks
+  {
+  public class TClass_biz_scheduled_tasks
     {
-        //Constructor  Create()
-        public TClass_biz_scheduled_tasks() : base()
-        {
-            // TODO: Add any constructor code here
+    private Class_fs fs;
 
-        }
-        public void DoDailyChores()
-        {
-            // Call db class methods to perform chores.
+    //Constructor  Create()
+    public TClass_biz_scheduled_tasks() : base()
+      {
+      fs = new Class_fs();
+      }
 
-        }
+    public void DoDailyChores(string current_working_directory_spec)
+      {
+      fs.DeleteCondemnedFolders(current_working_directory_spec + "/../protected/attachment");
+      }
 
     } // end TClass_biz_scheduled_tasks
 
-}
+  }
