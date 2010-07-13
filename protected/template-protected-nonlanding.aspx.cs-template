@@ -44,7 +44,7 @@ namespace template_protected_nonlanding
       // Required for Designer support
       InitializeComponent();
       base.OnInit(e);
-      var nature_of_visit = NatureOfVisit("mark_vehicle_down.p");
+      var nature_of_visit = NatureOfVisit("template_protected_nonlanding.p");
       if (nature_of_visit == nature_of_visit_type.VISIT_INITIAL)
         {
         //
@@ -53,7 +53,7 @@ namespace template_protected_nonlanding
         }
       else if (nature_of_visit == nature_of_visit_type.VISIT_POSTBACK_STANDARD)
         {
-        p = (p_type)(Session["mark_vehicle_down.p"]);
+        p = (p_type)(Session["template_protected_nonlanding.p"]);
         }
       }
 
