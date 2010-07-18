@@ -22,6 +22,9 @@ namespace UserControl_template_kicrudhelped_item
       TextBox_ki_crud_helper_user_key.Text = k.EMPTY;
       DropDownList_ki_crud_helper_user_key.Visible = false;
 //<KiCrudHelper:ClearStatements/>
+      Literal_match_index.Text = k.EMPTY;
+      Literal_num_matches.Text = k.EMPTY;
+      Panel_match_numbers.Visible = false;
       LinkButton_go_to_match_prior.Visible = false;
       LinkButton_go_to_match_next.Visible = false;
       LinkButton_go_to_match_last.Visible = false;
@@ -134,6 +137,7 @@ namespace UserControl_template_kicrudhelped_item
 
     private bool PresentRecord(string ki_crud_helper_user_key)
       {
+      Literal_match_index.Text = DropDownList_ki_crud_helper_user_key.SelectedIndex.ToString();
       bool result;
 //<KiCrudHelper:VarBlock/>
       result = false;
@@ -334,6 +338,9 @@ namespace UserControl_template_kicrudhelped_item
             }
           else
             {
+            Literal_match_index.Text = "0";
+            Literal_num_matches.Text = num_matches.ToString();
+            Panel_match_numbers.Visible = true;
             LinkButton_go_to_match_prior.Visible = true;
             LinkButton_go_to_match_next.Visible = true;
             LinkButton_go_to_match_last.Visible = true;
