@@ -24,6 +24,7 @@ namespace UserControl_template_datagrid_sortable
 
     private struct p_type
       {
+      public bool be_datagrid_empty;
       public bool be_interactive;
       public bool be_loaded;
       public bool be_sort_order_ascending;
@@ -227,6 +228,9 @@ namespace UserControl_template_datagrid_sortable
     private void Bind()
       {
       p.biz_0s.BindGrid(p.sort_order, p.be_sort_order_ascending, DataGrid_control);
+      p.be_datagrid_empty = (p.num_0s == 0);
+      TableRow_none.Visible = p.be_datagrid_empty;
+      DataGrid_control.Visible = !p.be_datagrid_empty;
       Literal_num_0s.Text = p.num_0s.ToString();
       p.num_0s = 0;
       }
