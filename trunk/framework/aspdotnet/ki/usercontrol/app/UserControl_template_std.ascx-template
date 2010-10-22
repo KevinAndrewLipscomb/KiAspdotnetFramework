@@ -1,6 +1,6 @@
 <%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_template_std.ascx.cs" Inherits="UserControl_template_std.TWebUserControl_template_std"%>
 <!-- Derived from KiAspdotnetFramework/usercontrol/app/UserControl~template~std.ascx-template -->
-<table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1" width="100%">
+<table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" width="100%" border="1">
   <tr>
     <td>
       <table cellspacing="0" cellpadding="10" width="100%" border="0">
