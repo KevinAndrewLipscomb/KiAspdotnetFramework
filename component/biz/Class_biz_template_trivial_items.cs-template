@@ -1,0 +1,60 @@
+using kix;
+using System;
+using Class_db_template_trivial_items;
+namespace Class_biz_template_trivial_items
+{
+    public class TClass_biz_template_trivial_items
+    {
+        private TClass_db_template_trivial_items db_template_trivial_items = null;
+        //Constructor  Create()
+        public TClass_biz_template_trivial_items() : base()
+        {
+            // TODO: Add any constructor code here
+            db_template_trivial_items = new TClass_db_template_trivial_items();
+        }
+        public bool Bind(string partial_code, object target)
+        {
+            bool result;
+            result = db_template_trivial_items.Bind(partial_code, target);
+            return result;
+        }
+
+        public void BindDirectToListControl(object target, string unselected_literal, string selected_value)
+        {
+            db_template_trivial_items.BindDirectToListControl(target, unselected_literal, selected_value);
+        }
+
+        public void BindDirectToListControl(object target)
+        {
+            BindDirectToListControl(target, "-- court kind --");
+        }
+
+        public void BindDirectToListControl(object target, string unselected_literal)
+        {
+            BindDirectToListControl(target, unselected_literal, k.EMPTY);
+        }
+
+        public bool Delete(string code)
+        {
+            bool result;
+            result = db_template_trivial_items.Delete(code);
+            return result;
+        }
+
+        public bool Get(string code, out string description)
+        {
+            bool result;
+            result = db_template_trivial_items.Get(code, out description);
+
+            return result;
+        }
+
+        public void Set(string code, string description)
+        {
+            db_template_trivial_items.Set(code, description);
+
+        }
+
+    } // end TClass_biz_template_trivial_items
+
+}
