@@ -77,7 +77,7 @@ target "http://en.wikipedia.org/wiki/NTFS_reparse_point"
 
 \end_inset
 
- (junction points and symlinks) is recommended in this document because
+ (junction points and hardlinks) is recommended in this document because
  it allows Subversion operations to take place without undesirable impact
  to project environments, and without violating Subversion rules.
  If you simply exported KiAspdotnetFramework from its repository and you
@@ -331,7 +331,7 @@ unpublished.config
 \end_layout
 
 \begin_layout Enumerate
-Create a symlink in the 
+Create a hardlink in the 
 \emph on
 KiAspdotnetFramework
 \emph default
@@ -347,7 +347,7 @@ KiAspdotnetFramework/config
 \end_layout
 
 \begin_layout Enumerate
-Create a symlink in the 
+Create a hardlink in the 
 \emph on
 KiAspdotnetFramework
 \emph default
@@ -363,16 +363,11 @@ KiAspdotnetFramework/config
 \end_layout
 
 \begin_layout Standard
-You can make symlinks with the 
+You can make hardlinks with 
 \noun on
-Cygwin bash
+Michael Elsdoerfer's NTFS Link
 \noun default
- 
-\emph on
-ln -s
-\emph default
- command or, on Vista-based systems (including Windows 7, Windows Server
- 2008, and later systems), the prototype commands would be:
+ tool or, from the Windows command line, the prototype commands would be:
 \begin_inset Newline newline
 \end_inset
 
@@ -386,7 +381,7 @@ cd KiAspdotnetFramework
 \begin_inset Newline newline
 \end_inset
 
-mklink unpublished.config config/
+fsutil hardlink create unpublished.config config/
 \emph default
 {path-to-appropriate-
 \emph on
@@ -398,7 +393,7 @@ unpublished.config
 \begin_inset Newline newline
 \end_inset
 
-mklink Web.config config/
+fsutil hardlink create Web.config config/
 \emph default
 {path-to-appropriate-
 \emph on
