@@ -7,7 +7,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="000-README.tex"> 
-<meta name="date" content="2010-11-11 15:28:00"> 
+<meta name="date" content="2010-11-11 16:55:00"> 
 <link rel="stylesheet" type="text/css" href="000-README.css"> 
 </head><body 
 >
@@ -40,7 +40,7 @@ class="cmss-10x-x-109">such as setting up an ASP.NET server, or creating and pop
 <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Recommended methods</h3>
 <!--l. 45--><p class="noindent" >The use of <a 
-href="http://en.wikipedia.org/wiki/NTFS_reparse_point" >NTFS reparse points</a> (junction points and symlinks) is recommended in this document
+href="http://en.wikipedia.org/wiki/NTFS_reparse_point" >NTFS reparse points</a> (junction points and hardlinks) is recommended in this document
 because it allows Subversion operations to take place without undesirable impact to project
 environments, and without violating Subversion rules. If you simply exported KiAspdotnetFramework
 from its repository and you do not intend to perform subsequent updates or any other Subversion
@@ -196,42 +196,50 @@ class="cmssbx-10x-x-120">file to any</span>
 class="cmssbx-10x-x-120">public repository.</span>
       </li>
       <li 
-  class="enumerate" id="x1-5004x2">Create  a  symlink  in  the  <span 
+  class="enumerate" id="x1-5004x2">Create  a  hardlink  in  the  <span 
 class="cmssi-12">KiAspdotnetFramework  </span>top-level  folder  that  points  to  the
       appropriate <span 
 class="cmssi-12">unpublished.config </span>file inside the <span 
 class="cmssi-12">KiAspdotnetFramework/config </span>folder tree.
       </li>
       <li 
-  class="enumerate" id="x1-5006x3">Create  a  symlink  in  the  <span 
+  class="enumerate" id="x1-5006x3">Create  a  hardlink  in  the  <span 
 class="cmssi-12">KiAspdotnetFramework  </span>top-level  folder  that  points  to  the
       appropriate <span 
 class="cmssi-12">Web.config </span>file inside the <span 
 class="cmssi-12">KiAspdotnetFramework/config </span>folder tree.</li></ol>
-<!--l. 133--><p class="noindent" >You can make symlinks with the <span 
-class="cmcsc-10x-x-120">C<span 
-class="small-caps">y</span><span 
-class="small-caps">g</span><span 
-class="small-caps">w</span><span 
+<!--l. 133--><p class="noindent" >You can make hardlinks with <span 
+class="cmcsc-10x-x-120">M<span 
 class="small-caps">i</span><span 
-class="small-caps">n</span> <span 
-class="small-caps">b</span><span 
+class="small-caps">c</span><span 
+class="small-caps">h</span><span 
 class="small-caps">a</span><span 
+class="small-caps">e</span><span 
+class="small-caps">l</span> E<span 
+class="small-caps">l</span><span 
 class="small-caps">s</span><span 
-class="small-caps">h</span> </span><span 
-class="cmssi-12">ln -s </span>command or, on Vista-based systems
-(including Windows 7, Windows Server 2008, and later systems), the prototype commands would
-be:<br 
+class="small-caps">d</span><span 
+class="small-caps">o</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">f</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span>&#8217;<span 
+class="small-caps">s</span> NTFS L<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">k</span> </span>tool or, from the Windows
+command line, the prototype commands would be:<br 
 class="newline" /><br 
 class="newline" /><span 
 class="cmssi-12">cd KiAspdotnetFramework</span><br 
 class="newline" /><span 
-class="cmssi-12">mklink unpublished.config config/</span><span 
+class="cmssi-12">fsutil hardlink create unpublished.config config/</span><span 
 class="cmsy-10x-x-120">{</span>path-to-appropriate-<span 
 class="cmssi-12">unpublished.config</span>-file<span 
 class="cmsy-10x-x-120">}</span><br 
 class="newline" /><span 
-class="cmssi-12">mklink Web.config config/</span><span 
+class="cmssi-12">fsutil hardlink create Web.config config/</span><span 
 class="cmsy-10x-x-120">{</span>path-to-appropriate-<span 
 class="cmssi-12">Web.config</span>-file<span 
 class="cmsy-10x-x-120">}</span> 
