@@ -3,7 +3,7 @@
 <%@ Register TagPrefix="uc1" TagName="UserControl_bread_crumb_trail" Src="~/usercontrol/ki/UserControl_bread_crumb_trail.ascx" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:ToolkitScriptManager ID="ScriptManager_control" runat="server"><Scripts><asp:ScriptReference Path="~/js/ErrorHandler.js" /></Scripts></asp:ToolkitScriptManager>
-<table width="100%" bgcolor="#808080" border="1" bordercolor="#808080" cellspacing="0" cellpadding="0">
+<table width="100%" bgcolor="gray" border="1" bordercolor="gray" cellspacing="0" cellpadding="0">
   <tr>
     <td>
       <table width="100%" cellspacing="0" cellpadding="5">
