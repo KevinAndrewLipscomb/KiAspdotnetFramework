@@ -72,17 +72,17 @@ Recommended methods
 The use of 
 \begin_inset CommandInset href
 LatexCommand href
-name "NTFS reparse points"
-target "http://en.wikipedia.org/wiki/NTFS_reparse_point"
+name "NTFS junction points"
+target "http://en.wikipedia.org/wiki/Junction_point"
 
 \end_inset
 
- (junction points and hardlinks) is recommended in this document because
- it allows Subversion operations to take place without undesirable impact
- to project environments, and without violating Subversion rules.
+ is recommended in this document because it allows Subversion operations
+ to take place without undesirable impact to project environments, and without
+ violating Subversion rules.
  If you simply exported KiAspdotnetFramework from its repository and you
  do not intend to perform subsequent updates or any other Subversion operations
- on it (not recommended), you can simply make copies instead of NTFS reparse
+ on it (not recommended), you can simply make copies instead of NTFS junction
  points.
 \end_layout
 
@@ -271,7 +271,7 @@ mklink /j ki KiDotnetFoundation
 \end_layout
 
 \begin_layout Section
-Establish hooks to appropriate config files
+Put appropriate config files in the application root folder
 \end_layout
 
 \begin_layout Standard
@@ -292,8 +292,8 @@ unpublished.config
 KiAspdotnetFramework/config
 \emph default
  subfolder tree.
- To hook the config files that are appropriate for your environment into
- the top-level KiAspdotnetFramework folder, do the following:
+ To put config files that are appropriate for your environment into the
+ top-level KiAspdotnetFramework folder, do the following:
 \end_layout
 
 \begin_layout Enumerate
@@ -331,43 +331,39 @@ unpublished.config
 \end_layout
 
 \begin_layout Enumerate
-Create a hardlink in the 
-\emph on
-KiAspdotnetFramework
-\emph default
- top-level folder that points to the appropriate 
+Copy the appropriate 
 \emph on
 unpublished.config
 \emph default
- file inside the 
+ file from within the 
 \emph on
 KiAspdotnetFramework/config
 \emph default
- folder tree.
-\end_layout
-
-\begin_layout Enumerate
-Create a hardlink in the 
+ folder tree to the 
 \emph on
 KiAspdotnetFramework
 \emph default
- top-level folder that points to the appropriate 
+ top-level folder.
+\end_layout
+
+\begin_layout Enumerate
+Copy the appropriate 
 \emph on
 Web.config
 \emph default
- file inside the 
+ file from within the 
 \emph on
 KiAspdotnetFramework/config
 \emph default
- folder tree.
+ folder tree to the 
+\emph on
+KiAspdotnetFramework
+\emph default
+ top-level folder.
 \end_layout
 
 \begin_layout Standard
-You can make hardlinks with 
-\noun on
-Michael Elsdoerfer's NTFS Link
-\noun default
- tool or, from the Windows command line, the prototype commands would be:
+From the Windows command line, the prototype commands would be:
 \begin_inset Newline newline
 \end_inset
 
@@ -381,25 +377,19 @@ cd KiAspdotnetFramework
 \begin_inset Newline newline
 \end_inset
 
-fsutil hardlink create unpublished.config config/
+copy config/
 \emph default
-{path-to-appropriate-
+{appropriate-path}/
 \emph on
-unpublished.config
-\emph default
--file}
-\emph on
-
+unpublished.config .
 \begin_inset Newline newline
 \end_inset
 
-fsutil hardlink create Web.config config/
+copy config/
 \emph default
-{path-to-appropriate-
+{appropriate-path}/
 \emph on
-Web.config
-\emph default
--file}
+Web.config .
 \end_layout
 
 \end_body
