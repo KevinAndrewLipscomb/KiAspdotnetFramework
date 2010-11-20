@@ -61,7 +61,8 @@ This document describes additional steps that you must perform, after checking
  out the KiAspdotnetFramework project from its repository, to achieve a
  clean compilation or to execute the application.
  This document does not cover how to meet other prerequisites, such as setting
- up an ASP.NET server, or creating and populating the database schema.
+ up an ASP.NET server, creating and populating the database schema, and setting
+ up a cron daemon.
 \end_layout
 
 \begin_layout Section
@@ -390,6 +391,30 @@ copy config/
 {appropriate-path}/
 \emph on
 Web.config .
+\end_layout
+
+\begin_layout Section
+Set up cron jobs
+\end_layout
+
+\begin_layout Standard
+Some FromPaper2Web applications include features that support scheduled
+ unattended jobs, such as notifications and report generation, data scrubs,
+ and other periodic tasks.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Crontab"
+target "http://en.wikipedia.org/wiki/Cron"
+
+\end_inset
+
+ entries for any such jobs that are part of KiAspdotnetFramework are located
+ in 
+\emph on
+noninteractive/.crontab
+\emph default
+.
 \end_layout
 
 \end_body
