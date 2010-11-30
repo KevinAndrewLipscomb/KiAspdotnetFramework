@@ -7,7 +7,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="000-README.tex"> 
-<meta name="date" content="2010-11-19 19:35:00"> 
+<meta name="date" content="2010-11-30 14:17:00"> 
 <link rel="stylesheet" type="text/css" href="000-README.css"> 
 </head><body 
 >
@@ -227,8 +227,22 @@ class="cmssi-12">Web.config .</span>
                                                                                          
 <!--l. 140--><p class="noindent" >
 <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-60004"></a>Set up cron jobs</h3>
-<!--l. 142--><p class="noindent" >Some FromPaper2Web applications include features that support scheduled unattended jobs, such as
+ id="x1-60004"></a>Give write permission in appropriate folders to the host worker process</h3>
+<!--l. 142--><p class="noindent" >Some FromPaper2Web applications include features that need to create files on the filesystem,
+typically in target folders <span 
+class="cmssi-12">protected/attachment </span>and/or <span 
+class="cmssi-12">protected/scratch</span>. For this to work, the
+ASP.NET Machine Account (<span 
+class="cmssi-12">ASPNET</span>) [on IIS5] or the <span 
+class="cmssi-12">NETWORK SERVICE </span>account [on IIS7]
+must have write permission for the target folder(s). Configure this on the Security tab of
+the folder&#8217;s Properties. If the Security tab is missing, open Windows Explorer / Tools /
+Folder Options... / View, and in the Advanced Settings, clear the &#8221;Use simple file sharing&#8221;
+checkbox.
+<!--l. 153--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-70005"></a>Set up cron jobs</h3>
+<!--l. 155--><p class="noindent" >Some FromPaper2Web applications include features that support scheduled unattended jobs, such as
 notifications and report generation, data scrubs, and other periodic tasks. <a 
 href="http://en.wikipedia.org/wiki/Cron" >Crontab</a> entries for any
 such jobs that are part of KiAspdotnetFramework are located in <span 

@@ -394,6 +394,37 @@ Web.config .
 \end_layout
 
 \begin_layout Section
+Give write permission in appropriate folders to the host worker process
+\end_layout
+
+\begin_layout Standard
+Some FromPaper2Web applications include features that need to create files
+ on the filesystem, typically in target folders 
+\emph on
+protected/attachment
+\emph default
+ and/or 
+\emph on
+protected/scratch
+\emph default
+.
+ For this to work, the ASP.NET Machine Account (
+\emph on
+ASPNET
+\emph default
+) [on IIS5] or the 
+\emph on
+NETWORK SERVICE
+\emph default
+ account [on IIS7] must have write permission for the target folder(s).
+ Configure this on the Security tab of the folder's Properties.
+ If the Security tab is missing, open Windows Explorer / Tools / Folder
+ Options...
+ / View, and in the Advanced Settings, clear the "Use simple file sharing"
+ checkbox.
+\end_layout
+
+\begin_layout Section
 Set up cron jobs
 \end_layout
 
