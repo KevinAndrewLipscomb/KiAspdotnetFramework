@@ -1,0 +1,7 @@
+grant select
+ , insert
+ , update
+ , delete
+ , create
+  on kiaspdotnetframeworkdb_d.*
+  to 'ki-kiaspdotnetframework-d'@'localhost' identified by '~ki-kiaspdotnetframework-d-password~'
