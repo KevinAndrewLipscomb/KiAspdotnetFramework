@@ -55,20 +55,13 @@ namespace UserControl_template_binder
         //
         // Dynamic controls must be re-added on each postback.
         //
-        if (p.tab_index == UserControl_template_binder_Static.TSSI_0)
-          {
-          p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx"))), "UserControl_0", PlaceHolder_content);
-          }
-        else if (p.tab_index == UserControl_template_binder_Static.TSSI_1)
-          {
-          p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_1)(LoadControl("~/usercontrol/app/UserControl_1.ascx"))), "UserControl_1", PlaceHolder_content);
-          }
+        FillPlaceHolder(false);
         }
       else
         {
         p.be_loaded = false;
         p.tab_index = UserControl_template_binder_Static.TSSI_0;
-        p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx"))).Fresh(), "UserControl_0", PlaceHolder_content);
+        FillPlaceHolder(true);
         }
       }
 
@@ -103,13 +96,49 @@ namespace UserControl_template_binder
       {
       p.tab_index = (uint)(TabContainer_control.ActiveTabIndex);
       PlaceHolder_content.Controls.Clear();
+      FillPlaceHolder(true);
+      }
+
+    private void FillPlaceHolder
+      (
+      bool be_fresh_control_required,
+      string target
+      )
+      {
       if (p.tab_index == UserControl_template_binder_Static.TSSI_0)
         {
-        p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx"))).Fresh(), "UserControl_0", PlaceHolder_content);
+        var c = ((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx")));
+        p.content_id = AddIdentifiedControlToPlaceHolder((be_fresh_control_required ? c.Fresh() : c), "UserControl_0", PlaceHolder_content);
+        c.SetTarget(target);
         }
       else if (p.tab_index == UserControl_template_binder_Static.TSSI_1)
         {
-        p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_1)(LoadControl("~/usercontrol/app/UserControl_1.ascx"))).Fresh(), "UserControl_1", PlaceHolder_content);
+        var c = ((TWebUserControl_1)(LoadControl("~/usercontrol/app/UserControl_1.ascx")));
+        p.content_id = AddIdentifiedControlToPlaceHolder((be_fresh_control_required ? c.Fresh() : c), "UserControl_1", PlaceHolder_content);
+        c.SetTarget(target);
+        }
+      }
+    private void FillPlaceHolder(bool be_fresh_control_required)
+      {
+      FillPlaceHolder(be_fresh_control_required,k.EMPTY);
+      }
+
+    public void SetTarget(string target)
+      {
+      if (target != k.EMPTY)
+        {
+        if (target.ToLower().Contains("/0/"))
+          {
+          p.tab_index = UserControl_template_binder_Static.TSSI_0;
+          }
+        else if (target.ToLower().Contains("/1/"))
+          {
+          p.tab_index = UserControl_member_binder_Static.TSSI_1;
+          }
+        //
+        PlaceHolder_content.Controls.Clear();
+        FillPlaceHolder(false,target);
+        //
         }
       }
 
