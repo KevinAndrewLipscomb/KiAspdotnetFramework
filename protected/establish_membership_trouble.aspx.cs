@@ -48,14 +48,14 @@ namespace establish_membership_trouble
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            switch(NatureOfVisit("establish_membership_trouble.p"))
+            switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     p.biz_notifications = new TClass_biz_notifications();
                     p.biz_user = new TClass_biz_user();
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session["establish_membership_trouble.p"]);
+                    p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
 
@@ -75,7 +75,7 @@ namespace establish_membership_trouble
 
         private void TWebForm_establish_membership_trouble_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("establish_membership_trouble.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         private struct p_type

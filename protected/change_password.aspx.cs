@@ -39,7 +39,7 @@ namespace change_password
 
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            switch(NatureOfVisit("change_password.p"))
+            switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     Title.Text = ConfigurationManager.AppSettings["application_name"] + " - change_password";
@@ -48,7 +48,7 @@ namespace change_password
                     Focus(TextBox_nominal_password, true);
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session["change_password.p"]);
+                    p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
         }
@@ -72,7 +72,7 @@ namespace change_password
 
         private void TWebForm_change_password_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("change_password.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         protected void Button_submit_Click(object sender, System.EventArgs e)

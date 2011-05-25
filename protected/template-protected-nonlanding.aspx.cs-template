@@ -44,7 +44,7 @@ namespace template_protected_nonlanding
       // Required for Designer support
       InitializeComponent();
       base.OnInit(e);
-      var nature_of_visit = NatureOfVisit("template_protected_nonlanding.p");
+      var nature_of_visit = NatureOfVisit(InstanceContextId() + ".p");
       if (nature_of_visit == nature_of_visit_type.VISIT_INITIAL)
         {
         //
@@ -53,13 +53,16 @@ namespace template_protected_nonlanding
         }
       else if (nature_of_visit == nature_of_visit_type.VISIT_POSTBACK_STANDARD)
         {
-        p = (p_type)(Session["template_protected_nonlanding.p"]);
+        p = (p_type)(Session[InstanceContextId() + ".p"]);
         }
+      //
+      // ScriptManager.GetCurrent(Page).EnablePartialRendering = false;
+      //
       }
 
     private void TWebForm_template_protected_nonlanding_PreRender(object sender, System.EventArgs e)
       {
-      SessionSet("template_protected_nonlanding.p", p);
+      SessionSet(InstanceContextId() + ".p", p);
       }
 
     } // end TWebForm_template_protected_nonlanding

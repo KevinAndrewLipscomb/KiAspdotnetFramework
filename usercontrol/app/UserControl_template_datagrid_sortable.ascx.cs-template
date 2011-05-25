@@ -133,9 +133,9 @@ namespace UserControl_template_datagrid_sortable
       // Required for Designer support
       InitializeComponent();
       base.OnInit(e);
-      if (Session["UserControl_template_datagrid_sortable.p"] != null)
+      if (Session[InstanceId() + ".p"] != null)
         {
-        p = (p_type)(Session["UserControl_template_datagrid_sortable.p"]);
+        p = (p_type)(Session[InstanceId() + ".p"]);
 #warning Revise the ClientID path to this control appropriately.
         p.be_loaded = IsPostBack && ((Session["UserControl_member_binder_PlaceHolder_content"] as string) == "UserControl_template_datagrid_sortable");
         }
@@ -164,12 +164,12 @@ namespace UserControl_template_datagrid_sortable
 
     private void TWebUserControl_template_datagrid_sortable_PreRender(object sender, System.EventArgs e)
       {
-      SessionSet("UserControl_template_datagrid_sortable.p", p);
+      SessionSet(InstanceId() + ".p", p);
       }
 
     public TWebUserControl_template_datagrid_sortable Fresh()
       {
-      Session.Remove("UserControl_template_datagrid_sortable.p");
+      Session.Remove(InstanceId() + ".p");
       return this;
       }
 
