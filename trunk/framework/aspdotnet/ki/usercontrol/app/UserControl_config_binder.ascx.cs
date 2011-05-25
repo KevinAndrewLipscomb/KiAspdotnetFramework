@@ -41,9 +41,9 @@ namespace UserControl_config_binder
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            if (Session["UserControl_config_binder.p"] != null)
+            if (Session[InstanceId() + ".p"] != null)
             {
-                p = (p_type)(Session["UserControl_config_binder.p"]);
+                p = (p_type)(Session[InstanceId() + ".p"]);
                 p.be_loaded = IsPostBack && ((Session["UserControl_member_binder_PlaceHolder_content"] as string) == "UserControl_config_binder");
                 switch(p.tab_index)
                 {
@@ -60,7 +60,7 @@ namespace UserControl_config_binder
             {
                 p.be_loaded = false;
                 p.tab_index = Units.UserControl_config_binder.TSSI_ROLES_AND_MATRICES;
-                p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_roles_and_matrices_binder)(LoadControl("~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx"))).Fresh(), "UserControl_roles_and_matrices_binder", PlaceHolder_content);
+                p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_roles_and_matrices_binder)(LoadControl("~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx"))),"UserControl_roles_and_matrices_binder",PlaceHolder_content,InstanceId());
             }
 
         }
@@ -81,14 +81,14 @@ namespace UserControl_config_binder
             // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
             // not it is already loaded in the user's browser.
             SessionSet(PlaceHolder_content.ClientID, p.content_id);
-            SessionSet("UserControl_config_binder.p", p);
+            SessionSet(InstanceId() + ".p", p);
 
         }
 
         public TWebUserControl_config_binder Fresh()
         {
             TWebUserControl_config_binder result;
-            Session.Remove("UserControl_config_binder.p");
+            Session.Remove(InstanceId() + ".p");
             result = this;
             return result;
         }
@@ -100,10 +100,10 @@ namespace UserControl_config_binder
             switch(p.tab_index)
             {
                 case Units.UserControl_config_binder.TSSI_ROLES_AND_MATRICES:
-                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_roles_and_matrices_binder)(LoadControl("~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx"))).Fresh(), "UserControl_roles_and_matrices_binder", PlaceHolder_content);
+                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_roles_and_matrices_binder)(LoadControl("~/usercontrol/app/UserControl_roles_and_matrices_binder.ascx"))),"UserControl_roles_and_matrices_binder",PlaceHolder_content,InstanceId());
                     break;
                 case Units.UserControl_config_binder.TSSI_USERS_AND_MAPPING:
-                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_users_and_mapping_binder)(LoadControl("~/usercontrol/app/UserControl_users_and_mapping_binder.ascx"))).Fresh(), "UserControl_users_and_mapping_binder", PlaceHolder_content);
+                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_users_and_mapping_binder)(LoadControl("~/usercontrol/app/UserControl_users_and_mapping_binder.ascx"))),"UserControl_users_and_mapping_binder",PlaceHolder_content,InstanceId());
                     break;
             }
         }

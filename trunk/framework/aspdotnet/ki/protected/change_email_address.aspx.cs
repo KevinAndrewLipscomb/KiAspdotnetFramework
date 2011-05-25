@@ -40,7 +40,7 @@ namespace change_email_address
         protected void Page_Load(object sender, System.EventArgs e)
         {
             string email_address;
-            switch(NatureOfVisit("change_email_password.p"))
+            switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     Title.Text = ConfigurationManager.AppSettings["application_name"] + " - change_email_address";
@@ -53,7 +53,7 @@ namespace change_email_address
                     Focus(TextBox_nominal_email_address, true);
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session["change_email_password.p"]);
+                    p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
         }
@@ -77,7 +77,7 @@ namespace change_email_address
 
         private void TWebForm_change_email_address_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("change_email_password.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         protected void CustomValidator_nominal_email_address_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)

@@ -186,9 +186,9 @@ namespace UserControl_template_trivial_item
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            if (Session["UserControl_template_trivial_item.p"] != null)
+            if (Session[InstanceId() + ".p"] != null)
             {
-                p = (p_type)(Session["UserControl_template_trivial_item.p"]);
+                p = (p_type)(Session[InstanceId() + ".p"]);
                 p.be_loaded = IsPostBack && ((Session["UserControl_member_binder_UserControl_config_UserControl_business_objects_binder_PlaceHolder_content"] as string) == "UserControl_template_trivial_item");
             }
             else
@@ -212,13 +212,13 @@ namespace UserControl_template_trivial_item
 
         private void TWebUserControl_template_trivial_item_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("UserControl_template_trivial_item.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         public TWebUserControl_template_trivial_item Fresh()
         {
             TWebUserControl_template_trivial_item result;
-            Session.Remove("UserControl_template_trivial_item.p");
+            Session.Remove(InstanceId() + ".p");
             result = this;
             return result;
         }

@@ -34,7 +34,7 @@ namespace remind_username
 
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            switch(NatureOfVisit("remind_username.p"))
+            switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     Title.InnerText = Server.HtmlEncode(ConfigurationManager.AppSettings["application_name"]) + " - remind_username";
@@ -45,7 +45,7 @@ namespace remind_username
                     Focus(TextBox_email_address, true);
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session["remind_username.p"]);
+                    p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
         }
@@ -90,7 +90,7 @@ namespace remind_username
 
         private void TWebForm_remind_username_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("remind_username.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
     } // end TWebForm_remind_username

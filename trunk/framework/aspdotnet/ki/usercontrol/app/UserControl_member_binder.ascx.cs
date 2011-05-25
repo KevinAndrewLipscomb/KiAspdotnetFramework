@@ -41,9 +41,9 @@ namespace UserControl_member_binder
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            if (IsPostBack && (Session["UserControl_member_binder.p"] != null) && (Session["UserControl_member_binder.p"].GetType().Namespace == p.GetType().Namespace))
+            if (IsPostBack && (Session[InstanceId() + ".p"] != null))
             {
-                p = (p_type)(Session["UserControl_member_binder.p"]);
+                p = (p_type)(Session[InstanceId() + ".p"]);
                 switch(p.tab_index)
                 {
                     case Units.UserControl_member_binder.TSSI_CONFIG:
@@ -92,14 +92,14 @@ namespace UserControl_member_binder
             // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
             // not it is already loaded in the user's browser.
             SessionSet(PlaceHolder_content.ClientID, p.content_id);
-            SessionSet("UserControl_member_binder.p", p);
+            SessionSet(InstanceId() + ".p", p);
 
         }
 
         public TWebUserControl_member_binder Fresh()
         {
             TWebUserControl_member_binder result;
-            Session.Remove("UserControl_member_binder.p");
+            Session.Remove(InstanceId() + ".p");
             result = this;
             return result;
         }
@@ -118,10 +118,10 @@ namespace UserControl_member_binder
                     // 'UserControl_resources',
                     // PlaceHolder_content
                     // );
-                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_config_binder)(LoadControl("~/usercontrol/app/UserControl_config_binder.ascx"))).Fresh(), "UserControl_config", PlaceHolder_content);
+                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_config_binder)(LoadControl("~/usercontrol/app/UserControl_config_binder.ascx"))),"UserControl_config",PlaceHolder_content,InstanceId());
                     break;
                 case Units.UserControl_member_binder.TSSI_ABOUT:
-                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_about)(LoadControl("~/usercontrol/app/UserControl_about.ascx"))).Fresh(), "UserControl_about", PlaceHolder_content);
+                    p.content_id = AddIdentifiedControlToPlaceHolder(((TWebUserControl_about)(LoadControl("~/usercontrol/app/UserControl_about.ascx"))),"UserControl_about",PlaceHolder_content,InstanceId());
                     break;
             }
         }

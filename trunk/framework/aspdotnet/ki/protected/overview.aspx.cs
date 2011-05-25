@@ -48,7 +48,7 @@ namespace overview
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            switch(NatureOfLanding("overview.p"))
+            switch(NatureOfLanding(InstanceContextId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     p.biz_user = new TClass_biz_user();
@@ -66,7 +66,7 @@ namespace overview
                     }
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session["overview.p"]);
+                    p = (p_type)(Session[InstanceContextId() + ".p"]);
                     break;
             }
             if (p.biz_members.IdOfUserId(p.biz_user.IdNum()) == k.EMPTY)
@@ -78,12 +78,14 @@ namespace overview
             {
                 AddIdentifiedControlToPlaceHolder(((TWebUserControl_member_binder)(LoadControl("~/usercontrol/app/UserControl_member_binder.ascx"))), "UserControl_member_binder", PlaceHolder_member_binder);
             }
-
+           //
+           // ScriptManager.GetCurrent(Page).EnablePartialRendering = false;
+           //
         }
 
         private void TWebForm_overview_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("overview.p", p);
+            SessionSet(InstanceContextId() + ".p", p);
         }
 
         private struct p_type

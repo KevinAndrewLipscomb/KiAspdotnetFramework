@@ -42,7 +42,7 @@ namespace salogin
 
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            switch(NatureOfVisitUnlimited("salogin.p"))
+            switch(NatureOfVisitUnlimited(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_COLD_CALL:
                 case nature_of_visit_type.VISIT_INITIAL:
@@ -51,7 +51,7 @@ namespace salogin
                     Focus(TextBox_username, true);
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session["salogin.p"]);
+                    p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
         }
@@ -97,7 +97,7 @@ namespace salogin
 
         private void TWebForm_salogin_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("salogin.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         protected void CustomValidator_account_exists_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)

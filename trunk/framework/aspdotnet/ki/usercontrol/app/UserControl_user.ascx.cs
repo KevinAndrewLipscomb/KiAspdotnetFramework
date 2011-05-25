@@ -100,9 +100,9 @@ namespace UserControl_user
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            if (Session["UserControl_user.p"] != null)
+            if (Session[InstanceId() + ".p"] != null)
             {
-                p = (p_type)(Session["UserControl_user.p"]);
+                p = (p_type)(Session[InstanceId() + ".p"]);
                 p.be_loaded = IsPostBack && ((Session["UserControl_member_binder_PlaceHolder_content"] as string) == "UserControl_user");
             }
             else
@@ -126,13 +126,13 @@ namespace UserControl_user
 
         private void TWebUserControl_user_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet("UserControl_user.p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         public TWebUserControl_user Fresh()
         {
             TWebUserControl_user result;
-            Session.Remove("UserControl_user.p");
+            Session.Remove(InstanceId() + ".p");
             result = this;
             return result;
         }
