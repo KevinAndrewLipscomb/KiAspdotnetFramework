@@ -48,7 +48,7 @@ namespace overview
             // Required for Designer support
             InitializeComponent();
             base.OnInit(e);
-            switch(NatureOfLanding(InstanceContextId() + ".p"))
+            switch(NatureOfLanding(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     p.biz_user = new TClass_biz_user();
@@ -66,7 +66,7 @@ namespace overview
                     }
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
-                    p = (p_type)(Session[InstanceContextId() + ".p"]);
+                    p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
             if (p.biz_members.IdOfUserId(p.biz_user.IdNum()) == k.EMPTY)
@@ -85,7 +85,7 @@ namespace overview
 
         private void TWebForm_overview_PreRender(object sender, System.EventArgs e)
         {
-            SessionSet(InstanceContextId() + ".p", p);
+            SessionSet(InstanceId() + ".p", p);
         }
 
         private struct p_type
