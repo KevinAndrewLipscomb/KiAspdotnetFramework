@@ -23,7 +23,7 @@ namespace Class_db_template_kicrudhelped_items
     public bool Bind(string partial_spec, object target)
       {
       var concat_clause = "concat(ki_crud_helper_spec_clause)";
-      this.Open();
+      Open();
       ((target) as ListControl).Items.Clear();
       var dr = new MySqlCommand
         (
@@ -32,7 +32,7 @@ namespace Class_db_template_kicrudhelped_items
         + " from template_kicrudhelped_item"
         + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
         + " order by spec",
-        this.connection
+        connection
         )
         .ExecuteReader();
       while (dr.Read())
@@ -40,13 +40,13 @@ namespace Class_db_template_kicrudhelped_items
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
         }
       dr.Close();
-      this.Close();
+      Close();
       return ((target) as ListControl).Items.Count > 0;
       }
 
     public void BindDirectToListControl(object target)
       {
-      this.Open();
+      Open();
       ((target) as ListControl).Items.Clear();
       var dr = new MySqlCommand
         (
@@ -54,7 +54,7 @@ namespace Class_db_template_kicrudhelped_items
         + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
         + " FROM template_kicrudhelped_item"
         + " order by spec",
-        this.connection
+        connection
         )
         .ExecuteReader();
       while (dr.Read())
@@ -62,17 +62,16 @@ namespace Class_db_template_kicrudhelped_items
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
         }
       dr.Close();
-      this.Close();
+      Close();
       }
 
     public bool Delete(string ki_crud_helper_user_key)
       {
-      bool result;
-      result = true;
-      this.Open();
+      var result = true;
+      Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from template_kicrudhelped_item where ki_crud_helper_user_key = \"" + ki_crud_helper_user_key + "\""), this.connection).ExecuteNonQuery();
+        new MySqlCommand(db_trail.Saved("delete from template_kicrudhelped_item where ki_crud_helper_user_key = \"" + ki_crud_helper_user_key + "\""), connection).ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -85,7 +84,7 @@ namespace Class_db_template_kicrudhelped_items
           throw e;
           }
         }
-      this.Close();
+      Close();
       return result;
       }
 
@@ -95,21 +94,18 @@ namespace Class_db_template_kicrudhelped_items
 //<KiCrudHelper:GetOutArgs/>
       )
       {
-      bool result;
-      MySqlDataReader dr;
-      //
 //<KiCrudHelper:InitGetOutArgs/>
-      result = false;
+      var result = false;
       //
-      this.Open();
-      dr = new MySqlCommand("select * from template_kicrudhelped_item where CAST(ki_crud_helper_user_key AS CHAR) = \"" + ki_crud_helper_user_key + "\"", this.connection).ExecuteReader();
+      Open();
+      var dr = new MySqlCommand("select * from template_kicrudhelped_item where CAST(ki_crud_helper_user_key AS CHAR) = \"" + ki_crud_helper_user_key + "\"", connection).ExecuteReader();
       if (dr.Read())
         {
 //<KiCrudHelper:DbGetBody/>
         result = true;
         }
       dr.Close();
-      this.Close();
+      Close();
       return result;
       }
 
@@ -119,10 +115,10 @@ namespace Class_db_template_kicrudhelped_items
 //<KiCrudHelper:SetDefinition/>
       )
       {
-      string childless_field_assignments_clause = k.EMPTY
+      var childless_field_assignments_clause = k.EMPTY
 //<KiCrudHelper:DbSetBody/>
       + k.EMPTY;
-      this.Open();
+      Open();
       new MySqlCommand
         (
         db_trail.Saved
@@ -133,10 +129,10 @@ namespace Class_db_template_kicrudhelped_items
           + " on duplicate key update "
           + childless_field_assignments_clause
           ),
-          this.connection
+          connection
         )
         .ExecuteNonQuery();
-      this.Close();
+      Close();
       }
 
     } // end TClass_db_template_kicrudhelped_items
