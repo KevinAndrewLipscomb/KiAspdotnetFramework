@@ -16,7 +16,7 @@
                  <td>
       <ASP:TextBox id="TextBox_ki_crud_helper_user_key" runat="server"  cssclass=""></ASP:TextBox><ASP:Button id="Button_lookup" runat="server" causesvalidation="False" text="LOOKUP" onclick="Button_lookup_Click"></ASP:Button>
                 </td>
-                <td nowrap="True"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
+                <td nowrap="nowrap"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
                 <td><small><small><em><asp:Label id="Label_lookup_hint" runat="server">Lookup by partial or full field value</asp:Label></em></small></small></td>
               </tr>
             </table>
@@ -48,7 +48,7 @@
       </table>
     </font>
     </td>
-    <td nowrap="True" valign="top">
+    <td nowrap="nowrap" valign="top">
       <ASP:RequiredFieldValidator id="RequiredFieldValidator_ki_crud_helper_user_key" runat="server" errormessage="Please enter ki_crud_helper_user_key." font-bold="True" controltovalidate="TextBox_ki_crud_helper_user_key">!ERR!</ASP:RequiredFieldValidator>
     </td>
   </tr>
