@@ -142,7 +142,7 @@ namespace UserControl_template_datagrid_sortable
       else
         {
         p.biz_0s = new TClass_biz_0s();
-        p.be_interactive = !(Session["mode:report"] != null);
+        p.be_interactive = (Session["mode:report"] == null);
         p.be_loaded = false;
         p.be_sort_order_ascending = true;
         p.sort_order = "field_0%";
