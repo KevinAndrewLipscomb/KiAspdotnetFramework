@@ -227,7 +227,7 @@ namespace UserControl_template_datagrid_sortable
 
     private void Bind()
       {
-      p.biz_0s.BindGrid(p.sort_order, p.be_sort_order_ascending, DataGrid_control);
+      p.biz_0s.BindBaseDataList(p.sort_order,p.be_sort_order_ascending,DataGrid_control);
       p.be_datagrid_empty = (p.num_0s == 0);
       TableRow_none.Visible = p.be_datagrid_empty;
       DataGrid_control.Visible = !p.be_datagrid_empty;
