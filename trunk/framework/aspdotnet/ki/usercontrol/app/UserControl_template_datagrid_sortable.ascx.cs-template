@@ -1,6 +1,7 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
 using Class_biz_0s;
+using Class_msg_protected;
 using kix;
 using System;
 using System.Web;
@@ -29,6 +30,7 @@ namespace UserControl_template_datagrid_sortable
       public bool be_loaded;
       public bool be_sort_order_ascending;
       public TClass_biz_0s biz_0s;
+      public TClass_msg_protected.0_detail msg_protected_0_detail;
       public uint num_0s;
       public string sort_order;
       }
@@ -142,6 +144,8 @@ namespace UserControl_template_datagrid_sortable
       else
         {
         p.biz_0s = new TClass_biz_0s();
+        p.msg_protected_0_detail = new TClass_msg_protected.0_detail();
+        //
         p.be_interactive = (Session["mode:report"] == null);
         p.be_loaded = false;
         p.be_sort_order_ascending = true;
@@ -177,8 +181,8 @@ namespace UserControl_template_datagrid_sortable
       {
       if (new ArrayList(new object[] {ListItemType.AlternatingItem, ListItemType.Item, ListItemType.EditItem, ListItemType.SelectedItem}).Contains(e.Item.ItemType))
         {
-        SessionSet("0_summary",p.biz_0s.Summary(k.Safe(e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].Text,k.safe_hint_type.NUM)));
-        DropCrumbAndTransferTo("template_datagrid_sortable_detail.aspx");
+        p.msg_protected_0_detail.summary = p.biz_0s.Summary(k.Safe(e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].Text,k.safe_hint_type.NUM));
+        MessageDropCrumbAndTransferTo(p.msg_protected_0_detail,"protected","template_datagrid_sortable_detail");
         }
       }
 
