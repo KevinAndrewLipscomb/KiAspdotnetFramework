@@ -15,7 +15,7 @@
                         <td>
       <ASP:TextBox id="TextBox_username" runat="server" columns="40" maxlength="40"></ASP:TextBox><ASP:Button id="Button_lookup" runat="server" causesvalidation="False" text="LOOKUP" onclick="Button_lookup_Click"></ASP:Button>
                         </td>
-                        <td nowrap="True"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
+                        <td nowrap="nowrap"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
                         <td><small><small><em><asp:Label id="Label_lookup_hint" runat="server">Lookup by partial or full Username</asp:Label></em></small></small></td>
                       </tr>
                     </table>

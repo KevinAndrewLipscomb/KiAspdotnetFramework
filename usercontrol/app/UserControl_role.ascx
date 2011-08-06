@@ -15,7 +15,7 @@
                         <td>
               <ASP:TextBox id="TextBox_name" runat="server" cssclass="" maxlength="63" columns="63"></ASP:TextBox><ASP:Button id="Button_lookup" runat="server" causesvalidation="False" text="LOOKUP" onclick="Button_lookup_Click"></ASP:Button>
                         </td>
-                        <td nowrap="True"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
+                        <td nowrap="nowrap"><small><small><asp:Label id="Label_lookup_arrow" runat="server">&lt;--</asp:Label></small></small></td>
                         <td><small><small><em><asp:Label id="Label_lookup_hint" runat="server">Lookup by partial or full Role title</asp:Label></em></small></small></td>
                       </tr>
                     </table>
@@ -46,7 +46,7 @@
         </tr>
       </table>
             </font></td>
-          <td nowrap="True" valign="top">
+          <td nowrap="nowrap" valign="top">
             <ASP:RequiredFieldValidator id="RequiredFieldValidator_name" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_name" errormessage="Please enter Name.">!ERR!</ASP:RequiredFieldValidator>
             <asp:RegularExpressionValidator id="RegularExpressionValidator_name" runat="server" errormessage="Please enter a valid Role title." font-bold="True" controltovalidate="TextBox_name" validationexpression="[a-zA-Z\-. ']+">!ERR!</asp:RegularExpressionValidator>
           </td>
@@ -132,7 +132,7 @@
                   <td valign="top">Body:</td>
                   <td>
                     <ASP:TextBox id="TextBox_quick_message_body" runat="server" columns="72" textmode="MultiLine" rows="18"></ASP:TextBox></td>
-                  <td valign="top" nowrap="true">
+                  <td valign="top" nowrap="nowrap">
                     <ASP:RequiredFieldValidator id="RequiredFieldValidator_quick_message_body" runat="server" font-bold="True" display="Dynamic" controltovalidate="TextBox_quick_message_body" errormessage="Please enter a message body." validationgroup="QuickMessage">!ERR!</ASP:RequiredFieldValidator></td>
                 </tr>
                 <tr>
