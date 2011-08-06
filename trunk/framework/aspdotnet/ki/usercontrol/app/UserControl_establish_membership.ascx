@@ -17,7 +17,7 @@
 						<td valign="top">
                           <p align="center"><strong>NO</strong>
                           </p></td>
-						<td valign="top" nowrap="true">-&gt;</td>
+						<td valign="top" nowrap="nowrap">-&gt;</td>
                         <td valign="top">
                      <p>Use the process dictated by the <asp:Label id="Label_sponsor_4" runat="server"></asp:Label> to attain a <asp:Label id="Label_shared_secret_description_2" runat="server"></asp:Label>.</p>
                           <p>&nbsp;</p></td>
@@ -26,7 +26,7 @@
 						<td valign="top">
 						  <p align="center"><strong>YES</strong>
 						  </p></td>
-						<td valign="top" nowrap="true">-&gt;</td>
+						<td valign="top" nowrap="nowrap">-&gt;</td>
 						<td valign="top">
 						  <p>Match yourself to a <ASP:Label id="Label_sponsor_3" runat="server"></ASP:Label>&nbsp;membership record by entering <ASP:Label id="Label_shared_secret_description_1" runat="server"></ASP:Label>&nbsp;here:</p>
 						  <p>

@@ -31,7 +31,7 @@
                               <p><ASP:TextBox id="TextBox_full_name" runat="server" columns="40"></ASP:TextBox></p>
                             </blockquote>
                           </td>
-                          <td valign="top" nowrap="true">
+                          <td valign="top" nowrap="nowrap">
                             <ASP:RequiredFieldValidator id="RequiredFieldValidator_full_name" runat="server" errormessage="Please enter your full name." font-bold="True" controltovalidate="TextBox_full_name">!ERR!</ASP:RequiredFieldValidator>
                           </td>
                         </tr>
@@ -42,7 +42,7 @@
                               <p><ASP:TextBox id="TextBox_explanation" runat="server" columns="72" rows="7" textmode="MultiLine"></ASP:TextBox></p>
                             </blockquote>
                           </td>
-                          <td valign="top" nowrap="true">
+                          <td valign="top" nowrap="nowrap">
                             <ASP:RequiredFieldValidator id="RequiredFieldValidator_explanation" runat="server" errormessage="Please enter an explanation." font-bold="True" controltovalidate="TextBox_explanation">!ERR!</ASP:RequiredFieldValidator>
                           </td>
                         </tr>
