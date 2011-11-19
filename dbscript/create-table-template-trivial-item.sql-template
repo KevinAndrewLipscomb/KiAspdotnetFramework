@@ -1,11 +1,17 @@
-START TRANSACTION;
-
-DROP TABLE IF EXISTS template_trivial_item;
+START TRANSACTION
+;
+DROP TABLE IF EXISTS template_trivial_item
+;
 CREATE TABLE IF NOT EXISTS template_trivial_item (
   id SERIAL,
   description VARCHAR(63) NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE(description)
 )
-ENGINE = InnoDB;
-
+ENGINE = InnoDB
+;
+insert ignore template_trivial_item (description) values
+(""),
+("")
+;
 COMMIT
