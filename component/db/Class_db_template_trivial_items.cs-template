@@ -76,7 +76,7 @@ namespace Class_db_template_trivial_items
       }
     public void BindDirectToListControl(object target)
       {
-      BindDirectToListControl(target, "-- court kind --");
+      BindDirectToListControl(target, "-- template_trivial_item --");
       }
 
     public bool Delete(string id)
