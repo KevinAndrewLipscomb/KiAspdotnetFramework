@@ -128,7 +128,7 @@ namespace Class_db_template_trivial_items
       string description
       )
       {
-      var childless_field_assignments_clause = "description = \"" + description + "\"";
+      var childless_field_assignments_clause = "description = '" + description + "'";
       Open();
       new MySqlCommand
         (
