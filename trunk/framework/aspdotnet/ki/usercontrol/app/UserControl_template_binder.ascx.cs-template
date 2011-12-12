@@ -71,9 +71,8 @@ namespace UserControl_template_binder
     // / </summary>
     private void InitializeComponent()
       {
-      this.TabContainer_control.ActiveTabChanged += this.TabContainer_control_ActiveTabChanged;
-      this.PreRender += this.TWebUserControl_template_binder_PreRender;
-      //this.Load += this.Page_Load;
+      TabContainer_control.ActiveTabChanged += TabContainer_control_ActiveTabChanged;
+      PreRender += TWebUserControl_template_binder_PreRender;
       }
 
     private void TWebUserControl_template_binder_PreRender(object sender, System.EventArgs e)
@@ -133,7 +132,7 @@ namespace UserControl_template_binder
           }
         else if (target.ToLower().Contains("/1/"))
           {
-          p.tab_index = UserControl_member_binder_Static.TSSI_1;
+          p.tab_index = UserControl_template_binder_Static.TSSI_1;
           }
         //
         PlaceHolder_content.Controls.Clear();
