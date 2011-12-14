@@ -1,6 +1,5 @@
 using Class_db_template_trivial_items;
 using kix;
-using System;
 
 namespace Class_biz_template_trivial_items
   {
@@ -27,7 +26,7 @@ namespace Class_biz_template_trivial_items
 
     public void BindDirectToListControl(object target)
       {
-      BindDirectToListControl(target, "-- court kind --");
+      BindDirectToListControl(target, "-- template_trivial_item --");
       }
 
     public void BindDirectToListControl(object target, string unselected_literal)

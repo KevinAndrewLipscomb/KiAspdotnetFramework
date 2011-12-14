@@ -1,13 +1,9 @@
+using Class_biz_template_trivial_items;
 using kix;
 using System;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Collections;
 
-using Class_biz_template_trivial_items;
-using UserControl_drop_down_date;
 namespace UserControl_template_trivial_item
 {
     // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~trivial~item.pas
@@ -195,7 +191,7 @@ namespace UserControl_template_trivial_item
             {
                 p.be_loaded = false;
                 p.biz_template_trivial_items = new TClass_biz_template_trivial_items();
-                p.be_ok_to_config_template_trivial_items = k.Has((string[])(Session["privilege_array"]), "config-court-kinds");
+                p.be_ok_to_config_template_trivial_items = k.Has((string[])(Session["privilege_array"]), "config-template_trivial_items");
             }
 
         }
