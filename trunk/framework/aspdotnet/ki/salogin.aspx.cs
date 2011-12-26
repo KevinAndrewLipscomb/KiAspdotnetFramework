@@ -35,7 +35,7 @@ namespace salogin
         (
         "SecurePassword()",
         k.EMPTY
-        + "El('" + TextBox_password.ClientID + "').value = new jsSHA(El('" + TextBox_password.ClientID + "').value,'ASCII').getHash('B64')"
+        + "if (El('" + TextBox_password.ClientID + "').value != '') El('" + TextBox_password.ClientID + "').value = new jsSHA(El('" + TextBox_password.ClientID + "').value,'ASCII').getHash('HEX')"
         );
       //
       Form_control.Attributes.Add("onsubmit","SecurePassword()");
@@ -107,7 +107,7 @@ namespace salogin
             bool dummy_boolean;
             uint dummy_cardinal;
             string dummy_string;
-            args.IsValid = true && p.biz_users.Get(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), out dummy_string, out dummy_boolean, out dummy_string, out dummy_boolean, out dummy_cardinal, out dummy_string) && p.biz_users.BeAuthorizedSysAdmin(k.Safe(TextBox_password.Text.Trim(), k.safe_hint_type.BASE64));
+            args.IsValid = true && p.biz_users.Get(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), out dummy_string, out dummy_boolean, out dummy_string, out dummy_boolean, out dummy_cardinal, out dummy_string) && p.biz_users.BeAuthorizedSysAdmin(k.Safe(TextBox_password.Text.Trim(), k.safe_hint_type.HEX));
 
         }
 

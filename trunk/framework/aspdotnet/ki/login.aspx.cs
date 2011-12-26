@@ -35,7 +35,7 @@ namespace login
         (
         "SecurePassword()",
         k.EMPTY
-        + "El('" + TextBox_password.ClientID + "').value = new jsSHA(El('" + TextBox_password.ClientID + "').value,'ASCII').getHash('B64')"
+        + "if (El('" + TextBox_password.ClientID + "').value != '') El('" + TextBox_password.ClientID + "').value = new jsSHA(El('" + TextBox_password.ClientID + "').value,'ASCII').getHash('HEX')"
         );
       //
       Form_control.Attributes.Add("onsubmit","SecurePassword()");
@@ -104,7 +104,7 @@ namespace login
 
         protected void CustomValidator_account_exists_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
-            args.IsValid = p.biz_users.BeAuthorized(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), k.Safe(TextBox_password.Text,k.safe_hint_type.BASE64));
+            args.IsValid = p.biz_users.BeAuthorized(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), k.Safe(TextBox_password.Text,k.safe_hint_type.HEX));
         }
 
         protected void Button_log_in_Click(object sender, System.EventArgs e)
