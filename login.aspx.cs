@@ -1,25 +1,10 @@
-using System.Configuration;
-
-using kix;
-
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Web;
-using System.Web.SessionState;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Globalization;
-using System.Data.SqlClient;
-using System.Data.Common;
-
-
-
-
-
-using System.Web.UI;
-using System.Web.Security;
 using Class_biz_users;
+using kix;
+using System;
+using System.Configuration;
+using System.Web.Security;
+using System.Web.UI;
+
 namespace login
 {
     public struct p_type
@@ -40,13 +25,29 @@ namespace login
             this.PreRender += this.TWebForm_login_PreRender;
         }
 
+    private void InjectPersistentClientSideScript()
+      {
+      EstablishClientSideFunction(k.client_side_function_enumeral_type.EL);
+      EstablishClientSideFunction("SetClientTimezoneOffset()","El('" + Hidden_client_timezone_offset.ClientID + "').value = (new Date()).getTimezoneOffset();");
+      Button_log_in.Attributes.Add("onclick","SetClientTimezoneOffset();");
+      LinkButton_new_user.Attributes.Add("onclick","SetClientTimezoneOffset();");
+      EstablishClientSideFunction
+        (
+        "SecurePassword()",
+        k.EMPTY
+        + "El('" + TextBox_password.ClientID + "').value = new jsSHA(El('" + TextBox_password.ClientID + "').value,'ASCII').getHash('B64')"
+        );
+      //
+      Form_control.Attributes.Add("onsubmit","SecurePassword()");
+      }
+
         protected void Page_Load(object sender, System.EventArgs e)
         {
             switch(NatureOfVisitUnlimited(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_COLD_CALL:
                 case nature_of_visit_type.VISIT_INITIAL:
-                    Title.InnerText = ConfigurationManager.AppSettings["application_name"] + " - login";
+                    Title = ConfigurationManager.AppSettings["application_name"] + " - login";
                     p.biz_users = new TClass_biz_users();
                     Focus(TextBox_username, true);
                     break;
@@ -54,6 +55,7 @@ namespace login
                     p = (p_type)(Session[InstanceId() + ".p"]);
                     break;
             }
+            InjectPersistentClientSideScript();
         }
 
         protected override void OnInit(EventArgs e)
@@ -102,7 +104,7 @@ namespace login
 
         protected void CustomValidator_account_exists_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
-            args.IsValid = p.biz_users.BeAuthorized(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), k.Digest(k.Safe(TextBox_password.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM)));
+            args.IsValid = p.biz_users.BeAuthorized(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), k.Safe(TextBox_password.Text,k.safe_hint_type.BASE64));
         }
 
         protected void Button_log_in_Click(object sender, System.EventArgs e)
