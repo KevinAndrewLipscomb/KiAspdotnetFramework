@@ -8,6 +8,12 @@ using System.Web.UI.WebControls;
 namespace Class_db_template_trivial_items
   {
 
+  internal enum template_trivial_item_enumeration
+    {
+    DESCRIPTION_1 = 1,
+    DESCRIPTION_2 = 2
+    }
+
   public class TClass_db_template_trivial_items: TClass_db
     {
 
