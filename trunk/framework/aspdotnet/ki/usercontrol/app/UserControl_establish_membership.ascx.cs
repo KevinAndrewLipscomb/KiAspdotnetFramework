@@ -1,16 +1,8 @@
-using System.Configuration;
-
-using kix;
-
-using System;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Collections;
-
 using Class_biz_user;
 using Class_biz_users;
+using kix;
+using System.Configuration;
+
 namespace UserControl_establish_membership
 {
     public struct p_type
@@ -70,7 +62,7 @@ namespace UserControl_establish_membership
 
         protected void Button_submit_Click(object sender, System.EventArgs e)
         {
-            if (p.biz_users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHA), p.biz_user.IdNum()))
+            if (p.biz_users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.NUM), p.biz_user.IdNum()))
             {
                 SessionSet("privilege_array", p.biz_user.Privileges());
                 // User was an unprivileged user until now, so reset privs.
