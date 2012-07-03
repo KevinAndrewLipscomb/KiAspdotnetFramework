@@ -1,17 +1,8 @@
-using System.Configuration;
-
 using kix;
-
-using System;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI;
-
-
-
-
+using System.Configuration;
 using System.Web;
 using System.Web.Security;
+
 namespace UserControl_precontent
 {
     public partial class TWebUserControl_precontent: ki_web_ui.usercontrol_class
