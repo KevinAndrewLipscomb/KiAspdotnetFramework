@@ -1,11 +1,11 @@
-using System.Collections.Specialized;
-using MySql.Data.MySqlClient;
-using kix;
-using System;
-
-using System.Web.UI.WebControls;
 using Class_db;
 using Class_db_trail;
+using System.Collections.Specialized;
+using kix;
+using MySql.Data.MySqlClient;
+using System;
+using System.Web.UI.WebControls;
+
 namespace Class_db_users
 {
     public class TClass_db_users: TClass_db
@@ -17,23 +17,22 @@ namespace Class_db_users
             // TODO: Add any constructor code here
             db_trail = new TClass_db_trail();
         }
-        public bool AcceptAsMember(string shared_secret, string id)
-        {
-            bool result;
-            bool accept_as_member;
-            object member_id_obj;
-            accept_as_member = false;
-            this.Open();
-            member_id_obj = new MySqlCommand("select id from member where registration_code = \"" + shared_secret + "\"", this.connection).ExecuteScalar();
-            if (member_id_obj != null)
+
+        internal bool AcceptAsMember(string shared_secret,string id)
+          {
+          var accept_as_member = false;
+          object member_id_obj;
+          //
+          Open();
+          member_id_obj = new MySqlCommand("select id from member where registration_code = \"" + shared_secret + "\"",connection).ExecuteScalar();
+          if (member_id_obj != null)
             {
-                new MySqlCommand("insert user_member_map" + " set user_id = " + id + " , member_id = " + member_id_obj.ToString() + " on duplicate key update user_id = " + id, this.connection).ExecuteNonQuery();
-                accept_as_member = true;
+            new MySqlCommand("insert user_member_map set user_id = '" + id + "' , member_id = '" + member_id_obj.ToString() + "' on duplicate key update user_id = '" + id + "'",connection).ExecuteNonQuery();
+            accept_as_member = true;
             }
-            this.Close();
-            result = accept_as_member;
-            return result;
-        }
+          Close();
+          return accept_as_member;
+          }
 
         public bool BeAuthorized(string username, string encoded_password)
         {

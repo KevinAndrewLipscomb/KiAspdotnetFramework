@@ -26,7 +26,7 @@ namespace UserControl_establish_membership
                 Label_sponsor_4.Text = ConfigurationManager.AppSettings["sponsor"];
                 Label_shared_secret_description_1.Text = ConfigurationManager.AppSettings["shared_secret_description"];
                 Label_shared_secret_description_2.Text = ConfigurationManager.AppSettings["shared_secret_description"];
-                Focus(TextBox_shared_secret, true);
+                TextBox_shared_secret.Focus();
                 p.be_loaded = true;
             }
 

@@ -187,7 +187,7 @@ namespace UserControl_template_kicrudhelped_item
       SetDependentFieldAblements(p.be_ok_to_config_template_kicrudhelped_items);
       Button_submit.Enabled = p.be_ok_to_config_template_kicrudhelped_items;
       Button_delete.Enabled = false;
-      Focus(TextBox_ki_crud_helper_user_key, true);
+      TextBox_ki_crud_helper_user_key.Focus();
       }
 
     private void SetLookupMode()
@@ -199,7 +199,7 @@ namespace UserControl_template_kicrudhelped_item
       Label_lookup_hint.Enabled = true;
       LinkButton_reset.Enabled = false;
       LinkButton_new_record.Enabled = true;
-      Focus(TextBox_ki_crud_helper_user_key, true);
+      TextBox_ki_crud_helper_user_key.Focus();
       }
 
     protected override void OnInit(System.EventArgs e)

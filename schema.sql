@@ -130,7 +130,7 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user (
   id int unsigned NOT NULL AUTO_INCREMENT,
   username char(40) NOT NULL,
-  encoded_password char(40) default NULL,
+  encoded_password_hash char(40) default NULL,
   be_stale_password boolean NOT NULL default 1,
   password_reset_email_address varchar(255) NOT NULL,
   be_active boolean NOT NULL default 1,

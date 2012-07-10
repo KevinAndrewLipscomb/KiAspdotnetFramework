@@ -1,8 +1,8 @@
+using Class_db;
+using Class_db_trail;
 using MySql.Data.MySqlClient;
 using System;
 
-using Class_db;
-using Class_db_trail;
 namespace Class_db_milestones
 {
     public class TClass_db_milestones: TClass_db
@@ -14,17 +14,29 @@ namespace Class_db_milestones
             // TODO: Add any constructor code here
             db_trail = new TClass_db_trail();
         }
+
         public void Check(uint code, out bool be_processed, out DateTime value)
         {
-            MySqlDataReader dr;
-            this.Open();
-            // + biz_fiscal_years.IdOfCurrent
-            dr = new MySqlCommand("select be_processed,value" + " from fy_calendar" + " where fiscal_year_id = " + " and milestone_code = " + code.ToString(), this.connection).ExecuteReader();
-            dr.Read();
-            be_processed = (dr["be_processed"].ToString() == "1");
-            value = DateTime.Parse(dr["value"].ToString());
+            be_processed = true;
+            value = DateTime.MaxValue;
+            Open();
+            var dr = new MySqlCommand
+              (
+              "select be_processed"
+              + " , value"
+              + " from fy_calendar"
+              + " where milestone_code = '" + code.ToString() + "'",
+              //+   " and fiscal_year_id = '" + biz_fiscal_years.IdOfCurrent() + "'"
+              connection
+              )
+              .ExecuteReader();
+            if (dr.Read())
+              {
+              be_processed = (dr["be_processed"].ToString() == "1");
+              value = DateTime.Parse(dr["value"].ToString());
+              }
             dr.Close();
-            this.Close();
+            Close();
         }
 
         public void MarkProcessed(uint code)
