@@ -14,21 +14,17 @@
                 <p>
                   <table cellspacing="0" cellpadding="10" border="0">
                       <tr>
-						<td valign="top">
-                          <p align="center"><strong>NO</strong>
-                          </p></td>
+						<td align="center" valign="top"><strong>NO</strong></td>
 						<td valign="top" nowrap="nowrap">-&gt;</td>
                         <td valign="top">
-                     <p>Use the process dictated by the <asp:Label id="Label_sponsor_4" runat="server"></asp:Label> to attain a <asp:Label id="Label_shared_secret_description_2" runat="server"></asp:Label>.</p>
+                     Use the process dictated by the <asp:Label id="Label_sponsor_4" runat="server"></asp:Label> to attain a <asp:Label id="Label_shared_secret_description_2" runat="server"></asp:Label>.
                           <p>&nbsp;</p></td>
                       </tr>
                       <tr>
-						<td valign="top">
-						  <p align="center"><strong>YES</strong>
-						  </p></td>
+						<td align="center" valign="top"><strong>YES</strong></td>
 						<td valign="top" nowrap="nowrap">-&gt;</td>
 						<td valign="top">
-						  <p>Match yourself to a <ASP:Label id="Label_sponsor_3" runat="server"></ASP:Label>&nbsp;membership record by entering <ASP:Label id="Label_shared_secret_description_1" runat="server"></ASP:Label>&nbsp;here:</p>
+						  Match yourself to a <ASP:Label id="Label_sponsor_3" runat="server"></ASP:Label>&nbsp;membership record by entering <ASP:Label id="Label_shared_secret_description_1" runat="server"></ASP:Label>&nbsp;here:
 						  <p>
 							<asp:textbox id="TextBox_noop_ie_behavior_workaround" runat="server" style="DISPLAY: none; VISIBILITY: hidden" /><!-- To work around an IE bug that otherwise prevents Enter in a textbox from submitting a form. -->
 							<ASP:TextBox id="TextBox_shared_secret" runat="server" columns="15" maxlength="15"></ASP:TextBox><ASP:Button id="Button_submit" runat="server" text="Submit" font-bold="True" onclick="Button_submit_Click"></ASP:Button><ASP:RequiredFieldValidator id="RequiredFieldValidator_shared_secret" runat="server" errormessage="Please enter {your shared secret data}." font-bold="True" controltovalidate="TextBox_shared_secret">!ERR!</ASP:RequiredFieldValidator><ASP:RegularExpressionValidator id="RegularExpressionValidator_shared_secret" runat="server" errormessage="Please enter only numbers." font-bold="True" controltovalidate="TextBox_shared_secret" validationexpression="\d+">!ERR!</ASP:RegularExpressionValidator>
