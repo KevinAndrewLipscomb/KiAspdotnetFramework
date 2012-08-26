@@ -5,3 +5,11 @@ grant select
  , create
   on kiaspdotnetframeworkdb.*
   to 'ki-kiaspdotnetframework'@'localhost' identified by '~ki-kiaspdotnetframework-password~'
+;
+--
+-- Must grant PROCESS priv to primary user to include SHOW ENGINE INNODB
+-- STATUS output in MySQL-related exception reports.
+--
+grant process
+  on *.*
+  to 'ki-kiaspdotnetframework'@'localhost'
