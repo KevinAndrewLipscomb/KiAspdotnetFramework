@@ -3,6 +3,8 @@ grant select
  , update
  , delete
  , create
+ , create routine
+ , alter routine
   on kiaspdotnetframeworkdb_x.*
   to 'ki-kiaspdotnetframework-x'@'localhost' identified by '~ki-kiaspdotnetframework-x-password~'
 ;
