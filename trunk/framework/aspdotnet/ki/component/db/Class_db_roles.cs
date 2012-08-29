@@ -136,12 +136,14 @@ namespace Class_db_roles
 
         public void Set(string name, string soft_hyphenation_text, string pecking_order)
         {
-            string childless_field_assignments_clause;
-            childless_field_assignments_clause = " soft_hyphenation_text = NULLIF(\"" + soft_hyphenation_text + "\",\"\")" + " , pecking_order = NULLIF(\"" + pecking_order + "\",\"\")";
-            this.Open();
-            new MySqlCommand(db_trail.Saved("insert role" + " set name = NULLIF(\"" + name + "\",\"\")" + " , " + childless_field_assignments_clause + " on duplicate key update " + childless_field_assignments_clause), this.connection).ExecuteNonQuery();
-            this.Close();
-
+            var childless_field_assignments_clause = " soft_hyphenation_text = NULLIF('" + soft_hyphenation_text + "','')" + " , pecking_order = NULLIF('" + pecking_order + "','')";
+            db_trail.MimicTraditionalInsertOnDuplicateKeyUpdate
+              (
+              target_table_name:"role",
+              key_field_name:"name",
+              key_field_value:name,
+              childless_field_assignments_clause:childless_field_assignments_clause
+              );
         }
 
     } // end TClass_db_roles
