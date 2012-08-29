@@ -232,13 +232,16 @@ namespace Class_db_users
         }
 
         public void Set(string username, bool be_stale_password, string password_reset_email_address, bool be_active)
-        {
-            string childless_field_assignments_clause;
-            childless_field_assignments_clause = " be_stale_password = " + be_stale_password.ToString() + " , password_reset_email_address = \"" + password_reset_email_address + "\"" + " , be_active = " + be_active.ToString();
-            this.Open();
-            new MySqlCommand(db_trail.Saved("insert user" + " set username = \"" + username + "\"" + " , " + childless_field_assignments_clause + " on duplicate key update " + childless_field_assignments_clause), this.connection).ExecuteNonQuery();
-            this.Close();
-        }
+          {
+          var childless_field_assignments_clause = " be_stale_password = " + be_stale_password.ToString() + " , password_reset_email_address = '" + password_reset_email_address + "'" + " , be_active = " + be_active.ToString();
+          db_trail.MimicTraditionalInsertOnDuplicateKeyUpdate
+            (
+            target_table_name:"user",
+            key_field_name:"username",
+            key_field_value:username,
+            childless_field_assignments_clause:childless_field_assignments_clause
+            );
+          }
 
         public void SetEmailAddress(string id, string email_address)
         {
