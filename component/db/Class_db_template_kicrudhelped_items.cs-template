@@ -118,7 +118,7 @@ namespace Class_db_template_kicrudhelped_items
       var childless_field_assignments_clause = k.EMPTY
 //<KiCrudHelper:DbSetBody/>
       + k.EMPTY;
-      db_trail.InsertOnDuplicateKeyUpdateTraditionalMimicScript
+      db_trail.MimicTraditionalInsertOnDuplicateKeyUpdate
         (
         target_table_name:"template_kicrudhelped_item",
         key_field_name:"ki_crud_helper_user_key",
