@@ -393,8 +393,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="component\biz\Class_biz_template_kicrudhelped_items.pas-template" />
-    <None Include="component\db\Class_db_template_kicrudhelped_items.pas-template" />
+    <None Include="component\biz\Class_biz_template_kicrudhelped_items.cs-template" />
+    <None Include="component\biz\Class_biz_template_trivial_items.cs-template" />
+    <None Include="component\db\Class_db_template_kicrudhelped_items.cs-template" />
+    <None Include="component\db\Class_db_template_trivial_items.cs-template" />
     <None Include="deploy.bat" />
     <Content Include="css\standard-overrides-for-ie6.css" />
     <Content Include="css\standard.css" />
