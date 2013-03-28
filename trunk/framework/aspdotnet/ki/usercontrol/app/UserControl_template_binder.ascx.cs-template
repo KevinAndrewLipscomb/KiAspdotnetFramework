@@ -75,6 +75,7 @@ namespace UserControl_template_binder
           {
           TabPanel_0.Enabled = true;
           }
+        TabContainer_control.ActiveTabIndex = (int)(p.tab_index);
         p.be_loaded = true;
         }
       }
