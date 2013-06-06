@@ -51,7 +51,6 @@ namespace Class_db_template_kicrudhelped_items
 
     internal void BindBaseDataList
       (
-      string ki_crud_helper_user_key,
       string sort_order,
       bool be_sort_order_ascending,
       object target
@@ -60,9 +59,8 @@ namespace Class_db_template_kicrudhelped_items
       Open();
       ((target) as BaseDataList).DataSource = new MySqlCommand
         (
-        "select template_kicrudhelped_item.ki_crud_helper_user_key as template_kicrudhelped_item_ki_crud_helper_user_key"
-        + " from template_kicrudhelped_item"
-        + " where template_kicrudhelped_item.ki_crud_helper_user_key = '" + ki_crud_helper_user_key + "'",
+        "select template_kicrudhelped_item.ki_crud_helper_user_key as ki_crud_helper_user_key"
+        + " from template_kicrudhelped_item",
         connection
         )
         .ExecuteReader();
