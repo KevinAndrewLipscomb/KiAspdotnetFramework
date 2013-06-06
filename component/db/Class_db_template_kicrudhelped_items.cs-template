@@ -13,6 +13,11 @@ namespace Class_db_template_kicrudhelped_items
   {
   public class TClass_db_template_kicrudhelped_items: TClass_db
     {
+    private class template_kicrudhelped_item_summary
+      {
+      public string ki_crud_helper_user_key;
+      }
+
     private TClass_db_trail db_trail = null;
 
     public TClass_db_template_kicrudhelped_items() : base()
@@ -125,6 +130,29 @@ namespace Class_db_template_kicrudhelped_items
         key_field_value:ki_crud_helper_user_key,
         childless_field_assignments_clause:childless_field_assignments_clause
         );
+      }
+
+    internal object Summary(string ki_crud_helper_user_key)
+      {
+      Open();
+      var dr =
+        (
+        new MySqlCommand
+          (
+          "SELECT *"
+          + " FROM template_kicrudhelped_item"
+          + " where ki_crud_helper_user_key = '" + ki_crud_helper_user_key + "'",
+          connection
+          )
+          .ExecuteReader()
+        );
+      dr.Read();
+      var the_summary = new template_kicrudhelped_item_summary()
+        {
+        ki_crud_helper_user_key = ki_crud_helper_user_key
+        };
+      Close();
+      return the_summary;
       }
 
     } // end TClass_db_template_kicrudhelped_items
