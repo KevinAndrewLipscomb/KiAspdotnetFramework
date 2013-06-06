@@ -57,6 +57,11 @@ namespace Class_biz_template_kicrudhelped_items
         );
       }
 
+    internal object Summary(string ki_crud_helper_user_key)
+      {
+      return db_template_kicrudhelped_items.Summary(ki_crud_helper_user_key);
+      }
+
     } // end TClass_biz_template_kicrudhelped_items
 
   }
