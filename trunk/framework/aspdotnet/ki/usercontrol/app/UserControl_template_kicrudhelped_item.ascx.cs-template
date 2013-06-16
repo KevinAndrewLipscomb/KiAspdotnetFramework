@@ -133,11 +133,6 @@ namespace UserControl_template_kicrudhelped_item
         RequireConfirmation(Button_delete, "Are you sure you want to delete this record?");
 #warning Remove the following line if the template_kicrudhelped_item will primarily be a reference table as opposed to a log or journal table.
         SetDataEntryMode();
-        if ((Session["mode:goto"] != null) && Session["mode:goto"].ToString().Contains("/template_kicrudhelped_item/"))
-          {
-          PresentRecord(Session["mode:goto"].ToString().Substring(Session["mode:goto"].ToString().LastIndexOf("/") + 1));
-          Session.Remove("mode:goto");
-          }
         p.be_loaded = true;
         }
       InjectPersistentClientSideScript();
