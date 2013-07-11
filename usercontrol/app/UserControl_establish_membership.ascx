@@ -26,8 +26,12 @@
 						<td valign="top">
 						  Match yourself to a <ASP:Label id="Label_sponsor_3" runat="server"></ASP:Label>&nbsp;membership record by entering <ASP:Label id="Label_shared_secret_description_1" runat="server"></ASP:Label>&nbsp;here:
 						  <p>
-							<asp:textbox id="TextBox_noop_ie_behavior_workaround" runat="server" style="DISPLAY: none; VISIBILITY: hidden" /><!-- To work around an IE bug that otherwise prevents Enter in a textbox from submitting a form. -->
-							<ASP:TextBox id="TextBox_shared_secret" runat="server" columns="15" maxlength="15"></ASP:TextBox><ASP:Button id="Button_submit" runat="server" text="Submit" font-bold="True" onclick="Button_submit_Click"></ASP:Button><ASP:RequiredFieldValidator id="RequiredFieldValidator_shared_secret" runat="server" errormessage="Please enter {your shared secret data}." font-bold="True" controltovalidate="TextBox_shared_secret">!ERR!</ASP:RequiredFieldValidator><ASP:RegularExpressionValidator id="RegularExpressionValidator_shared_secret" runat="server" errormessage="Please enter only numbers." font-bold="True" controltovalidate="TextBox_shared_secret" validationexpression="\d+">!ERR!</ASP:RegularExpressionValidator>
+							  <asp:textbox id="TextBox_noop_ie_behavior_workaround" runat="server" style="DISPLAY: none; VISIBILITY: hidden" /><!-- To work around an IE bug that otherwise prevents Enter in a textbox from submitting a form. -->
+							  <ASP:TextBox id="TextBox_shared_secret" runat="server" columns="15" maxlength="15"></ASP:TextBox>
+                <ASP:Button id="Button_submit" runat="server" text="Submit" font-bold="True" onclick="Button_submit_Click"></ASP:Button>
+                <ASP:RequiredFieldValidator id="RequiredFieldValidator_shared_secret" runat="server" errormessage="Please enter {your shared secret data}." font-bold="True" controltovalidate="TextBox_shared_secret">!ERR!</ASP:RequiredFieldValidator>
+                <ASP:RegularExpressionValidator id="RegularExpressionValidator_shared_secret" runat="server" errormessage="Please enter only numbers." font-bold="True" controltovalidate="TextBox_shared_secret" validationexpression="\d+">!ERR!</ASP:RegularExpressionValidator>
+                <asp:CustomValidator ID="CustomValidator_shared_secret" runat="server" Display="Dynamic" ErrorMessage="Sorry, because of privileges attached to the specified membership record, Application Administrator intervention is required to complete this match.  The Application Administrator has been notified and will be in touch with you." Font-Bold="True" OnServerValidate="CustomValidator_shared_secret_ServerValidate">!ERR!</asp:CustomValidator>
 						  </p>
 						  <p>If you have trouble with this feature, <ASP:LinkButton id="LinkButton_trouble_handler" runat="server" causesvalidation="False" onclick="LinkButton_trouble_handler_Click">click here</ASP:LinkButton>.</p>
 						  <p>
