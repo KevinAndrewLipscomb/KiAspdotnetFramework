@@ -135,7 +135,7 @@ namespace Class_db_template_trivial_items
       )
       {
       var childless_field_assignments_clause = "description = '" + description + "'";
-      db_trail.InsertOnDuplicateKeyUpdateTraditionalMimicScript
+      db_trail.MimicTraditionalInsertOnDuplicateKeyUpdate
         (
         target_table_name:"template_trivial_item",
         key_field_name:"id",
