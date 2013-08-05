@@ -8,7 +8,7 @@ using kix;
 namespace UserControl_template_binder
   {
 
-  public class UserControl_template_binder_Static
+  public static class UserControl_template_binder_Static
     {
     public const int TSSI_0 = 0;
     public const int TSSI_1 = 1;

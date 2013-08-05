@@ -14,7 +14,7 @@ namespace UserControl_template_datagrid_sortable
   {
   public partial class TWebUserControl_template_datagrid_sortable: ki_web_ui.usercontrol_class
     {
-    public class UserControl_template_datagrid_sortable_Static
+    public static class UserControl_template_datagrid_sortable_Static
       {
       public const int TCI_SELECT = 0;
       public const int TCI_ID = 1;
