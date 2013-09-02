@@ -2,6 +2,7 @@ using Class_db;
 using Class_db_trail;
 using kix;
 using MySql.Data.MySqlClient;
+using System;
 using System.Web.UI.WebControls;
 
 namespace Class_db_privileges
@@ -90,6 +91,27 @@ namespace Class_db_privileges
       dr.Close();
       Close();
       return result;
+      }
+
+    internal bool HasGenerally
+      (
+      string member_id,
+      string name
+      )
+      {
+      Open();
+      var has_generally = "1" == new MySqlCommand
+        (
+        "select IF(count(*) > 0 and (select count(*) from information_schema.COLUMNS WHERE TABLE_SCHEMA = '" + connection.Database + "' and TABLE_NAME = 'role_member_map' and COLUMN_NAME not in ('id','role_id','member_id')),1,0)"
+        + " from role_member_map"
+        +   " join role_privilege_map on (role_privilege_map.role_id=role_member_map.role_id)"
+        + " where member_id = '" + member_id + "'"
+        +   " and privilege.name = '" + name + "'",
+        connection
+        )
+        .ExecuteScalar().ToString();
+      Close();
+      return has_generally;
       }
 
     } // end TClass_db_privileges
