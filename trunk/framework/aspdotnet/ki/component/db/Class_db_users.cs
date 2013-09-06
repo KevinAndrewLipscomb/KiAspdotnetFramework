@@ -206,9 +206,9 @@ namespace Class_db_users
       var dr = new MySqlCommand
         (
         "select distinct name"
-        //+ " , IFNULL(role_member_map_scope_column_a_name,'')" // such as system_id
-        //+ " , IFNULL(role_member_map_scope_column_b_name,'')" // such as region_code
-        //+ " , IFNULL(role_member_map_scope_column_c_name,'')" // such as service_id
+        //+ " , IFNULL(role_member_map_scope_column_a_name,'') as role_member_map_scope_column_a_name" // such as system_id
+        //+ " , IFNULL(role_member_map_scope_column_b_name,'') as role_member_map_scope_column_b_name" // such as region_code
+        //+ " , IFNULL(role_member_map_scope_column_c_name,'') as role_member_map_scope_column_c_name" // such as service_id
         + " from user_member_map"
         +   " join role_member_map using (member_id)"
         +   " join role_privilege_map using (role_id)"
@@ -229,15 +229,15 @@ namespace Class_db_users
         //  }
         //else if (role_member_map_scope_column_a_name.Length > 0)
         //  {
-        //  privilege_spec += "/{role_member_map_scope_column_a_name}=" + role_member_map_scope_column_a_name;
+        //  privilege_spec += "/role_member_map_scope_column_a_name=" + role_member_map_scope_column_a_name;
         //  }
         //else if (role_member_map_scope_column_b_name.Length > 0)
         //  {
-        //  privilege_spec += "/{role_member_map_scope_column_b_name}=" + role_member_map_scope_column_b_name;
+        //  privilege_spec += "/role_member_map_scope_column_b_name=" + role_member_map_scope_column_b_name;
         //  }
         //else if (role_member_map_scope_column_c_name.Length > 0)
         //  {
-        //  privilege_spec += "/{role_member_map_scope_column_c_name}=" + role_member_map_scope_column_c_name;
+        //  privilege_spec += "/role_member_map_scope_column_c_name=" + role_member_map_scope_column_c_name;
         //  }
         privileges_of_string_collection.Add(privilege_spec);
         }
