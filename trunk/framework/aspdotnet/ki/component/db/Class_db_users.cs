@@ -193,22 +193,60 @@ namespace Class_db_users
             return result;
         }
 
-        public string[] PrivilegesOf(string id)
+    public string[] PrivilegesOf(string id)
+      {
+      var privilege_spec = k.EMPTY;
+      var privileges_of_string_collection = new StringCollection();
+      //
+      //var scope_a_affiliation_id = k.EMPTY;
+      //var scope_b_affiliation_id = k.EMPTY;
+      //var scope_c_affiliation_id = k.EMPTY;
+      //
+      Open();
+      var dr = new MySqlCommand
+        (
+        "select distinct name"
+        //+ " , IFNULL(scope_a_affiliation_id,'')" // such as system_id
+        //+ " , IFNULL(scope_b_affiliation_id,'')" // such as region_code
+        //+ " , IFNULL(scope_c_affiliation_id,'')" // such as service_id
+        + " from user_member_map"
+        +   " join role_member_map using (member_id)"
+        +   " join role_privilege_map using (role_id)"
+        +   " join privilege on (privilege.id=role_privilege_map.privilege_id)"
+        + " where user_id = '" + id + "'",
+        connection
+        )
+        .ExecuteReader();
+      while (dr.Read())
         {
-            MySqlDataReader dr;
-            StringCollection privileges_of_string_collection = new StringCollection();
-            this.Open();
-            dr = new MySqlCommand("select distinct name" + " from user_member_map" + " join role_member_map using (member_id)" + " join role_privilege_map using (role_id)" + " join privilege on (privilege.id=role_privilege_map.privilege_id)" + " where user_id = " + id, this.connection).ExecuteReader();
-            while (dr.Read())
-            {
-                privileges_of_string_collection.Add(dr["name"].ToString());
-            }
-            dr.Close();
-            this.Close();
-            string[] privileges_of = new string[privileges_of_string_collection.Count];
-            privileges_of_string_collection.CopyTo(privileges_of,0);
-            return privileges_of;
+        privilege_spec = dr["name"].ToString();
+        //scope_a_affiliation_id = dr["scope_a_affiliation_id"].ToString();
+        //scope_b_affiliation_id = dr["scope_b_affiliation_id"].ToString();
+        //scope_c_affiliation_id = dr["scope_c_affiliation_id"].ToString();
+        //if (scope_a_affiliation_id.Length  + scope_b_affiliation_id.Length + scope_c_affiliation_id.Length > 0)
+        //  {
+          privilege_spec += "/GENERALLY";
+        //  }
+        //else if (scope_a_affiliation_id.Length > 0)
+        //  {
+        //  privilege_spec += "/{scope_a_affiliation}=" + scope_a_affiliation_id;
+        //  }
+        //else if (scope_b_affiliation_id.Length > 0)
+        //  {
+        //  privilege_spec += "/{scope_b_affiliation}=" + scope_b_affiliation_id;
+        //  }
+        //else if (scope_c_affiliation_id.Length > 0)
+        //  {
+        //  privilege_spec += "/{scope_c_affiliation}=" + scope_c_affiliation_id;
+        //  }
+        privileges_of_string_collection.Add(privilege_spec);
         }
+      dr.Close();
+      Close();
+      string[] privileges_of = new string[privileges_of_string_collection.Count];
+      privileges_of_string_collection.CopyTo(privileges_of,0);
+      return privileges_of;
+      }
 
         public void RecordSuccessfulLogin(string id)
         {
