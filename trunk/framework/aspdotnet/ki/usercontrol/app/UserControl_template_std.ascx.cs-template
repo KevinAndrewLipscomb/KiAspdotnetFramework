@@ -3,13 +3,13 @@ using System.Configuration;
 namespace UserControl_template_std
   {
 
-  public struct p_type
-    {
-    public bool be_loaded;
-    }
-
   public partial class TWebUserControl_template_std: ki_web_ui.usercontrol_class
     {
+
+    private struct p_type
+      {
+      public bool be_loaded;
+      }
 
     private p_type p;
 
