@@ -213,7 +213,8 @@ namespace Class_db_users
         +   " join role_member_map using (member_id)"
         +   " join role_privilege_map using (role_id)"
         +   " join privilege on (privilege.id=role_privilege_map.privilege_id)"
-        + " where user_id = '" + id + "'",
+        + " where user_id = '" + id + "'"
+        + " order by name",
         connection
         )
         .ExecuteReader();
@@ -223,7 +224,7 @@ namespace Class_db_users
         //role_member_map_scope_column_a_name = dr["role_member_map_scope_column_a_name"].ToString();
         //role_member_map_scope_column_b_name = dr["role_member_map_scope_column_b_name"].ToString();
         //role_member_map_scope_column_c_name = dr["role_member_map_scope_column_c_name"].ToString();
-        //if (role_member_map_scope_column_a_name.Length  + role_member_map_scope_column_b_name.Length + role_member_map_scope_column_c_name.Length > 0)
+        //if (role_member_map_scope_column_a_name.Length + role_member_map_scope_column_b_name.Length + role_member_map_scope_column_c_name.Length == 0)
         //  {
           privilege_spec += "/GENERALLY";
         //  }
@@ -243,7 +244,7 @@ namespace Class_db_users
         }
       dr.Close();
       Close();
-      string[] privileges_of = new string[privileges_of_string_collection.Count];
+      var privileges_of = new string[privileges_of_string_collection.Count];
       privileges_of_string_collection.CopyTo(privileges_of,0);
       return privileges_of;
       }
