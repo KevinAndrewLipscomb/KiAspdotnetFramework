@@ -57,15 +57,6 @@ namespace Class_biz_notifications
       BindDirectToListControl(target, unselected_literal:"-- Notification --");
       }
 
-    public void BindDirectToListControlForMember
-      (
-      string member_id,
-      object target
-      )
-      {
-      db_notifications.BindDirectToListControlForMember(member_id,target);
-      }
-
     private delegate string IssueForForgottenUsername_Merge(string s);
     public void IssueForForgottenUsername(string email_address, string username, string client_host_name)
       {

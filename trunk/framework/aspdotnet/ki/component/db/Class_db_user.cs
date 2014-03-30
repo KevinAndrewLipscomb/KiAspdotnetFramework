@@ -1,7 +1,7 @@
 using Class_db;
-using kix;
 using MySql.Data.MySqlClient;
 using System.Collections.Specialized;
+using System.Web.UI.WebControls;
 
 namespace Class_db_user
   {
@@ -13,57 +13,90 @@ namespace Class_db_user
       {
       }
 
-    public string[] RolesForDisplayOf(string id)
+    internal void BindRolesToBaseDataList
+      (
+      string id,
+      object target
+      )
       {
-      var role_spec = k.EMPTY;
-      var roles_for_display_of_string_collection = new StringCollection();
-      //
-      //var role_member_map_scope_column_a_name = k.EMPTY;
-      //var role_member_map_scope_column_b_name = k.EMPTY;
-      //var role_member_map_scope_column_c_name = k.EMPTY;
-      //
       Open();
-      var dr = new MySqlCommand
+      ((target) as BaseDataList).DataSource = new MySqlCommand
         (
-        "select role.name as role_name"
-        //+ " , IFNULL(role_member_map_scope_column_a_name,'') as role_member_map_scope_column_a_name" // such as system_id
-        //+ " , IFNULL(role_member_map_scope_column_b_name,'') as role_member_map_scope_column_b_name" // such as region_code
-        //+ " , IFNULL(role_member_map_scope_column_c_name,'') as role_member_map_scope_column_c_name" // such as service_id
-        + " from role"
-        +   " join role_member_map on (role_member_map.role_id=role.id)"
-        +   " join user_member_map on (user_member_map.member_id=role_member_map.member_id)"
-        + " where user_member_map.user_id = '" + id + "'",
+        "select role.name as role"
+        + " , 1 as tier" //IF(role_member_map_scope_column_c_name is not null,4,IF(role_member_map_scope_column_b_name is not null,3,IF(role_member_map_scope_column_a_name is not null,2,1))) as tier"
+        + " , '' as scope" //IF(role_member_map_scope_column_c_name is not null,concat('role_member_map_scope_c `',role_member_map_scope_column_c_ref_table.name,'`'),IF(role_member_map_scope_column_b_name is not null,concat('role_member_map_scope_b `',role_member_map_scope_column_b_ref_table.name,'`'),IF(role_member_map_scope_column_a_name is not null,concat('role_member_map_scope_a `',role_member_map_scope_column_a_ref_table.name,'`'),''))) as scope"
+        + " from user"
+        +   " join user_member_map on (user_member_map.user_id=user.id)"
+        +   " join role_member_map using (member_id)"
+        //+   " left join role_member_map_scope_column_a_ref_table on (role_member_map_scope_column_a_ref_table.id=role_member_map.role_member_map_scope_column_a_name)"
+        //+   " left join role_member_map_scope_column_b_ref_table on (role_member_map_scope_column_b_ref_table.id=role_member_map.role_member_map_scope_column_b_name)"
+        //+   " left join role_member_map_scope_column_c_ref_table on (role_member_map_scope_column_c_ref_table.id=role_member_map.role_member_map_scope_column_c_name)"
+        +   " join role on (role.id=role_member_map.role_id)"
+        + " where user.id = '" + id + "'"
+        + " order by role,tier,scope",
         connection
         )
         .ExecuteReader();
-      while (dr.Read())
-        {
-        role_spec = dr["role_name"].ToString();
-        //role_member_map_scope_column_a_name = dr["role_member_map_scope_column_a_name"].ToString();
-        //role_member_map_scope_column_b_name = dr["role_member_map_scope_column_b_name"].ToString();
-        //role_member_map_scope_column_c_name = dr["role_member_map_scope_column_c_name"].ToString();
-        //if (role_member_map_scope_column_a_name.Length + role_member_map_scope_column_b_name.Length + role_member_map_scope_column_c_name.Length != 0)
-        //  {
-        //  if (role_member_map_scope_column_a_name.Length > 0)
-        //    {
-        //    role_spec += " for " + role_member_map_scope_column_a_name;
-        //    }
-        //  else if (role_member_map_scope_column_b_name.Length > 0)
-        //    {
-        //    role_spec += " for " + role_member_map_scope_column_b_name;
-        //    }
-        //  else if (role_member_map_scope_column_c_name.Length > 0)
-        //    {
-        //    role_spec += " for " + role_member_map_scope_column_c_name;
-        //    }
-        //  }
-        roles_for_display_of_string_collection.Add(role_spec);
-        }
-      dr.Close();
+      ((target) as BaseDataList).DataBind();
       Close();
-      var roles_of = new string[roles_for_display_of_string_collection.Count];
-      roles_for_display_of_string_collection.CopyTo(roles_of,0);
-      return roles_of;
+      }
+
+    internal void BindPrivilegesToBaseDataList
+      (
+      string id,
+      object target
+      )
+      {
+      Open();
+      ((target) as BaseDataList).DataSource = new MySqlCommand
+        (
+        "select privilege.name as privilege"
+        + " , 1 as tier" //IF(role_member_map_scope_column_c_name is not null,4,IF(role_member_map_scope_column_b_name is not null,3,IF(role_member_map_scope_column_a_name is not null,2,1))) as tier"
+        + " , '' as scope" //IF(role_member_map_scope_column_c_name is not null,concat('role_member_map_scope_c `',role_member_map_scope_column_c_ref_table.name,'`'),IF(role_member_map_scope_column_b_name is not null,concat('role_member_map_scope_b `',role_member_map_scope_column_b_ref_table.name,'`'),IF(role_member_map_scope_column_a_name is not null,concat('role_member_map_scope_a `',role_member_map_scope_column_a_ref_table.name,'`'),''))) as scope"
+        + " from user"
+        +   " join user_member_map on (user_member_map.user_id=user.id)"
+        +   " join role_member_map using (member_id)"
+        //+   " left join role_member_map_scope_column_a_ref_table on (role_member_map_scope_column_a_ref_table.id=role_member_map.role_member_map_scope_column_a_name)"
+        //+   " left join role_member_map_scope_column_b_ref_table on (role_member_map_scope_column_b_ref_table.id=role_member_map.role_member_map_scope_column_b_name)"
+        //+   " left join role_member_map_scope_column_c_ref_table on (role_member_map_scope_column_c_ref_table.id=role_member_map.role_member_map_scope_column_c_name)"
+        +   " join role_privilege_map using (role_id)"
+        +   " join privilege on (privilege.id=role_privilege_map.privilege_id)"
+        + " where user.id = '" + id + "'"
+        + " order by privilege,tier,scope",
+        connection
+        )
+        .ExecuteReader();
+      ((target) as BaseDataList).DataBind();
+      Close();
+      }
+
+    internal void BindNotificationsToBaseDataList
+      (
+      string id,
+      object target
+      )
+      {
+      Open();
+      ((target) as BaseDataList).DataSource = new MySqlCommand
+        (
+        "select notification.name as notification"
+        + " , 1 as tier" //IF(role_member_map_scope_column_c_name is not null,4,IF(role_member_map_scope_column_b_name is not null,3,IF(role_member_map_scope_column_a_name is not null,2,1))) as tier"
+        + " , '' as scope" //IF(role_member_map_scope_column_c_name is not null,concat('role_member_map_scope_c `',role_member_map_scope_column_c_ref_table.name,'`'),IF(role_member_map_scope_column_b_name is not null,concat('role_member_map_scope_b `',role_member_map_scope_column_b_ref_table.name,'`'),IF(role_member_map_scope_column_a_name is not null,concat('role_member_map_scope_a `',role_member_map_scope_column_a_ref_table.name,'`'),''))) as scope"
+        + " from user"
+        +   " join user_member_map on (user_member_map.user_id=user.id)"
+        +   " join role_member_map using (member_id)"
+        //+   " left join role_member_map_scope_column_a_ref_table on (role_member_map_scope_column_a_ref_table.id=role_member_map.role_member_map_scope_column_a_name)"
+        //+   " left join role_member_map_scope_column_b_ref_table on (role_member_map_scope_column_b_ref_table.id=role_member_map.role_member_map_scope_column_b_name)"
+        //+   " left join role_member_map_scope_column_c_ref_table on (role_member_map_scope_column_c_ref_table.id=role_member_map.role_member_map_scope_column_c_name)"
+        +   " join role_notification_map using (role_id)"
+        +   " join notification on (notification.id=role_notification_map.notification_id)"
+        + " where user.id = '" + id + "'"
+        + " order by notification,tier,scope",
+        connection
+        )
+        .ExecuteReader();
+      ((target) as BaseDataList).DataBind();
+      Close();
       }
 
     public string[] RolesOf(string id)
