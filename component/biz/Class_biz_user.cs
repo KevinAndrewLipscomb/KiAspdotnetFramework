@@ -1,49 +1,57 @@
-using System;
-
-using System.Web;
 using Class_db_user;
 using Class_db_users;
+using System.Web;
+
 namespace Class_biz_user
-{
-    public class TClass_biz_user
+  {
+
+  public class TClass_biz_user
     {
-        private TClass_db_user db_user = null;
-        private TClass_db_users db_users = null;
-        //Constructor  Create()
-        public TClass_biz_user() : base()
-        {
-            // TODO: Add any constructor code here
-            db_user = new TClass_db_user();
-            db_users = new TClass_db_users();
-        }
-        public string EmailAddress()
-        {
-            string result;
-            result = db_users.PasswordResetEmailAddressOfId(IdNum());
-            return result;
-        }
 
-        public string IdNum()
-        {
-            string result;
-            result = db_users.IdOf(HttpContext.Current.User.Identity.Name);
-            return result;
-        }
+    private TClass_db_user db_user = null;
+    private TClass_db_users db_users = null;
 
-        public string[] Privileges()
-        {
-            string[] result;
-            result = db_users.PrivilegesOf(IdNum());
-            return result;
-        }
+    public TClass_biz_user() : base()
+      {
+      db_user = new TClass_db_user();
+      db_users = new TClass_db_users();
+      }
 
-        public string[] Roles()
-        {
-            string[] result;
-            result = db_user.RolesOf(IdNum());
-            return result;
-        }
+    public void BindNotificationsToBaseDataList(object target)
+      {
+      db_user.BindNotificationsToBaseDataList(IdNum(),target);
+      }
+
+    public void BindPrivilegesToBaseDataList(object target)
+      {
+      db_user.BindPrivilegesToBaseDataList(IdNum(),target);
+      }
+
+    public void BindRolesToBaseDataList(object target)
+      {
+      db_user.BindRolesToBaseDataList(IdNum(),target);
+      }
+
+    public string EmailAddress()
+      {
+      return db_users.PasswordResetEmailAddressOfId(IdNum());
+      }
+
+    public string IdNum()
+      {
+      return db_users.IdOf(HttpContext.Current.User.Identity.Name);
+      }
+
+    public string[] Privileges()
+      {
+      return db_users.PrivilegesOf(IdNum());
+      }
+
+    public string[] Roles()
+      {
+      return db_user.RolesOf(IdNum());
+      }
 
     } // end TClass_biz_user
 
-}
+  }
