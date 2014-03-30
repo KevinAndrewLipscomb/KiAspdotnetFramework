@@ -51,6 +51,15 @@ namespace Class_biz_privileges
       return db_privileges.Get(name, out soft_hyphenation_text);
       }
 
+    internal bool HasForAnyScope
+      (
+      string member_id,
+      string privilege_name
+      )
+      {
+      return db_privileges.HasForAnyScope(member_id,privilege_name);
+      }
+
     } // end TClass_biz_privileges
 
   }
