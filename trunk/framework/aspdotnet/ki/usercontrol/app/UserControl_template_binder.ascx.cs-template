@@ -166,6 +166,7 @@ namespace UserControl_template_binder
           p.tab_index = UserControl_template_binder_Static.TSSI_1;
           }
         //
+        TabContainer_control.ActiveTabIndex = (int)p.tab_index;
         PlaceHolder_content.Controls.Clear();
         FillPlaceHolder(false,target);
         //

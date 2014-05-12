@@ -195,6 +195,7 @@ namespace UserControl_roles_and_matrices_binder
           p.tab_index = Static.TSSI_ROLE_NOTIFICATION_MAPPINGS;
           }
         //
+        TabContainer_control.ActiveTabIndex = (int)p.tab_index;
         PlaceHolder_content.Controls.Clear();
         FillPlaceHolder(false,target);
         //
