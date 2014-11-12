@@ -8,13 +8,6 @@ using kix;
 namespace UserControl_template_binder
   {
 
-  public static class UserControl_template_binder_Static
-    {
-    public const int TSSI_0 = 0;
-    public const int TSSI_1 = 1;
-    public const int TSSI_2 = 2;
-    }
-
   public partial class TWebUserControl_template_binder: ki_web_ui.usercontrol_class
     {
 
@@ -23,6 +16,13 @@ namespace UserControl_template_binder
     // PRIVATE
     //
     //--
+
+    private static class Static
+      {
+      public const int TSSI_0 = 0;
+      public const int TSSI_1 = 1;
+      public const int TSSI_2 = 2;
+      }
 
     private struct p_type
       {
@@ -39,13 +39,13 @@ namespace UserControl_template_binder
       string target
       )
       {
-      if (p.tab_index == UserControl_template_binder_Static.TSSI_0)
+      if (p.tab_index == Static.TSSI_0)
         {
         var c = ((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx")));
         p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_0",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
         c.SetTarget(target);
         }
-      else if (p.tab_index == UserControl_template_binder_Static.TSSI_1)
+      else if (p.tab_index == Static.TSSI_1)
         {
         var c = ((TWebUserControl_1)(LoadControl("~/usercontrol/app/UserControl_1.ascx")));
         p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_1",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
@@ -136,7 +136,7 @@ namespace UserControl_template_binder
         {
         p.be_loaded = false;
         //
-        p.tab_index = UserControl_template_binder_Static.TSSI_0;
+        p.tab_index = Static.TSSI_0;
         FillPlaceHolder(true);
         }
       }
@@ -159,11 +159,11 @@ namespace UserControl_template_binder
         {
         if (target.ToLower().Contains("/0/"))
           {
-          p.tab_index = UserControl_template_binder_Static.TSSI_0;
+          p.tab_index = Static.TSSI_0;
           }
         else if (target.ToLower().Contains("/1/"))
           {
-          p.tab_index = UserControl_template_binder_Static.TSSI_1;
+          p.tab_index = Static.TSSI_1;
           }
         //
         TabContainer_control.ActiveTabIndex = (int)p.tab_index;
