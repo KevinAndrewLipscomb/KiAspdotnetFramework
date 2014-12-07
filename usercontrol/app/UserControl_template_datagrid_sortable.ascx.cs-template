@@ -1,5 +1,6 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
+using AjaxControlToolkit;
 using Class_biz_0s;
 using Class_msg_protected;
 using kix;
@@ -14,7 +15,7 @@ namespace UserControl_template_datagrid_sortable
   {
   public partial class TWebUserControl_template_datagrid_sortable: ki_web_ui.usercontrol_class
     {
-    public static class UserControl_template_datagrid_sortable_Static
+    private static class Static
       {
       public const int TCI_SELECT = 0;
       public const int TCI_ID = 1;
@@ -195,7 +196,7 @@ namespace UserControl_template_datagrid_sortable
       {
       if (new ArrayList {ListItemType.AlternatingItem, ListItemType.Item, ListItemType.EditItem, ListItemType.SelectedItem}.Contains(e.Item.ItemType))
         {
-        p.msg_protected_0_detail.summary = p.biz_0s.Summary(k.Safe(e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].Text,k.safe_hint_type.NUM));
+        p.msg_protected_0_detail.summary = p.biz_0s.Summary(k.Safe(e.Item.Cells[Static.TCI_ID].Text,k.safe_hint_type.NUM));
         MessageDropCrumbAndTransferTo(p.msg_protected_0_detail,"protected","template_datagrid_sortable_detail");
         }
       }
@@ -207,7 +208,7 @@ namespace UserControl_template_datagrid_sortable
         {
         if (new ArrayList {ListItemType.AlternatingItem, ListItemType.Item, ListItemType.EditItem, ListItemType.SelectedItem}.Contains(e.Item.ItemType))
           {
-          link_button = ((e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_SELECT].Controls[0]) as LinkButton);
+          link_button = ((e.Item.Cells[Static.TCI_SELECT].Controls[0]) as LinkButton);
           link_button.Text = k.ExpandTildePath(link_button.Text);
           ToolkitScriptManager.GetCurrent(Page).RegisterPostBackControl(link_button);
           //
@@ -217,14 +218,14 @@ namespace UserControl_template_datagrid_sortable
             {
             cell.EnableViewState = false;
             }
-          e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_ID].EnableViewState = true;
+          e.Item.Cells[Static.TCI_ID].EnableViewState = true;
           //
           p.num_0s++;
           }
         }
       else
         {
-        e.Item.Cells[UserControl_template_datagrid_sortable_Static.TCI_SELECT].Visible = false;
+        e.Item.Cells[Static.TCI_SELECT].Visible = false;
         }
       }
 
