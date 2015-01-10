@@ -71,7 +71,7 @@ namespace UserControl_establish_membership
         {
           if (Page.IsValid)
             {
-            if (p.biz_users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.NUM), p.biz_user.IdNum()))
+            if (p.biz_users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz_user.IdNum()))
               {
               SessionSet("privilege_array", p.biz_user.Privileges());
               // User was an unprivileged user until now, so reset privs.

@@ -30,7 +30,7 @@
 							  <ASP:TextBox id="TextBox_shared_secret" runat="server" columns="15" maxlength="15"></ASP:TextBox>
                 <ASP:Button id="Button_submit" runat="server" text="Submit" font-bold="True" onclick="Button_submit_Click"></ASP:Button>
                 <ASP:RequiredFieldValidator id="RequiredFieldValidator_shared_secret" runat="server" errormessage="Please enter {your shared secret data}." font-bold="True" controltovalidate="TextBox_shared_secret">!ERR!</ASP:RequiredFieldValidator>
-                <ASP:RegularExpressionValidator id="RegularExpressionValidator_shared_secret" runat="server" errormessage="Please enter only numbers." font-bold="True" controltovalidate="TextBox_shared_secret" validationexpression="\d+">!ERR!</ASP:RegularExpressionValidator>
+                      <asp:RegularExpressionValidator ID="RegularExpressionValidator_shared_secret" runat="server" ErrorMessage="Please enter a valid shared_secret." Font-Bold="True" ControlToValidate="TextBox_shared_secret" ValidationExpression="[0-9a-zA-Z]+">!ERR!</asp:RegularExpressionValidator>
                 <asp:CustomValidator ID="CustomValidator_shared_secret" runat="server" Display="Dynamic" ErrorMessage="Sorry, because of privileges attached to the specified membership record, Application Administrator intervention is required to complete this match.  The Application Administrator has been notified and will be in touch with you." Font-Bold="True" OnServerValidate="CustomValidator_shared_secret_ServerValidate">!ERR!</asp:CustomValidator>
 						  </p>
 						  <p>If you have trouble with this feature, <ASP:LinkButton id="LinkButton_trouble_handler" runat="server" causesvalidation="False" onclick="LinkButton_trouble_handler_Click">click here</ASP:LinkButton>.</p>
