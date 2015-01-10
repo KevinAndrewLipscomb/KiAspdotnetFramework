@@ -58,7 +58,7 @@ namespace template_protected_nonlanding
           folder_name:"protected",
           aspx_name:"template_protected_nonlanding"
           );
-        UserControl_template_protected_nonlanding_control.Set(deployment_summary:p.incoming.summary);
+        UserControl_template_protected_nonlanding_control.Set(summary:p.incoming.summary);
         }
       else if (nature_of_visit == nature_of_visit_type.VISIT_POSTBACK_STANDARD)
         {

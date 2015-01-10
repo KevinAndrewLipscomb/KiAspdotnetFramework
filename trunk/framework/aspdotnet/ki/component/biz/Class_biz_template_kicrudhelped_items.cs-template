@@ -7,6 +7,14 @@ using System.Collections;
 
 namespace Class_biz_template_kicrudhelped_items
   {
+  internal enum presentation_mode_enum
+    {
+    NONE,
+    FULL_FUNCTION,
+    NEW,
+    REVIEW_ONLY
+    };
+
   public class TClass_biz_template_kicrudhelped_items
     {
     private TClass_db_template_kicrudhelped_items db_template_kicrudhelped_items = null;
