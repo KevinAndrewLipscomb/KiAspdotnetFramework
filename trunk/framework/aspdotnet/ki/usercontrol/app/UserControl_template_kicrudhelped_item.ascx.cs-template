@@ -21,7 +21,9 @@ namespace UserControl_template_kicrudhelped_item
       public TClass_biz_template_kicrudhelped_items biz_template_kicrudhelped_items;
       public TClass_biz_role_member_map biz_role_member_map;
       public bool be_ok_to_config_template_kicrudhelped_items;
+      public string id;
       public presentation_mode_enum presentation_mode;
+      public object summary;
       }
 
     private p_type p;
@@ -234,10 +236,13 @@ namespace UserControl_template_kicrudhelped_item
         }
       else
         {
-        p.be_loaded = false;
         p.biz_template_kicrudhelped_items = new TClass_biz_template_kicrudhelped_items();
         p.biz_role_member_map = new TClass_biz_role_member_map();
+        //
+        p.be_loaded = false;
         p.be_ok_to_config_template_kicrudhelped_items = k.Has((string[])(Session["privilege_array"]), "config-template_kicrudhelped_items");
+        p.id = k.EMPTY;
+        p.summary = null;
         }
       }
 
