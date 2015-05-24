@@ -354,7 +354,7 @@ namespace UserControl_template_kicrudhelped_item
       {
       uint num_matches;
       string saved_ki_crud_helper_user_key;
-      saved_ki_crud_helper_user_key = k.Safe(TextBox_ki_crud_helper_user_key.Text,k.safe_hint_type.PUNCTUATED);
+      saved_ki_crud_helper_user_key = k.Safe(TextBox_ki_crud_helper_user_key.Text,k.safe_hint_type.PUNCTUATED); // Leave the hint PUNCTUATED since the TextBox is being used as a partial spec lookup value that we don't want to modify.
       Clear();
       if (!PresentRecord(saved_ki_crud_helper_user_key))
         {
