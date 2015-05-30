@@ -94,7 +94,7 @@ namespace overview
         Title.Text = ConfigurationManager.AppSettings["application_name"] + " - overview";
         }
 //
-// ToolkitScriptManager.GetCurrent(Page).EnablePartialRendering = false;
+// ScriptManager.GetCurrent(Page).EnablePartialRendering = false;
 //
       }
 

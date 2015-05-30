@@ -24,6 +24,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,9 +48,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=3.5.40412.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Microsoft ASP.NET\AjaxControlToolkit.Binary.NET35\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=15.1.2.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>packages\AjaxControlToolkit.15.1.2.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\..\..\Program Files\MySQL\MySQL Connector Net 6.5.4\Assemblies\v2.0\MySql.Data.dll</HintPath>
@@ -247,7 +248,6 @@
     </Compile>
     <Compile Include="usercontrol\app\UserControl_member_binder.ascx.cs">
       <DependentUpon>UserControl_member_binder.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_member_binder.ascx.designer.cs">
       <DependentUpon>UserControl_member_binder.ascx</DependentUpon>
@@ -373,7 +373,6 @@
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_attachment_explorer.ascx.cs">
       <DependentUpon>UserControl_attachment_explorer.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_attachment_explorer.ascx.designer.cs">
       <DependentUpon>UserControl_attachment_explorer.ascx</DependentUpon>
@@ -394,7 +393,6 @@
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_drop_down_date.ascx.cs">
       <DependentUpon>UserControl_drop_down_date.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_drop_down_date.ascx.designer.cs">
       <DependentUpon>UserControl_drop_down_date.ascx</DependentUpon>
@@ -435,6 +433,7 @@
     <Content Include="template\notification\username_reminder.txt" />
     <Content Include="unpublished.config" />
     <None Include="noninteractive\.crontab" />
+    <Content Include="packages.config" />
     <None Include="protected\template-protected-datagrid-sortable.aspx-template" />
     <None Include="protected\template-protected-landing.aspx-template" />
     <None Include="protected\template-protected-nonlanding.aspx-template" />
