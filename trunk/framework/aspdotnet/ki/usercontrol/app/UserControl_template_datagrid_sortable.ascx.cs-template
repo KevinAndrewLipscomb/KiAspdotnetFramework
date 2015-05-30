@@ -210,7 +210,7 @@ namespace UserControl_template_datagrid_sortable
           {
           link_button = ((e.Item.Cells[Static.TCI_SELECT].Controls[0]) as LinkButton);
           link_button.Text = k.ExpandTildePath(link_button.Text);
-          ToolkitScriptManager.GetCurrent(Page).RegisterPostBackControl(link_button);
+          ScriptManager.GetCurrent(Page).RegisterPostBackControl(link_button);
           //
           // Remove all cell controls from viewstate except for the one at TCI_ID.
           //
