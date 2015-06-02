@@ -27,7 +27,29 @@ namespace Class_db_users
           member_id_obj = new MySqlCommand("select id from member where registration_code = \"" + shared_secret + "\"",connection).ExecuteScalar();
           if (member_id_obj != null)
             {
-            new MySqlCommand("insert user_member_map set user_id = '" + id + "' , member_id = '" + member_id_obj.ToString() + "' on duplicate key update user_id = '" + id + "'",connection).ExecuteNonQuery();
+            new MySqlCommand
+              (
+              db_trail.Saved
+                (
+                "START TRANSACTION"
+                + ";"
+                + " insert user_member_map"
+                + " set user_id = '" + id + "'"
+                + " , member_id = '" + member_id_obj.ToString() + "'"
+                + " on duplicate key update user_id = '" + id + "'"
+                + ";"
+                + " update member"
+                +   " join user_member_map on (user_member_map.member_id=member.id)"
+                +   " join user on (user.id=user_member_map.user_id)"
+                + " set email_address = password_reset_email_address"
+                + " where member.id = '" + member_id_obj.ToString() + "'"
+                + ";"
+                + " COMMIT"
+                )
+              ,
+              connection
+              )
+              .ExecuteNonQuery();
             accept_as_member = true;
             }
           Close();
