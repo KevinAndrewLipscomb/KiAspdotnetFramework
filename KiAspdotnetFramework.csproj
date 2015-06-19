@@ -432,7 +432,6 @@
     <Content Include="template\notification\username_reminder.txt" />
     <Content Include="unpublished.config" />
     <None Include="noninteractive\.crontab" />
-    <Content Include="packages.config" />
     <None Include="protected\template-protected-datagrid-sortable.aspx-template" />
     <None Include="protected\template-protected-landing.aspx-template" />
     <None Include="protected\template-protected-nonlanding.aspx-template" />
