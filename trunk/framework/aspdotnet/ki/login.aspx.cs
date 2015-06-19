@@ -6,24 +6,25 @@ using System.Web.Security;
 using System.Web.UI;
 
 namespace login
-{
-    public struct p_type
-    {
-        public TClass_biz_users biz_users;
-    } // end p_type
+  {
 
-    public partial class TWebForm_login: ki_web_ui.page_class
+  public partial class TWebForm_login: ki_web_ui.page_class
     {
-        private p_type p;
-        // / <summary>
-        // / Required method for Designer support -- do not modify
-        // / the contents of this method with the code editor.
-        // / </summary>
-        private void InitializeComponent()
-        {
-            //this.Load += this.Page_Load;
-            this.PreRender += this.TWebForm_login_PreRender;
-        }
+
+    //
+    // Page Private Persistent Properties
+    //
+    private struct p_type
+      {
+      public TClass_biz_users biz_users;
+      }
+
+    private p_type p;
+
+    private void InitializeComponent()
+      {
+      PreRender += TWebForm_login_PreRender;
+      }
 
     private void InjectPersistentClientSideScript()
       {
@@ -133,4 +134,4 @@ namespace login
 
     } // end TWebForm_login
 
-}
+  }
