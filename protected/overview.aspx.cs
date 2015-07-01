@@ -91,7 +91,7 @@ namespace overview
       {
       if (!IsPostBack)
         {
-        Title.Text = ConfigurationManager.AppSettings["application_name"] + " - overview";
+        Title = ConfigurationManager.AppSettings["application_name"] + " - overview";
         }
 //
 // ScriptManager.GetCurrent(Page).EnablePartialRendering = false;
