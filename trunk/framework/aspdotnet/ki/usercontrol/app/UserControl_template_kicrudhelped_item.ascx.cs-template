@@ -383,7 +383,7 @@ namespace UserControl_template_kicrudhelped_item
         }
       }
 
-    internal void Set
+    internal void SetP
       (
       string id,
       //string container_id
