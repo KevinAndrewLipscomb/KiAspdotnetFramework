@@ -76,7 +76,7 @@ namespace overview
           }
         }
       //
-      if (p.biz_members.IdOfUserId(p.biz_user.IdNum()) == k.EMPTY)
+      if (p.biz_members.IdOfUserId(p.biz_user.IdNum()).Length == 0)
         {
         // Display controls appropriate ONLY to nonmembers.
         AddIdentifiedControlToPlaceHolder(((TWebUserControl_establish_membership)(LoadControl("~/usercontrol/app/UserControl_establish_membership.ascx"))), "UserControl_establish_membership", PlaceHolder_establish_membership);

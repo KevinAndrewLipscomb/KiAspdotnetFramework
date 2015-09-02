@@ -172,7 +172,7 @@ namespace UserControl_roles_and_matrices_binder
 
     public void SetTarget(string target)
       {
-      if (target != k.EMPTY)
+      if (target.Length > 0)
         {
         if (target.ToLower().Contains("/mine/"))
           {
