@@ -80,7 +80,7 @@ namespace login
         protected void LinkButton_forgot_password_Click(object sender, System.EventArgs e)
         {
             string username;
-            if (TextBox_username.Text == k.EMPTY)
+            if (TextBox_username.Text.Length == 0)
             {
                 Alert(k.alert_cause_type.USER, k.alert_state_type.FAILURE, "misusrnam", "Please enter your username.", true);
             }
