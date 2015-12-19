@@ -1,4 +1,5 @@
-grant select
+create user if not exists 'ki-kiaspdotnetframework'@'localhost' identified by '~ki-kiaspdotnetframework-password~';
+grant  select
  , insert
  , update
  , delete
@@ -6,7 +7,7 @@ grant select
  , create routine
  , alter routine
   on kiaspdotnetframeworkdb.*
-  to 'ki-kiaspdotnetframework'@'localhost' identified by '~ki-kiaspdotnetframework-password~'
+  to 'ki-kiaspdotnetframework'@'localhost'
 ;
 --
 -- Must grant PROCESS priv to primary user to include SHOW ENGINE INNODB
