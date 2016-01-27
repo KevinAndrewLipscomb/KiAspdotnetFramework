@@ -85,6 +85,7 @@
     <Content Include="salogin.aspx" />
     <Content Include="timeout.aspx" />
     <Content Include="usercontrol\app\UserControl_my_roles_and_mappings.ascx" />
+    <Content Include="usercontrol\app\UserControl_role_member_map_log.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +95,7 @@
     <Compile Include="component\biz\Class_biz_privileges.cs" />
     <Compile Include="component\biz\Class_biz_roles.cs" />
     <Compile Include="component\biz\Class_biz_role_member_map.cs" />
+    <Compile Include="component\biz\Class_biz_role_member_map_logs.cs" />
     <Compile Include="component\biz\Class_biz_role_notification_map.cs" />
     <Compile Include="component\biz\Class_biz_role_privilege_map.cs" />
     <Compile Include="component\biz\Class_biz_scheduled_tasks.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="component\db\Class_db_privileges.cs" />
     <Compile Include="component\db\Class_db_roles.cs" />
     <Compile Include="component\db\Class_db_role_member_map.cs" />
+    <Compile Include="component\db\Class_db_role_member_map_logs.cs" />
     <Compile Include="component\db\Class_db_role_notification_map.cs" />
     <Compile Include="component\db\Class_db_role_privilege_map.cs" />
     <Compile Include="component\db\Class_db_trail.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="protected\change_password.aspx.designer.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
     </Compile>
+    <Compile Include="protected\Class_msg_protected.cs" />
     <Compile Include="protected\establish_membership_trouble.aspx.cs">
       <DependentUpon>establish_membership_trouble.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +296,13 @@
     </Compile>
     <Compile Include="usercontrol\app\UserControl_role_member_mapping.ascx.designer.cs">
       <DependentUpon>UserControl_role_member_mapping.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_role_member_map_log.ascx.cs">
+      <DependentUpon>UserControl_role_member_map_log.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_role_member_map_log.ascx.designer.cs">
+      <DependentUpon>UserControl_role_member_map_log.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_role_member_matrix.ascx.cs">
       <DependentUpon>UserControl_role_member_matrix.ascx</DependentUpon>
