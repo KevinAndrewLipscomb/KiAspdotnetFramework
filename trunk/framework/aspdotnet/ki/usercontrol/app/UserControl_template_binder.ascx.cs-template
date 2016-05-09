@@ -4,6 +4,7 @@ using kix;
 //using UserControl_0;
 //using UserControl_1;
 //using UserControl_2;
+using System;
 
 namespace UserControl_template_binder
   {
@@ -67,7 +68,7 @@ namespace UserControl_template_binder
       PreRender += TWebUserControl_template_binder_PreRender;
       }
 
-    private void Page_Load(object sender, System.EventArgs e)
+    private void Page_Load(object sender, EventArgs e)
       {
       if (!p.be_loaded)
         {
@@ -80,14 +81,14 @@ namespace UserControl_template_binder
         }
       }
 
-    private void TabContainer_control_ActiveTabChanged(object sender, System.EventArgs e)
+    private void TabContainer_control_ActiveTabChanged(object sender, EventArgs e)
       {
       p.tab_index = (uint)(TabContainer_control.ActiveTabIndex);
       PlaceHolder_content.Controls.Clear();
       FillPlaceHolder(true);
       }
 
-    private void TWebUserControl_template_binder_PreRender(object sender, System.EventArgs e)
+    private void TWebUserControl_template_binder_PreRender(object sender, EventArgs e)
       {
       //
       // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
@@ -103,7 +104,7 @@ namespace UserControl_template_binder
     //
     //--
 
-    protected override void OnInit(System.EventArgs e)
+    protected override void OnInit(EventArgs e)
       {
       // Required for Designer support
       InitializeComponent();
