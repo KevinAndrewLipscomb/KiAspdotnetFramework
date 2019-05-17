@@ -84,6 +84,7 @@
     <Content Include="remind_username.aspx" />
     <Content Include="salogin.aspx" />
     <Content Include="timeout.aspx" />
+    <Content Include="usercontrol\app\UserControl_app_level_announcement.ascx" />
     <Content Include="usercontrol\app\UserControl_my_roles_and_mappings.ascx" />
     <Content Include="usercontrol\app\UserControl_role_member_map_log.ascx" />
     <Content Include="Web.config" />
@@ -227,6 +228,13 @@
     </Compile>
     <Compile Include="usercontrol\app\UserControl_about.ascx.designer.cs">
       <DependentUpon>UserControl_about.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_app_level_announcement.ascx.cs">
+      <DependentUpon>UserControl_app_level_announcement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_app_level_announcement.ascx.designer.cs">
+      <DependentUpon>UserControl_app_level_announcement.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.cs">
       <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
