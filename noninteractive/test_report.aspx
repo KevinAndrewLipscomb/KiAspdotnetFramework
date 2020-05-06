@@ -1,4 +1,4 @@
-<%@ Page language="c#" Debug="true" Codebehind="test_report.aspx.cs" AutoEventWireup="True" Inherits="test_report.TWebForm_test_report" EnableViewState="false" %>
+<%@ Page language="c#" codebehind="test_report.aspx.cs" AutoEventWireup="True" Inherits="test_report.TWebForm_test_report" EnableViewState="false" %>
 <!DOCTYPE html>
 <html>
   <head runat="server">
