@@ -252,8 +252,7 @@ namespace UserControl_template_kicrudhelped_item
     // / </summary>
     private void InitializeComponent()
       {
-      //this.Load += this.Page_Load;
-      this.PreRender += this.TWebUserControl_template_kicrudhelped_item_PreRender;
+      PreRender += TWebUserControl_template_kicrudhelped_item_PreRender;
       }
 
     private void TWebUserControl_template_kicrudhelped_item_PreRender(object sender, System.EventArgs e)

@@ -10,7 +10,9 @@ namespace Class_db_privileges
   public class TClass_db_privileges: TClass_db
     {
 
-    private TClass_db_trail db_trail = null;
+    #pragma warning disable IDE0052 // Remove unread private members
+    private readonly TClass_db_trail db_trail = null;
+    #pragma warning restore IDE0052 // Remove unread private members
 
     //Constructor  Create()
     public TClass_db_privileges() : base()
@@ -27,7 +29,8 @@ namespace Class_db_privileges
       {
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand("SELECT name FROM privilege WHERE name like '" + partial_name + "%' order by name", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("SELECT name FROM privilege WHERE name like '" + partial_name + "%' order by name", connection);
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["name"].ToString(), dr["name"].ToString()));
@@ -50,7 +53,8 @@ namespace Class_db_privileges
         ((target) as ListControl).Items.Add(new ListItem(unselected_literal, k.EMPTY));
         }
       Open();
-      var dr = new MySqlCommand("select privilege.id as privilege_id, name as privilege_name from privilege order by privilege_name", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select privilege.id as privilege_id, name as privilege_name from privilege order by privilege_name", connection);
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["privilege_name"].ToString(), dr["privilege_id"].ToString()));
@@ -80,7 +84,8 @@ namespace Class_db_privileges
       soft_hyphenation_text = k.EMPTY;
       var result = false;
       Open();
-      var dr = new MySqlCommand("select * from privilege where CAST(name AS CHAR) = '" + name + "'", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select * from privilege where CAST(name AS CHAR) = '" + name + "'", connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
         name = dr["name"].ToString();
@@ -99,7 +104,7 @@ namespace Class_db_privileges
       )
       {
       Open();
-      var has_for_any_scope_obj = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select 1"
         + " from member"
@@ -110,8 +115,8 @@ namespace Class_db_privileges
         + " where member.id = '" + member_id + "'"
         +   " and privilege.name = '" + privilege_name + "'",
         connection
-        )
-        .ExecuteScalar();
+        );
+      var has_for_any_scope_obj = my_sql_command.ExecuteScalar();
       Close();
       return (has_for_any_scope_obj != null);
       }

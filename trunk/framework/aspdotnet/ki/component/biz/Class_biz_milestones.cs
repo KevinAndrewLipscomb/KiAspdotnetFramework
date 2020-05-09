@@ -69,7 +69,7 @@ namespace Class_biz_milestones
                             // be_handled := TRUE;
                             // end;
                             }
-                            i = i + 1;
+                            i++;
                         }
                     }
                 }

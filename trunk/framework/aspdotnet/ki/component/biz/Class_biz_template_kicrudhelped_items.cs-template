@@ -17,7 +17,7 @@ namespace Class_biz_template_kicrudhelped_items
 
   public class TClass_biz_template_kicrudhelped_items
     {
-    private TClass_db_template_kicrudhelped_items db_template_kicrudhelped_items = null;
+    private readonly TClass_db_template_kicrudhelped_items db_template_kicrudhelped_items = null;
 
     public TClass_biz_template_kicrudhelped_items() : base()
       {

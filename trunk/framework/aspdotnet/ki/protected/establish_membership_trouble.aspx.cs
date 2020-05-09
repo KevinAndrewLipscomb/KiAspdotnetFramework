@@ -25,8 +25,7 @@ namespace establish_membership_trouble
         // / </summary>
         private void InitializeComponent()
         {
-            this.PreRender += this.TWebForm_establish_membership_trouble_PreRender;
-            //this.Load += this.Page_Load;
+            PreRender += TWebForm_establish_membership_trouble_PreRender;
         }
 
         protected void Page_Load(object sender, System.EventArgs e)

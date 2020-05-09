@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <!-- Derived from KiAspdotnetFramework/protected/template~protected~landing.aspx~template -->
-<%@ Page language="c#" Debug="true" Codebehind="template_protected_landing.pas" AutoEventWireup="false" Inherits="template_protected_landing.TWebForm_template_protected_landing" %>
+<%@ Page language="c#" codebehind="template_protected_landing.pas" AutoEventWireup="false" Inherits="template_protected_landing.TWebForm_template_protected_landing" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_precontent" Src="~/usercontrol/app/UserControl_precontent.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_postcontent" Src="~/usercontrol/app/UserControl_postcontent.ascx" %>
 <%@ Register TagPrefix="uc3" TagName="UserControl_update_progress_blocker" Src="~/usercontrol/app/UserControl_update_progress_blocker.ascx" %>

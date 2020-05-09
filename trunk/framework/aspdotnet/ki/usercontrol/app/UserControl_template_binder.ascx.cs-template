@@ -37,7 +37,7 @@ namespace UserControl_template_binder
     private void FillPlaceHolder
       (
       bool be_fresh_control_required,
-      string target
+      string target = k.EMPTY
       )
       {
       if (p.tab_index == Static.TSSI_0)
@@ -52,10 +52,6 @@ namespace UserControl_template_binder
         p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_1",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
         c.SetTarget(target);
         }
-      }
-    private void FillPlaceHolder(bool be_fresh_control_required)
-      {
-      FillPlaceHolder(be_fresh_control_required,k.EMPTY);
       }
 
     // / <summary>
@@ -177,4 +173,3 @@ namespace UserControl_template_binder
     } // end TWebUserControl_template_binder
 
   }
-

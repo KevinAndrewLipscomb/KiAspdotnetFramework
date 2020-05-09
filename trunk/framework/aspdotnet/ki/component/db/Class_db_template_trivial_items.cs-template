@@ -17,7 +17,7 @@ namespace Class_db_template_trivial_items
   public class TClass_db_template_trivial_items: TClass_db
     {
 
-    private TClass_db_trail db_trail = null;
+    private readonly TClass_db_trail db_trail = null;
 
     public TClass_db_template_trivial_items() : base()
       {
@@ -32,7 +32,7 @@ namespace Class_db_template_trivial_items
       {
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "SELECT lpad(id,4,'0') as id"
         + " , description"
@@ -40,8 +40,8 @@ namespace Class_db_template_trivial_items
         + " WHERE concat(lpad(id,4,'0'),' -- ',description) like '%" + partial_spec + "%'"
         + " order by description",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["id"].ToString() + k.SPACE_HYPHENS_SPACE + dr["description"].ToString(), dr["id"].ToString()));
@@ -54,8 +54,8 @@ namespace Class_db_template_trivial_items
     public void BindDirectToListControl
       (
       object target,
-      string unselected_literal,
-      string selected_value
+      string unselected_literal = k.EMPTY,
+      string selected_value = "-- template_trivial_item --"
       )
       {
       ((target) as ListControl).Items.Clear();
@@ -64,7 +64,8 @@ namespace Class_db_template_trivial_items
         ((target) as ListControl).Items.Add(new ListItem(unselected_literal, k.EMPTY));
         }
       Open();
-      var dr = new MySqlCommand("SELECT id,description FROM template_trivial_item where description <> '(none specified)' order by id", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("SELECT id,description FROM template_trivial_item where description <> '(none specified)' order by id", connection);
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["description"].ToString(), dr["id"].ToString()));
@@ -76,14 +77,6 @@ namespace Class_db_template_trivial_items
         ((target) as ListControl).SelectedValue = selected_value;
         }
       }
-    public void BindDirectToListControl(object target,string unselected_literal)
-      {
-      BindDirectToListControl(target, unselected_literal, k.EMPTY);
-      }
-    public void BindDirectToListControl(object target)
-      {
-      BindDirectToListControl(target, "-- template_trivial_item --");
-      }
 
     public bool Delete(string id)
       {
@@ -91,7 +84,8 @@ namespace Class_db_template_trivial_items
       Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from template_trivial_item where id = '" + id + "'"), connection).ExecuteNonQuery();
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from template_trivial_item where id = '" + id + "'"), connection);
+        my_sql_command.ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -117,7 +111,8 @@ namespace Class_db_template_trivial_items
       description = k.EMPTY;
       var result = false;
       Open();
-      var dr = new MySqlCommand("select description from template_trivial_item where id = '" + id + "'", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select description from template_trivial_item where id = '" + id + "'", connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
         description = dr["description"].ToString();

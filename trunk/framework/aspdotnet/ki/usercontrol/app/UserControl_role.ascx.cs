@@ -1,22 +1,16 @@
-using System.Configuration;
-
-using kix;
-
-using System;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Collections;
-
 using Class_biz_members;
 using Class_biz_role_member_map;
 using Class_biz_roles;
 using Class_biz_user;
-using Class_db_role_member_map;
+using kix;
+using System;
+using System.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 namespace UserControl_role
-{
-    public partial class TWebUserControl_role: ki_web_ui.usercontrol_class
+  {
+  public partial class TWebUserControl_role: ki_web_ui.usercontrol_class
     {
         private p_type p;
         private void Clear()
@@ -227,11 +221,10 @@ namespace UserControl_role
         // / </summary>
         private void InitializeComponent()
         {
-            this.GridView_holders.Sorting += new System.Web.UI.WebControls.GridViewSortEventHandler(this.GridView_holders_Sorting);
-            this.GridView_holders.RowDataBound += new System.Web.UI.WebControls.GridViewRowEventHandler(this.GridView_holders_RowDataBound);
-            this.GridView_holders.RowCreated += new System.Web.UI.WebControls.GridViewRowEventHandler(this.GridView_holders_RowCreated);
-            this.PreRender += this.TWebUserControl_role_PreRender;
-            //this.Load += this.Page_Load;
+            GridView_holders.Sorting += new System.Web.UI.WebControls.GridViewSortEventHandler(GridView_holders_Sorting);
+            GridView_holders.RowDataBound += new System.Web.UI.WebControls.GridViewRowEventHandler(GridView_holders_RowDataBound);
+            GridView_holders.RowCreated += new System.Web.UI.WebControls.GridViewRowEventHandler(GridView_holders_RowCreated);
+            PreRender += TWebUserControl_role_PreRender;
         }
 
         private void TWebUserControl_role_PreRender(object sender, System.EventArgs e)
@@ -272,7 +265,7 @@ namespace UserControl_role
             if ((e.Row.RowType == DataControlRowType.DataRow) && (e.Row.Cells[Class_db_role_member_map.Units.Class_db_role_member_map.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text != "&nbsp;"))
             {
                 p.distribution_list = p.distribution_list + e.Row.Cells[Class_db_role_member_map.Units.Class_db_role_member_map.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text + k.COMMA_SPACE;
-                p.num_gridview_rows = p.num_gridview_rows + 1;
+                p.num_gridview_rows++;
             }
         }
 
@@ -286,7 +279,7 @@ namespace UserControl_role
             // cc
             // bcc
             // reply_to
-           k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], Label_distribution_list.Text, TextBox_quick_message_subject.Text, "-- From " + p.biz_user.Roles()[0] + k.SPACE + p.biz_members.FirstNameOfMemberId(Session["member_id"].ToString()) + k.SPACE + p.biz_members.LastNameOfMemberId(Session["member_id"].ToString()) + " (" + p.biz_user.EmailAddress() + ") [via " + ConfigurationManager.AppSettings["application_name"] + "]" + k.NEW_LINE + k.NEW_LINE + TextBox_quick_message_body.Text, false, k.EMPTY, p.biz_user.EmailAddress(), p.biz_user.EmailAddress());
+            k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], Label_distribution_list.Text, TextBox_quick_message_subject.Text, "-- From " + p.biz_user.Roles()[0] + k.SPACE + p.biz_members.FirstNameOfMemberId(Session["member_id"].ToString()) + k.SPACE + p.biz_members.LastNameOfMemberId(Session["member_id"].ToString()) + " (" + p.biz_user.EmailAddress() + ") [via " + ConfigurationManager.AppSettings["application_name"] + "]" + k.NEW_LINE + k.NEW_LINE + TextBox_quick_message_body.Text, false, k.EMPTY, p.biz_user.EmailAddress(), p.biz_user.EmailAddress());
             TextBox_quick_message_subject.Text = k.EMPTY;
             TextBox_quick_message_body.Text = k.EMPTY;
             Alert(k.alert_cause_type.LOGIC, k.alert_state_type.NORMAL, "messagsnt", "Message sent", true);

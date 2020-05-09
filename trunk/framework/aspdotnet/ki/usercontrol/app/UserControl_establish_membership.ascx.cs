@@ -91,8 +91,7 @@ namespace UserControl_establish_membership
         // / </summary>
         private void InitializeComponent()
         {
-            //this.Load += this.Page_Load;
-            this.PreRender += this.TWebUserControl_establish_membership_PreRender;
+            PreRender += TWebUserControl_establish_membership_PreRender;
         }
 
         private void TWebUserControl_establish_membership_PreRender(object sender, System.EventArgs e)
