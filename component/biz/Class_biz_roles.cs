@@ -1,6 +1,7 @@
 using kix;
 using System;
 using Class_db_roles;
+
 namespace Class_biz_roles
 {
     public class TClass_biz_roles
