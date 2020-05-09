@@ -26,10 +26,10 @@ namespace Class_biz_notifications
         }
       }
 
-    private string application_name = k.EMPTY;
-    private TClass_db_notifications db_notifications = null;
-    private string host_domain_name = k.EMPTY;
-    private string runtime_root_fullspec = k.EMPTY;
+    private readonly string application_name = k.EMPTY;
+    private readonly TClass_db_notifications db_notifications = null;
+    private readonly string host_domain_name = k.EMPTY;
+    private readonly string runtime_root_fullspec = k.EMPTY;
 
     public TClass_biz_notifications() : base()
       {

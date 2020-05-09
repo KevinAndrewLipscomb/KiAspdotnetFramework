@@ -5,13 +5,15 @@ namespace Class_biz_roles
 {
     public class TClass_biz_roles
     {
-        private TClass_db_roles db_roles = null;
+        private readonly TClass_db_roles db_roles = null;
+        
         //Constructor  Create()
         public TClass_biz_roles() : base()
         {
             // TODO: Add any constructor code here
             db_roles = new TClass_db_roles();
         }
+        
         public bool Bind(string partial_name, object target)
         {
             bool result;
