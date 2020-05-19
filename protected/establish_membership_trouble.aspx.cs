@@ -1,25 +1,22 @@
-using System.Configuration;
-
-using kix;
-
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Web;
-using System.Web.SessionState;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-
-
 using Class_biz_notifications;
 using Class_biz_user;
+using kix;
+using System;
+using System.Configuration;
 
 namespace establish_membership_trouble
-{
-    public partial class TWebForm_establish_membership_trouble: ki_web_ui.page_class
+  {
+  public partial class TWebForm_establish_membership_trouble: ki_web_ui.page_class
     {
-        private p_type p;
+
+    private struct p_type
+      {
+      public TClass_biz_notifications biz_notifications;
+      public TClass_biz_user biz_user;
+      }
+
+        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+
         // / <summary>
         // / Required method for Designer support -- do not modify
         // / the contents of this method with the code editor.
@@ -77,12 +74,6 @@ namespace establish_membership_trouble
         {
             SessionSet(InstanceId() + ".p", p);
         }
-
-        private struct p_type
-        {
-            public TClass_biz_notifications biz_notifications;
-            public TClass_biz_user biz_user;
-        } // end p_type
 
     } // end TWebForm_establish_membership_trouble
 

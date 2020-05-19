@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 
+#pragma warning disable CA1716
 namespace Default
 {
     public partial class TWebForm_Default: ki_web_ui.page_class

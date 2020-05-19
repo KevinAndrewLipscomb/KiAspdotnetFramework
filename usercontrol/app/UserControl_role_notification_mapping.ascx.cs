@@ -1,32 +1,39 @@
-using kix;
-using System;
-using System.Collections;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-
 using Class_biz_notifications;
 using Class_biz_role_notification_map;
 using Class_biz_roles;
+using kix;
+using System.Web.UI.WebControls;
 
 namespace UserControl_role_notification_mapping
-{
-    public struct p_type
-    {
-        public bool be_interactive;
-        public bool be_loaded;
-        public bool be_sort_order_ascending;
-        public TClass_biz_notifications biz_notifications;
-        public TClass_biz_role_notification_map biz_role_notification_map;
-        public TClass_biz_roles biz_roles;
-        public bool may_add_mappings;
-        public string sort_order;
-    } // end p_type
-
+  {
     public partial class TWebUserControl_role_notification_mapping: ki_web_ui.usercontrol_class
     {
-        private p_type p;
+
+    private static class Static
+      {
+      public const int CI_UNMAP = 0;
+      public const int CI_ROLE_ID = 1;
+      public const int CI_ROLE_PECKING_ORDER = 2;
+      public const int CI_ROLE_NAME = 3;
+      public const int CI_NOTIFICATION_NAME = 4;
+      public const int CI_NOTIFICATION_ID = 5;
+      public const string INITIAL_SORT_ORDER = "role_pecking_order%,notification_name";
+      }
+
+    private struct p_type
+      {
+      public bool be_interactive;
+      public bool be_loaded;
+      public bool be_sort_order_ascending;
+      public TClass_biz_notifications biz_notifications;
+      public TClass_biz_role_notification_map biz_role_notification_map;
+      public TClass_biz_roles biz_roles;
+      public bool may_add_mappings;
+      public string sort_order;
+      }
+
+        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+
         private void InjectPersistentClientSideScript()
         {
             // EstablishClientSideFunction(k.client_side_function_enumeral_type.EL);
@@ -144,7 +151,7 @@ namespace UserControl_role_notification_mapping
                 p.be_loaded = false;
                 p.be_sort_order_ascending = true;
                 p.may_add_mappings = k.Has((string[])(Session["privilege_array"]), "config-roles-and-matrices");
-                p.sort_order = Units.UserControl_role_notification_mapping.INITIAL_SORT_ORDER;
+                p.sort_order = Static.INITIAL_SORT_ORDER;
             }
 
         }
@@ -176,7 +183,7 @@ namespace UserControl_role_notification_mapping
 
         private void GridView_control_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
         {
-            p.biz_role_notification_map.Save(k.Safe(GridView_control.Rows[e.RowIndex].Cells[Units.UserControl_role_notification_mapping.CI_NOTIFICATION_ID].Text, k.safe_hint_type.NUM), k.Safe(GridView_control.Rows[e.RowIndex].Cells[Units.UserControl_role_notification_mapping.CI_ROLE_ID].Text, k.safe_hint_type.NUM), false);
+            p.biz_role_notification_map.Save(k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_NOTIFICATION_ID].Text, k.safe_hint_type.NUM), k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_ROLE_ID].Text, k.safe_hint_type.NUM), false);
             Bind();
         }
 
@@ -200,12 +207,12 @@ namespace UserControl_role_notification_mapping
                 }
                 else
                 {
-                    e.Row.Cells[Units.UserControl_role_notification_mapping.CI_UNMAP].Enabled = false;
-                    e.Row.Cells[Units.UserControl_role_notification_mapping.CI_UNMAP].Text = k.EMPTY;
+                    e.Row.Cells[Static.CI_UNMAP].Enabled = false;
+                    e.Row.Cells[Static.CI_UNMAP].Text = k.EMPTY;
                 }
-                e.Row.Cells[Units.UserControl_role_notification_mapping.CI_ROLE_ID].Visible = false;
-                e.Row.Cells[Units.UserControl_role_notification_mapping.CI_ROLE_PECKING_ORDER].Visible = false;
-                e.Row.Cells[Units.UserControl_role_notification_mapping.CI_NOTIFICATION_ID].Visible = false;
+                e.Row.Cells[Static.CI_ROLE_ID].Visible = false;
+                e.Row.Cells[Static.CI_ROLE_PECKING_ORDER].Visible = false;
+                e.Row.Cells[Static.CI_NOTIFICATION_ID].Visible = false;
             }
         }
 
@@ -245,19 +252,3 @@ namespace UserControl_role_notification_mapping
     } // end TWebUserControl_role_notification_mapping
 
 }
-
-namespace UserControl_role_notification_mapping.Units
-{
-    public class UserControl_role_notification_mapping
-    {
-        public const int CI_UNMAP = 0;
-        public const int CI_ROLE_ID = 1;
-        public const int CI_ROLE_PECKING_ORDER = 2;
-        public const int CI_ROLE_NAME = 3;
-        public const int CI_NOTIFICATION_NAME = 4;
-        public const int CI_NOTIFICATION_ID = 5;
-        public const string INITIAL_SORT_ORDER = "role_pecking_order%,notification_name";
-    } // end UserControl_role_notification_mapping
-
-}
-

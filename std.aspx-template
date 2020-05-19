@@ -1,7 +1,7 @@
-<%@ Page language="c#" codebehind="template_std.pas" AutoEventWireup="false" Inherits="template_std.TWebForm_template_std" %>
+<%@ Page language="c#" codebehind="template_std.aspx.cs" AutoEventWireup="True" Inherits="template_std.TWebForm_template_std" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_precontent" Src="~/usercontrol/app/UserControl_precontent.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="UserControl_postcontent" Src="~/usercontrol/app/UserControl_postcontent.ascx" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
   <head>
     <!-- $Id$ -->
