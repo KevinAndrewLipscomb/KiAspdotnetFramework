@@ -95,7 +95,7 @@ namespace Class_db_template_trivial_items
           }
         else
           {
-          throw e;
+          throw;
           }
         }
       Close();

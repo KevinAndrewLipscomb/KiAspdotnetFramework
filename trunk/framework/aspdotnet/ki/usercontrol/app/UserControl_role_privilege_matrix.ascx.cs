@@ -1,18 +1,22 @@
+using Class_biz_role_privilege_map;
+using Class_db_roles;
 using kix;
 using System;
 using System.Collections;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using Class_biz_role_privilege_map;
-using Class_db_roles;
-using Class_db_role_privilege_map;
-
 namespace UserControl_role_privilege_matrix
-{
-    public struct p_type
+  {
+  public partial class TWebUserControl_role_privilege_matrix: ki_web_ui.usercontrol_class
+    {
+
+    private static class Static
+      {
+      public const string CHECKBOX_ID_PREFIX_PRIVILEGE_ID = "CheckBox_privilege_";
+      public const string CHECKBOX_ID_PREFIX_ROLE_ID = "_role_";
+      }
+
+    private struct p_type
     {
         public bool be_interactive;
         public bool be_loaded;
@@ -20,11 +24,10 @@ namespace UserControl_role_privilege_matrix
         public TClass_biz_role_privilege_map biz_role_privilege_map;
         public ArrayList crosstab_metadata_rec_arraylist;
         public string sort_order;
-    } // end p_type
+    }
 
-    public partial class TWebUserControl_role_privilege_matrix: ki_web_ui.usercontrol_class
-    {
-        private p_type p;
+        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+
         private void Checkboxify(GridViewRow row)
         {
             CheckBox check_box;
@@ -42,7 +45,7 @@ namespace UserControl_role_privilege_matrix
                         check_box.AutoPostBack = true;
                         check_box.Checked = (row.Cells[i].Text == "1");
                         check_box.Enabled = k.Has((string[])(Session["privilege_array"]), "config-roles-and-matrices");
-                        check_box.ID = k.EMPTY + Units.UserControl_role_privilege_matrix.CHECKBOX_ID_PREFIX_PRIVILEGE_ID + row.Cells[Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_PRIVILEGE_ID].Text + Units.UserControl_role_privilege_matrix.CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
+                        check_box.ID = k.EMPTY + Static.CHECKBOX_ID_PREFIX_PRIVILEGE_ID + row.Cells[Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_PRIVILEGE_ID].Text + Static.CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
                         check_box.ToolTip = crosstab_metadata_rec.natural_text;
                         check_box.CheckedChanged += new System.EventHandler(Changed);
                         row.Cells[i].Controls.Add(check_box);
@@ -214,7 +217,7 @@ namespace UserControl_role_privilege_matrix
             CheckBox check_box;
             string[] tuple;
             check_box = ((sender) as CheckBox);
-            tuple = check_box.ID.Split(new string[] {Units.UserControl_role_privilege_matrix.CHECKBOX_ID_PREFIX_PRIVILEGE_ID, Units.UserControl_role_privilege_matrix.CHECKBOX_ID_PREFIX_ROLE_ID}, StringSplitOptions.RemoveEmptyEntries);
+            tuple = check_box.ID.Split(new string[] {Static.CHECKBOX_ID_PREFIX_PRIVILEGE_ID, Static.CHECKBOX_ID_PREFIX_ROLE_ID}, StringSplitOptions.RemoveEmptyEntries);
             p.biz_role_privilege_map.Save(k.Safe(tuple[TUPLE_INDEX_PRIVILEGE_ID], k.safe_hint_type.NUM), k.Safe(tuple[TUPLE_INDEX_ROLE_ID], k.safe_hint_type.NUM), check_box.Checked);
         }
 
@@ -268,14 +271,3 @@ namespace UserControl_role_privilege_matrix
     } // end TWebUserControl_role_privilege_matrix
 
 }
-
-namespace UserControl_role_privilege_matrix.Units
-{
-    public class UserControl_role_privilege_matrix
-    {
-        public const string CHECKBOX_ID_PREFIX_PRIVILEGE_ID = "CheckBox_privilege_";
-        public const string CHECKBOX_ID_PREFIX_ROLE_ID = "_role_";
-    } // end UserControl_role_privilege_matrix
-
-}
-

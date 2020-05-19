@@ -59,8 +59,10 @@ namespace Class_db_notifications
 
     public string TargetOf
       (
+      #pragma warning disable CA1801 // Remove unused parameter
       string name,
       string member_id
+      #pragma warning restore CA1801 // Remove unused parameter
       )
       {
       // tier_2_match_value: string;

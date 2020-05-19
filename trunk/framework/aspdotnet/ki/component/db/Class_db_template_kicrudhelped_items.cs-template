@@ -60,7 +60,8 @@ namespace Class_db_template_kicrudhelped_items
       using var my_sql_command = new MySqlCommand
         (
         "select template_kicrudhelped_item.ki_crud_helper_user_key as ki_crud_helper_user_key"
-        + " from template_kicrudhelped_item",
+        + " from template_kicrudhelped_item"
+        + " order by " + sort_order.Replace("%",(be_sort_order_ascending ? "asc" : "desc")),
         connection
         );
       ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
@@ -106,7 +107,7 @@ namespace Class_db_template_kicrudhelped_items
           }
         else
           {
-          throw e;
+          throw;
           }
         }
       Close();

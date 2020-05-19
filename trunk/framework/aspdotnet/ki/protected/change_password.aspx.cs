@@ -7,16 +7,17 @@ using System.Web.UI;
 
 namespace change_password
 {
-    public struct p_type
-    {
-        public TClass_biz_users biz_users;
-        public TClass_biz_user biz_user;
-    } // end p_type
-
     public partial class TWebForm_change_password: ki_web_ui.page_class
     {
-        private p_type p;
-        protected System.Web.UI.WebControls.CompareValidator CompareValidator1 = null;
+
+    private struct p_type
+      {
+      public TClass_biz_users biz_users;
+      public TClass_biz_user biz_user;
+      }
+
+        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+
         // / <summary>
         // / Required method for Designer support -- do not modify
         // / the contents of this method with the code editor.

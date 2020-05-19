@@ -8,7 +8,7 @@ using System.Web.UI;
 namespace test_report
   {
 
-  public partial class TWebForm_test_report: System.Web.UI.Page
+  public partial class TWebForm_test_report: ki_web_ui.page_class
     {
 
     // / <summary>
@@ -37,7 +37,8 @@ namespace test_report
       // Write the HTML stream into a StringBuilder.
       //
       var sb = new StringBuilder();
-      base.Render(new HtmlTextWriter(new StringWriter(sb)));
+      using var html_text_writer = new HtmlTextWriter(new StringWriter(sb));
+      base.Render(html_text_writer);
       //
       // Send output stream as an email message.
       //

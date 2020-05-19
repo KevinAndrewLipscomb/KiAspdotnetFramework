@@ -21,7 +21,7 @@ type
       e: System.EventArgs);
   {$ENDREGION}
   strict private
-    p: p_type;
+    p: p_type; // Private Parcel of Page-Pertinent Process-Persistent Parameters
     procedure Page_Load(sender: System.Object; e: System.EventArgs);
   strict protected
     Title: System.Web.UI.HtmlControls.HtmlGenericControl;

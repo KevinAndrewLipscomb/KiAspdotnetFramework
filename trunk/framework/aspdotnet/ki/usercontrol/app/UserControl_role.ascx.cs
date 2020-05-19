@@ -12,7 +12,8 @@ namespace UserControl_role
   {
   public partial class TWebUserControl_role: ki_web_ui.usercontrol_class
     {
-        private p_type p;
+        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+        
         private void Clear()
         {
             TextBox_name.Text = k.EMPTY;
@@ -430,7 +431,7 @@ namespace UserControl_role
             public uint num_gridview_rows;
             public string role_name;
             public string sort_order;
-        } // end p_type
+        }
 
     } // end TWebUserControl_role
 

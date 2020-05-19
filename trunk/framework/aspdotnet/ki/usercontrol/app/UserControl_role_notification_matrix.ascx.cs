@@ -1,30 +1,33 @@
+using Class_biz_role_notification_map;
+using Class_db_roles;
 using kix;
 using System;
 using System.Collections;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using Class_biz_role_notification_map;
-using Class_db_roles;
-using Class_db_role_notification_map;
-
 namespace UserControl_role_notification_matrix
-{
-    public struct p_type
-    {
-        public bool be_interactive;
-        public bool be_loaded;
-        public bool be_sort_order_descending;
-        public TClass_biz_role_notification_map biz_role_notification_map;
-        public ArrayList crosstab_metadata_rec_arraylist;
-        public string sort_order;
-    } // end p_type
-
+  {
     public partial class TWebUserControl_role_notification_matrix: ki_web_ui.usercontrol_class
     {
-        private p_type p;
+
+    private class Static
+      {
+      public const string CHECKBOX_ID_PREFIX_NOTIFICATION_ID = "CheckBox_notification_";
+      public const string CHECKBOX_ID_PREFIX_ROLE_ID = "_role_";
+      }
+
+    private struct p_type
+      {
+      public bool be_interactive;
+      public bool be_loaded;
+      public bool be_sort_order_descending;
+      public TClass_biz_role_notification_map biz_role_notification_map;
+      public ArrayList crosstab_metadata_rec_arraylist;
+      public string sort_order;
+      }
+
+        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+
         private void Checkboxify(GridViewRow row)
         {
             CheckBox check_box;
@@ -42,7 +45,7 @@ namespace UserControl_role_notification_matrix
                         check_box.AutoPostBack = true;
                         check_box.Checked = (row.Cells[i].Text == "1");
                         check_box.Enabled = k.Has((string[])(Session["privilege_array"]), "config-roles-and-matrices");
-                        check_box.ID = k.EMPTY + Units.UserControl_role_notification_matrix.CHECKBOX_ID_PREFIX_NOTIFICATION_ID + row.Cells[Class_db_role_notification_map.Units.Class_db_role_notification_map.CI_NOTIFICATION_ID].Text + Units.UserControl_role_notification_matrix.CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
+                        check_box.ID = k.EMPTY + Static.CHECKBOX_ID_PREFIX_NOTIFICATION_ID + row.Cells[Class_db_role_notification_map.Units.Class_db_role_notification_map.CI_NOTIFICATION_ID].Text + Static.CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
                         check_box.ToolTip = crosstab_metadata_rec.natural_text;
                         check_box.CheckedChanged += new System.EventHandler(Changed);
                         row.Cells[i].Controls.Add(check_box);
@@ -214,7 +217,7 @@ namespace UserControl_role_notification_matrix
             CheckBox check_box;
             string[] tuple;
             check_box = ((sender) as CheckBox);
-            tuple = check_box.ID.Split(new string[] {Units.UserControl_role_notification_matrix.CHECKBOX_ID_PREFIX_NOTIFICATION_ID, Units.UserControl_role_notification_matrix.CHECKBOX_ID_PREFIX_ROLE_ID}, StringSplitOptions.RemoveEmptyEntries);
+            tuple = check_box.ID.Split(new string[] {Static.CHECKBOX_ID_PREFIX_NOTIFICATION_ID, Static.CHECKBOX_ID_PREFIX_ROLE_ID}, StringSplitOptions.RemoveEmptyEntries);
             p.biz_role_notification_map.Save(k.Safe(tuple[TUPLE_INDEX_NOTIFICATION_ID], k.safe_hint_type.NUM), k.Safe(tuple[TUPLE_INDEX_ROLE_ID], k.safe_hint_type.NUM), check_box.Checked);
         }
 
@@ -268,14 +271,3 @@ namespace UserControl_role_notification_matrix
     } // end TWebUserControl_role_notification_matrix
 
 }
-
-namespace UserControl_role_notification_matrix.Units
-{
-    public class UserControl_role_notification_matrix
-    {
-        public const string CHECKBOX_ID_PREFIX_NOTIFICATION_ID = "CheckBox_notification_";
-        public const string CHECKBOX_ID_PREFIX_ROLE_ID = "_role_";
-    } // end UserControl_role_notification_matrix
-
-}
-

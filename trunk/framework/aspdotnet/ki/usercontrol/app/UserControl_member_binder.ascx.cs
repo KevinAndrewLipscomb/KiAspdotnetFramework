@@ -6,13 +6,6 @@ using UserControl_config_binder;
 namespace UserControl_member_binder
   {
 
-  public class UserControl_member_binder_Static
-    {
-    public const int TSSI_RESOURCES = 0;
-    public const int TSSI_CONFIG = 1;
-    public const int TSSI_ABOUT = 2;
-    }
-
   public partial class TWebUserControl_member_binder: ki_web_ui.usercontrol_class
     {
 
@@ -22,6 +15,13 @@ namespace UserControl_member_binder
     //
     //--
 
+    private static class Static
+      {
+      public const int TSSI_RESOURCES = 0;
+      public const int TSSI_CONFIG = 1;
+      public const int TSSI_ABOUT = 2;
+      }
+
     private struct p_type
       {
       internal bool be_loaded;
@@ -29,26 +29,28 @@ namespace UserControl_member_binder
       internal uint tab_index;
       }
 
-    private p_type p;
+    private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
 
     private void FillPlaceHolder
       (
+      #pragma warning disable CA1801 // Remove unused parameter
       bool be_fresh_control_required,
       string target
+      #pragma warning restore CA1801 // Remove unused parameter
       )
       {
-      if (p.tab_index == UserControl_member_binder_Static.TSSI_RESOURCES)
+      if (p.tab_index == Static.TSSI_RESOURCES)
         {
         //var c = ((TWebUserControl_resource)(LoadControl("~/usercontrol/app/UserControl_resource.ascx")));
         //p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_resource",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
         //c.SetTarget(target);
         }
-      else if (p.tab_index == UserControl_member_binder_Static.TSSI_CONFIG)
+      else if (p.tab_index == Static.TSSI_CONFIG)
         {
         var c = ((TWebUserControl_config_binder)(LoadControl("~/usercontrol/app/UserControl_config_binder.ascx")));
         p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_config_binder",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
         }
-      else if (p.tab_index == UserControl_member_binder_Static.TSSI_ABOUT)
+      else if (p.tab_index == Static.TSSI_ABOUT)
         {
         var c = ((TWebUserControl_about)(LoadControl("~/usercontrol/app/UserControl_about.ascx")));
         p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_about",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
@@ -108,7 +110,7 @@ namespace UserControl_member_binder
         {
         p.be_loaded = false;
         //
-        p.tab_index = UserControl_member_binder_Static.TSSI_RESOURCES;
+        p.tab_index = Static.TSSI_RESOURCES;
         FillPlaceHolder(true);
         }
       }
@@ -143,15 +145,15 @@ namespace UserControl_member_binder
         {
         if (target.ToLower().Contains("/resource/"))
           {
-          p.tab_index = UserControl_member_binder_Static.TSSI_RESOURCES;
+          p.tab_index = Static.TSSI_RESOURCES;
           }
         else if (target.ToLower().Contains("/config/"))
           {
-          p.tab_index = UserControl_member_binder_Static.TSSI_CONFIG;
+          p.tab_index = Static.TSSI_CONFIG;
           }
         else if (target.ToLower().Contains("/about/"))
           {
-          p.tab_index = UserControl_member_binder_Static.TSSI_ABOUT;
+          p.tab_index = Static.TSSI_ABOUT;
           }
         //
         TabContainer_control.ActiveTabIndex = (int)p.tab_index;

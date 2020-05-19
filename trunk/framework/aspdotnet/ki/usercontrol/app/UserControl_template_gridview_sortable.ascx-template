@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserControl_template_gridview_sortable.pas" Inherits="UserControl_template_gridview_sortable.TWebUserControl_template_gridview_sortable"%>
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_template_gridview_sortable.ascx.cs" Inherits="UserControl_template_gridview_sortable.TWebUserControl_template_gridview_sortable"%>
 <!-- Derived from KiAspdotnetFramework/usercontrol/app/UserControl~template~gridview~sortable.ascx-template -->
 <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
   <tr>
