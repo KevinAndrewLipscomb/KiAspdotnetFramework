@@ -33,19 +33,19 @@ namespace UserControl_role_privilege_matrix
             CheckBox check_box;
             crosstab_metadata_rec_type crosstab_metadata_rec;
             int i;
-            if (row.Cells.Count > Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_FIRST_CROSSTAB)
+            if (row.Cells.Count > Static.CI_FIRST_CROSSTAB)
             {
-                for (i = Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_FIRST_CROSSTAB; i <= (row.Cells.Count - 1); i ++ )
+                for (i = Static.CI_FIRST_CROSSTAB; i <= (row.Cells.Count - 1); i ++ )
                 {
                     if (row.RowType == DataControlRowType.DataRow)
                     {
                         row.Cells[i].HorizontalAlign = HorizontalAlign.Center;
-                        crosstab_metadata_rec = ((crosstab_metadata_rec_type)(p.crosstab_metadata_rec_arraylist[i - Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_FIRST_CROSSTAB]));
+                        crosstab_metadata_rec = ((crosstab_metadata_rec_type)(p.crosstab_metadata_rec_arraylist[i - Static.CI_FIRST_CROSSTAB]));
                         check_box = new CheckBox();
                         check_box.AutoPostBack = true;
                         check_box.Checked = (row.Cells[i].Text == "1");
                         check_box.Enabled = k.Has((string[])(Session["privilege_array"]), "config-roles-and-matrices");
-                        check_box.ID = k.EMPTY + Static.CHECKBOX_ID_PREFIX_PRIVILEGE_ID + row.Cells[Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_PRIVILEGE_ID].Text + Static.CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
+                        check_box.ID = k.EMPTY + Static.CHECKBOX_ID_PREFIX_PRIVILEGE_ID + row.Cells[Static.CI_PRIVILEGE_ID].Text + Static.CHECKBOX_ID_PREFIX_ROLE_ID + crosstab_metadata_rec.id;
                         check_box.ToolTip = crosstab_metadata_rec.natural_text;
                         check_box.CheckedChanged += new System.EventHandler(Changed);
                         row.Cells[i].Controls.Add(check_box);
@@ -225,8 +225,8 @@ namespace UserControl_role_privilege_matrix
         {
             if (e.Row.RowType != DataControlRowType.EmptyDataRow)
             {
-                e.Row.Cells[Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_PRIVILEGE_ID].Visible = false;
-                e.Row.Cells[Class_db_role_privilege_map.Units.Class_db_role_privilege_map.CI_PRIVILEGE_NAME].Wrap = false;
+                e.Row.Cells[Static.CI_PRIVILEGE_ID].Visible = false;
+                e.Row.Cells[Static.CI_PRIVILEGE_NAME].Wrap = false;
                 Checkboxify(e.Row);
             }
 

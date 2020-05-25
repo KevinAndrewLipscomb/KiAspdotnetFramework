@@ -10,6 +10,14 @@ namespace Class_db_user_member_map
 {
     public class TClass_db_user_member_map: TClass_db
     {
+
+    private static class Static
+    {
+        public const int CI_MEMBER_ID = 0;
+        public const int CI_MEMBER_NAME = 1;
+        public const int CI_FIRST_CROSSTAB = 2;
+    } // end Class_db_user_member_map
+
         private readonly TClass_db_trail db_trail = null;
         
         //Constructor  Create()
@@ -55,15 +63,3 @@ namespace Class_db_user_member_map
     } // end TClass_db_user_member_map
 
 }
-
-namespace Class_db_user_member_map.Units
-{
-    public class Class_db_user_member_map
-    {
-        public const int CI_MEMBER_ID = 0;
-        public const int CI_MEMBER_NAME = 1;
-        public const int CI_FIRST_CROSSTAB = 2;
-    } // end Class_db_user_member_map
-
-}
-

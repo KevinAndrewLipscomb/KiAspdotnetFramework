@@ -31,7 +31,8 @@
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
     <LangVersion>preview</LangVersion>
-    <NuGetPackageImportStamp></NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -321,13 +322,6 @@
     <Compile Include="usercontrol\app\UserControl_role_member_map_log.ascx.designer.cs">
       <DependentUpon>UserControl_role_member_map_log.ascx</DependentUpon>
     </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_member_matrix.ascx.cs">
-      <DependentUpon>UserControl_role_member_matrix.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_member_matrix.ascx.designer.cs">
-      <DependentUpon>UserControl_role_member_matrix.ascx</DependentUpon>
-    </Compile>
     <Compile Include="usercontrol\app\UserControl_role_notification_mapping.ascx.cs">
       <DependentUpon>UserControl_role_notification_mapping.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -335,26 +329,12 @@
     <Compile Include="usercontrol\app\UserControl_role_notification_mapping.ascx.designer.cs">
       <DependentUpon>UserControl_role_notification_mapping.ascx</DependentUpon>
     </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_notification_matrix.ascx.cs">
-      <DependentUpon>UserControl_role_notification_matrix.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_notification_matrix.ascx.designer.cs">
-      <DependentUpon>UserControl_role_notification_matrix.ascx</DependentUpon>
-    </Compile>
     <Compile Include="usercontrol\app\UserControl_role_privilege_mapping.ascx.cs">
       <DependentUpon>UserControl_role_privilege_mapping.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_role_privilege_mapping.ascx.designer.cs">
       <DependentUpon>UserControl_role_privilege_mapping.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_privilege_matrix.ascx.cs">
-      <DependentUpon>UserControl_role_privilege_matrix.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_privilege_matrix.ascx.designer.cs">
-      <DependentUpon>UserControl_role_privilege_matrix.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_update_progress_blocker.ascx.cs">
       <DependentUpon>UserControl_update_progress_blocker.ascx</DependentUpon>
@@ -476,11 +456,8 @@
     <Content Include="usercontrol\app\UserControl_role.ascx" />
     <Content Include="usercontrol\app\UserControl_roles_and_matrices_binder.ascx" />
     <Content Include="usercontrol\app\UserControl_role_member_mapping.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_member_matrix.ascx" />
     <Content Include="usercontrol\app\UserControl_role_notification_mapping.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_notification_matrix.ascx" />
     <Content Include="usercontrol\app\UserControl_role_privilege_mapping.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_privilege_matrix.ascx" />
     <Content Include="usercontrol\app\UserControl_update_progress_blocker.ascx" />
     <Content Include="usercontrol\app\UserControl_user.ascx" />
     <Content Include="usercontrol\app\UserControl_users_and_mapping_binder.ascx" />
