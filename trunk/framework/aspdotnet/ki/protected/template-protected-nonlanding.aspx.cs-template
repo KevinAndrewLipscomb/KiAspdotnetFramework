@@ -15,7 +15,12 @@ namespace template_protected_nonlanding
       public TClass_msg_protected.template_protected_nonlanding incoming;
       }
 
+    private struct v_type
+      {
+      }
+
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+    private v_type v; // Volatile instance Variable container
 
     // / <summary>
     // / Required method for Designer support -- do not modify

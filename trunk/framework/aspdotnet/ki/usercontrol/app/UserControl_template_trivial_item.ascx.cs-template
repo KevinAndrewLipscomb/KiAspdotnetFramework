@@ -18,7 +18,12 @@ namespace UserControl_template_trivial_item
       public TClass_biz_template_trivial_items biz_template_trivial_items;
       }
 
+    private struct v_type
+      {
+      }
+
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+    private v_type v; // Volatile instance Variable container
 
     private void Clear()
       {
