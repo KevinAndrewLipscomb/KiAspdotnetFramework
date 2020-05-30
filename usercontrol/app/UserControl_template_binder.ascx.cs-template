@@ -32,7 +32,12 @@ namespace UserControl_template_binder
       internal uint tab_index;
       }
 
+    private struct v_type
+      {
+      }
+
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+    private v_type v; // Volatile instance Variable container
 
     private void FillPlaceHolder
       (
