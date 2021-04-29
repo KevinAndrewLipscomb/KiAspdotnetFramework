@@ -1,0 +1,83 @@
+using System;
+
+namespace UserControl_capture_subjoined_involvement_name_template
+  {
+
+  public partial class TWebUserControl_capture_subjoined_involvement_name_template: ki_web_ui.usercontrol_subjoined_attribute_capture_class
+    {
+
+    private struct p_type
+      {
+      public bool be_loaded;
+      }
+
+    private struct v_type
+      {
+      }
+
+    private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+    private v_type v; // Volatile instance Variable container
+
+    protected void Page_Load(object sender, EventArgs e)
+      {
+      if (!p.be_loaded)
+        {
+        p.be_loaded = true;
+        }
+      }
+
+    protected override void OnInit(EventArgs e)
+      {
+      // Required for Designer support
+      InitializeComponent();
+      base.OnInit(e);
+      var instance_id = InstanceId();
+      if (Session[instance_id + ".p"] != null)
+        {
+        p = (p_type)(Session[instance_id + ".p"]);
+        p.be_loaded = IsPostBack;  // This test is sufficient if this control is being used as a child of UserControl_capture_subjoined_attributes.
+        }
+      else
+        {
+        p.be_loaded = false;
+        }
+      }
+
+    // / <summary>
+    // / Required method for Designer support -- do not modify
+    // / the contents of this method with the code editor.
+    // / </summary>
+    private void InitializeComponent()
+      {
+      PreRender += TWebUserControl_capture_subjoined_involvement_name_template_PreRender;
+      }
+
+    private void TWebUserControl_capture_subjoined_involvement_name_template_PreRender(object sender, EventArgs e)
+      {
+      SessionSet(InstanceId() + ".p", p);
+      }
+
+    public TWebUserControl_capture_subjoined_involvement_name_template Fresh()
+      {
+      Session.Remove(InstanceId() + ".p");
+      return this;
+      }
+
+    public override void ServerValidate
+      (
+      object source,
+      ServerValidateEventArgs args
+      )
+      {
+#warning Revise UserControl_capture_subjoined_involvement_name_template.ServerValidate() appropriately.
+      args.IsValid = false;
+      }
+
+    public override void Submit()
+      {
+#warning Revise UserControl_capture_subjoined_involvement_name_template.Submit() appropriately.
+      }
+
+    }
+
+  }
