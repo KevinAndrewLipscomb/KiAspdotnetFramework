@@ -1,5 +1,6 @@
 using Class_db_user;
 using Class_db_users;
+using System;
 using System.Web;
 
 namespace Class_biz_user
@@ -40,6 +41,11 @@ namespace Class_biz_user
     public string IdNum()
       {
       return db_users.IdOf(HttpContext.Current.User.Identity.Name);
+      }
+
+    internal DateTime LastLoginTime()
+      {
+      return db_user.LastLoginTime(IdNum());
       }
 
     public string[] Privileges()

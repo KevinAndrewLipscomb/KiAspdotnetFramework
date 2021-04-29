@@ -1,0 +1,18 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="UserControl_capture_subjoined_involvement_name_template.ascx.cs" Inherits="UserControl_capture_subjoined_involvement_name_template.TWebUserControl_capture_subjoined_involvement_name_template"%>
+<!-- Derived from KiAspdotnetFramework/usercontrol/app/UserControl~capture~subjoined~template.ascx-template -->
+<table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" width="100%" border="1">
+  <tr>
+    <td>
+      <table cellspacing="0" cellpadding="10" width="100%" border="0">
+        <tr bgcolor="#f5f5f5">
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
