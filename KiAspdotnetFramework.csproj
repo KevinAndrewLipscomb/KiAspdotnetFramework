@@ -158,6 +158,7 @@
     <Compile Include="component\biz\Class_biz_milestones.cs" />
     <Compile Include="component\biz\Class_biz_notifications.cs" />
     <Compile Include="component\biz\Class_biz_privileges.cs" />
+    <Compile Include="component\biz\Class_biz_quick_messages.cs" />
     <Compile Include="component\biz\Class_biz_roles.cs" />
     <Compile Include="component\biz\Class_biz_role_member_map.cs" />
     <Compile Include="component\biz\Class_biz_role_member_map_logs.cs" />
