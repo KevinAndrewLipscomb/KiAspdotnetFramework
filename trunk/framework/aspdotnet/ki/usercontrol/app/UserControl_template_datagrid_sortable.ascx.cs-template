@@ -32,7 +32,7 @@ namespace UserControl_template_datagrid_sortable
       public bool be_sort_order_ascending;
       public TClass_biz_0s biz_0s;
       public TClass_msg_protected.0_detail msg_protected_0_detail;
-      public uint num_0s;
+      public k.int_nonnegative num_0s;
       public string sort_order;
       }
 
@@ -169,6 +169,7 @@ namespace UserControl_template_datagrid_sortable
         p.be_interactive = (Session["mode:report"] == null);
         p.be_loaded = false;
         p.be_sort_order_ascending = true;
+        p.num_0s = new k.int_nonnegative();
         p.sort_order = "field_0%";
         }
       }
@@ -224,7 +225,7 @@ namespace UserControl_template_datagrid_sortable
             }
           e.Item.Cells[Static.TCI_ID].EnableViewState = true;
           //
-          p.num_0s++;
+          p.num_0s.val++;
           }
         }
       else
@@ -251,11 +252,11 @@ namespace UserControl_template_datagrid_sortable
     private void Bind()
       {
       p.biz_0s.BindBaseDataList(p.sort_order,p.be_sort_order_ascending,DataGrid_control);
-      p.be_datagrid_empty = (p.num_0s == 0);
+      p.be_datagrid_empty = (p.num_0s.val == 0);
       TableRow_none.Visible = p.be_datagrid_empty;
       DataGrid_control.Visible = !p.be_datagrid_empty;
-      Literal_num_0s.Text = p.num_0s.ToString();
-      p.num_0s = 0;
+      Literal_num_0s.Text = p.num_0s.val.ToString();
+      p.num_0s.val = 0;
       }
 
     } // end TWebUserControl_template_datagrid_sortable
