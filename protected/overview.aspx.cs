@@ -96,9 +96,9 @@ namespace overview
 
     protected void Page_Load(object sender, EventArgs e)
       {
+      Title = Server.HtmlEncode(ConfigurationManager.AppSettings["application_name"]) + " - overview";
       if (!IsPostBack)
         {
-        Title = ConfigurationManager.AppSettings["application_name"] + " - overview";
         }
 //
 // ScriptManager.GetCurrent(Page).EnablePartialRendering = false;
