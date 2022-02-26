@@ -21,7 +21,7 @@ namespace test_report
 
     protected void Page_Load(object sender, System.EventArgs e)
       {
-      Title = ConfigurationManager.AppSettings["application_name"] + " - test_report";
+      Title = Server.HtmlEncode(ConfigurationManager.AppSettings["application_name"]) + " - test_report";
       }
 
     protected override void OnInit(EventArgs e)
