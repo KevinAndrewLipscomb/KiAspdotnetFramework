@@ -12,7 +12,8 @@
   </head>
   <body bgcolor="white">
     <form id="Form_control" runat="server">
-      <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent><p>
+      <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
+      <p>
         <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
             <tr>
               <td>
@@ -55,7 +56,7 @@
                               </tr>
                               <tr>
                                 <td></td>
-                                <td><ASP:Button id="Button_submit" runat="server" text="Submit" onclick="Button_submit_Click"></ASP:Button>&nbsp; <ASP:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False" onclick="Button_cancel_Click"></ASP:Button></td>
+                                <td><ASP:Button id="Button_submit" runat="server" text="Submit" OnClientClick="return Button_submit_Click();"></ASP:Button>&nbsp; <ASP:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False" onclick="Button_cancel_Click"></ASP:Button></td>
                                 <td></td>
                               </tr>
                           </table>
@@ -63,6 +64,36 @@
                     </tr>
                 </table></td>
             </tr>
-        </table></p><uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent></form>
+        </table>
+      </p>
+      <uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent>
+    </form>
+    <script>
+      function Button_submit_Click()
+        {
+        if (Page_ClientValidate())
+          {
+          $.post('NewUserRegistration',$('#Form_control').serialize())
+            .success
+              (
+              function() {}
+              )
+            .error
+              (
+              function
+                (
+                data,
+                msg,
+                detail
+                )
+                {
+                alert(data + '\n' + msg + '\n' + detail)
+                }
+              )
+            ;
+          }
+        return false;
+        }
+    </script>
   </body>
 </html>
