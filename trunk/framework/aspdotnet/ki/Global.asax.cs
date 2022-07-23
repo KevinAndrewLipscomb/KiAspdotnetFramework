@@ -1,7 +1,13 @@
 using Class_biz_user;
 using System;
+using System.Collections.Generic;
 using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
 using System.Web.Security;
+using System.Web.SessionState;
 
 #pragma warning disable CA1716
 namespace Global
@@ -24,6 +30,19 @@ namespace Global
 
     protected void Application_Start(object sender, EventArgs e)
       {
+      AreaRegistration.RegisterAllAreas();
+      GlobalConfiguration.Configure(WebApiConfig.Register);
+      FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+      RouteConfig.RegisterRoutes(RouteTable.Routes);
+      BundleConfig.RegisterBundles(BundleTable.Bundles);
+      //
+      RouteTable.Routes.MapHttpRoute
+        (
+        name:"NewUserRegistrationPost",
+        routeTemplate:"NewUserRegistration",
+        defaults:new {Controller = "NewUserRegistration"},
+        constraints:new {httpMerthod = new HttpMethodConstraint("Post") }
+        );
       }
 
     protected void Session_Start(object sender, EventArgs e)
