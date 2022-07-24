@@ -127,6 +127,7 @@
     <Compile Include="component\db\Class_db__information_schema.cs" />
     <Compile Include="component\fs\Class_fs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewUserRegistrationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -231,7 +232,6 @@
     <Compile Include="timeout.aspx.designer.cs">
       <DependentUpon>timeout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="NewUserRegistrationController.cs" />
     <Compile Include="usercontrol\app\UserControl_about.ascx.cs">
       <DependentUpon>UserControl_about.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
