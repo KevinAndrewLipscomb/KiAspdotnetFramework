@@ -1,6 +1,7 @@
 ﻿using Class_biz_users;
 using ki_web_http;
 using kix;
+using System.Net.Http;
 using System.Web.Security;
 
 namespace KiAspdotnetFramework
@@ -43,7 +44,6 @@ namespace KiAspdotnetFramework
 
     public void Post(DTO dto)
       {
-      if NatureOfVisit
       var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
       p.biz_users.RegisterNew(username, k.Safe(dto.TextBox_nominal_password, k.safe_hint_type.HEX), k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
       SessionSet("username", username);

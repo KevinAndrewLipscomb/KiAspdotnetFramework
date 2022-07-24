@@ -1,4 +1,5 @@
 using Class_biz_user;
+using KiAspdotnetFramework;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -35,14 +36,6 @@ namespace Global
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
-      //
-      RouteTable.Routes.MapHttpRoute
-        (
-        name:"NewUserRegistrationPost",
-        routeTemplate:"NewUserRegistration",
-        defaults:new {Controller = "NewUserRegistration"},
-        constraints:new {httpMerthod = new HttpMethodConstraint("Post") }
-        );
       }
 
     protected void Session_Start(object sender, EventArgs e)

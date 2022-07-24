@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/sha1.js"></script>
   </head>
   <body bgcolor="white">
-    <form id="Form_control" runat="server">
+    <form id="Form_control" runat="server" action="/api/NewUserRegistration">
       <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
       <p>
         <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
