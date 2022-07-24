@@ -8,7 +8,8 @@
     <title></title>
     <link href="css/standard.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 7]> <style type="text/css">@import "css/standard-overrides-for-ie6.css";</style><![endif]-->
-    <script type="text/javascript" src="js/sha1.js"></script>
+    <script src="js/sha1.js"></script>
+    <script src="new_user_registration.aspx.js"></script>
   </head>
   <body bgcolor="white">
     <form id="Form_control" runat="server" action="/api/NewUserRegistration">
@@ -68,32 +69,5 @@
       </p>
       <uc1:UserControl_postcontent id="UserControl_postcontent" runat="server"></uc1:UserControl_postcontent>
     </form>
-    <script>
-      function Button_submit_Click()
-        {
-        if (Page_ClientValidate())
-          {
-          $.post('NewUserRegistration',$('#Form_control').serialize())
-            .success
-              (
-              function() {}
-              )
-            .error
-              (
-              function
-                (
-                data,
-                msg,
-                detail
-                )
-                {
-                alert(data + '\n' + msg + '\n' + detail)
-                }
-              )
-            ;
-          }
-        return false;
-        }
-    </script>
   </body>
 </html>
