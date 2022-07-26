@@ -2,12 +2,12 @@
   {
   if (Page_ClientValidate())
     {
-    $.post('NewUserRegistration',$('#Form_control').serialize())
-      .success
+    $.post('api/NewUserRegistration',$('#Form_control').serialize())
+      .done
         (
         function() {}
         )
-      .error
+      .fail
         (
         function
           (
