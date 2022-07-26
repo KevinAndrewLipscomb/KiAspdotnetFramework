@@ -1,0 +1,1 @@
+﻿var apiBaseUrl = '@Url.Content(KiAspdotnetFramework.WebApiConfig.UrlPrefixRelative)';

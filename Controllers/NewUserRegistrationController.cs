@@ -1,6 +1,10 @@
 ﻿using Class_biz_users;
+using ki_net_http;
 using ki_web_http;
 using kix;
+using System;
+using System.Configuration;
+using System.Net;
 using System.Net.Http;
 using System.Web.Security;
 
@@ -42,13 +46,18 @@ namespace KiAspdotnetFramework
       SessionSet(nameof(NewUserRegistrationController) + ".p", p);
       }
 
-    public void Post(DTO dto)
+    public HttpResponseMessage Post(DTO dto)
       {
+      var response = new httpresponsemessage_class();
       var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
       p.biz_users.RegisterNew(username, k.Safe(dto.TextBox_nominal_password, k.safe_hint_type.HEX), k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
       SessionSet("username", username);
       SessionSet("user_id", p.biz_users.IdOf(username));
-      FormsAuthentication.RedirectFromLoginPage(username, false);
+      //FormsAuthentication.RedirectFromLoginPage(username, false);
+      FormsAuthentication.SetAuthCookie(userName:username, createPersistentCookie:false);
+      response.StatusCode = HttpStatusCode.Found;
+      response.Headers.Location = new Uri(uriString:"/" + ConfigurationManager.AppSettings["virtual_directory_name"] + "/protected/overview.aspx", uriKind:UriKind.Relative);
+      return response;
       }
 
     }

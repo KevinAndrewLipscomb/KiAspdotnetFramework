@@ -9,6 +9,7 @@
     <link href="css/standard.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 7]> <style type="text/css">@import "css/standard-overrides-for-ie6.css";</style><![endif]-->
     <script src="js/sha1.js"></script>
+    <script src="Scripts/jquery-3.6.0.js"></script>
     <script src="new_user_registration.aspx.js"></script>
   </head>
   <body bgcolor="white">
