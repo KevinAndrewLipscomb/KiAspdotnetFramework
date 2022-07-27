@@ -511,9 +511,6 @@
     <Content Include="js\sha1.js" />
     <Content Include="login.aspx" />
     <Content Include="new_user_registration.aspx" />
-    <Content Include="new_user_registration.aspx.js">
-      <DependentUpon>new_user_registration.aspx</DependentUpon>
-    </Content>
     <Content Include="noninteractive\daily_tasks.aspx" />
     <Content Include="noninteractive\milestone_sweep.aspx" />
     <Content Include="noninteractive\test_report.aspx" />

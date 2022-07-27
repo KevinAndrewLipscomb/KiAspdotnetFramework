@@ -46,7 +46,7 @@ namespace KiAspdotnetFramework
       SessionSet(nameof(NewUserRegistrationController) + ".p", p);
       }
 
-    public HttpResponseMessage Post(DTO dto)
+    public httpresponsemessage_class Post(DTO dto)
       {
       var response = new httpresponsemessage_class();
       var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
