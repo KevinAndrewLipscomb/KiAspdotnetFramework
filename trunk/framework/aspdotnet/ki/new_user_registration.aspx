@@ -9,11 +9,9 @@
     <link href="css/standard.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 7]> <style type="text/css">@import "css/standard-overrides-for-ie6.css";</style><![endif]-->
     <script src="js/sha1.js"></script>
-    <script src="Scripts/jquery-3.6.0.js"></script>
-    <script src="new_user_registration.aspx.js"></script>
   </head>
   <body bgcolor="white">
-    <form id="Form_control" runat="server" action="/api/NewUserRegistration">
+    <form id="Form_control" runat="server" action="api/NewUserRegistration">
       <uc1:UserControl_precontent id="UserControl_precontent" runat="server"></uc1:UserControl_precontent>
       <p>
         <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="1">
@@ -58,7 +56,7 @@
                               </tr>
                               <tr>
                                 <td></td>
-                                <td><ASP:Button id="Button_submit" runat="server" text="Submit" OnClientClick="return Button_submit_Click();"></ASP:Button>&nbsp; <ASP:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False" onclick="Button_cancel_Click"></ASP:Button></td>
+                                <td><ASP:Button id="Button_submit" runat="server" text="Submit" onclick="Button_submit_Click"></ASP:Button>&nbsp; <ASP:Button id="Button_cancel" runat="server" text="Cancel" causesvalidation="False" onclick="Button_cancel_Click"></ASP:Button></td>
                                 <td></td>
                               </tr>
                           </table>
