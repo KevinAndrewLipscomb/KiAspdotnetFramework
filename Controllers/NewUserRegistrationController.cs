@@ -34,10 +34,12 @@ namespace KiAspdotnetFramework
 
     public class DTO
       {
-      public string TextBox_username {get;set;}
-      public string TextBox_nominal_password {get;set;}
+      public string Button_cancel {get;set;}
+      public string Button_submit {get;set;}
       public string TextBox_confirmation_password {get;set;}
       public string TextBox_email_address {get;set;}
+      public string TextBox_nominal_password {get;set;}
+      public string TextBox_username {get;set;}
       }
 
     public NewUserRegistrationController() : base() // CONSTRUCTOR
@@ -49,14 +51,22 @@ namespace KiAspdotnetFramework
     public httpresponsemessage_class Post(DTO dto)
       {
       var response = new httpresponsemessage_class();
-      var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
-      p.biz_users.RegisterNew(username, k.Safe(dto.TextBox_nominal_password, k.safe_hint_type.HEX), k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
-      SessionSet("username", username);
-      SessionSet("user_id", p.biz_users.IdOf(username));
-      //FormsAuthentication.RedirectFromLoginPage(username, false);
-      FormsAuthentication.SetAuthCookie(userName:username, createPersistentCookie:false);
-      response.StatusCode = HttpStatusCode.Found;
-      response.Headers.Location = new Uri(uriString:"/" + ConfigurationManager.AppSettings["virtual_directory_name"] + "/protected/overview.aspx", uriKind:UriKind.Relative);
+      if (dto.Button_submit != null)
+        {
+        var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
+        p.biz_users.RegisterNew(username, k.Safe(dto.TextBox_nominal_password, k.safe_hint_type.HEX), k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
+        SessionSet("username", username);
+        SessionSet("user_id", p.biz_users.IdOf(username));
+        //FormsAuthentication.RedirectFromLoginPage(username, false);
+        FormsAuthentication.SetAuthCookie(userName:username, createPersistentCookie:false);
+        response.StatusCode = HttpStatusCode.Found;
+        response.Headers.Location = new Uri(uriString:"/" + ConfigurationManager.AppSettings["virtual_directory_name"] + "/protected/overview.aspx", uriKind:UriKind.Relative);
+        }
+      else if (dto.Button_cancel != null)
+        {
+        response.StatusCode = HttpStatusCode.Found;
+        response.Headers.Location = new Uri(uriString:"/" + ConfigurationManager.AppSettings["virtual_directory_name"] + "/login.aspx", uriKind:UriKind.Relative);
+        }
       return response;
       }
 
