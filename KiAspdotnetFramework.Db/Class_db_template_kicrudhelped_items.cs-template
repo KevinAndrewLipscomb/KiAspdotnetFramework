@@ -1,4 +1,4 @@
-// Derived from KiAspdotnetFramework/component/db/Class~db~template~kicrudhelped~items.cs~template
+// Derived from KiAspdotnetFramework/KiAspdotnetFramework.Db/Class~db~template~kicrudhelped~items.cs~template
 
 using Class_db;
 using Class_db_trail;
@@ -11,7 +11,7 @@ using UserControl_drop_down_date;
 
 namespace Class_db_template_kicrudhelped_items
   {
-  public class TClass_db_template_kicrudhelped_items: TClass_db
+  public class TClass_db_template_kicrudhelped_items : TClass_db, ITClass_db_template_kicrudhelped_items
     {
     private class template_kicrudhelped_item_summary
       {
@@ -49,7 +49,7 @@ namespace Class_db_template_kicrudhelped_items
       return ((target) as ListControl).Items.Count > 0;
       }
 
-    internal void BindBaseDataList
+    public void BindBaseDataList
       (
       string sort_order,
       bool be_sort_order_ascending,
@@ -154,7 +154,7 @@ namespace Class_db_template_kicrudhelped_items
         );
       }
 
-    internal object Summary(string ki_crud_helper_user_key)
+    public object Summary(string ki_crud_helper_user_key)
       {
       Open();
       using var my_sql_command = new MySqlCommand

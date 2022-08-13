@@ -40,18 +40,25 @@ namespace Class_biz_role_member_map
             db_role_member_map.BindHolders(role_name, target, sort_order, be_sort_order_ascending);
         }
 
-        public void Save(string member_id, string role_id, bool be_granted)
-        {
-            db_role_member_map.Save(member_id, role_id, be_granted);
-            db_role_member_map_logs.Enter
-              (
-              subject_member_id:member_id,
-              be_granted:be_granted,
-              role_id:role_id
-              );
-            biz_notifications.IssueForRoleChange(member_id, role_id, be_granted);
-        }
+    public void Save
+      (
+      string member_id,
+      string actor_member_id,
+      string role_id,
+      bool be_granted
+      )
+      {
+      db_role_member_map.Save(member_id, role_id, be_granted);
+      db_role_member_map_logs.Enter
+        (
+        subject_member_id: member_id,
+        actor_member_id: actor_member_id,
+        be_granted: be_granted,
+        role_id: role_id
+        );
+      biz_notifications.IssueForRoleChange(member_id, role_id, be_granted);
+      }
 
     } // end TClass_biz_role_member_map
 
-}
+  }

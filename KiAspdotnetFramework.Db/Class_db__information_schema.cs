@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 namespace Class_db__information_schema
   {
 
-  public class TClass_db__information_schema: TClass_db
+  public class TClass_db__information_schema : TClass_db, ITClass_db__information_schema
     {
 
     public TClass_db__information_schema() : base()

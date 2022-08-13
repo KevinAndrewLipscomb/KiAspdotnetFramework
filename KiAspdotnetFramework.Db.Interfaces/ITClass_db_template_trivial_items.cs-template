@@ -1,0 +1,14 @@
+// Derived from KiAspdotnetFramework/KiAspdotnetFramework.Db.Interfaces/ITClass~db~template~trivial~items.cs~template
+
+namespace Class_db_template_trivial_items
+  {
+  public interface ITClass_db_template_trivial_items
+    {
+    public enum enumeration;
+    public bool Bind(string partial_spec, object target);
+    public void BindDirectToListControl(object target, string unselected_literal = k.EMPTY, string selected_value = "-- template_trivial_item --");
+    public bool Delete(string id);
+    public bool Get(string id, out string description);
+    public void Set(string id, string description)
+    }
+  }

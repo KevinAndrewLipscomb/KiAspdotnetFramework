@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Class_db_role_privilege_map
   {
-  public class TClass_db_role_privilege_map: TClass_db
+  public class TClass_db_role_privilege_map : TClass_db, ITClass_db_role_privilege_map
     {
 
     private static class Static

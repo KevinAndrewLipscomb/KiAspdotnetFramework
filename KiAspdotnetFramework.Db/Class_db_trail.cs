@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Class_db_trail
   {
-  public class TClass_db_trail: TClass_db
+  public class TClass_db_trail : TClass_db, ITClass_db_trail
     {
 
     public TClass_db_trail() : base()

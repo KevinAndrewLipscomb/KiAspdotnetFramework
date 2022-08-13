@@ -17,7 +17,7 @@ namespace Class_db_role_member_map
     public const int ROLE_HOLDER_EMAIL_ADDRESS_CI = 1;
     } // end Class_db_role_member_map
 
-  public class TClass_db_role_member_map: TClass_db
+  public class TClass_db_role_member_map : TClass_db, ITClass_db_role_member_map
     {
 
         private readonly TClass_db_trail db_trail = null;

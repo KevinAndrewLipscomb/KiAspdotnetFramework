@@ -1,3 +1,5 @@
+// Derived from KiAspdotnetFramework/KiAspdotnetFramework.Db/Class~db~template~trivial~items.cs~template
+
 using Class_db;
 using Class_db_trail;
 using MySql.Data.MySqlClient;
@@ -8,16 +10,16 @@ using System.Web.UI.WebControls;
 namespace Class_db_template_trivial_items
   {
 
-  internal enum template_trivial_item_enumeration
-    {
-    DESCRIPTION_1 = 1,
-    DESCRIPTION_2 = 2
-    }
-
-  public class TClass_db_template_trivial_items: TClass_db
+  public class TClass_db_template_trivial_items : TClass_db, ITClass_db_template_trivial_items
     {
 
     private readonly TClass_db_trail db_trail = null;
+
+    public enum enumeration
+      {
+      DESCRIPTION_1 = 1,
+      DESCRIPTION_2 = 2
+      }
 
     public TClass_db_template_trivial_items() : base()
       {

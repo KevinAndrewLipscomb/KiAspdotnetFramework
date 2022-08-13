@@ -1,0 +1,23 @@
+// Derived from KiAspdotnetFramework/KiAspdotnetFramework.Db.Interfaces/ITClass~db~template~kicrudhelped~items.cs~template
+
+namespace Class_db_template_kicrudhelped_items
+  {
+  public interface ITClass_db_template_kicrudhelped_items
+    {
+    public bool Bind(string partial_spec, object target);
+    public void BindBaseDataList(string sort_order, bool be_sort_order_ascending, object target);
+    public void BindDirectToListControl(object target);
+    public bool Delete(string ki_crud_helper_user_key);
+    public bool Get
+      (
+      string ki_crud_helper_user_key,
+//<KiCrudHelper:GetOutArgs/>
+      );
+    public void Set
+      (
+      string ki_crud_helper_user_key,
+//<KiCrudHelper:SetDefinition/>
+      );
+    public object Summary(string ki_crud_helper_user_key);
+    }
+  }

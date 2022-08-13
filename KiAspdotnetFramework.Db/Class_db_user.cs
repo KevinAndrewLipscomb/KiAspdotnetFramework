@@ -7,14 +7,14 @@ using System.Web.UI.WebControls;
 namespace Class_db_user
   {
 
-  public class TClass_db_user: TClass_db
+  public class TClass_db_user : TClass_db, ITClass_db_user
     {
 
     public TClass_db_user() : base()
       {
       }
 
-    internal void BindRolesToBaseDataList
+    public void BindRolesToBaseDataList
       (
       string id,
       object target
@@ -42,7 +42,7 @@ namespace Class_db_user
       Close();
       }
 
-    internal void BindPrivilegesToBaseDataList
+    public void BindPrivilegesToBaseDataList
       (
       string id,
       object target
@@ -71,7 +71,7 @@ namespace Class_db_user
       Close();
       }
 
-    internal void BindNotificationsToBaseDataList
+    public void BindNotificationsToBaseDataList
       (
       string id,
       object target
@@ -100,7 +100,7 @@ namespace Class_db_user
       Close();
       }
 
-    internal DateTime LastLoginTime(string id)
+    public DateTime LastLoginTime(string id)
       {
       Open();
       using var mysql_command = new MySqlCommand("select last_login from user where id = '" + id + "'",connection);

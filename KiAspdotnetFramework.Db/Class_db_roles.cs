@@ -15,7 +15,7 @@ namespace Class_db_roles
         public string soft_hyphenation_text;
     }
 
-    public class TClass_db_roles: TClass_db
+  public class TClass_db_roles : TClass_db, ITClass_db_roles
     {
         private readonly TClass_db_trail db_trail = null;
         
