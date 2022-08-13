@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 namespace Class_db_members
   {
 
-  public class TClass_db_members: TClass_db
+  public class TClass_db_members : TClass_db, ITClass_db_members
     {
 
     private readonly TClass_db_trail db_trail = null;
@@ -33,7 +33,7 @@ namespace Class_db_members
     //   return be_known;
     //   }
 
-    internal bool BeRoleHolderBySharedSecret
+    public bool BeRoleHolderBySharedSecret
       (
       string shared_secret,
       out string claimed_role_name,

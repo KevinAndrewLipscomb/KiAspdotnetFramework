@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 namespace Class_db_privileges
   {
 
-  public class TClass_db_privileges: TClass_db
+  public class TClass_db_privileges : TClass_db, ITClass_db_privileges
     {
 
     #pragma warning disable IDE0052 // Remove unread private members
@@ -97,7 +97,7 @@ namespace Class_db_privileges
       return result;
       }
 
-    internal bool HasForAnyScope
+    public bool HasForAnyScope
       (
       string member_id,
       string privilege_name

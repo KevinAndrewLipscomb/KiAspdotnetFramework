@@ -1,7 +1,5 @@
 // Derived from KiAspdotnetFramework/component/db/Class~db~template~kicrudhelped~items.cs~template
 
-using Class_biz_members;
-using Class_biz_user;
 using Class_db;
 using Class_db_trail;
 using kix;
@@ -9,22 +7,18 @@ using MySql.Data.MySqlClient;
 using System.Web.UI.WebControls;
 
 namespace Class_db_role_member_map_logs
-  {
-  public class TClass_db_role_member_map_logs: TClass_db
+{
+  public class TClass_db_role_member_map_logs : TClass_db, ITClass_db_role_member_map_logs
     {
     private class role_member_map_log_summary
       {
       public string id;
       }
 
-    private readonly TClass_biz_members biz_members = null;
-    private readonly TClass_biz_user  biz_user = null;
     private readonly TClass_db_trail db_trail = null;
 
     public TClass_db_role_member_map_logs() : base()
       {
-      biz_members = new TClass_biz_members();
-      biz_user = new TClass_biz_user();
       db_trail = new TClass_db_trail();
       }
 
@@ -53,7 +47,7 @@ namespace Class_db_role_member_map_logs
       return ((target) as ListControl).Items.Count > 0;
       }
 
-    internal void BindBaseDataList
+    public void BindBaseDataList
       (
       string sort_order,
       bool be_sort_order_ascending,
@@ -111,7 +105,7 @@ namespace Class_db_role_member_map_logs
         using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from role_member_map_log where id = '" + id + "'"), connection);
         my_sql_command.ExecuteNonQuery();
         }
-      catch(System.Exception e)
+      catch (System.Exception e)
         {
         if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
           {
@@ -126,9 +120,10 @@ namespace Class_db_role_member_map_logs
       return result;
       }
 
-    internal void Enter
+    public void Enter
       (
       string subject_member_id,
+      string actor_member_id,
       bool be_granted,
       string role_id
       )
@@ -140,7 +135,7 @@ namespace Class_db_role_member_map_logs
           (
           "insert role_member_map_log"
           + " set subject_member_id = NULLIF('" + subject_member_id + "','')"
-          + " , actor_member_id = NULLIF('" + biz_members.IdOfUserId(biz_user.IdNum()) + "','')"
+          + " , actor_member_id = NULLIF('" + actor_member_id + "','')"
           + " , be_granted = " + be_granted.ToString()
           + " , role_id = '" + role_id + "'"
           ),
@@ -210,7 +205,7 @@ namespace Class_db_role_member_map_logs
         );
       }
 
-    internal object Summary(string id)
+    public object Summary(string id)
       {
       Open();
       using var my_sql_command = new MySqlCommand

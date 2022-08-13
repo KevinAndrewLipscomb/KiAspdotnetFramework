@@ -8,7 +8,7 @@ using Class_db_trail;
 
 namespace Class_db_user_member_map
 {
-    public class TClass_db_user_member_map: TClass_db
+  public class TClass_db_user_member_map : TClass_db, ITClass_db_user_member_map
     {
 
     private static class Static

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 namespace Class_db_notifications
   {
 
-  public class TClass_db_notifications: TClass_db
+  public class TClass_db_notifications : TClass_db, ITClass_db_notifications
     {
 
     #pragma warning disable IDE0052 // Remove unread private members

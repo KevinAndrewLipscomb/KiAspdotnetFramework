@@ -108,23 +108,6 @@
     <Compile Include="component\biz\Class_biz_user.cs" />
     <Compile Include="component\biz\Class_biz_users.cs" />
     <Compile Include="component\biz\Class_biz_user_member_map.cs" />
-    <Compile Include="component\db\Class_db.cs" />
-    <Compile Include="component\db\Class_db_involvements.cs" />
-    <Compile Include="component\db\Class_db_members.cs" />
-    <Compile Include="component\db\Class_db_milestones.cs" />
-    <Compile Include="component\db\Class_db_notifications.cs" />
-    <Compile Include="component\db\Class_db_privileges.cs" />
-    <Compile Include="component\db\Class_db_roles.cs" />
-    <Compile Include="component\db\Class_db_role_member_map.cs" />
-    <Compile Include="component\db\Class_db_role_member_map_logs.cs" />
-    <Compile Include="component\db\Class_db_role_notification_map.cs" />
-    <Compile Include="component\db\Class_db_role_privilege_map.cs" />
-    <Compile Include="component\db\Class_db_subjoined_attributes.cs" />
-    <Compile Include="component\db\Class_db_trail.cs" />
-    <Compile Include="component\db\Class_db_user.cs" />
-    <Compile Include="component\db\Class_db_users.cs" />
-    <Compile Include="component\db\Class_db_user_member_map.cs" />
-    <Compile Include="component\db\Class_db__information_schema.cs" />
     <Compile Include="component\fs\Class_fs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewUserRegistrationController.cs" />
@@ -593,13 +576,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="component\db\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="component\biz\Class_biz_template_kicrudhelped_items.cs-template" />
     <None Include="component\biz\Class_biz_template_trivial_items.cs-template" />
-    <None Include="component\db\Class_db_template_kicrudhelped_items.cs-template" />
-    <None Include="component\db\Class_db_template_trivial_items.cs-template" />
     <None Include="deploy.bat" />
     <None Include="noninteractive\.crontab" />
     <None Include="packages.config" />
@@ -616,6 +598,14 @@
     <None Include="work.bat" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="KiAspdotnetFramework.Db.Interfaces\KiAspdotnetFramework.Db.Interfaces.csproj">
+      <Project>{bd64d2d8-a56b-4df6-b939-b300819b0c39}</Project>
+      <Name>KiAspdotnetFramework.Db.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="KiAspdotnetFramework.Db\KiAspdotnetFramework.Db.csproj">
+      <Project>{a0268dfb-43c2-42f3-aa9a-2ec8feeb8c68}</Project>
+      <Name>KiAspdotnetFramework.Db</Name>
+    </ProjectReference>
     <ProjectReference Include="lib\ki\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
       <Name>ki</Name>

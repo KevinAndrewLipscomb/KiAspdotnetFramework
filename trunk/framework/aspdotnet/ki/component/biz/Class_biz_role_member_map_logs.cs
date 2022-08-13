@@ -43,11 +43,12 @@ namespace Class_biz_role_member_map_logs
     internal void Enter
       (
       string subject_member_id,
+      string actor_member_id,
       bool be_granted,
       string role_id
       )
       {
-      db_role_member_map_logs.Enter(subject_member_id,be_granted,role_id);
+      db_role_member_map_logs.Enter(subject_member_id,actor_member_id,be_granted,role_id);
       }
 
     public bool Get

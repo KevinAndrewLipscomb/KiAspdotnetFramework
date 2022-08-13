@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace Class_db_subjoined_attributes
   {
-  public class TClass_db_subjoined_attributes: TClass_db
+  public class TClass_db_subjoined_attributes : TClass_db, ITClass_db_subjoined_attributes
     {
     private class subjoined_attribute_summary
       {
@@ -23,7 +23,7 @@ namespace Class_db_subjoined_attributes
       db_trail = new TClass_db_trail();
       }
 
-    internal bool BeAnyImplementedSince(DateTime time)
+    public bool BeAnyImplementedSince(DateTime time)
       {
       Open();
       using var mysql_command = new MySqlCommand("select IF(count(*) > 0,1,0) from subjoined_attribute where time_implemented >= '" + time.ToString("yyyy-MM-dd HH:mm:ss") + "'",connection);
@@ -56,7 +56,7 @@ namespace Class_db_subjoined_attributes
       return ((target) as ListControl).Items.Count > 0;
       }
 
-    internal void BindBaseDataList
+    public void BindBaseDataList
       (
       object target,
       DateTime last_login
@@ -108,7 +108,7 @@ namespace Class_db_subjoined_attributes
         using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from subjoined_attribute where id = \"" + id + "\""), connection);
         my_sql_command.ExecuteNonQuery();
         }
-      catch(System.Exception e)
+      catch (System.Exception e)
         {
         if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
           {
@@ -173,7 +173,7 @@ namespace Class_db_subjoined_attributes
         );
       }
 
-    internal object Summary(string id)
+    public object Summary(string id)
       {
       Open();
       using var my_sql_command = new MySqlCommand

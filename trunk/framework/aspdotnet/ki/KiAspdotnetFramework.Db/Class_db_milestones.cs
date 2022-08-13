@@ -5,7 +5,7 @@ using System;
 
 namespace Class_db_milestones
 {
-    public class TClass_db_milestones: TClass_db
+  public class TClass_db_milestones : TClass_db, ITClass_db_milestones
     {
         private readonly TClass_db_trail db_trail = null;
         
