@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Class_ss
-  {
+{
 
   public abstract class TClass_ss
     {
