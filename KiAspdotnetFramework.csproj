@@ -108,7 +108,6 @@
     <Compile Include="Models\Class_biz_user.cs" />
     <Compile Include="Models\Class_biz_users.cs" />
     <Compile Include="Models\Class_biz_user_member_map.cs" />
-    <Compile Include="component\fs\Class_fs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewUserRegistrationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -576,6 +575,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="component\fs\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Class_biz_template_kicrudhelped_items.cs-template" />
@@ -603,6 +603,14 @@
     <ProjectReference Include="KiAspdotnetFramework.Db\KiAspdotnetFramework.Db.csproj">
       <Project>{a0268dfb-43c2-42f3-aa9a-2ec8feeb8c68}</Project>
       <Name>KiAspdotnetFramework.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="KiAspdotnetFramework.FileSystem.Interface\KiAspdotnetFramework.FileSystem.Interface.csproj">
+      <Project>{ba49f31d-0fef-4bdf-8a0f-130450f7219b}</Project>
+      <Name>KiAspdotnetFramework.FileSystem.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="KiAspdotnetFramework.FileSystem\KiAspdotnetFramework.FileSystem.csproj">
+      <Project>{873deb18-2d56-4ba3-8493-3bcb2c4bf349}</Project>
+      <Name>KiAspdotnetFramework.FileSystem</Name>
     </ProjectReference>
     <ProjectReference Include="lib\ki\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
