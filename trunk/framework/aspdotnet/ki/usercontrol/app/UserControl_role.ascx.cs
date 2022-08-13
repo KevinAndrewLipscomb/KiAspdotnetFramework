@@ -282,15 +282,15 @@ namespace UserControl_role
 
         private void GridView_holders_RowCreated(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
         {
-            e.Row.Cells[Class_db_role_member_map_Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Visible = false;
+            e.Row.Cells[TClass_db_role_member_map.Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Visible = false;
         }
 
         private void GridView_holders_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
         {
-            if ((e.Row.RowType == DataControlRowType.DataRow) && (e.Row.Cells[Class_db_role_member_map_Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text != "&nbsp;"))
+            if ((e.Row.RowType == DataControlRowType.DataRow) && (e.Row.Cells[TClass_db_role_member_map.Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text != "&nbsp;"))
             {
                 v.distribution_list.Append(k.COMMA_SPACE);
-                v.distribution_list.Append(e.Row.Cells[Class_db_role_member_map_Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text);
+                v.distribution_list.Append(e.Row.Cells[TClass_db_role_member_map.Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text);
                 p.num_gridview_rows++;
             }
         }

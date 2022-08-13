@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Class_db_users
   {
-  public class TClass_db_users: TClass_db
+  public class TClass_db_users : TClass_db, ITClass_db_users
     {
         private readonly TClass_db_trail db_trail = null;
 
@@ -18,7 +18,7 @@ namespace Class_db_users
             db_trail = new TClass_db_trail();
         }
 
-        internal bool AcceptAsMember(string shared_secret,string id)
+        public bool AcceptAsMember(string shared_secret,string id)
           {
           var accept_as_member = false;
           object member_id_obj;

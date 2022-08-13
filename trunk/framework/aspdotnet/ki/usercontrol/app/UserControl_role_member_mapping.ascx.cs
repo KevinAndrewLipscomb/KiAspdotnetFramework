@@ -1,6 +1,7 @@
 using Class_biz_members;
 using Class_biz_role_member_map;
 using Class_biz_roles;
+using Class_biz_user;
 using kix;
 using System.Web.UI.WebControls;
 
@@ -28,6 +29,7 @@ namespace UserControl_role_member_mapping
       public TClass_biz_members biz_members;
       public TClass_biz_role_member_map biz_role_member_map;
       public TClass_biz_roles biz_roles;
+      public TClass_biz_user biz_user;
       public bool may_add_mappings;
       public string sort_order;
       }
@@ -147,6 +149,7 @@ namespace UserControl_role_member_mapping
                 p.biz_members = new TClass_biz_members();
                 p.biz_role_member_map = new TClass_biz_role_member_map();
                 p.biz_roles = new TClass_biz_roles();
+                p.biz_user = new();
                 p.be_interactive = !(Session["mode:report"] != null);
                 p.be_loaded = false;
                 p.be_sort_order_ascending = true;
@@ -183,7 +186,13 @@ namespace UserControl_role_member_mapping
 
         private void GridView_control_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
         {
-            p.biz_role_member_map.Save(k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_MEMBER_ID].Text, k.safe_hint_type.NUM), k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_ROLE_ID].Text, k.safe_hint_type.NUM), false);
+            p.biz_role_member_map.Save
+              (
+              member_id:k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_MEMBER_ID].Text,k.safe_hint_type.NUM),
+              actor_member_id:p.biz_members.IdOfUserId(p.biz_user.IdNum()),
+              role_id:k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_ROLE_ID].Text,k.safe_hint_type.NUM),
+              be_granted:false
+              );
             Bind();
         }
 
@@ -219,7 +228,13 @@ namespace UserControl_role_member_mapping
 
         protected void Button_add_Click(object sender, System.EventArgs e)
         {
-            p.biz_role_member_map.Save(k.Safe(DropDownList_member.SelectedValue, k.safe_hint_type.NUM), k.Safe(DropDownList_role.SelectedValue, k.safe_hint_type.NUM), true);
+            p.biz_role_member_map.Save
+              (
+              member_id:k.Safe(DropDownList_member.SelectedValue, k.safe_hint_type.NUM),
+              actor_member_id:p.biz_members.IdOfUserId(p.biz_user.IdNum()),
+              role_id:k.Safe(DropDownList_role.SelectedValue, k.safe_hint_type.NUM),
+              be_granted:true
+              );
             Bind();
         }
 
