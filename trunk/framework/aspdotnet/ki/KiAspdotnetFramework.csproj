@@ -576,8 +576,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="component\biz\" />
-    <Folder Include="component\db\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Class_biz_template_kicrudhelped_items.cs-template" />
