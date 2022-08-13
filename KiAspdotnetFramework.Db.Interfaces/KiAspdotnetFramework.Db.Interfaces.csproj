@@ -55,6 +55,7 @@
     <Compile Include="ITClass_db_subjoined_attributes.cs" />
     <Compile Include="ITClass_db_trail.cs" />
     <Compile Include="ITClass_db_user.cs" />
+    <Compile Include="ITClass_db_users.cs" />
     <Compile Include="ITClass_db_user_member_map.cs" />
     <Compile Include="ITClass_db__information_schema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

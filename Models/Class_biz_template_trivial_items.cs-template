@@ -1,3 +1,5 @@
+// Derived from KiAspdotnetFramework/Models/Class~biz~~template~trivial~items.cs~template
+
 using Class_db_template_trivial_items;
 using kix;
 

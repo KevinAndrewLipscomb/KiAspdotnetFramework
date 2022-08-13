@@ -1,4 +1,4 @@
-// Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
+// Derived from KiAspdotnetFramework/Models/Class~biz~~template~kicrudhelped~items.cs~template
 
 using Class_db_template_kicrudhelped_items;
 using kix;

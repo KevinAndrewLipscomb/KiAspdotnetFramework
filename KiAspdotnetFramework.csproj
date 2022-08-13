@@ -92,22 +92,22 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="component\biz\Class_biz_involvements.cs" />
-    <Compile Include="component\biz\Class_biz_members.cs" />
-    <Compile Include="component\biz\Class_biz_milestones.cs" />
-    <Compile Include="component\biz\Class_biz_notifications.cs" />
-    <Compile Include="component\biz\Class_biz_privileges.cs" />
-    <Compile Include="component\biz\Class_biz_quick_messages.cs" />
-    <Compile Include="component\biz\Class_biz_roles.cs" />
-    <Compile Include="component\biz\Class_biz_role_member_map.cs" />
-    <Compile Include="component\biz\Class_biz_role_member_map_logs.cs" />
-    <Compile Include="component\biz\Class_biz_role_notification_map.cs" />
-    <Compile Include="component\biz\Class_biz_role_privilege_map.cs" />
-    <Compile Include="component\biz\Class_biz_scheduled_tasks.cs" />
-    <Compile Include="component\biz\Class_biz_subjoined_attributes.cs" />
-    <Compile Include="component\biz\Class_biz_user.cs" />
-    <Compile Include="component\biz\Class_biz_users.cs" />
-    <Compile Include="component\biz\Class_biz_user_member_map.cs" />
+    <Compile Include="Models\Class_biz_involvements.cs" />
+    <Compile Include="Models\Class_biz_members.cs" />
+    <Compile Include="Models\Class_biz_milestones.cs" />
+    <Compile Include="Models\Class_biz_notifications.cs" />
+    <Compile Include="Models\Class_biz_privileges.cs" />
+    <Compile Include="Models\Class_biz_quick_messages.cs" />
+    <Compile Include="Models\Class_biz_roles.cs" />
+    <Compile Include="Models\Class_biz_role_member_map.cs" />
+    <Compile Include="Models\Class_biz_role_member_map_logs.cs" />
+    <Compile Include="Models\Class_biz_role_notification_map.cs" />
+    <Compile Include="Models\Class_biz_role_privilege_map.cs" />
+    <Compile Include="Models\Class_biz_scheduled_tasks.cs" />
+    <Compile Include="Models\Class_biz_subjoined_attributes.cs" />
+    <Compile Include="Models\Class_biz_user.cs" />
+    <Compile Include="Models\Class_biz_users.cs" />
+    <Compile Include="Models\Class_biz_user_member_map.cs" />
     <Compile Include="component\fs\Class_fs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewUserRegistrationController.cs" />
@@ -576,12 +576,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="component\biz\" />
     <Folder Include="component\db\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="component\biz\Class_biz_template_kicrudhelped_items.cs-template" />
-    <None Include="component\biz\Class_biz_template_trivial_items.cs-template" />
+    <None Include="Models\Class_biz_template_kicrudhelped_items.cs-template" />
+    <None Include="Models\Class_biz_template_trivial_items.cs-template" />
     <None Include="deploy.bat" />
     <None Include="noninteractive\.crontab" />
     <None Include="packages.config" />
