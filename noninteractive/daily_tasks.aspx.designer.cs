@@ -11,6 +11,6 @@
 namespace daily_tasks {
     
     
-    public partial class TWebForm1 {
+    public partial class TWebForm_daily_tasks {
     }
 }

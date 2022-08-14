@@ -92,6 +92,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Biz.cs" />
     <Compile Include="Models\Class_biz_involvements.cs" />
     <Compile Include="Models\Class_biz_members.cs" />
     <Compile Include="Models\Class_biz_milestones.cs" />
