@@ -1,4 +1,5 @@
-﻿using Class_biz_involvements;
+﻿using Class_biz__information_schema;
+using Class_biz_involvements;
 using Class_biz_members;
 using Class_biz_milestones;
 using Class_biz_notifications;
@@ -14,6 +15,7 @@ using Class_biz_subjoined_attributes;
 using Class_biz_user;
 using Class_biz_user_member_map;
 using Class_biz_users;
+using Class_db__information_schema;
 using Class_db_involvements;
 using Class_db_members;
 using Class_db_milestones;
@@ -29,6 +31,7 @@ using Class_db_user;
 using Class_db_user_member_map;
 using Class_db_users;
 using KiAspdotnetFramework.component.os;
+using System.Configuration;
 
 namespace KiAspdotnetFramework
   {
@@ -38,6 +41,7 @@ namespace KiAspdotnetFramework
   public class Biz
     {
 
+    private static readonly TClass_db__information_schema db__information_schema = new();
     private static readonly TClass_db_involvements db_involvements = new();
     private static readonly TClass_db_members db_members = new();
     private static readonly TClass_db_milestones db_milestones = new();
@@ -54,6 +58,10 @@ namespace KiAspdotnetFramework
     private static readonly TClass_db_users db_users = new();
     private static readonly Class_fs fs = new();
 
+    public TClass_biz__information_schema _information_schema = new
+      (
+      db__information_schema_imp:db__information_schema
+      );
     public TClass_biz_involvements involvements = new
       (
       db_involvements_imp:db_involvements
@@ -68,7 +76,8 @@ namespace KiAspdotnetFramework
       );
     public TClass_biz_notifications notifications = new
       (
-      db_notifications_imp:db_notifications
+      db_notifications_imp:db_notifications,
+      appSettings_imp:ConfigurationManager.AppSettings
       );
     public TClass_biz_privileges privileges = new
       (
@@ -79,7 +88,8 @@ namespace KiAspdotnetFramework
       (
       db_notifications_imp:db_notifications,
       db_role_member_map_imp:db_role_member_map,
-      db_role_member_map_logs_imp:db_role_member_map_logs
+      db_role_member_map_logs_imp:db_role_member_map_logs,
+      appSettings_imp:ConfigurationManager.AppSettings
       );
     public TClass_biz_role_member_map_logs role_member_map_logs = new
       (
@@ -118,7 +128,8 @@ namespace KiAspdotnetFramework
       (
       db_members_imp:db_members,
       db_notifications_imp:db_notifications,
-      db_users_imp:db_users
+      db_users_imp:db_users,
+      appSettings_imp:ConfigurationManager.AppSettings
       );
 
     }

@@ -4,6 +4,7 @@ using Class_db_notifications;
 using Class_db_users;
 using KiAspdotnetFramework;
 using kix;
+using System.Collections.Specialized;
 using System.Configuration;
 
 namespace Class_biz_users
@@ -11,7 +12,8 @@ namespace Class_biz_users
   public class TClass_biz_users
     {
 
-    private readonly ITClass_db_notifications db_notifications = null;
+    private readonly TClass_biz_notifications biz_notifications = null;
+
     private readonly ITClass_db_members db_members = null;
     private readonly ITClass_db_users db_users = null;
 
@@ -19,13 +21,19 @@ namespace Class_biz_users
       (
       ITClass_db_members db_members_imp,
       ITClass_db_notifications db_notifications_imp,
-      ITClass_db_users db_users_imp
+      ITClass_db_users db_users_imp,
+      NameValueCollection appSettings_imp
       )
       : base() // CONSTRUCTOR
       {
       db_members = db_members_imp;
-      db_notifications = db_notifications_imp;
       db_users = db_users_imp;
+      //
+      biz_notifications = new
+        (
+        db_notifications_imp:db_notifications_imp,
+        appSettings_imp:appSettings_imp
+        );
       }
 
     public bool AcceptAsMember(string shared_secret, string id)
@@ -117,12 +125,12 @@ namespace Class_biz_users
       // Make the password string the user's new temporary password, and set the stale flag to force an immediate password change.
       db_users.SetTemporaryPassword(username, k.Digest(temporary_password));
       // Send the new password to the user's email address of record.
-      new TClass_biz_notifications(db_notifications_imp: db_notifications).IssueForTemporaryPassword(username, client_host_name, temporary_password);
+      biz_notifications.IssueForTemporaryPassword(username, client_host_name, temporary_password);
       }
 
     public void IssueUsernameReminder(string email_address, string client_host_name)
       {
-      new TClass_biz_notifications(db_notifications_imp: db_notifications).IssueForForgottenUsername(email_address, db_users.UsernameOfEmailAddress(email_address), client_host_name);
+      biz_notifications.IssueForForgottenUsername(email_address, db_users.UsernameOfEmailAddress(email_address), client_host_name);
       }
 
     public uint NumUnsuccessfulLoginAttemptsOf(string username)

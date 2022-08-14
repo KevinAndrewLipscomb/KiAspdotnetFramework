@@ -92,23 +92,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Biz.cs" />
-    <Compile Include="Models\Class_biz_involvements.cs" />
-    <Compile Include="Models\Class_biz_members.cs" />
-    <Compile Include="Models\Class_biz_milestones.cs" />
-    <Compile Include="Models\Class_biz_notifications.cs" />
-    <Compile Include="Models\Class_biz_privileges.cs" />
-    <Compile Include="Models\Class_biz_quick_messages.cs" />
-    <Compile Include="Models\Class_biz_roles.cs" />
-    <Compile Include="Models\Class_biz_role_member_map.cs" />
-    <Compile Include="Models\Class_biz_role_member_map_logs.cs" />
-    <Compile Include="Models\Class_biz_role_notification_map.cs" />
-    <Compile Include="Models\Class_biz_role_privilege_map.cs" />
-    <Compile Include="Models\Class_biz_scheduled_tasks.cs" />
-    <Compile Include="Models\Class_biz_subjoined_attributes.cs" />
-    <Compile Include="Models\Class_biz_user.cs" />
-    <Compile Include="Models\Class_biz_users.cs" />
-    <Compile Include="Models\Class_biz_user_member_map.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewUserRegistrationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -576,10 +559,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\Class_biz_template_kicrudhelped_items.cs-template" />
-    <None Include="Models\Class_biz_template_trivial_items.cs-template" />
     <None Include="deploy.bat" />
     <None Include="noninteractive\.crontab" />
     <None Include="packages.config" />
@@ -596,29 +578,9 @@
     <None Include="work.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="KiAspdotnetFramework.Db.Interfaces\KiAspdotnetFramework.Db.Interfaces.csproj">
-      <Project>{bd64d2d8-a56b-4df6-b939-b300819b0c39}</Project>
-      <Name>KiAspdotnetFramework.Db.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="KiAspdotnetFramework.Db\KiAspdotnetFramework.Db.csproj">
-      <Project>{a0268dfb-43c2-42f3-aa9a-2ec8feeb8c68}</Project>
-      <Name>KiAspdotnetFramework.Db</Name>
-    </ProjectReference>
-    <ProjectReference Include="KiAspdotnetFramework.FileSystem.Interface\KiAspdotnetFramework.FileSystem.Interface.csproj">
-      <Project>{ba49f31d-0fef-4bdf-8a0f-130450f7219b}</Project>
-      <Name>KiAspdotnetFramework.FileSystem.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="KiAspdotnetFramework.FileSystem\KiAspdotnetFramework.FileSystem.csproj">
-      <Project>{873deb18-2d56-4ba3-8493-3bcb2c4bf349}</Project>
-      <Name>KiAspdotnetFramework.FileSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="KiAspdotnetFramework.Scrape.Interface\KiAspdotnetFramework.Scrape.Interface.csproj">
-      <Project>{1508bc9b-40ec-448f-867a-222c7ae484b1}</Project>
-      <Name>KiAspdotnetFramework.Scrape.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="KiAspdotnetFramework.Scrape\KiAspdotnetFramework.Scrape.csproj">
-      <Project>{c14b4c8f-d05b-40cb-9d14-6d916aab9cc4}</Project>
-      <Name>KiAspdotnetFramework.Scrape</Name>
+    <ProjectReference Include="KiAspdotnetFramework.Model\KiAspdotnetFramework.Model.csproj">
+      <Project>{6548dbd5-aae5-4a4f-ada2-88bfb04e95f4}</Project>
+      <Name>KiAspdotnetFramework.Model</Name>
     </ProjectReference>
     <ProjectReference Include="lib\ki\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>

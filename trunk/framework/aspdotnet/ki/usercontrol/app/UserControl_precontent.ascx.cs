@@ -1,4 +1,4 @@
-using Class_db__information_schema;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -45,7 +45,7 @@ namespace UserControl_precontent
             //
             // NOTE that this is one of TWO places in the application that k.EscalatedException gets called.  The other place is in ~/exception.aspx.cs Page_Load().  Consider keeping them relatively consistent.
             //
-            var engine_innodb_status = k.EMPTY;
+            var engine_status = k.EMPTY;
             var cause = k.alert_cause_type.LOGIC;
             var key = "xparposbac";
             var alert_message_value = "OOPS!" + k.NEW_LINE
@@ -87,7 +87,7 @@ namespace UserControl_precontent
               {
               if (e.Exception.ToString().Contains("Deadlock found when trying to get lock; try restarting transaction"))
                 {
-                engine_innodb_status = new TClass_db__information_schema().EngineInnodbStatus();
+                engine_status = new Biz()._information_schema.EngineStatus();
                 cause = k.alert_cause_type.DBMS;
                 key = "deadlock";
                 alert_message_value = "DEADLOCK!" + k.NEW_LINE
@@ -122,7 +122,7 @@ namespace UserControl_precontent
                 the_exception:e.Exception,
                 user_identity_name:(HttpContext.Current.User.Identity.Name.Length > 0 ? HttpContext.Current.User.Identity.Name : "(EMPTY HttpContext.Current.User.Identity.Name)") + " from " + Request.UserHostAddress + k.SPACE + "(" + k.DomainNameOfIpAddress(Request.UserHostAddress) + ")",
                 session:Session,
-                engine_innodb_status:engine_innodb_status
+                engine_innodb_status:engine_status
                 );
               }
             ScriptManager_control.AsyncPostBackErrorMessage = APP_HANDLED_ASYNC_POST_BACK_ERROR_MESSAGE_MARK + AlertMessage

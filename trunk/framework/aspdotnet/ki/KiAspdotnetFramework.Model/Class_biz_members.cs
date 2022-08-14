@@ -3,7 +3,6 @@ using kix;
 
 namespace Class_biz_members
   {
-
   public class TClass_biz_members
     {
 
@@ -32,7 +31,7 @@ namespace Class_biz_members
       return add;
       }
 
-    internal bool BeRoleHolderBySharedSecret
+    public bool BeRoleHolderBySharedSecret
       (
       string shared_secret,
       out string claimed_role_name,
@@ -106,5 +105,4 @@ namespace Class_biz_members
       }
 
     } // end TClass_biz_members
-
   }

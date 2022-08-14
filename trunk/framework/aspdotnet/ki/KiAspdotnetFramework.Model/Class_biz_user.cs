@@ -47,7 +47,7 @@ namespace Class_biz_user
       return db_users.IdOf(HttpContext.Current.User.Identity.Name);
       }
 
-    internal DateTime LastLoginTime()
+    public DateTime LastLoginTime()
       {
       return db_user.LastLoginTime(IdNum());
       }

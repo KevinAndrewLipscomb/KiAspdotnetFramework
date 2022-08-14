@@ -5,6 +5,7 @@ using System;
 
 namespace Class_biz_subjoined_attributes
   {
+
   internal enum presentation_mode_enum
     {
     NONE,
@@ -15,6 +16,7 @@ namespace Class_biz_subjoined_attributes
 
   public class TClass_biz_subjoined_attributes
     {
+
     private readonly ITClass_db_subjoined_attributes db_subjoined_attributes = null;
 
     public TClass_biz_subjoined_attributes(ITClass_db_subjoined_attributes db_subjoined_attributes_imp) : base() // CONSTRUCTOR
@@ -22,7 +24,7 @@ namespace Class_biz_subjoined_attributes
       db_subjoined_attributes = db_subjoined_attributes_imp;
       }
 
-    internal bool BeAnyImplementedSince(DateTime time)
+    public bool BeAnyImplementedSince(DateTime time)
       {
       return db_subjoined_attributes.BeAnyImplementedSince(time);
       }
@@ -85,7 +87,7 @@ namespace Class_biz_subjoined_attributes
         );
       }
 
-    internal object Summary(string id)
+    public object Summary(string id)
       {
       return db_subjoined_attributes.Summary(id);
       }

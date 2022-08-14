@@ -2,6 +2,6 @@
   {
   public interface ITClass_db__information_schema
     {
-    string EngineInnodbStatus();
+    string EngineStatus();
     }
   }
