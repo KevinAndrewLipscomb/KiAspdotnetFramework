@@ -1,4 +1,4 @@
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -10,7 +10,6 @@ namespace remind_username
 
     private struct p_type
       {
-      public TClass_biz_users biz_users;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -30,7 +29,6 @@ namespace remind_username
             switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
-                    p.biz_users = new TClass_biz_users();
                     Label_application_name_1.Text = ConfigurationManager.AppSettings["application_name"];
                     Label_application_name_2.Text = ConfigurationManager.AppSettings["application_name"];
                     Label_application_name_3.Text = ConfigurationManager.AppSettings["application_name"];
@@ -63,9 +61,9 @@ namespace remind_username
         {
             string email_address;
             email_address = k.Safe(TextBox_email_address.Text.Trim(), k.safe_hint_type.EMAIL_ADDRESS);
-            if (p.biz_users.BeRegisteredEmailAddress(email_address))
+            if (Biz.users.BeRegisteredEmailAddress(email_address))
             {
-                p.biz_users.IssueUsernameReminder(email_address, k.Safe(Request.UserHostName, k.safe_hint_type.HOSTNAME));
+                Biz.users.IssueUsernameReminder(email_address, k.Safe(Request.UserHostName, k.safe_hint_type.HOSTNAME));
                 Alert(k.alert_cause_type.LOGIC, k.alert_state_type.NORMAL, "usrnamsnt", "The associated " + ConfigurationManager.AppSettings["application_name"] + " username has been sent to " + email_address + k.PERIOD, true);
                 Table_return.Visible = true;
             }

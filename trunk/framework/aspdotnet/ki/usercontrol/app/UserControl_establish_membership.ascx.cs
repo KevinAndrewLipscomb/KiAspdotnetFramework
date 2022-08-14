@@ -1,7 +1,7 @@
 using Class_biz_members;
 using Class_biz_notifications;
 using Class_biz_user;
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System.Configuration;
 using System.Web.UI.WebControls;
@@ -17,7 +17,6 @@ namespace UserControl_establish_membership
       public TClass_biz_members biz_members;
       public TClass_biz_notifications biz_notifications;
       public TClass_biz_user biz_user;
-      public TClass_biz_users biz_users;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -54,7 +53,6 @@ namespace UserControl_establish_membership
                 p.biz_members = new TClass_biz_members();
                 p.biz_notifications = new TClass_biz_notifications();
                 p.biz_user = new TClass_biz_user();
-                p.biz_users = new TClass_biz_users();
             }
 
         }
@@ -73,7 +71,7 @@ namespace UserControl_establish_membership
         {
           if (Page.IsValid)
             {
-            if (p.biz_users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz_user.IdNum()))
+            if (Biz.users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz_user.IdNum()))
               {
               SessionSet("privilege_array", p.biz_user.Privileges());
               // User was an unprivileged user until now, so reset privs.

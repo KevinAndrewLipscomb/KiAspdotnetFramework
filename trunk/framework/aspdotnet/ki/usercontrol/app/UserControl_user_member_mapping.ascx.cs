@@ -1,7 +1,7 @@
 using Class_biz_members;
 using Class_biz_user;
 using Class_biz_user_member_map;
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Collections;
@@ -31,7 +31,6 @@ namespace UserControl_user_member_mapping
         public TClass_biz_members biz_members;
         public TClass_biz_user biz_user;
         public TClass_biz_user_member_map biz_user_member_map;
-        public TClass_biz_users biz_users;
         public bool may_add_mappings;
         public string sort_order;
     }
@@ -152,7 +151,6 @@ namespace UserControl_user_member_mapping
                 p.biz_members = new TClass_biz_members();
                 p.biz_user = new TClass_biz_user();
                 p.biz_user_member_map = new TClass_biz_user_member_map();
-                p.biz_users = new TClass_biz_users();
                 p.be_interactive = !(Session["mode:report"] != null);
                 p.be_loaded = false;
                 p.be_sort_order_ascending = true;
@@ -234,8 +232,8 @@ namespace UserControl_user_member_mapping
         Session.RemoveAll();
         //
         SessionSet("username",username);
-        SessionSet("user_id",p.biz_users.IdOf(username));
-        SessionSet("password_reset_email_address",p.biz_users.PasswordResetEmailAddressOfUsername(username));
+        SessionSet("user_id",Biz.users.IdOf(username));
+        SessionSet("password_reset_email_address",Biz.users.PasswordResetEmailAddressOfUsername(username));
         FormsAuthentication.SetAuthCookie(username,createPersistentCookie:false);
         Response.Redirect("~/protected/overview.aspx");
         }

@@ -1,4 +1,4 @@
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Web.UI;
@@ -8,9 +8,16 @@ namespace UserControl_user
   {
   public partial class TWebUserControl_user: ki_web_ui.usercontrol_class
     {
-        private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
 
-        private void Clear()
+    private struct p_type
+      {
+      public bool be_loaded;
+      public bool be_ok_to_config_users;
+      }
+
+    private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+
+    private void Clear()
         {
             TextBox_username.Text = k.EMPTY;
             DropDownList_username.Visible = false;
@@ -59,7 +66,7 @@ namespace UserControl_user
             uint num_unsuccessful_login_attempts;
             string last_login;
             result = false;
-            if (p.biz_users.Get(username, out encoded_password, out be_stale_password, out password_reset_email_address, out be_active, out num_unsuccessful_login_attempts, out last_login))
+            if (Biz.users.Get(username, out encoded_password, out be_stale_password, out password_reset_email_address, out be_active, out num_unsuccessful_login_attempts, out last_login))
             {
                 TextBox_username.Text = username;
                 TextBox_encoded_password.Text = encoded_password;
@@ -105,7 +112,6 @@ namespace UserControl_user
             else
             {
                 p.be_loaded = false;
-                p.biz_users = new TClass_biz_users();
                 p.be_ok_to_config_users = k.Has((string[])(Session["privilege_array"]), "config-users");
             }
 
@@ -137,7 +143,7 @@ namespace UserControl_user
         {
             if (Page.IsValid)
             {
-                p.biz_users.Set(k.Safe(TextBox_username.Text, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), CheckBox_be_stale_password.Checked, k.Safe(TextBox_password_reset_email_address.Text, k.safe_hint_type.EMAIL_ADDRESS), CheckBox_be_active.Checked);
+                Biz.users.Set(k.Safe(TextBox_username.Text, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), CheckBox_be_stale_password.Checked, k.Safe(TextBox_password_reset_email_address.Text, k.safe_hint_type.EMAIL_ADDRESS), CheckBox_be_active.Checked);
                 Alert(k.alert_cause_type.USER, k.alert_state_type.SUCCESS, "recsaved", "Record saved.", true);
                 SetLookupMode();
             }
@@ -178,7 +184,7 @@ namespace UserControl_user
 
         protected void Button_delete_Click(object sender, System.EventArgs e)
         {
-            p.biz_users.Delete(k.Safe(TextBox_username.Text, k.safe_hint_type.ALPHANUM));
+            Biz.users.Delete(k.Safe(TextBox_username.Text, k.safe_hint_type.ALPHANUM));
             SetLookupMode();
         }
 
@@ -203,7 +209,7 @@ namespace UserControl_user
             if (!PresentRecord(saved_username))
             {
                 TextBox_username.Text = saved_username;
-                p.biz_users.Bind(saved_username, DropDownList_username);
+                Biz.users.Bind(saved_username, DropDownList_username);
                 num_matches = (uint)(DropDownList_username.Items.Count);
         if (num_matches > 0)
           {
@@ -225,13 +231,6 @@ namespace UserControl_user
             }
           }
             }
-        }
-
-        private struct p_type
-        {
-            public bool be_loaded;
-            public bool be_ok_to_config_users;
-            public TClass_biz_users biz_users;
         }
 
     } // end TWebUserControl_user

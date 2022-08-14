@@ -2,7 +2,7 @@
 
 using Class_biz_subjoined_attributes;
 using Class_biz_user;
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Web.UI;
@@ -25,7 +25,6 @@ namespace UserControl_capture_subjoined_attributes
       public bool be_loaded;
       public TClass_biz_subjoined_attributes biz_subjoined_attributes;
       public TClass_biz_user biz_user;
-      public TClass_biz_users biz_users;
       }
 
     private struct v_type
@@ -156,7 +155,6 @@ namespace UserControl_capture_subjoined_attributes
         {
         p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
         p.biz_user = new TClass_biz_user();
-        p.biz_users = new TClass_biz_users();
         //
         p.be_loaded = false;
         //
@@ -232,7 +230,7 @@ namespace UserControl_capture_subjoined_attributes
         v.be_submitting = true;
         Bind();
         v.be_submitting = false;
-        p.biz_users.RecordSuccessfulLogin(p.biz_user.IdNum());
+        Biz.users.RecordSuccessfulLogin(p.biz_user.IdNum());
         Server.Transfer("~/Default.aspx");
         }
       }
