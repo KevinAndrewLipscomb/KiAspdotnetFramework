@@ -1,15 +1,7 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
-using Class_biz_members;
 using Class_biz_notifications;
-using Class_biz_user;
-using kix;
-using System;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Collections;
+using KiAspdotnetFramework;
 
 namespace UserControl_my_roles_and_mappings
   {
@@ -21,9 +13,8 @@ namespace UserControl_my_roles_and_mappings
       {
       public bool be_interactive;
       public bool be_loaded;
-      public TClass_biz_members biz_members;
+      public Biz biz;
       public TClass_biz_notifications biz_notifications;
-      public TClass_biz_user biz_user;
       }
 
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -32,15 +23,15 @@ namespace UserControl_my_roles_and_mappings
       {
       if (!p.be_loaded)
         {
-        p.biz_user.BindRolesToBaseDataList(DataGrid_role);
+        p.biz.user.BindRolesToBaseDataList(DataGrid_role);
         TableRow_no_roles.Visible = (DataGrid_role.Items.Count == 0);
         TableRow_role_data.Visible = !TableRow_no_roles.Visible;
         //
-        p.biz_user.BindPrivilegesToBaseDataList(DataGrid_privilege);
+        p.biz.user.BindPrivilegesToBaseDataList(DataGrid_privilege);
         TableRow_no_privileges.Visible = (DataGrid_privilege.Items.Count == 0);
         TableRow_privilege_data.Visible = !TableRow_no_privileges.Visible;
         //
-        p.biz_user.BindNotificationsToBaseDataList(DataGrid_notification);
+        p.biz.user.BindNotificationsToBaseDataList(DataGrid_notification);
         TableRow_no_notifications.Visible = (DataGrid_notification.Items.Count == 0);
         TableRow_notification_data.Visible = !TableRow_no_notifications.Visible;
         //
@@ -73,9 +64,8 @@ namespace UserControl_my_roles_and_mappings
         }
       else
         {
-        p.biz_members = new TClass_biz_members();
+        p.biz = new();
         p.biz_notifications = new TClass_biz_notifications();
-        p.biz_user = new TClass_biz_user();
         //
         p.be_interactive = (Session["mode:report"] == null);
         p.be_loaded = false;

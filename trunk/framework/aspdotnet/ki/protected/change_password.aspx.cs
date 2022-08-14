@@ -1,4 +1,3 @@
-using Class_biz_user;
 using KiAspdotnetFramework;
 using kix;
 using System;
@@ -13,7 +12,6 @@ namespace change_password
     private struct p_type
       {
       public Biz biz;
-      public TClass_biz_user biz_user;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -48,7 +46,6 @@ namespace change_password
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     p.biz = new();
-                    p.biz_user = new TClass_biz_user();
                     TextBox_nominal_password.Focus();
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
@@ -84,7 +81,7 @@ namespace change_password
         {
             if (Page.IsValid)
             {
-                p.biz.users.SetPassword(p.biz_user.IdNum(), k.Safe(TextBox_nominal_password.Text.Trim(), k.safe_hint_type.HEX));
+                p.biz.users.SetPassword(p.biz.user.IdNum(), k.Safe(TextBox_nominal_password.Text.Trim(), k.safe_hint_type.HEX));
                 BackTrack();
             }
             else

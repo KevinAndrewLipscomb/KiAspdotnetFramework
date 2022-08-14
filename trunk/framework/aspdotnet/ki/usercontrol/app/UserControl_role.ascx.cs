@@ -1,8 +1,7 @@
-using Class_biz_members;
 using Class_biz_role_member_map;
 using Class_biz_roles;
-using Class_biz_user;
 using Class_db_role_member_map;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -21,10 +20,9 @@ namespace UserControl_role
       public bool be_loaded;
       public bool be_ok_to_config_roles;
       public bool be_sort_order_ascending;
-      public TClass_biz_members biz_members;
+      public Biz biz;
       public TClass_biz_role_member_map biz_role_member_map;
       public TClass_biz_roles biz_roles;
-      public TClass_biz_user biz_user;
       public uint num_gridview_rows;
       public string role_name;
       public string sort_order;
@@ -147,7 +145,7 @@ namespace UserControl_role
                 Anchor_quick_message_shortcut.HRef = Page.Request.RawUrl + "#QuickMessage";
                 if (!(Session["mode:report"] != null))
                 {
-                    Label_author_email_address.Text = p.biz_user.EmailAddress();
+                    Label_author_email_address.Text = p.biz.user.EmailAddress();
                     if (k.Has((string[])(Session["privilege_array"]), "config-roles-and-matrices"))
                     {
                         LinkButton_new_record.Visible = true;
@@ -232,10 +230,9 @@ namespace UserControl_role
                 p.num_gridview_rows = 0;
                 p.role_name = k.EMPTY;
                 p.sort_order = "member_name%";
-                p.biz_members = new TClass_biz_members();
+                p.biz = new();
                 p.biz_role_member_map = new TClass_biz_role_member_map();
                 p.biz_roles = new TClass_biz_roles();
-                p.biz_user = new TClass_biz_user();
             }
             v.distribution_list = new StringBuilder();
         }
@@ -305,7 +302,7 @@ namespace UserControl_role
             // cc
             // bcc
             // reply_to
-            k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], Label_distribution_list.Text, TextBox_quick_message_subject.Text, "-- From " + p.biz_user.Roles()[0] + k.SPACE + p.biz_members.FirstNameOfMemberId(Session["member_id"].ToString()) + k.SPACE + p.biz_members.LastNameOfMemberId(Session["member_id"].ToString()) + " (" + p.biz_user.EmailAddress() + ") [via " + ConfigurationManager.AppSettings["application_name"] + "]" + k.NEW_LINE + k.NEW_LINE + TextBox_quick_message_body.Text, false, k.EMPTY, p.biz_user.EmailAddress(), p.biz_user.EmailAddress());
+            k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], Label_distribution_list.Text, TextBox_quick_message_subject.Text, "-- From " + p.biz.user.Roles()[0] + k.SPACE + p.biz.members.FirstNameOfMemberId(Session["member_id"].ToString()) + k.SPACE + p.biz.members.LastNameOfMemberId(Session["member_id"].ToString()) + " (" + p.biz.user.EmailAddress() + ") [via " + ConfigurationManager.AppSettings["application_name"] + "]" + k.NEW_LINE + k.NEW_LINE + TextBox_quick_message_body.Text, false, k.EMPTY, p.biz.user.EmailAddress(), p.biz.user.EmailAddress());
             TextBox_quick_message_subject.Text = k.EMPTY;
             TextBox_quick_message_body.Text = k.EMPTY;
             Alert(k.alert_cause_type.LOGIC, k.alert_state_type.NORMAL, "messagsnt", "Message sent", true);

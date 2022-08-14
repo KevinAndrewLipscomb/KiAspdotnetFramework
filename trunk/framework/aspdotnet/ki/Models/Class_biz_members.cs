@@ -7,11 +7,11 @@ namespace Class_biz_members
   public class TClass_biz_members
     {
 
-    private readonly TClass_db_members db_members = null;
+    private readonly ITClass_db_members db_members = null;
 
-    public TClass_biz_members() : base()
+    public TClass_biz_members(ITClass_db_members db_members_imp) : base()
       {
-      db_members = new TClass_db_members();
+      db_members = db_members_imp;
       }
 
     public bool Add()

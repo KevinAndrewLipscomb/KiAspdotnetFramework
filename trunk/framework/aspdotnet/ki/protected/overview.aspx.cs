@@ -1,6 +1,4 @@
-using Class_biz_members;
 using Class_biz_subjoined_attributes;
-using Class_biz_user;
 using KiAspdotnetFramework;
 using System;
 using System.Configuration;
@@ -23,9 +21,7 @@ namespace overview
     private struct p_type
       {
       public Biz biz;
-      public TClass_biz_user biz_user;
       public TClass_biz_subjoined_attributes biz_subjoined_attributes;
-      public TClass_biz_members biz_members;
       }
 
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -63,28 +59,26 @@ namespace overview
       else if (NatureOfLanding(InstanceId() + ".p") == nature_of_visit_type.VISIT_INITIAL)
         {
         p.biz = new();
-        p.biz_members = new TClass_biz_members();
         p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
-        p.biz_user = new TClass_biz_user();
         //
         BeginBreadCrumbTrail();
-        if (p.biz.users.BeStalePassword(p.biz_user.IdNum()))
+        if (p.biz.users.BeStalePassword(p.biz.user.IdNum()))
           {
           DropCrumbAndTransferTo("change_password.aspx");
           }
-        SessionSet("privilege_array", p.biz_user.Privileges());
+        SessionSet("privilege_array", p.biz.user.Privileges());
         if ((Session["privilege_array"] != null))
           {
-          SessionSet("member_id", p.biz_members.IdOfUserId(Session["user_id"].ToString()));
+          SessionSet("member_id", p.biz.members.IdOfUserId(Session["user_id"].ToString()));
           }
         }
       //
-      if (p.biz_members.IdOfUserId(p.biz_user.IdNum()).Length == 0)
+      if (p.biz.members.IdOfUserId(p.biz.user.IdNum()).Length == 0)
         {
         // Display controls appropriate ONLY to nonmembers.
         AddIdentifiedControlToPlaceHolder(((TWebUserControl_establish_membership)(LoadControl("~/usercontrol/app/UserControl_establish_membership.ascx"))), "UserControl_establish_membership", PlaceHolder_control);
         }
-      else if(p.biz_subjoined_attributes.BeAnyImplementedSince(p.biz_user.LastLoginTime()))
+      else if(p.biz_subjoined_attributes.BeAnyImplementedSince(p.biz.user.LastLoginTime()))
         {
         AddIdentifiedControlToPlaceHolder(((TWebUserControl_capture_subjoined_attributes)(LoadControl("~/usercontrol/app/UserControl_capture_subjoined_attributes.ascx"))), "UserControl_capture_subjoined_attributes", PlaceHolder_control);
         }

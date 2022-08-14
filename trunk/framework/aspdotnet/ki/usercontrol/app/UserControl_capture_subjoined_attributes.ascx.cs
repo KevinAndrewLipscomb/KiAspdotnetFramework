@@ -1,7 +1,6 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
 using Class_biz_subjoined_attributes;
-using Class_biz_user;
 using KiAspdotnetFramework;
 using kix;
 using System;
@@ -25,7 +24,6 @@ namespace UserControl_capture_subjoined_attributes
       public bool be_loaded;
       public Biz biz;
       public TClass_biz_subjoined_attributes biz_subjoined_attributes;
-      public TClass_biz_user biz_user;
       }
 
     private struct v_type
@@ -156,7 +154,6 @@ namespace UserControl_capture_subjoined_attributes
         {
         p.biz = new();
         p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
-        p.biz_user = new TClass_biz_user();
         //
         p.be_loaded = false;
         //
@@ -222,7 +219,7 @@ namespace UserControl_capture_subjoined_attributes
 
     private void Bind()
       {
-      p.biz_subjoined_attributes.BindBaseDataList(DataGrid_control,p.biz_user.LastLoginTime());
+      p.biz_subjoined_attributes.BindBaseDataList(DataGrid_control,p.biz.user.LastLoginTime());
       }
 
     protected void Button_submit_Click(object sender, EventArgs e)
@@ -232,7 +229,7 @@ namespace UserControl_capture_subjoined_attributes
         v.be_submitting = true;
         Bind();
         v.be_submitting = false;
-        p.biz.users.RecordSuccessfulLogin(p.biz_user.IdNum());
+        p.biz.users.RecordSuccessfulLogin(p.biz.user.IdNum());
         Server.Transfer("~/Default.aspx");
         }
       }

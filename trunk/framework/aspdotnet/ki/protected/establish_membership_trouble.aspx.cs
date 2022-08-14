@@ -1,5 +1,4 @@
 using Class_biz_notifications;
-using Class_biz_user;
 using kix;
 using System;
 using System.Configuration;
@@ -12,7 +11,6 @@ namespace establish_membership_trouble
     private struct p_type
       {
       public TClass_biz_notifications biz_notifications;
-      public TClass_biz_user biz_user;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -49,7 +47,6 @@ namespace establish_membership_trouble
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     p.biz_notifications = new TClass_biz_notifications();
-                    p.biz_user = new TClass_biz_user();
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
                     p = (p_type)(Session[InstanceId() + ".p"]);

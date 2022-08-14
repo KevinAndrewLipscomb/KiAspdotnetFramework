@@ -9,13 +9,18 @@ namespace Class_biz_user
   public class TClass_biz_user
     {
 
-    private readonly TClass_db_user db_user = null;
-    private readonly TClass_db_users db_users = null;
+    private readonly ITClass_db_user db_user = null;
+    private readonly ITClass_db_users db_users = null;
 
-    public TClass_biz_user() : base()
+    public TClass_biz_user
+      (
+      ITClass_db_user db_user_imp,
+      ITClass_db_users db_users_imp
+      )
+      : base()
       {
-      db_user = new TClass_db_user();
-      db_users = new TClass_db_users();
+      db_user = db_user_imp;
+      db_users = db_users_imp;
       }
 
     public void BindNotificationsToBaseDataList(object target)
