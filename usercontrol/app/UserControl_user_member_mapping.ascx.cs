@@ -1,5 +1,3 @@
-using Class_biz_members;
-using Class_biz_user;
 using Class_biz_user_member_map;
 using KiAspdotnetFramework;
 using kix;
@@ -29,8 +27,6 @@ namespace UserControl_user_member_mapping
         public bool be_loaded;
         public bool be_sort_order_ascending;
         public Biz biz;
-        public TClass_biz_members biz_members;
-        public TClass_biz_user biz_user;
         public TClass_biz_user_member_map biz_user_member_map;
         public bool may_add_mappings;
         public string sort_order;
@@ -126,7 +122,7 @@ namespace UserControl_user_member_mapping
                 {
                     GridView_control.AllowSorting = false;
                 }
-                GridView_control.Columns[Static.CI_IMITATE].Visible = (new ArrayList(p.biz_user.Roles()).Contains("Application Administrator"));
+                GridView_control.Columns[Static.CI_IMITATE].Visible = (new ArrayList(p.biz.user.Roles()).Contains("Application Administrator"));
                 Bind();
                 p.be_loaded = true;
             }
@@ -150,8 +146,6 @@ namespace UserControl_user_member_mapping
             else
             {
                 p.biz = new();
-                p.biz_members = new TClass_biz_members();
-                p.biz_user = new TClass_biz_user();
                 p.biz_user_member_map = new TClass_biz_user_member_map();
                 p.be_interactive = !(Session["mode:report"] != null);
                 p.be_loaded = false;

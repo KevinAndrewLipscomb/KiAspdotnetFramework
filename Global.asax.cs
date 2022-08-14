@@ -1,7 +1,5 @@
-using Class_biz_user;
 using KiAspdotnetFramework;
 using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -65,7 +63,7 @@ namespace Global
         HttpContext.Current.User = new System.Security.Principal.GenericPrincipal
           (
           identity:User.Identity,
-          roles:new TClass_biz_user().Roles()
+          roles:new Biz().user.Roles()
           );
         }
       }

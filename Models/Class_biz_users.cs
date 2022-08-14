@@ -1,7 +1,7 @@
 using Class_biz_notifications;
-using Class_biz_user;
 using Class_db_members;
 using Class_db_users;
+using KiAspdotnetFramework;
 using kix;
 using System.Configuration;
 
@@ -169,7 +169,7 @@ namespace Class_biz_users
         public string SelfEmailAddress()
         {
             string result;
-            result = PasswordResetEmailAddressOfId(new TClass_biz_user().IdNum());
+            result = PasswordResetEmailAddressOfId(new Biz().user.IdNum());
             return result;
         }
 

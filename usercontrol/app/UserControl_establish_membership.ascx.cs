@@ -1,6 +1,4 @@
-using Class_biz_members;
 using Class_biz_notifications;
-using Class_biz_user;
 using KiAspdotnetFramework;
 using kix;
 using System.Configuration;
@@ -15,9 +13,7 @@ namespace UserControl_establish_membership
       {
       public bool be_loaded;
       public Biz biz;
-      public TClass_biz_members biz_members;
       public TClass_biz_notifications biz_notifications;
-      public TClass_biz_user biz_user;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -52,9 +48,7 @@ namespace UserControl_establish_membership
             {
                 p.be_loaded = false;
                 p.biz = new();
-                p.biz_members = new TClass_biz_members();
                 p.biz_notifications = new TClass_biz_notifications();
-                p.biz_user = new TClass_biz_user();
             }
 
         }
@@ -73,9 +67,9 @@ namespace UserControl_establish_membership
         {
           if (Page.IsValid)
             {
-            if (p.biz.users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz_user.IdNum()))
+            if (p.biz.users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz.user.IdNum()))
               {
-              SessionSet("privilege_array", p.biz_user.Privileges());
+              SessionSet("privilege_array", p.biz.user.Privileges());
               // User was an unprivileged user until now, so reset privs.
               Alert(k.alert_cause_type.USER, k.alert_state_type.SUCCESS, "memaccept", "Link to membership record established.  Membership privileges granted.", true);
               Table_proceed.Visible = true;
@@ -115,7 +109,7 @@ namespace UserControl_establish_membership
           var claimed_member_name = k.EMPTY;
           var claimed_member_id = k.EMPTY;
           var claimed_member_email_address = k.EMPTY;
-          if(p.biz_members.BeRoleHolderBySharedSecret
+          if(p.biz.members.BeRoleHolderBySharedSecret
               (
               k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM),
               out claimed_role_name,

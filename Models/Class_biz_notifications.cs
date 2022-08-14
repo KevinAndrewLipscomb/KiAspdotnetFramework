@@ -1,6 +1,4 @@
-using Class_biz_members;
 using Class_biz_roles;
-using Class_biz_user;
 using Class_db_notifications;
 using KiAspdotnetFramework;
 using kix;
@@ -60,7 +58,6 @@ namespace Class_biz_notifications
     private delegate string IssueForForgottenUsername_Merge(string s);
     public void IssueForForgottenUsername(string email_address, string username, string client_host_name)
       {
-      TClass_biz_user biz_user;
       StreamReader template_reader;
 
       IssueForForgottenUsername_Merge Merge = delegate (string s)
@@ -73,7 +70,6 @@ namespace Class_biz_notifications
           .Replace("<username/>", username);
         };
 
-      biz_user = new TClass_biz_user();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/username_reminder.txt"));
       k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], email_address, Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();
@@ -106,9 +102,9 @@ namespace Class_biz_notifications
           .Replace("<claimed_member_email_address/>",claimed_member_email_address);
         };
 
-      var biz_user = new TClass_biz_user();
+      var biz = new Biz();
       var template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/membership_establishment_blocked.txt"));
-      user_email_address = biz_user.EmailAddress();
+      user_email_address = biz.user.EmailAddress();
       k.SmtpMailSend
         (
         ConfigurationManager.AppSettings["sender_email_address"],
@@ -127,7 +123,6 @@ namespace Class_biz_notifications
     public void IssueForMembershipEstablishmentTrouble(string full_name, string explanation)
       {
       string user_email_address = k.EMPTY;
-      TClass_biz_user biz_user;
       StreamReader template_reader;
 
       IssueForMembershipEstablishmentTrouble_Merge Merge = delegate (string s)
@@ -140,9 +135,9 @@ namespace Class_biz_notifications
           .Replace("<host_domain_name/>", host_domain_name);
         };
 
-      biz_user = new TClass_biz_user();
+      var biz = new Biz();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/membership_establishment_trouble.txt"));
-      user_email_address = biz_user.EmailAddress();
+      user_email_address = biz.user.EmailAddress();
       k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], ConfigurationManager.AppSettings["membership_establishment_liaison"] + k.COMMA + ConfigurationManager.AppSettings["application_name"] + "-appadmin@" + host_domain_name, Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();
       }
@@ -153,9 +148,7 @@ namespace Class_biz_notifications
       string actor = k.EMPTY;
       string actor_email_address = k.EMPTY;
       string actor_member_id;
-      TClass_biz_members biz_members;
       TClass_biz_roles biz_roles;
-      TClass_biz_user biz_user;
       string changed = k.EMPTY;
       string first_name = k.EMPTY;
       string last_name = k.EMPTY;
@@ -179,12 +172,10 @@ namespace Class_biz_notifications
         };
 
       var biz = new Biz();
-      biz_members = new TClass_biz_members();
       biz_roles = new TClass_biz_roles();
-      biz_user = new TClass_biz_user();
-      actor_member_id = biz_members.IdOfUserId(biz_user.IdNum());
-      actor = biz_user.Roles()[0] + k.SPACE + biz_members.FirstNameOfMemberId(actor_member_id) + k.SPACE + biz_members.LastNameOfMemberId(actor_member_id);
-      actor_email_address = biz.users.PasswordResetEmailAddressOfId(biz_user.IdNum());
+      actor_member_id = biz.members.IdOfUserId(biz.user.IdNum());
+      actor = biz.user.Roles()[0] + k.SPACE + biz.members.FirstNameOfMemberId(actor_member_id) + k.SPACE + biz.members.LastNameOfMemberId(actor_member_id);
+      actor_email_address = biz.users.PasswordResetEmailAddressOfId(biz.user.IdNum());
       if (be_granted)
         {
         changed = "granted";
@@ -195,18 +186,17 @@ namespace Class_biz_notifications
         changed = "removed";
         to_or_from = "from";
         }
-      first_name = biz_members.FirstNameOfMemberId(member_id);
-      last_name = biz_members.LastNameOfMemberId(member_id);
+      first_name = biz.members.FirstNameOfMemberId(member_id);
+      last_name = biz.members.LastNameOfMemberId(member_id);
       role_name = biz_roles.NameOfId(role_id);
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/role_change.txt"));
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz_members.EmailAddressOf(member_id) + k.COMMA + actor_email_address + k.COMMA + db_notifications.TargetOf("role-change", member_id), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()), false, k.EMPTY, k.EMPTY, actor_email_address);
+      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz.members.EmailAddressOf(member_id) + k.COMMA + actor_email_address + k.COMMA + db_notifications.TargetOf("role-change", member_id), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()), false, k.EMPTY, k.EMPTY, actor_email_address);
       template_reader.Close();
       }
 
     private delegate string IssueForTemporaryPassword_Merge(string s);
     public void IssueForTemporaryPassword(string username, string client_host_name, string temporary_password)
       {
-      TClass_biz_user biz_user;
       StreamReader template_reader;
 
       IssueForTemporaryPassword_Merge Merge = delegate (string s)
@@ -219,7 +209,6 @@ namespace Class_biz_notifications
         };
 
       var biz = new Biz();
-      biz_user = new TClass_biz_user();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/temporary_password.txt"));
       k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz.users.PasswordResetEmailAddressOfUsername(username), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();

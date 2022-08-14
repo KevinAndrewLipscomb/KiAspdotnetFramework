@@ -1,7 +1,6 @@
-using Class_biz_members;
 using Class_biz_role_member_map;
 using Class_biz_roles;
-using Class_biz_user;
+using KiAspdotnetFramework;
 using kix;
 using System.Web.UI.WebControls;
 
@@ -26,10 +25,9 @@ namespace UserControl_role_member_mapping
       public bool be_interactive;
       public bool be_loaded;
       public bool be_sort_order_ascending;
-      public TClass_biz_members biz_members;
+      public Biz biz;
       public TClass_biz_role_member_map biz_role_member_map;
       public TClass_biz_roles biz_roles;
-      public TClass_biz_user biz_user;
       public bool may_add_mappings;
       public string sort_order;
       }
@@ -146,10 +144,9 @@ namespace UserControl_role_member_mapping
             }
             else
             {
-                p.biz_members = new TClass_biz_members();
+                p.biz = new();
                 p.biz_role_member_map = new TClass_biz_role_member_map();
                 p.biz_roles = new TClass_biz_roles();
-                p.biz_user = new();
                 p.be_interactive = !(Session["mode:report"] != null);
                 p.be_loaded = false;
                 p.be_sort_order_ascending = true;
@@ -189,7 +186,7 @@ namespace UserControl_role_member_mapping
             p.biz_role_member_map.Save
               (
               member_id:k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_MEMBER_ID].Text,k.safe_hint_type.NUM),
-              actor_member_id:p.biz_members.IdOfUserId(p.biz_user.IdNum()),
+              actor_member_id:p.biz.members.IdOfUserId(p.biz.user.IdNum()),
               role_id:k.Safe(GridView_control.Rows[e.RowIndex].Cells[Static.CI_ROLE_ID].Text,k.safe_hint_type.NUM),
               be_granted:false
               );
@@ -231,7 +228,7 @@ namespace UserControl_role_member_mapping
             p.biz_role_member_map.Save
               (
               member_id:k.Safe(DropDownList_member.SelectedValue, k.safe_hint_type.NUM),
-              actor_member_id:p.biz_members.IdOfUserId(p.biz_user.IdNum()),
+              actor_member_id:p.biz.members.IdOfUserId(p.biz.user.IdNum()),
               role_id:k.Safe(DropDownList_role.SelectedValue, k.safe_hint_type.NUM),
               be_granted:true
               );
@@ -260,7 +257,7 @@ namespace UserControl_role_member_mapping
             if (TableCell_add_mapping.Visible)
             {
                 p.biz_roles.BindDirectToListControl(DropDownList_role, k.Has((string[])(Session["privilege_array"]), "config-roles-and-matrices"));
-                p.biz_members.BindDirectToListControl(DropDownList_member);
+                p.biz.members.BindDirectToListControl(DropDownList_member);
             }
 
         }
