@@ -1,4 +1,3 @@
-using Class_db_role_member_map;
 using KiAspdotnetFramework;
 using kix;
 using System;
@@ -11,6 +10,14 @@ namespace UserControl_role
   {
   public partial class TWebUserControl_role : ki_web_ui.usercontrol_class
     {
+
+    private static class Static
+      {
+      public const int CI_MEMBER_ID = 0;
+      public const int CI_MEMBER_NAME = 1;
+      public const int CI_FIRST_CROSSTAB = 2;
+      public const int ROLE_HOLDER_EMAIL_ADDRESS_CI = 1;
+      }
 
     private struct p_type
       {
@@ -131,10 +138,9 @@ namespace UserControl_role
       // 'El("' + TextBox_net_landed_in_pounds.clientid + '").value = KgsToLbs(El("' + TextBox_net_landed_in_kgs.clientid + '").value);'
       // + ' RecalculateDependentValues();'
       // );
-
       }
 
-    protected void Page_Load(object sender, System.EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
       {
       if (!p.be_loaded)
         {
@@ -165,7 +171,6 @@ namespace UserControl_role
         p.be_loaded = true;
         }
       InjectPersistentClientSideScript();
-
       }
 
     private bool PresentRecord(string name)
@@ -207,7 +212,7 @@ namespace UserControl_role
       TextBox_name.Focus();
       }
 
-    protected override void OnInit(System.EventArgs e)
+    protected override void OnInit(EventArgs e)
       {
       // Required for Designer support
       InitializeComponent();
@@ -237,13 +242,13 @@ namespace UserControl_role
     // / </summary>
     private void InitializeComponent()
       {
-      GridView_holders.Sorting += new System.Web.UI.WebControls.GridViewSortEventHandler(GridView_holders_Sorting);
-      GridView_holders.RowDataBound += new System.Web.UI.WebControls.GridViewRowEventHandler(GridView_holders_RowDataBound);
-      GridView_holders.RowCreated += new System.Web.UI.WebControls.GridViewRowEventHandler(GridView_holders_RowCreated);
+      GridView_holders.Sorting += new GridViewSortEventHandler(GridView_holders_Sorting);
+      GridView_holders.RowDataBound += new GridViewRowEventHandler(GridView_holders_RowDataBound);
+      GridView_holders.RowCreated += new GridViewRowEventHandler(GridView_holders_RowCreated);
       PreRender += TWebUserControl_role_PreRender;
       }
 
-    private void TWebUserControl_role_PreRender(object sender, System.EventArgs e)
+    private void TWebUserControl_role_PreRender(object sender, EventArgs e)
       {
       SessionSet(InstanceId() + ".p", p);
       }
@@ -256,7 +261,7 @@ namespace UserControl_role
       return result;
       }
 
-    private void GridView_holders_Sorting(object sender, System.Web.UI.WebControls.GridViewSortEventArgs e)
+    private void GridView_holders_Sorting(object sender, GridViewSortEventArgs e)
       {
       if (e.SortExpression == p.sort_order)
         {
@@ -271,22 +276,22 @@ namespace UserControl_role
       BindHolders(p.role_name);
       }
 
-    private void GridView_holders_RowCreated(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+    private void GridView_holders_RowCreated(object sender, GridViewRowEventArgs e)
       {
-      e.Row.Cells[TClass_db_role_member_map.Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Visible = false;
+      e.Row.Cells[Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Visible = false;
       }
 
-    private void GridView_holders_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+    private void GridView_holders_RowDataBound(object sender, GridViewRowEventArgs e)
       {
-      if ((e.Row.RowType == DataControlRowType.DataRow) && (e.Row.Cells[TClass_db_role_member_map.Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text != "&nbsp;"))
+      if ((e.Row.RowType == DataControlRowType.DataRow) && (e.Row.Cells[Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text != "&nbsp;"))
         {
         v.distribution_list.Append(k.COMMA_SPACE);
-        v.distribution_list.Append(e.Row.Cells[TClass_db_role_member_map.Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text);
+        v.distribution_list.Append(e.Row.Cells[Static.ROLE_HOLDER_EMAIL_ADDRESS_CI].Text);
         p.num_gridview_rows++;
         }
       }
 
-    protected void Button_send_Click(object sender, System.EventArgs e)
+    protected void Button_send_Click(object sender, EventArgs e)
       {
       k.SmtpMailSend
         (
@@ -306,7 +311,7 @@ namespace UserControl_role
       Alert(k.alert_cause_type.LOGIC, k.alert_state_type.NORMAL, "messagsnt", "Message sent", true);
       }
 
-    protected void Button_submit_Click(object sender, System.EventArgs e)
+    protected void Button_submit_Click(object sender, EventArgs e)
       {
       if (Page.IsValid)
         {
@@ -320,37 +325,37 @@ namespace UserControl_role
         }
       }
 
-    protected void DropDownList_name_SelectedIndexChanged(object sender, System.EventArgs e)
+    protected void DropDownList_name_SelectedIndexChanged(object sender, EventArgs e)
       {
       p.role_name = k.Safe(DropDownList_name.SelectedValue, k.safe_hint_type.HUMAN_NAME);
       PresentRecord(p.role_name);
       }
 
-    protected void LinkButton_go_to_match_first_Click(object sender, System.EventArgs e)
+    protected void LinkButton_go_to_match_first_Click(object sender, EventArgs e)
       {
       DropDownList_name.SelectedIndex = 1;
       PresentRecord(k.Safe(DropDownList_name.SelectedValue, k.safe_hint_type.HUMAN_NAME));
       }
 
-    protected void LinkButton_go_to_match_prior_Click(object sender, System.EventArgs e)
+    protected void LinkButton_go_to_match_prior_Click(object sender, EventArgs e)
       {
       DropDownList_name.SelectedIndex = Math.Max(1, (DropDownList_name.SelectedIndex - 1));
       PresentRecord(k.Safe(DropDownList_name.SelectedValue, k.safe_hint_type.HUMAN_NAME));
       }
 
-    protected void LinkButton_go_to_match_next_Click(object sender, System.EventArgs e)
+    protected void LinkButton_go_to_match_next_Click(object sender, EventArgs e)
       {
       DropDownList_name.SelectedIndex = Math.Min((DropDownList_name.SelectedIndex + 1), (DropDownList_name.Items.Count - 1));
       PresentRecord(k.Safe(DropDownList_name.SelectedValue, k.safe_hint_type.HUMAN_NAME));
       }
 
-    protected void LinkButton_go_to_match_last_Click(object sender, System.EventArgs e)
+    protected void LinkButton_go_to_match_last_Click(object sender, EventArgs e)
       {
       DropDownList_name.SelectedIndex = DropDownList_name.Items.Count - 1;
       PresentRecord(k.Safe(DropDownList_name.SelectedValue, k.safe_hint_type.HUMAN_NAME));
       }
 
-    protected void Button_delete_Click(object sender, System.EventArgs e)
+    protected void Button_delete_Click(object sender, EventArgs e)
       {
       if (p.biz.roles.Delete(k.Safe(TextBox_name.Text, k.safe_hint_type.HUMAN_NAME)))
         {
@@ -362,7 +367,7 @@ namespace UserControl_role
         }
       }
 
-    protected void LinkButton_new_record_Click(object sender, System.EventArgs e)
+    protected void LinkButton_new_record_Click(object sender, EventArgs e)
       {
       Clear();
       Button_lookup.Enabled = false;
@@ -376,7 +381,7 @@ namespace UserControl_role
       TextBox_name.Focus();
       }
 
-    protected void LinkButton_reset_Click(object sender, System.EventArgs e)
+    protected void LinkButton_reset_Click(object sender, EventArgs e)
       {
       SetLookupMode();
       }
@@ -387,7 +392,7 @@ namespace UserControl_role
       TextBox_soft_hyphenation_text.Enabled = ablement;
       }
 
-    protected void Button_lookup_Click(object sender, System.EventArgs e)
+    protected void Button_lookup_Click(object sender, EventArgs e)
       {
       uint num_matches;
       string saved_name;
@@ -436,7 +441,6 @@ namespace UserControl_role
       // Clear aggregation vars for next bind, if any.
       v.distribution_list.Clear();
       p.num_gridview_rows = 0;
-
       }
 
     } // end TWebUserControl_role

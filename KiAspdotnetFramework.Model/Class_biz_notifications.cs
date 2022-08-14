@@ -2,12 +2,12 @@ using Class_db_notifications;
 using KiAspdotnetFramework;
 using kix;
 using System;
-using System.Configuration;
+using System.Collections.Specialized;
 using System.IO;
 using System.Web;
 
 namespace Class_biz_notifications
-  {
+{
 
   public class TClass_biz_notifications
     {
@@ -19,21 +19,18 @@ namespace Class_biz_notifications
       Convert.ToChar(k.HYPHEN)
       };
 
-    private readonly string application_name = k.EMPTY;
+    private readonly NameValueCollection appSettings = null;
     private readonly ITClass_db_notifications db_notifications = null;
-    private readonly string host_domain_name = k.EMPTY;
-    private readonly string runtime_root_fullspec = k.EMPTY;
 
     public TClass_biz_notifications // CONSTRUCTOR
       (
-      ITClass_db_notifications db_notifications_imp
+      ITClass_db_notifications db_notifications_imp,
+      NameValueCollection appSettings_imp
       )
       : base()
       {
       db_notifications = db_notifications_imp;
-      application_name = ConfigurationManager.AppSettings["application_name"];
-      host_domain_name = ConfigurationManager.AppSettings["host_domain_name"];
-      runtime_root_fullspec = ConfigurationManager.AppSettings["runtime_root_fullspec"];
+      appSettings = appSettings_imp;
       }
 
     public void BindDirectToListControl
@@ -62,15 +59,15 @@ namespace Class_biz_notifications
       IssueForForgottenUsername_Merge Merge = delegate (string s)
         {
         return s
-          .Replace("<application_name/>", application_name)
-          .Replace("<host_domain_name/>", host_domain_name)
+          .Replace("<application_name/>", appSettings["application_name"])
+          .Replace("<host_domain_name/>", appSettings["host_domain_name"])
           .Replace("<client_host_name/>", client_host_name)
           .Replace("<email_address/>", client_host_name)
           .Replace("<username/>", username);
         };
 
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/username_reminder.txt"));
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], email_address, Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
+      k.SmtpMailSend(appSettings["sender_email_address"], email_address, Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();
       }
 
@@ -90,8 +87,8 @@ namespace Class_biz_notifications
       IssueForMembershipEstablishmentBlocked_Merge Merge = delegate (string s)
         {
         return s
-          .Replace("<application_name/>",application_name)
-          .Replace("<host_domain_name/>",host_domain_name)
+          .Replace("<application_name/>",appSettings["application_name"])
+          .Replace("<host_domain_name/>",appSettings["host_domain_name"])
           .Replace("<username/>",username)
           .Replace("<user_id/>",user_id)
           .Replace("<user_email_address/>",user_email_address)
@@ -106,8 +103,8 @@ namespace Class_biz_notifications
       user_email_address = biz.user.EmailAddress();
       k.SmtpMailSend
         (
-        ConfigurationManager.AppSettings["sender_email_address"],
-        ConfigurationManager.AppSettings["application_name"] + "-appadmin@" + host_domain_name + k.COMMA + ConfigurationManager.AppSettings["sysadmin_sms_address"],
+        appSettings["sender_email_address"],
+        appSettings["application_name"] + "-appadmin@" + appSettings["host_domain_name"] + k.COMMA + appSettings["sysadmin_sms_address"],
         Merge(template_reader.ReadLine()),
         Merge(template_reader.ReadToEnd()),
         false,
@@ -129,9 +126,9 @@ namespace Class_biz_notifications
         return s
           .Replace("<full_name/>", full_name.ToUpper())
           .Replace("<user_email_address/>", user_email_address)
-          .Replace("<application_name/>", application_name)
-          .Replace("<explanation/>", k.WrapText(explanation, (k.NEW_LINE + "   "), break_chars, short.Parse(ConfigurationManager.AppSettings["email_blockquote_maxcol"])))
-          .Replace("<host_domain_name/>", host_domain_name);
+          .Replace("<application_name/>", appSettings["application_name"])
+          .Replace("<explanation/>", k.WrapText(explanation, (k.NEW_LINE + "   "), break_chars, short.Parse(appSettings["email_blockquote_maxcol"])))
+          .Replace("<host_domain_name/>", appSettings["host_domain_name"]);
         };
 
       var biz = new Biz();
@@ -139,8 +136,8 @@ namespace Class_biz_notifications
       user_email_address = biz.user.EmailAddress();
       k.SmtpMailSend
         (
-        from:ConfigurationManager.AppSettings["sender_email_address"],
-        to:ConfigurationManager.AppSettings["membership_establishment_liaison"] + k.COMMA + ConfigurationManager.AppSettings["application_name"] + "-appadmin@" + host_domain_name,
+        from:appSettings["sender_email_address"],
+        to:appSettings["membership_establishment_liaison"] + k.COMMA + appSettings["application_name"] + "-appadmin@" + appSettings["host_domain_name"],
         subject:Merge(template_reader.ReadLine()),
         message_string:Merge(template_reader.ReadToEnd())
         );
@@ -163,8 +160,8 @@ namespace Class_biz_notifications
       IssueForRoleChange_Merge Merge = delegate (string s)
         {
         return s
-          .Replace("<application_name/>", application_name)
-          .Replace("<host_domain_name/>", host_domain_name)
+          .Replace("<application_name/>", appSettings["application_name"])
+          .Replace("<host_domain_name/>", appSettings["host_domain_name"])
           .Replace("<actor/>", actor)
           .Replace("<actor_email_address/>", actor_email_address)
           .Replace("<changed/>", changed)
@@ -172,7 +169,7 @@ namespace Class_biz_notifications
           .Replace("<first_name/>", first_name)
           .Replace("<last_name/>", last_name)
           .Replace("<role_name/>", role_name)
-          .Replace("<runtime_root_fullspec/>", runtime_root_fullspec);
+          .Replace("<runtime_root_fullspec/>", appSettings["runtime_root_fullspec"]);
         };
 
       var biz = new Biz();
@@ -195,7 +192,7 @@ namespace Class_biz_notifications
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/role_change.txt"));
       k.SmtpMailSend
         (
-        from:ConfigurationManager.AppSettings["sender_email_address"],
+        from:appSettings["sender_email_address"],
         to:biz.members.EmailAddressOf(member_id) + k.COMMA + actor_email_address + k.COMMA + db_notifications.TargetOf("role-change", member_id),
         subject:Merge(template_reader.ReadLine()),
         message_string:Merge(template_reader.ReadToEnd()),
@@ -215,8 +212,8 @@ namespace Class_biz_notifications
       IssueForTemporaryPassword_Merge Merge = delegate (string s)
         {
         return s
-          .Replace("<application_name/>", application_name)
-          .Replace("<host_domain_name/>", host_domain_name)
+          .Replace("<application_name/>", appSettings["application_name"])
+          .Replace("<host_domain_name/>", appSettings["host_domain_name"])
           .Replace("<client_host_name/>", client_host_name)
           .Replace("<temporary_password/>", temporary_password);
         };
@@ -225,7 +222,7 @@ namespace Class_biz_notifications
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/temporary_password.txt"));
       k.SmtpMailSend
         (
-        from:ConfigurationManager.AppSettings["sender_email_address"],
+        from:appSettings["sender_email_address"],
         to:biz.users.PasswordResetEmailAddressOfUsername(username),
         subject:Merge(template_reader.ReadLine()),
         message_string:Merge(template_reader.ReadToEnd())

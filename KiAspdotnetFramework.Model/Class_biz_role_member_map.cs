@@ -3,13 +3,15 @@ using Class_db_notifications;
 using Class_db_role_member_map;
 using Class_db_role_member_map_logs;
 using System.Collections;
+using System.Collections.Specialized;
 
 namespace Class_biz_role_member_map
   {
   public class TClass_biz_role_member_map
     {
 
-    private readonly ITClass_db_notifications db_notifications = null;
+    private readonly TClass_biz_notifications biz_notifications = null;
+
     private readonly ITClass_db_role_member_map db_role_member_map = null;
     private readonly ITClass_db_role_member_map_logs db_role_member_map_logs = null;
 
@@ -17,13 +19,19 @@ namespace Class_biz_role_member_map
       (
       ITClass_db_notifications db_notifications_imp,
       ITClass_db_role_member_map db_role_member_map_imp,
-      ITClass_db_role_member_map_logs db_role_member_map_logs_imp
+      ITClass_db_role_member_map_logs db_role_member_map_logs_imp,
+      NameValueCollection appSettings_imp
       )
       : base()
       {
-      db_notifications = db_notifications_imp;
       db_role_member_map = db_role_member_map_imp;
       db_role_member_map_logs = db_role_member_map_logs_imp;
+      //
+      biz_notifications = new
+        (
+        db_notifications_imp:db_notifications_imp,
+        appSettings_imp:appSettings_imp
+        );
       }
 
     public bool BePrivilegedToModifyTuple(bool has_config_roles_and_matrices, bool has_assign_roles_to_members, string role_natural_text)
@@ -64,7 +72,7 @@ namespace Class_biz_role_member_map
         be_granted: be_granted,
         role_id: role_id
         );
-      new TClass_biz_notifications(db_notifications_imp:db_notifications).IssueForRoleChange(member_id, role_id, be_granted);
+      biz_notifications.IssueForRoleChange(member_id, role_id, be_granted);
       }
 
     } // end TClass_biz_role_member_map

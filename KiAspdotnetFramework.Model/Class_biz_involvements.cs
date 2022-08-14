@@ -9,7 +9,7 @@ namespace Class_biz_involvements
 
     private readonly ITClass_db_involvements db_involvements = null;
 
-    public TClass_biz_involvements
+    public TClass_biz_involvements // CONSTRUCTOR
       (
       ITClass_db_involvements db_involvements_imp
       )
@@ -54,5 +54,4 @@ namespace Class_biz_involvements
       }
 
     } // end TClass_biz_involvements
-
   }

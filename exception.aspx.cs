@@ -1,4 +1,4 @@
-using Class_db__information_schema;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -12,7 +12,7 @@ namespace exception
 
     private struct p_type
       {
-      public TClass_db__information_schema db__information_schema;
+      public Biz biz;
       public string notification_message;
       }
 
@@ -86,7 +86,7 @@ namespace exception
             the_exception:last_error,
             user_identity_name:(User.Identity.Name.Length > 0 ? User.Identity.Name : "(EMPTY User.Identity.Name)") + " from " + Request.UserHostAddress + k.SPACE + "(" + k.DomainNameOfIpAddress(Request.UserHostAddress) + ")",
             session:Session,
-            engine_innodb_status:(be_deadlock ? p.db__information_schema.EngineInnodbStatus() : k.EMPTY)
+            engine_innodb_status:(be_deadlock ? p.biz._information_schema.EngineStatus() : k.EMPTY)
             );
           }
         }
@@ -103,7 +103,7 @@ namespace exception
       InitializeComponent();
       base.OnInit(e);
       //
-      p.db__information_schema = new TClass_db__information_schema();
+      p.biz = new();
       }
 
     protected void Button_submit_Click(object sender, System.EventArgs e)

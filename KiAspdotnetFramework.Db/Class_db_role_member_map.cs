@@ -14,14 +14,6 @@ namespace Class_db_role_member_map
 
         private readonly TClass_db_trail db_trail = null;
 
-    public static class Static
-      {
-      public const int CI_MEMBER_ID = 0;
-      public const int CI_MEMBER_NAME = 1;
-      public const int CI_FIRST_CROSSTAB = 2;
-      public const int ROLE_HOLDER_EMAIL_ADDRESS_CI = 1;
-      }
-
         public TClass_db_role_member_map() : base() // CONSTRUCTOR
         {
             db_trail = new TClass_db_trail();

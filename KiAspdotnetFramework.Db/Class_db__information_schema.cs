@@ -12,7 +12,7 @@ namespace Class_db__information_schema
       {
       }
 
-    public string EngineInnodbStatus()
+    public string EngineStatus()
       {
       var engine_innodb_status = k.EMPTY;
       Open();
