@@ -1,4 +1,3 @@
-using Class_biz_users;
 using Class_db_milestones;
 using System;
 using System.Collections;
@@ -40,7 +39,6 @@ namespace Class_biz_milestones
         {
             bool be_handled;
             bool be_processed;
-            TClass_biz_users biz_users;
             DateTime deadline;
             TClass_db_milestones db_milestones;
             uint i;
@@ -49,7 +47,6 @@ namespace Class_biz_milestones
             Queue master_id_q;
             uint relative_day_num;
             DateTime today;
-            biz_users = new TClass_biz_users();
             db_milestones = new TClass_db_milestones();
             master_id_q = null;
             today = DateTime.Today;

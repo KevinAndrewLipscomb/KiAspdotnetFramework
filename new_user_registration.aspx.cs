@@ -1,4 +1,4 @@
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -12,7 +12,6 @@ namespace new_user_registration
 
     private struct p_type
     {
-        public TClass_biz_users biz_users;
     }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -46,7 +45,6 @@ namespace new_user_registration
             switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
-                    p.biz_users = new TClass_biz_users();
                     Label_application_name.Text = ConfigurationManager.AppSettings["application_name"];
                     TextBox_username.Focus();
                     break;
@@ -75,9 +73,9 @@ namespace new_user_registration
             if (Page.IsValid)
             {
                 username = k.Safe(TextBox_username.Text, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
-                p.biz_users.RegisterNew(username, k.Safe(TextBox_nominal_password.Text, k.safe_hint_type.HEX), k.Safe(TextBox_email_address.Text, k.safe_hint_type.EMAIL_ADDRESS));
+                Biz.users.RegisterNew(username, k.Safe(TextBox_nominal_password.Text, k.safe_hint_type.HEX), k.Safe(TextBox_email_address.Text, k.safe_hint_type.EMAIL_ADDRESS));
                 SessionSet("username", username);
-                SessionSet("user_id", p.biz_users.IdOf(username));
+                SessionSet("user_id", Biz.users.IdOf(username));
                 FormsAuthentication.RedirectFromLoginPage(username, false);
             }
             else
@@ -88,7 +86,7 @@ namespace new_user_registration
 
         protected void CustomValidator_email_address_novelty_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
-            args.IsValid = !p.biz_users.BeRegisteredEmailAddress(k.Safe(args.Value, k.safe_hint_type.EMAIL_ADDRESS));
+            args.IsValid = !Biz.users.BeRegisteredEmailAddress(k.Safe(args.Value, k.safe_hint_type.EMAIL_ADDRESS));
         }
 
         protected void CustomValidator_email_address_domain_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
@@ -98,7 +96,7 @@ namespace new_user_registration
 
         protected void CustomValidator_username_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
-            args.IsValid = !p.biz_users.BeRegisteredUsername(k.Safe(args.Value, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM));
+            args.IsValid = !Biz.users.BeRegisteredUsername(k.Safe(args.Value, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM));
         }
 
         private void TWebForm_new_user_registration_PreRender(object sender, System.EventArgs e)

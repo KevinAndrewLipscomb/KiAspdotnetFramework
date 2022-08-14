@@ -1,5 +1,5 @@
 using Class_biz_user;
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -12,7 +12,6 @@ namespace change_password
 
     private struct p_type
       {
-      public TClass_biz_users biz_users;
       public TClass_biz_user biz_user;
       }
 
@@ -47,7 +46,6 @@ namespace change_password
             switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
-                    p.biz_users = new TClass_biz_users();
                     p.biz_user = new TClass_biz_user();
                     TextBox_nominal_password.Focus();
                     break;
@@ -84,7 +82,7 @@ namespace change_password
         {
             if (Page.IsValid)
             {
-                p.biz_users.SetPassword(p.biz_user.IdNum(), k.Safe(TextBox_nominal_password.Text.Trim(), k.safe_hint_type.HEX));
+                Biz.users.SetPassword(p.biz_user.IdNum(), k.Safe(TextBox_nominal_password.Text.Trim(), k.safe_hint_type.HEX));
                 BackTrack();
             }
             else

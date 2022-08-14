@@ -1,7 +1,7 @@
 using Class_biz_members;
 using Class_biz_subjoined_attributes;
 using Class_biz_user;
-using Class_biz_users;
+using KiAspdotnetFramework;
 using System;
 using System.Configuration;
 using UserControl_capture_subjoined_attributes;
@@ -24,7 +24,6 @@ namespace overview
       {
       public TClass_biz_user biz_user;
       public TClass_biz_subjoined_attributes biz_subjoined_attributes;
-      public TClass_biz_users biz_users;
       public TClass_biz_members biz_members;
       }
 
@@ -65,10 +64,9 @@ namespace overview
         p.biz_members = new TClass_biz_members();
         p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
         p.biz_user = new TClass_biz_user();
-        p.biz_users = new TClass_biz_users();
         //
         BeginBreadCrumbTrail();
-        if (p.biz_users.BeStalePassword(p.biz_user.IdNum()))
+        if (Biz.users.BeStalePassword(p.biz_user.IdNum()))
           {
           DropCrumbAndTransferTo("change_password.aspx");
           }

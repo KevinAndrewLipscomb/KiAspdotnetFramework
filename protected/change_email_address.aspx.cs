@@ -1,5 +1,5 @@
 using Class_biz_user;
-using Class_biz_users;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -13,7 +13,6 @@ namespace change_email_address
     private struct p_type
       {
       public TClass_biz_user biz_user;
-      public TClass_biz_users biz_users;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -35,9 +34,8 @@ namespace change_email_address
             {
                 case nature_of_visit_type.VISIT_INITIAL:
                     p.biz_user = new TClass_biz_user();
-                    p.biz_users = new TClass_biz_users();
                     // Preload email address fields
-                    email_address = p.biz_users.SelfEmailAddress();
+                    email_address = Biz.users.SelfEmailAddress();
                     TextBox_nominal_email_address.Text = email_address;
                     TextBox_confirmation_email_address.Text = email_address;
                     TextBox_nominal_email_address.Focus();
@@ -79,7 +77,7 @@ namespace change_email_address
         {
             if (Page.IsValid)
             {
-                p.biz_users.SetEmailAddress(p.biz_user.IdNum(), k.Safe(TextBox_nominal_email_address.Text.Trim(), k.safe_hint_type.EMAIL_ADDRESS));
+                Biz.users.SetEmailAddress(p.biz_user.IdNum(), k.Safe(TextBox_nominal_email_address.Text.Trim(), k.safe_hint_type.EMAIL_ADDRESS));
                 BackTrack();
             }
             else

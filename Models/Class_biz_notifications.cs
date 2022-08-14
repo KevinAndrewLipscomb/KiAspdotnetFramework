@@ -1,8 +1,8 @@
 using Class_biz_members;
 using Class_biz_roles;
 using Class_biz_user;
-using Class_biz_users;
 using Class_db_notifications;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -61,7 +61,6 @@ namespace Class_biz_notifications
     public void IssueForForgottenUsername(string email_address, string username, string client_host_name)
       {
       TClass_biz_user biz_user;
-      TClass_biz_users biz_users;
       StreamReader template_reader;
 
       IssueForForgottenUsername_Merge Merge = delegate (string s)
@@ -75,7 +74,6 @@ namespace Class_biz_notifications
         };
 
       biz_user = new TClass_biz_user();
-      biz_users = new TClass_biz_users();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/username_reminder.txt"));
       k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], email_address, Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();
@@ -158,7 +156,6 @@ namespace Class_biz_notifications
       TClass_biz_members biz_members;
       TClass_biz_roles biz_roles;
       TClass_biz_user biz_user;
-      TClass_biz_users biz_users;
       string changed = k.EMPTY;
       string first_name = k.EMPTY;
       string last_name = k.EMPTY;
@@ -184,10 +181,9 @@ namespace Class_biz_notifications
       biz_members = new TClass_biz_members();
       biz_roles = new TClass_biz_roles();
       biz_user = new TClass_biz_user();
-      biz_users = new TClass_biz_users();
       actor_member_id = biz_members.IdOfUserId(biz_user.IdNum());
       actor = biz_user.Roles()[0] + k.SPACE + biz_members.FirstNameOfMemberId(actor_member_id) + k.SPACE + biz_members.LastNameOfMemberId(actor_member_id);
-      actor_email_address = biz_users.PasswordResetEmailAddressOfId(biz_user.IdNum());
+      actor_email_address = Biz.users.PasswordResetEmailAddressOfId(biz_user.IdNum());
       if (be_granted)
         {
         changed = "granted";
@@ -210,7 +206,6 @@ namespace Class_biz_notifications
     public void IssueForTemporaryPassword(string username, string client_host_name, string temporary_password)
       {
       TClass_biz_user biz_user;
-      TClass_biz_users biz_users;
       StreamReader template_reader;
 
       IssueForTemporaryPassword_Merge Merge = delegate (string s)
@@ -223,9 +218,8 @@ namespace Class_biz_notifications
         };
 
       biz_user = new TClass_biz_user();
-      biz_users = new TClass_biz_users();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/temporary_password.txt"));
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz_users.PasswordResetEmailAddressOfUsername(username), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
+      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], Biz.users.PasswordResetEmailAddressOfUsername(username), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();
       }
 
