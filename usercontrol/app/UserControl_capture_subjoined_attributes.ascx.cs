@@ -1,6 +1,5 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
-using Class_biz_subjoined_attributes;
 using KiAspdotnetFramework;
 using kix;
 using System;
@@ -11,6 +10,7 @@ namespace UserControl_capture_subjoined_attributes
   {
   public partial class TWebUserControl_capture_subjoined_attributes: ki_web_ui.usercontrol_class
     {
+
     private static class Static
       {
       public const int TCI_INVOLVEMENT = 0;
@@ -23,7 +23,6 @@ namespace UserControl_capture_subjoined_attributes
       {
       public bool be_loaded;
       public Biz biz;
-      public TClass_biz_subjoined_attributes biz_subjoined_attributes;
       }
 
     private struct v_type
@@ -153,7 +152,6 @@ namespace UserControl_capture_subjoined_attributes
       else
         {
         p.biz = new();
-        p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
         //
         p.be_loaded = false;
         //
@@ -219,7 +217,7 @@ namespace UserControl_capture_subjoined_attributes
 
     private void Bind()
       {
-      p.biz_subjoined_attributes.BindBaseDataList(DataGrid_control,p.biz.user.LastLoginTime());
+      p.biz.subjoined_attributes.BindBaseDataList(DataGrid_control,p.biz.user.LastLoginTime());
       }
 
     protected void Button_submit_Click(object sender, EventArgs e)
@@ -235,5 +233,4 @@ namespace UserControl_capture_subjoined_attributes
       }
 
     } // end TWebUserControl_capture_subjoined_attributes
-
   }

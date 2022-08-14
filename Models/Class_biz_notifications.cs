@@ -1,4 +1,3 @@
-using Class_biz_roles;
 using Class_db_notifications;
 using KiAspdotnetFramework;
 using kix;
@@ -13,26 +12,26 @@ namespace Class_biz_notifications
   public class TClass_biz_notifications
     {
 
-    private class Static
+    private static readonly char[] break_chars =
       {
-      public static char[] BreakChars = new char[3 + 1];
-      static Static() // constructor
-        {
-        BreakChars[1] = Convert.ToChar(k.SPACE);
-        BreakChars[2] = Convert.ToChar(k.TAB);
-        BreakChars[3] = Convert.ToChar(k.HYPHEN);
-        }
-      }
+      Convert.ToChar(k.SPACE),
+      Convert.ToChar(k.TAB),
+      Convert.ToChar(k.HYPHEN)
+      };
 
     private readonly string application_name = k.EMPTY;
-    private readonly TClass_db_notifications db_notifications = null;
+    private readonly ITClass_db_notifications db_notifications = null;
     private readonly string host_domain_name = k.EMPTY;
     private readonly string runtime_root_fullspec = k.EMPTY;
 
-    public TClass_biz_notifications() : base()
+    public TClass_biz_notifications // CONSTRUCTOR
+      (
+      ITClass_db_notifications db_notifications_imp
+      )
+      : base()
       {
+      db_notifications = db_notifications_imp;
       application_name = ConfigurationManager.AppSettings["application_name"];
-      db_notifications = new TClass_db_notifications();
       host_domain_name = ConfigurationManager.AppSettings["host_domain_name"];
       runtime_root_fullspec = ConfigurationManager.AppSettings["runtime_root_fullspec"];
       }
@@ -131,14 +130,20 @@ namespace Class_biz_notifications
           .Replace("<full_name/>", full_name.ToUpper())
           .Replace("<user_email_address/>", user_email_address)
           .Replace("<application_name/>", application_name)
-          .Replace("<explanation/>", k.WrapText(explanation, (k.NEW_LINE + "   "), Static.BreakChars, short.Parse(ConfigurationManager.AppSettings["email_blockquote_maxcol"])))
+          .Replace("<explanation/>", k.WrapText(explanation, (k.NEW_LINE + "   "), break_chars, short.Parse(ConfigurationManager.AppSettings["email_blockquote_maxcol"])))
           .Replace("<host_domain_name/>", host_domain_name);
         };
 
       var biz = new Biz();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/membership_establishment_trouble.txt"));
       user_email_address = biz.user.EmailAddress();
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], ConfigurationManager.AppSettings["membership_establishment_liaison"] + k.COMMA + ConfigurationManager.AppSettings["application_name"] + "-appadmin@" + host_domain_name, Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
+      k.SmtpMailSend
+        (
+        from:ConfigurationManager.AppSettings["sender_email_address"],
+        to:ConfigurationManager.AppSettings["membership_establishment_liaison"] + k.COMMA + ConfigurationManager.AppSettings["application_name"] + "-appadmin@" + host_domain_name,
+        subject:Merge(template_reader.ReadLine()),
+        message_string:Merge(template_reader.ReadToEnd())
+        );
       template_reader.Close();
       }
 
@@ -148,7 +153,6 @@ namespace Class_biz_notifications
       string actor = k.EMPTY;
       string actor_email_address = k.EMPTY;
       string actor_member_id;
-      TClass_biz_roles biz_roles;
       string changed = k.EMPTY;
       string first_name = k.EMPTY;
       string last_name = k.EMPTY;
@@ -172,7 +176,6 @@ namespace Class_biz_notifications
         };
 
       var biz = new Biz();
-      biz_roles = new TClass_biz_roles();
       actor_member_id = biz.members.IdOfUserId(biz.user.IdNum());
       actor = biz.user.Roles()[0] + k.SPACE + biz.members.FirstNameOfMemberId(actor_member_id) + k.SPACE + biz.members.LastNameOfMemberId(actor_member_id);
       actor_email_address = biz.users.PasswordResetEmailAddressOfId(biz.user.IdNum());
@@ -188,9 +191,19 @@ namespace Class_biz_notifications
         }
       first_name = biz.members.FirstNameOfMemberId(member_id);
       last_name = biz.members.LastNameOfMemberId(member_id);
-      role_name = biz_roles.NameOfId(role_id);
+      role_name = biz.roles.NameOfId(role_id);
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/role_change.txt"));
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz.members.EmailAddressOf(member_id) + k.COMMA + actor_email_address + k.COMMA + db_notifications.TargetOf("role-change", member_id), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()), false, k.EMPTY, k.EMPTY, actor_email_address);
+      k.SmtpMailSend
+        (
+        from:ConfigurationManager.AppSettings["sender_email_address"],
+        to:biz.members.EmailAddressOf(member_id) + k.COMMA + actor_email_address + k.COMMA + db_notifications.TargetOf("role-change", member_id),
+        subject:Merge(template_reader.ReadLine()),
+        message_string:Merge(template_reader.ReadToEnd()),
+        be_html:false,
+        cc:k.EMPTY,
+        bcc:k.EMPTY,
+        reply_to:actor_email_address
+        );
       template_reader.Close();
       }
 
@@ -210,7 +223,13 @@ namespace Class_biz_notifications
 
       var biz = new Biz();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/temporary_password.txt"));
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz.users.PasswordResetEmailAddressOfUsername(username), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
+      k.SmtpMailSend
+        (
+        from:ConfigurationManager.AppSettings["sender_email_address"],
+        to:biz.users.PasswordResetEmailAddressOfUsername(username),
+        subject:Merge(template_reader.ReadLine()),
+        message_string:Merge(template_reader.ReadToEnd())
+        );
       template_reader.Close();
       }
 

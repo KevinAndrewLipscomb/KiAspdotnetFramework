@@ -1,11 +1,9 @@
-﻿using Class_biz_users;
-using ki_net_http;
+﻿using ki_net_http;
 using ki_web_http;
 using kix;
 using System;
 using System.Configuration;
 using System.Net;
-using System.Net.Http;
 using System.Web.Security;
 
 namespace KiAspdotnetFramework
@@ -21,10 +19,32 @@ namespace KiAspdotnetFramework
 
     private struct p_type
       {
-      public TClass_biz_users biz_users;
+      public Biz biz;
       }
 
     private p_type p; // Private Parcel of controller-Pertinent Process-Persistent Parameters
+
+    private bool CustomValidator_email_address_domain_ServerValidate(DTO dto)
+      {
+      return k.BeValidDomainPartOfEmailAddress(dto.TextBox_email_address);
+      }
+
+    private bool CustomValidator_email_address_novelty_ServerValidate(DTO dto)
+      {
+      return !p.biz.users.BeRegisteredEmailAddress(k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
+      }
+
+    private bool CustomValidator_username_ServerValidate(DTO dto)
+      {
+      return !p.biz.users.BeRegisteredUsername(k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM));
+      }
+
+    private bool PageIsValid(DTO dto)
+      {
+      return CustomValidator_email_address_domain_ServerValidate(dto)
+        && CustomValidator_email_address_novelty_ServerValidate(dto)
+        && CustomValidator_username_ServerValidate(dto);
+      }
 
     //--
     //
@@ -44,7 +64,7 @@ namespace KiAspdotnetFramework
 
     public NewUserRegistrationController() : base() // CONSTRUCTOR
       {
-      p.biz_users = new TClass_biz_users();
+      p.biz = new();
       SessionSet(nameof(NewUserRegistrationController) + ".p", p);
       }
 
@@ -53,14 +73,21 @@ namespace KiAspdotnetFramework
       var response = new httpresponsemessage_class();
       if (dto.Button_submit != null)
         {
-        var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
-        p.biz_users.RegisterNew(username, k.Safe(dto.TextBox_nominal_password, k.safe_hint_type.HEX), k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
-        SessionSet("username", username);
-        SessionSet("user_id", p.biz_users.IdOf(username));
-        //FormsAuthentication.RedirectFromLoginPage(username, false);
-        FormsAuthentication.SetAuthCookie(userName:username, createPersistentCookie:false);
-        response.StatusCode = HttpStatusCode.Found;
-        response.Headers.Location = new Uri(uriString:"/" + ConfigurationManager.AppSettings["virtual_directory_name"] + "/protected/overview.aspx", uriKind:UriKind.Relative);
+        if (PageIsValid(dto))
+          {
+          var username = k.Safe(dto.TextBox_username, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
+          p.biz.users.RegisterNew(username, k.Safe(dto.TextBox_nominal_password, k.safe_hint_type.HEX), k.Safe(dto.TextBox_email_address, k.safe_hint_type.EMAIL_ADDRESS));
+          SessionSet("username", username);
+          SessionSet("user_id", p.biz.users.IdOf(username));
+          //FormsAuthentication.RedirectFromLoginPage(username, false);
+          FormsAuthentication.SetAuthCookie(userName:username, createPersistentCookie:false);
+          response.StatusCode = HttpStatusCode.Found;
+          response.Headers.Location = new Uri(uriString:"/" + ConfigurationManager.AppSettings["virtual_directory_name"] + "/protected/overview.aspx", uriKind:UriKind.Relative);
+          }
+        else
+          {
+          //ValidationAlert(true);
+          }
         }
       else if (dto.Button_cancel != null)
         {

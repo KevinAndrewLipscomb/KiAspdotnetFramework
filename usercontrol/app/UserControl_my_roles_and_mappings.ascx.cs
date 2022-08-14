@@ -1,6 +1,5 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
-using Class_biz_notifications;
 using KiAspdotnetFramework;
 
 namespace UserControl_my_roles_and_mappings
@@ -14,7 +13,6 @@ namespace UserControl_my_roles_and_mappings
       public bool be_interactive;
       public bool be_loaded;
       public Biz biz;
-      public TClass_biz_notifications biz_notifications;
       }
 
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -65,7 +63,6 @@ namespace UserControl_my_roles_and_mappings
       else
         {
         p.biz = new();
-        p.biz_notifications = new TClass_biz_notifications();
         //
         p.be_interactive = (Session["mode:report"] == null);
         p.be_loaded = false;

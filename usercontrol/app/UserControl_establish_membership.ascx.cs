@@ -1,4 +1,3 @@
-using Class_biz_notifications;
 using KiAspdotnetFramework;
 using kix;
 using System.Configuration;
@@ -13,7 +12,6 @@ namespace UserControl_establish_membership
       {
       public bool be_loaded;
       public Biz biz;
-      public TClass_biz_notifications biz_notifications;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -48,7 +46,6 @@ namespace UserControl_establish_membership
             {
                 p.be_loaded = false;
                 p.biz = new();
-                p.biz_notifications = new TClass_biz_notifications();
             }
 
         }
@@ -120,7 +117,7 @@ namespace UserControl_establish_membership
             )
             {
             args.IsValid = false;
-            p.biz_notifications.IssueForMembershipEstablishmentBlocked(Session["username"].ToString(),Session["user_id"].ToString(),claimed_role_name,claimed_member_name,claimed_member_id,claimed_member_email_address);
+            p.biz.notifications.IssueForMembershipEstablishmentBlocked(Session["username"].ToString(),Session["user_id"].ToString(),claimed_role_name,claimed_member_name,claimed_member_id,claimed_member_email_address);
             }
           else
             {

@@ -1,17 +1,16 @@
 // Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
 
 using Class_db_role_member_map_logs;
-using kix;
 
 namespace Class_biz_role_member_map_logs
   {
   public class TClass_biz_role_member_map_logs
     {
-    private readonly TClass_db_role_member_map_logs db_role_member_map_logs = null;
+    private readonly ITClass_db_role_member_map_logs db_role_member_map_logs = null;
 
-    public TClass_biz_role_member_map_logs() : base()
+    public TClass_biz_role_member_map_logs(ITClass_db_role_member_map_logs db_role_member_map_logs_imp) : base()
       {
-      db_role_member_map_logs = new TClass_db_role_member_map_logs();
+      db_role_member_map_logs = db_role_member_map_logs_imp;
       }
 
     public bool Bind(string partial_spec, object target)

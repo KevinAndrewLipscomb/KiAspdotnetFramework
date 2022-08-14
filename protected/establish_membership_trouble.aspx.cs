@@ -1,4 +1,4 @@
-using Class_biz_notifications;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Configuration;
@@ -10,7 +10,7 @@ namespace establish_membership_trouble
 
     private struct p_type
       {
-      public TClass_biz_notifications biz_notifications;
+      public Biz biz;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -46,7 +46,7 @@ namespace establish_membership_trouble
             switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
-                    p.biz_notifications = new TClass_biz_notifications();
+                    p.biz = new();
                     break;
                 case nature_of_visit_type.VISIT_POSTBACK_STANDARD:
                     p = (p_type)(Session[InstanceId() + ".p"]);
@@ -62,7 +62,7 @@ namespace establish_membership_trouble
 
         protected void Button_submit_Click(object sender, System.EventArgs e)
         {
-            p.biz_notifications.IssueForMembershipEstablishmentTrouble(k.Safe(TextBox_full_name.Text, k.safe_hint_type.HUMAN_NAME), k.Safe(TextBox_explanation.Text, k.safe_hint_type.PUNCTUATED));
+            p.biz.notifications.IssueForMembershipEstablishmentTrouble(k.Safe(TextBox_full_name.Text, k.safe_hint_type.HUMAN_NAME), k.Safe(TextBox_explanation.Text, k.safe_hint_type.PUNCTUATED));
             Session.Clear();
             Server.Transfer("~/login.aspx");
         }
