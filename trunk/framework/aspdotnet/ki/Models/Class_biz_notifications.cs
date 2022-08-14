@@ -178,12 +178,13 @@ namespace Class_biz_notifications
           .Replace("<runtime_root_fullspec/>", runtime_root_fullspec);
         };
 
+      var biz = new Biz();
       biz_members = new TClass_biz_members();
       biz_roles = new TClass_biz_roles();
       biz_user = new TClass_biz_user();
       actor_member_id = biz_members.IdOfUserId(biz_user.IdNum());
       actor = biz_user.Roles()[0] + k.SPACE + biz_members.FirstNameOfMemberId(actor_member_id) + k.SPACE + biz_members.LastNameOfMemberId(actor_member_id);
-      actor_email_address = Biz.users.PasswordResetEmailAddressOfId(biz_user.IdNum());
+      actor_email_address = biz.users.PasswordResetEmailAddressOfId(biz_user.IdNum());
       if (be_granted)
         {
         changed = "granted";
@@ -217,9 +218,10 @@ namespace Class_biz_notifications
           .Replace("<temporary_password/>", temporary_password);
         };
 
+      var biz = new Biz();
       biz_user = new TClass_biz_user();
       template_reader = System.IO.File.OpenText(HttpContext.Current.Server.MapPath("template/notification/temporary_password.txt"));
-      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], Biz.users.PasswordResetEmailAddressOfUsername(username), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
+      k.SmtpMailSend(ConfigurationManager.AppSettings["sender_email_address"], biz.users.PasswordResetEmailAddressOfUsername(username), Merge(template_reader.ReadLine()), Merge(template_reader.ReadToEnd()));
       template_reader.Close();
       }
 

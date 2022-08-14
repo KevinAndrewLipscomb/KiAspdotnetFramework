@@ -12,6 +12,7 @@ namespace salogin
 
     private struct p_type
       {
+      public Biz biz;
       }
 
         private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -40,6 +41,7 @@ namespace salogin
             {
                 case nature_of_visit_type.VISIT_COLD_CALL:
                 case nature_of_visit_type.VISIT_INITIAL:
+                    p.biz = new();
                     RequireConfirmation(LinkButton_forgot_password,"Are you sure you want a new password?");
                     TextBox_username.Focus();
                     break;
@@ -77,9 +79,9 @@ namespace salogin
             else
             {
                 username = k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
-                if (Biz.users.BeRegisteredUsername(username))
+                if (p.biz.users.BeRegisteredUsername(username))
                 {
-                    Biz.users.IssueTemporaryPassword(username, k.Safe(Request.UserHostName, k.safe_hint_type.HOSTNAME));
+                    p.biz.users.IssueTemporaryPassword(username, k.Safe(Request.UserHostName, k.safe_hint_type.HOSTNAME));
                     Alert(k.alert_cause_type.LOGIC, k.alert_state_type.NORMAL, "tmpassent", "A temporary password has been sent to the email address that " + ConfigurationManager.AppSettings["application_name"] + " has on file for " + username + ".  Please log in after you receive it.  You will receive further instructions at that" + " time.", true);
                 }
                 else
@@ -102,7 +104,7 @@ namespace salogin
             string dummy_string;
             //
             args.IsValid =
-              Biz.users.Get
+              p.biz.users.Get
                 (
                 username:k.Safe(TextBox_username.Text.Trim(),k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM),
                 encoded_password:out dummy_string,
@@ -115,7 +117,7 @@ namespace salogin
             &&
               be_active
             &&
-              Biz.users.BeAuthorizedSysAdmin
+              p.biz.users.BeAuthorizedSysAdmin
                 (
                 encoded_password:k.Digest(k.Safe(TextBox_password.Text.Trim(),k.safe_hint_type.ALPHANUM))
                 );
@@ -127,10 +129,10 @@ namespace salogin
             username = k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
             if (Page.IsValid)
             {
-                var user_id = Biz.users.IdOf(username);
+                var user_id = p.biz.users.IdOf(username);
                 SessionSet("user_id",user_id);
                 SessionSet("username", username);
-                SessionSet("password_reset_email_address",Biz.users.PasswordResetEmailAddressOfId(user_id));
+                SessionSet("password_reset_email_address",p.biz.users.PasswordResetEmailAddressOfId(user_id));
                 FormsAuthentication.SetAuthCookie(username, CheckBox_keep_me_logged_in.Checked);
                 Response.Redirect("~/protected/overview.aspx");
             }

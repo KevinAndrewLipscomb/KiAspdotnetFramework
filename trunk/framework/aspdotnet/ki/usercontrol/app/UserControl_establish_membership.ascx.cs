@@ -14,6 +14,7 @@ namespace UserControl_establish_membership
     private struct p_type
       {
       public bool be_loaded;
+      public Biz biz;
       public TClass_biz_members biz_members;
       public TClass_biz_notifications biz_notifications;
       public TClass_biz_user biz_user;
@@ -50,6 +51,7 @@ namespace UserControl_establish_membership
             else
             {
                 p.be_loaded = false;
+                p.biz = new();
                 p.biz_members = new TClass_biz_members();
                 p.biz_notifications = new TClass_biz_notifications();
                 p.biz_user = new TClass_biz_user();
@@ -71,7 +73,7 @@ namespace UserControl_establish_membership
         {
           if (Page.IsValid)
             {
-            if (Biz.users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz_user.IdNum()))
+            if (p.biz.users.AcceptAsMember(k.Safe(TextBox_shared_secret.Text, k.safe_hint_type.ALPHANUM), p.biz_user.IdNum()))
               {
               SessionSet("privilege_array", p.biz_user.Privileges());
               // User was an unprivileged user until now, so reset privs.

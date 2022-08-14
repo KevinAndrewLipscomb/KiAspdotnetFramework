@@ -22,6 +22,7 @@ namespace overview
 
     private struct p_type
       {
+      public Biz biz;
       public TClass_biz_user biz_user;
       public TClass_biz_subjoined_attributes biz_subjoined_attributes;
       public TClass_biz_members biz_members;
@@ -61,12 +62,13 @@ namespace overview
         }
       else if (NatureOfLanding(InstanceId() + ".p") == nature_of_visit_type.VISIT_INITIAL)
         {
+        p.biz = new();
         p.biz_members = new TClass_biz_members();
         p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
         p.biz_user = new TClass_biz_user();
         //
         BeginBreadCrumbTrail();
-        if (Biz.users.BeStalePassword(p.biz_user.IdNum()))
+        if (p.biz.users.BeStalePassword(p.biz_user.IdNum()))
           {
           DropCrumbAndTransferTo("change_password.aspx");
           }

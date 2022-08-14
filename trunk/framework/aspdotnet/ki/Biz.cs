@@ -9,19 +9,23 @@ namespace KiAspdotnetFramework
   /// <summary>
   /// The composition root of the application
   /// </summary>
-  public static class Biz
+  public class Biz
     {
 
-    public static TClass_biz_scheduled_tasks scheduled_tasks = new
+    public TClass_biz_scheduled_tasks scheduled_tasks = new
       (
       fs_imp:new Class_fs()
       );
 
-    public static TClass_biz_users users = new
+    public TClass_biz_users users = new
       (
       db_members_imp:new TClass_db_members(),
       db_users_imp:new TClass_db_users()
       );
+
+    public Biz() // CONSTRUCTOR
+      {
+      }
 
     }
   }
