@@ -1,7 +1,7 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~datagrid~sortable.ascx.cs
 
-using Class_biz_role_member_map_logs;
 using Class_msg_protected;
+using KiAspdotnetFramework;
 using kix;
 using System.Configuration;
 using System.Web.UI.WebControls;
@@ -24,7 +24,7 @@ namespace UserControl_role_member_map_log
       public bool be_interactive;
       public bool be_loaded;
       public bool be_sort_order_ascending;
-      public TClass_biz_role_member_map_logs biz_role_member_map_logs;
+      public Biz biz;
       public TClass_msg_protected.overview msg_protected_overview;
       public uint num_role_member_map_logs;
       public string sort_order;
@@ -67,7 +67,7 @@ namespace UserControl_role_member_map_log
         }
       else
         {
-        p.biz_role_member_map_logs = new TClass_biz_role_member_map_logs();
+        p.biz = new();
         p.msg_protected_overview = new TClass_msg_protected.overview();
         //
         p.be_loaded = false;
@@ -140,7 +140,7 @@ namespace UserControl_role_member_map_log
 
     private void Bind()
       {
-      p.biz_role_member_map_logs.BindBaseDataList
+      p.biz.role_member_map_logs.BindBaseDataList
         (
         sort_order:p.sort_order,
         be_sort_order_ascending:p.be_sort_order_ascending,

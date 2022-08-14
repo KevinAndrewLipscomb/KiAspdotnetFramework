@@ -5,7 +5,6 @@ using System.Web;
 
 namespace Class_biz_user
   {
-
   public class TClass_biz_user
     {
 
@@ -64,5 +63,4 @@ namespace Class_biz_user
       }
 
     } // end TClass_biz_user
-
   }

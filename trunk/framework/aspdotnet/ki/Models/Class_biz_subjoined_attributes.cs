@@ -15,11 +15,11 @@ namespace Class_biz_subjoined_attributes
 
   public class TClass_biz_subjoined_attributes
     {
-    private readonly TClass_db_subjoined_attributes db_subjoined_attributes = null;
+    private readonly ITClass_db_subjoined_attributes db_subjoined_attributes = null;
 
-    public TClass_biz_subjoined_attributes() : base()
+    public TClass_biz_subjoined_attributes(ITClass_db_subjoined_attributes db_subjoined_attributes_imp) : base() // CONSTRUCTOR
       {
-      db_subjoined_attributes = new TClass_db_subjoined_attributes();
+      db_subjoined_attributes = db_subjoined_attributes_imp;
       }
 
     internal bool BeAnyImplementedSince(DateTime time)
@@ -91,5 +91,4 @@ namespace Class_biz_subjoined_attributes
       }
 
     } // end TClass_biz_subjoined_attributes
-
   }

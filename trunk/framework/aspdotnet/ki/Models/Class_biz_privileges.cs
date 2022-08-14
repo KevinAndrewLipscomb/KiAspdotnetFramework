@@ -7,12 +7,11 @@ namespace Class_biz_privileges
   public class TClass_biz_privileges
     {
 
-    private readonly TClass_db_privileges db_privileges = null;
+    private readonly ITClass_db_privileges db_privileges = null;
 
-    public TClass_biz_privileges() : base()
+    public TClass_biz_privileges(ITClass_db_privileges db_privileges_imp) : base() // CONSTRUCTOR
       {
-      // TODO: Add any constructor code here
-      db_privileges = new TClass_db_privileges();
+      db_privileges = db_privileges_imp;
       }
 
     public bool Bind

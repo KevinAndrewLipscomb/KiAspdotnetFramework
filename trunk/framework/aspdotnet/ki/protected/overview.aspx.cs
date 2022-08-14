@@ -1,4 +1,3 @@
-using Class_biz_subjoined_attributes;
 using KiAspdotnetFramework;
 using System;
 using System.Configuration;
@@ -8,7 +7,6 @@ using UserControl_member_binder;
 
 namespace overview
   {
-
   public partial class TWebForm_overview: ki_web_ui.page_class
     {
 
@@ -21,7 +19,6 @@ namespace overview
     private struct p_type
       {
       public Biz biz;
-      public TClass_biz_subjoined_attributes biz_subjoined_attributes;
       }
 
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -59,7 +56,6 @@ namespace overview
       else if (NatureOfLanding(InstanceId() + ".p") == nature_of_visit_type.VISIT_INITIAL)
         {
         p.biz = new();
-        p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
         //
         BeginBreadCrumbTrail();
         if (p.biz.users.BeStalePassword(p.biz.user.IdNum()))
@@ -78,7 +74,7 @@ namespace overview
         // Display controls appropriate ONLY to nonmembers.
         AddIdentifiedControlToPlaceHolder(((TWebUserControl_establish_membership)(LoadControl("~/usercontrol/app/UserControl_establish_membership.ascx"))), "UserControl_establish_membership", PlaceHolder_control);
         }
-      else if(p.biz_subjoined_attributes.BeAnyImplementedSince(p.biz.user.LastLoginTime()))
+      else if(p.biz.subjoined_attributes.BeAnyImplementedSince(p.biz.user.LastLoginTime()))
         {
         AddIdentifiedControlToPlaceHolder(((TWebUserControl_capture_subjoined_attributes)(LoadControl("~/usercontrol/app/UserControl_capture_subjoined_attributes.ascx"))), "UserControl_capture_subjoined_attributes", PlaceHolder_control);
         }
@@ -100,5 +96,4 @@ namespace overview
       }
 
     } // end TWebForm_overview
-
   }

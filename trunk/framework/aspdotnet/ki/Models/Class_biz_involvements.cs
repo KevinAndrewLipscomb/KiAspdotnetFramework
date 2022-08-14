@@ -7,11 +7,15 @@ namespace Class_biz_involvements
   public class TClass_biz_involvements
     {
 
-    private readonly TClass_db_involvements db_involvements = null;
+    private readonly ITClass_db_involvements db_involvements = null;
 
-    public TClass_biz_involvements() : base()
+    public TClass_biz_involvements
+      (
+      ITClass_db_involvements db_involvements_imp
+      )
+      : base()
       {
-      db_involvements = new TClass_db_involvements();
+      db_involvements = db_involvements_imp;
       }
 
     public bool Bind(string partial_code, object target)

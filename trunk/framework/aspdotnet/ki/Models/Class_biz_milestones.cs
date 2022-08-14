@@ -1,4 +1,5 @@
 using Class_db_milestones;
+using kix;
 using System;
 using System.Collections;
 
@@ -7,95 +8,87 @@ namespace Class_biz_milestones
   public class TClass_biz_milestones
     {
 
+    private enum milestone_type
+      {
+      FIRST_MILESTONE = 1,
+      SECOND_MILESTONE = 2,
+      }
+
+    private struct reminder_control_record_type
+      {
+      public int num_reminders;
+      public int[] relative_day_num_array;
+      }
+
     private static class Static
       {
       public const int MAX_NUM_REMINDERS = 6;
       public static reminder_control_record_type[] REMINDER_CONTROL_TABLE =
         {
-        new reminder_control_record_type {num_reminders = 6, relative_day_num_array = new uint[MAX_NUM_REMINDERS] {1, 3, 7, 14, 30, 90}}, // FIRST_MILESTONE
-        new reminder_control_record_type {num_reminders = 6, relative_day_num_array = new uint[MAX_NUM_REMINDERS] {1, 3, 7, 14, 30, 90}}  // SECOND_MILESTONE
+        new reminder_control_record_type {num_reminders = 6, relative_day_num_array = new int[MAX_NUM_REMINDERS] {1, 3, 7, 14, 30, 90}}, // FIRST_MILESTONE
+        new reminder_control_record_type {num_reminders = 6, relative_day_num_array = new int[MAX_NUM_REMINDERS] {1, 3, 7, 14, 30, 90}}  // SECOND_MILESTONE
         };
       }
 
-      private struct reminder_control_record_type
+    private readonly ITClass_db_milestones db_milestones = null;
+
+    public TClass_biz_milestones(ITClass_db_milestones db_milestones_imp) : base() // CONSTRUCTOR
       {
-          public uint num_reminders;
-          public uint[] relative_day_num_array;
+      db_milestones = db_milestones_imp;
       }
 
-      private enum milestone_type
+    public void Sweep()
       {
-          FIRST_MILESTONE = 1,
-          SECOND_MILESTONE = 2,
-      }
-
-        //Constructor  Create()
-        public TClass_biz_milestones() : base()
+      bool be_processed;
+      DateTime deadline;
+      var i = new k.int_nonnegative();
+      // var j = new k.int_positive();
+      var master_id = k.EMPTY;
+      Queue master_id_q = null;
+      var relative_day_num = new k.int_nonnegative();
+      foreach (var milestone in Enum.GetValues(typeof(milestone_type)) as milestone_type[])
         {
-            // TODO: Add any constructor code here
-        }
-
-        public void Sweep()
-        {
-            bool be_handled;
-            bool be_processed;
-            DateTime deadline;
-            TClass_db_milestones db_milestones;
-            uint i;
-            // j: cardinal;
-            string master_id;
-            Queue master_id_q;
-            uint relative_day_num;
-            DateTime today;
-            db_milestones = new TClass_db_milestones();
-            master_id_q = null;
-            today = DateTime.Today;
-            foreach (milestone_type milestone in Enum.GetValues(typeof(milestone_type)))
+        db_milestones.Check((uint)(milestone), out be_processed, out deadline);
+        if (!be_processed)
+          {
+          if ((DateTime.Today > deadline))
             {
-                db_milestones.Check((uint)(milestone), out be_processed, out deadline);
-                if (!be_processed)
-                {
-                    if ((today > deadline))
-                    {
-                        switch(milestone)
-                        {
-                            case milestone_type.FIRST_MILESTONE:
-                                break;
-                            case milestone_type.SECOND_MILESTONE:
-                                break;
-                        // Not application-enforceable
-                        }
-                        uint master_id_q_count = (uint)(master_id_q.Count);
-                        for (i = 1; i <= master_id_q_count; i ++ )
-                        {
-                            master_id = master_id_q.Dequeue().ToString();
-                        // biz_users.MakeDeadlineFailureNotification;
-                        }
-                        db_milestones.MarkProcessed((uint)(milestone));
-                    }
-                    else
-                    {
-                        be_handled = false;
-                        i = 0;
-                        while (!be_handled && (i < Static.REMINDER_CONTROL_TABLE[(int)milestone].num_reminders))
-                        {
-                            relative_day_num = Static.REMINDER_CONTROL_TABLE[(int)milestone].relative_day_num_array[i];
-                            if (today == deadline.AddDays( -relative_day_num).Date)
-                            {
-                            // master_id_q := biz_emsof_requests.SusceptibleTo(milestone);
-                            // for j := 1 to master_id_q.Count do begin
-                            // master_id := master_id_q.Dequeue.ToString();
-                            // biz_users.Remind(milestone,relative_day_num,deadline,biz_emsof_requests.Kind1IdOfMasterId(master_id));
-                            // be_handled := TRUE;
-                            // end;
-                            }
-                            i++;
-                        }
-                    }
-                }
+            if (milestone == milestone_type.FIRST_MILESTONE)
+              {
+              }
+            else if (milestone == milestone_type.SECOND_MILESTONE)
+              {
+              }
+            for (i.val = 1; i.val <= master_id_q.Count; i.val++)
+              {
+              master_id = master_id_q.Dequeue().ToString();
+              //new Biz().users.MakeDeadlineFailureNotification;
+              }
+            db_milestones.MarkProcessed((uint)(milestone));
             }
+          else
+            {
+            var be_handled = false;
+            i.val = 0;
+            while (!be_handled && (i.val < Static.REMINDER_CONTROL_TABLE[(int)milestone].num_reminders))
+              {
+              relative_day_num.val = Static.REMINDER_CONTROL_TABLE[(int)milestone].relative_day_num_array[i.val];
+              if (DateTime.Today == deadline.AddDays(-relative_day_num.val).Date)
+                {
+                // master_id_q := biz_emsof_requests.SusceptibleTo(milestone);
+                // for j.val := 1 to master_id_q.Count do begin
+                // master_id := master_id_q.Dequeue.ToString();
+                // biz_users.Remind(milestone,relative_day_num,deadline,biz_emsof_requests.Kind1IdOfMasterId(master_id));
+                // be_handled := TRUE;
+                // end;
+                }
+              i.val++;
+              }
+            }
+          }
         }
+      }
 
     } // end TClass_biz_milestones
 
-}
+  }

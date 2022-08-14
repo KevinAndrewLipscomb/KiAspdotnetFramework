@@ -1,5 +1,5 @@
 // Derived from KiAspdotnetFramework/UserControl/app/UserControl~template~trivial~item.pas
-using Class_biz_involvements;
+using KiAspdotnetFramework;
 using kix;
 using System;
 using System.Web.UI;
@@ -15,7 +15,7 @@ namespace UserControl_involvement
       {
       public bool be_loaded;
       public bool be_ok_to_config_involvements;
-      public TClass_biz_involvements biz_involvements;
+      public Biz biz;
       }
 
     //private struct v_type
@@ -143,7 +143,7 @@ namespace UserControl_involvement
       string description;
       var result = false;
       if(
-        p.biz_involvements.Get
+        p.biz.involvements.Get
           (
           id,
           out description
@@ -220,7 +220,7 @@ namespace UserControl_involvement
       else
         {
         p.be_loaded = false;
-        p.biz_involvements = new TClass_biz_involvements();
+        p.biz = new();
         p.be_ok_to_config_involvements = k.Has((string[])(Session["privilege_array"]), "config-involvements");
         }
       }
@@ -249,7 +249,7 @@ namespace UserControl_involvement
       {
       if (Page.IsValid)
         {
-        p.biz_involvements.Set(k.Safe(TextBox_id.Text, k.safe_hint_type.NUM), k.Safe(TextBox_description.Text, k.safe_hint_type.PUNCTUATED));
+        p.biz.involvements.Set(k.Safe(TextBox_id.Text, k.safe_hint_type.NUM), k.Safe(TextBox_description.Text, k.safe_hint_type.PUNCTUATED));
         Alert(k.alert_cause_type.USER, k.alert_state_type.SUCCESS, "recsaved", "Record saved.", true);
         SetLookupMode();
         }
@@ -290,7 +290,7 @@ namespace UserControl_involvement
 
     protected void Button_delete_Click(object sender, System.EventArgs e)
       {
-      if (p.biz_involvements.Delete(k.Safe(TextBox_id.Text, k.safe_hint_type.ALPHANUM)))
+      if (p.biz.involvements.Delete(k.Safe(TextBox_id.Text, k.safe_hint_type.ALPHANUM)))
         {
         SetLookupMode();
         }
@@ -323,7 +323,7 @@ namespace UserControl_involvement
       if (!PresentRecord(saved_id))
         {
         TextBox_id.Text = saved_id;
-        p.biz_involvements.Bind(saved_id, DropDownList_code);
+        p.biz.involvements.Bind(saved_id, DropDownList_code);
         num_matches = (uint)(DropDownList_code.Items.Count);
         if (num_matches > 0)
           {

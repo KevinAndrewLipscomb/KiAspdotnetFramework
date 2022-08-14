@@ -4,6 +4,7 @@ namespace Class_biz_scheduled_tasks
   {
   public class TClass_biz_scheduled_tasks
     {
+
     private readonly IClass_fs fs;
 
     public TClass_biz_scheduled_tasks(IClass_fs fs_imp) : base() // CONSTRUCTOR
@@ -17,5 +18,4 @@ namespace Class_biz_scheduled_tasks
       }
 
     } // end TClass_biz_scheduled_tasks
-
   }
