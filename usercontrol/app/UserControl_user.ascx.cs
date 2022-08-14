@@ -13,6 +13,7 @@ namespace UserControl_user
       {
       public bool be_loaded;
       public bool be_ok_to_config_users;
+      public Biz biz;
       }
 
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -66,7 +67,7 @@ namespace UserControl_user
             uint num_unsuccessful_login_attempts;
             string last_login;
             result = false;
-            if (Biz.users.Get(username, out encoded_password, out be_stale_password, out password_reset_email_address, out be_active, out num_unsuccessful_login_attempts, out last_login))
+            if (p.biz.users.Get(username, out encoded_password, out be_stale_password, out password_reset_email_address, out be_active, out num_unsuccessful_login_attempts, out last_login))
             {
                 TextBox_username.Text = username;
                 TextBox_encoded_password.Text = encoded_password;
@@ -113,6 +114,7 @@ namespace UserControl_user
             {
                 p.be_loaded = false;
                 p.be_ok_to_config_users = k.Has((string[])(Session["privilege_array"]), "config-users");
+                p.biz = new();
             }
 
         }
@@ -143,7 +145,7 @@ namespace UserControl_user
         {
             if (Page.IsValid)
             {
-                Biz.users.Set(k.Safe(TextBox_username.Text, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), CheckBox_be_stale_password.Checked, k.Safe(TextBox_password_reset_email_address.Text, k.safe_hint_type.EMAIL_ADDRESS), CheckBox_be_active.Checked);
+                p.biz.users.Set(k.Safe(TextBox_username.Text, k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), CheckBox_be_stale_password.Checked, k.Safe(TextBox_password_reset_email_address.Text, k.safe_hint_type.EMAIL_ADDRESS), CheckBox_be_active.Checked);
                 Alert(k.alert_cause_type.USER, k.alert_state_type.SUCCESS, "recsaved", "Record saved.", true);
                 SetLookupMode();
             }
@@ -184,7 +186,7 @@ namespace UserControl_user
 
         protected void Button_delete_Click(object sender, System.EventArgs e)
         {
-            Biz.users.Delete(k.Safe(TextBox_username.Text, k.safe_hint_type.ALPHANUM));
+            p.biz.users.Delete(k.Safe(TextBox_username.Text, k.safe_hint_type.ALPHANUM));
             SetLookupMode();
         }
 
@@ -209,7 +211,7 @@ namespace UserControl_user
             if (!PresentRecord(saved_username))
             {
                 TextBox_username.Text = saved_username;
-                Biz.users.Bind(saved_username, DropDownList_username);
+                p.biz.users.Bind(saved_username, DropDownList_username);
                 num_matches = (uint)(DropDownList_username.Items.Count);
         if (num_matches > 0)
           {

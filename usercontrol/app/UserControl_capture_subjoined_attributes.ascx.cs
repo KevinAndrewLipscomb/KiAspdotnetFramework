@@ -23,6 +23,7 @@ namespace UserControl_capture_subjoined_attributes
     private struct p_type
       {
       public bool be_loaded;
+      public Biz biz;
       public TClass_biz_subjoined_attributes biz_subjoined_attributes;
       public TClass_biz_user biz_user;
       }
@@ -153,6 +154,7 @@ namespace UserControl_capture_subjoined_attributes
         }
       else
         {
+        p.biz = new();
         p.biz_subjoined_attributes = new TClass_biz_subjoined_attributes();
         p.biz_user = new TClass_biz_user();
         //
@@ -230,7 +232,7 @@ namespace UserControl_capture_subjoined_attributes
         v.be_submitting = true;
         Bind();
         v.be_submitting = false;
-        Biz.users.RecordSuccessfulLogin(p.biz_user.IdNum());
+        p.biz.users.RecordSuccessfulLogin(p.biz_user.IdNum());
         Server.Transfer("~/Default.aspx");
         }
       }

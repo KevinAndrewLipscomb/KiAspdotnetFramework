@@ -17,6 +17,7 @@ namespace login
     //
     private struct p_type
       {
+      public Biz biz;
       }
 
     private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
@@ -49,6 +50,7 @@ namespace login
             {
                 case nature_of_visit_type.VISIT_COLD_CALL:
                 case nature_of_visit_type.VISIT_INITIAL:
+                    p.biz = new();
                     RequireConfirmation(LinkButton_forgot_password,"Are you sure you want a new password?");
                     TextBox_username.Focus();
                     break;
@@ -86,9 +88,9 @@ namespace login
             else
             {
                 username = k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
-                if (Biz.users.BeRegisteredUsername(username))
+                if (p.biz.users.BeRegisteredUsername(username))
                 {
-                    Biz.users.IssueTemporaryPassword(username, k.Safe(Request.UserHostName, k.safe_hint_type.HOSTNAME));
+                    p.biz.users.IssueTemporaryPassword(username, k.Safe(Request.UserHostName, k.safe_hint_type.HOSTNAME));
                     Alert(k.alert_cause_type.LOGIC, k.alert_state_type.NORMAL, "tmpassent", "A temporary password has been sent to the email address that " + ConfigurationManager.AppSettings["application_name"] + " has on file for " + username + ".  Please log in after you receive it.  You will receive further instructions at that" + " time.", true);
                 }
                 else
@@ -105,7 +107,7 @@ namespace login
 
         protected void CustomValidator_account_exists_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
-            args.IsValid = Biz.users.BeAuthorized(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), k.Safe(TextBox_password.Text,k.safe_hint_type.HEX));
+            args.IsValid = p.biz.users.BeAuthorized(k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM), k.Safe(TextBox_password.Text,k.safe_hint_type.HEX));
         }
 
         protected void Button_log_in_Click(object sender, System.EventArgs e)
@@ -114,18 +116,18 @@ namespace login
             username = k.Safe(TextBox_username.Text.Trim(), k.safe_hint_type.HYPHENATED_UNDERSCORED_ALPHANUM);
             if (Page.IsValid)
             {
-                var user_id = Biz.users.IdOf(username);
+                var user_id = p.biz.users.IdOf(username);
                 SessionSet("user_id",user_id);
                 SessionSet("username", username);
-                SessionSet("password_reset_email_address",Biz.users.PasswordResetEmailAddressOfId(user_id));
+                SessionSet("password_reset_email_address",p.biz.users.PasswordResetEmailAddressOfId(user_id));
                 FormsAuthentication.SetAuthCookie(username, CheckBox_keep_me_logged_in.Checked);
                 Response.Redirect("~/protected/overview.aspx");
             }
             else
             {
-                if (Biz.users.BeRegisteredUsername(username))
+                if (p.biz.users.BeRegisteredUsername(username))
                 {
-                    Biz.users.RecordUnsuccessfulLoginAttempt(username);
+                    p.biz.users.RecordUnsuccessfulLoginAttempt(username);
                 }
             }
         }

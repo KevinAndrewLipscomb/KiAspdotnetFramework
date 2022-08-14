@@ -12,6 +12,7 @@ namespace change_email_address
 
     private struct p_type
       {
+      public Biz biz;
       public TClass_biz_user biz_user;
       }
 
@@ -33,9 +34,10 @@ namespace change_email_address
             switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
+                    p.biz = new();
                     p.biz_user = new TClass_biz_user();
                     // Preload email address fields
-                    email_address = Biz.users.SelfEmailAddress();
+                    email_address = p.biz.users.SelfEmailAddress();
                     TextBox_nominal_email_address.Text = email_address;
                     TextBox_confirmation_email_address.Text = email_address;
                     TextBox_nominal_email_address.Focus();
@@ -77,7 +79,7 @@ namespace change_email_address
         {
             if (Page.IsValid)
             {
-                Biz.users.SetEmailAddress(p.biz_user.IdNum(), k.Safe(TextBox_nominal_email_address.Text.Trim(), k.safe_hint_type.EMAIL_ADDRESS));
+                p.biz.users.SetEmailAddress(p.biz_user.IdNum(), k.Safe(TextBox_nominal_email_address.Text.Trim(), k.safe_hint_type.EMAIL_ADDRESS));
                 BackTrack();
             }
             else

@@ -12,6 +12,7 @@ namespace change_password
 
     private struct p_type
       {
+      public Biz biz;
       public TClass_biz_user biz_user;
       }
 
@@ -46,6 +47,7 @@ namespace change_password
             switch(NatureOfVisit(InstanceId() + ".p"))
             {
                 case nature_of_visit_type.VISIT_INITIAL:
+                    p.biz = new();
                     p.biz_user = new TClass_biz_user();
                     TextBox_nominal_password.Focus();
                     break;
@@ -82,7 +84,7 @@ namespace change_password
         {
             if (Page.IsValid)
             {
-                Biz.users.SetPassword(p.biz_user.IdNum(), k.Safe(TextBox_nominal_password.Text.Trim(), k.safe_hint_type.HEX));
+                p.biz.users.SetPassword(p.biz_user.IdNum(), k.Safe(TextBox_nominal_password.Text.Trim(), k.safe_hint_type.HEX));
                 BackTrack();
             }
             else

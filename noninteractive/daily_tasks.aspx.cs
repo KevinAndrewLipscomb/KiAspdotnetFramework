@@ -9,7 +9,7 @@ namespace daily_tasks
 
     protected void Page_Load(object sender, EventArgs e)
       {
-      Biz.scheduled_tasks.DoDailyChores(HttpContext.Current.Server.MapPath("."));
+      new Biz().scheduled_tasks.DoDailyChores(HttpContext.Current.Server.MapPath("."));
       }
 
     protected override void OnInit(EventArgs e)

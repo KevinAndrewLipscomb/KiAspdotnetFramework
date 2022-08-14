@@ -28,6 +28,7 @@ namespace UserControl_user_member_mapping
         public bool be_interactive;
         public bool be_loaded;
         public bool be_sort_order_ascending;
+        public Biz biz;
         public TClass_biz_members biz_members;
         public TClass_biz_user biz_user;
         public TClass_biz_user_member_map biz_user_member_map;
@@ -148,6 +149,7 @@ namespace UserControl_user_member_mapping
             }
             else
             {
+                p.biz = new();
                 p.biz_members = new TClass_biz_members();
                 p.biz_user = new TClass_biz_user();
                 p.biz_user_member_map = new TClass_biz_user_member_map();
@@ -232,8 +234,8 @@ namespace UserControl_user_member_mapping
         Session.RemoveAll();
         //
         SessionSet("username",username);
-        SessionSet("user_id",Biz.users.IdOf(username));
-        SessionSet("password_reset_email_address",Biz.users.PasswordResetEmailAddressOfUsername(username));
+        SessionSet("user_id",p.biz.users.IdOf(username));
+        SessionSet("password_reset_email_address",p.biz.users.PasswordResetEmailAddressOfUsername(username));
         FormsAuthentication.SetAuthCookie(username,createPersistentCookie:false);
         Response.Redirect("~/protected/overview.aspx");
         }
