@@ -612,6 +612,14 @@
       <Project>{873deb18-2d56-4ba3-8493-3bcb2c4bf349}</Project>
       <Name>KiAspdotnetFramework.FileSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="KiAspdotnetFramework.Scrape.Interface\KiAspdotnetFramework.Scrape.Interface.csproj">
+      <Project>{1508bc9b-40ec-448f-867a-222c7ae484b1}</Project>
+      <Name>KiAspdotnetFramework.Scrape.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="KiAspdotnetFramework.Scrape\KiAspdotnetFramework.Scrape.csproj">
+      <Project>{c14b4c8f-d05b-40cb-9d14-6d916aab9cc4}</Project>
+      <Name>KiAspdotnetFramework.Scrape</Name>
+    </ProjectReference>
     <ProjectReference Include="lib\ki\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
       <Name>ki</Name>
