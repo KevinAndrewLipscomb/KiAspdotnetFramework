@@ -4,12 +4,11 @@ namespace Class_biz_scheduled_tasks
   {
   public class TClass_biz_scheduled_tasks
     {
-    private readonly Class_fs fs;
+    private readonly IClass_fs fs;
 
-    //Constructor  Create()
-    public TClass_biz_scheduled_tasks() : base()
+    public TClass_biz_scheduled_tasks(IClass_fs fs_imp) : base() // CONSTRUCTOR
       {
-      fs = new Class_fs();
+      fs = fs_imp;
       }
 
     public void DoDailyChores(string current_working_directory_spec)
