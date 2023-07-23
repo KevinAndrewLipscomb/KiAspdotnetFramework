@@ -32,6 +32,7 @@
     <LangVersion>preview</LangVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -141,11 +142,13 @@
     <Content Include="exception.aspx" />
     <Content Include="Global.asax" />
     <Content Include="js\sha1.js" />
+    <Content Include="lib\000-README-IF-COMPILING.html" />
     <Content Include="login.aspx" />
     <Content Include="new_user_registration.aspx" />
     <Content Include="remind_username.aspx" />
     <Content Include="salogin.aspx" />
     <Content Include="timeout.aspx" />
+    <Content Include="usercontrol\000-README-RE-REQUIRED-ki-JUNCTION.txt" />
     <Content Include="usercontrol\app\UserControl_app_level_announcement.ascx" />
     <Content Include="usercontrol\app\UserControl_capture_subjoined_attributes.ascx" />
     <Content Include="usercontrol\app\UserControl_involvement.ascx" />
@@ -581,7 +584,16 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/KiAspdotnetFramework</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
