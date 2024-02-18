@@ -2,14 +2,26 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+*.*-SAV
+*.bak
 *.dll.config
+*.lnk
+*.log
 *.pdb
+*.SAV
 *.user
+.svn/
 .vs/
+1-user-setup.sql
 bin/*.xml
+bin/*/
+lib/ki/
+node_modules/
 obj/
 packages/
 unpublished.*
-/lib/ki/
+/app.ini
+/lib/emsi/
+/lib/oscalib/
 /usercontrol/ki/
 /Web.config
