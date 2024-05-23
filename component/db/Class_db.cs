@@ -56,6 +56,7 @@ namespace Class_db
       if (the_connection.State != ConnectionState.Open)
         {
         the_connection.Open();
+        (new MySqlCommand("set session sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'",the_connection)).ExecuteNonQuery();
         }
       }
 
