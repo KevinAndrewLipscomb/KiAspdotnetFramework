@@ -34,6 +34,7 @@ Write-Host -NoNewline "Creating schema $db_instance..."
 mysql --execute="create schema $db_instance"
 Write-Host "DONE."
 Write-Host -NoNewline "Populating instance appropriately..."
+$OutputEncoding = [System.Text.UTF8Encoding]::new()
 Get-Content -Path:"$LoadScriptFolder/$base_db_name.sql" -Encoding:UTF8 |
   ForEach-Object { $_ -creplace "NO_AUTO_CREATE_USER,","" } |
   mysql --database=$db_instance
