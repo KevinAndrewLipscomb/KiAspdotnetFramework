@@ -33,6 +33,7 @@
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
     <UseIISExpress>false</UseIISExpress>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -138,6 +139,18 @@
   </ItemGroup>
   <ItemGroup Label="Content">
     <Content Include="app_online.htm" />
+    <Content Include="config\Detail\appSettings.DEV.IISEXPRESS.config" />
+    <Content Include="config\Detail\appSettings.DEV.LOCALIIS.config" />
+    <Content Include="config\Detail\appSettings.PRODUCTION.config" />
+    <Content Include="config\Detail\appSettings.X.config" />
+    <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt" />
+    <Content Include="config\Setup\grant-mw-to-w3wp--on-cloudserver.cmd" />
+    <Content Include="config\Template\1-user-setup.DEV.sql" />
+    <Content Include="config\Template\1-user-setup.PRODUCTION.sql" />
+    <Content Include="config\Template\1-user-setup.X.sql" />
+    <Content Include="config\Template\connectionStrings.DEV.config" />
+    <Content Include="config\Template\connectionStrings.PRODUCTION.config" />
+    <Content Include="config\Template\connectionStrings.X.config" />
     <Content Include="css\standard.css" />
     <Content Include="css\standard-overrides-for-ie6.css" />
     <Content Include="Default.aspx" />
@@ -162,7 +175,6 @@
     <Content Include="template\notification\temporary_password.txt" />
     <Content Include="template\notification\username_reminder.txt" />
     <Content Include="timeout.aspx" />
-    <Content Include="unpublished.config" />
     <Content Include="usercontrol\000-README-RE-REQUIRED-ki-JUNCTION.txt" />
     <Content Include="usercontrol\app\UserControl_about.ascx" />
     <Content Include="usercontrol\app\UserControl_app_level_announcement.ascx" />
@@ -539,13 +551,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup Label="None">
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
     <None Include="component\biz\Class_biz_template_kicrudhelped_items.cs-template" />
     <None Include="component\biz\Class_biz_template_trivial_items.cs-template" />
     <None Include="component\db\Class_db_template_kicrudhelped_items.cs-template" />
     <None Include="component\db\Class_db_template_trivial_items.cs-template" />
-    <None Include="deploy.bat" />
+    <None Include="js\.eslintrc.json" />
     <None Include="noninteractive\.crontab" />
+    <None Include="package-lock.json" />
+    <None Include="package.json" />
     <None Include="packages.config" />
+    <None Include="PostBuild.ps1" />
+    <None Include="PreBuild.ps1" />
     <None Include="protected\template-protected-datagrid-sortable.aspx-template" />
     <None Include="protected\template-protected-landing.aspx-template" />
     <None Include="protected\template-protected-nonlanding.aspx-template" />
@@ -555,7 +573,19 @@
     <None Include="usercontrol\app\UserControl_template_kicrudhelped_item.ascx-template" />
     <None Include="usercontrol\app\UserControl_template_std.ascx-template" />
     <None Include="usercontrol\app\UserControl_template_trivial_item.ascx-template" />
-    <None Include="work.bat" />
+    <None Include="Web.DEV.IISEXPRESS.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.DEV.LOCALIIS.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.PRODUCTION.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.X.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="work.ps1" />
   </ItemGroup>
   <ItemGroup Label="Folder">
     <Folder Include="App_Data\" />
@@ -565,6 +595,12 @@
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
       <Name>ki</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="js\ErrorHandler.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup Label="VisualStudio">
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -598,4 +634,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>PowerShell -ExecutionPolicy Bypass ..\PreBuild.ps1</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>PowerShell -ExecutionPolicy Bypass ..\PostBuild.ps1</PostBuildEvent>
+  </PropertyGroup>
 </Project>

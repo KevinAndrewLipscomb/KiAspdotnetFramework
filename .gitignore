@@ -3,13 +3,13 @@
 ################################################################################
 
 *.*-SAV
-*.bak
 *.dll.config
 *.lnk
 *.log
 *.pdb
 *.SAV
 *.user
+**/scratch
 .svn/
 .vs/
 1-user-setup.sql
@@ -19,9 +19,8 @@ lib/ki/
 node_modules/
 obj/
 packages/
-unpublished.*
 /app.ini
-/lib/emsi/
+/config/Sensitive/*.config
 /lib/oscalib/
 /usercontrol/ki/
 /Web.config

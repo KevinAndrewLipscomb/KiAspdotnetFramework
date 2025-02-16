@@ -19,7 +19,7 @@ namespace Class_db
 
     public TClass_db() : base()
       {
-      the_connection = new MySqlConnection(connectionString:ConfigurationManager.AppSettings["db_connection_string"]);
+      the_connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["db_connection_string"].ConnectionString);
       }
 
     protected void Close()

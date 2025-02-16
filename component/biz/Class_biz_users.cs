@@ -43,7 +43,7 @@ namespace Class_biz_users
         public bool BeAuthorizedSysAdmin(string encoded_password)
         {
             bool result;
-            result = (encoded_password == ConfigurationManager.AppSettings["sysadmin_encoded_password"]);
+            result = (encoded_password == ConfigurationManager.ConnectionStrings["sysadmin_encoded_password"].ConnectionString);
             return result;
         }
 
