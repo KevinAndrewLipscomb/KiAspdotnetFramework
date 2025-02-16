@@ -559,6 +559,7 @@
     <None Include="component\db\Class_db_template_trivial_items.cs-template" />
     <None Include="js\.eslintrc.json" />
     <None Include="noninteractive\.crontab" />
+    <None Include="package-lock.json" />
     <None Include="package.json" />
     <None Include="packages.config" />
     <None Include="PostBuild.ps1" />
@@ -572,10 +573,18 @@
     <None Include="usercontrol\app\UserControl_template_kicrudhelped_item.ascx-template" />
     <None Include="usercontrol\app\UserControl_template_std.ascx-template" />
     <None Include="usercontrol\app\UserControl_template_trivial_item.ascx-template" />
-    <None Include="Web.DEV.IISEXPRESS.config" />
-    <None Include="Web.DEV.LOCALIIS.config" />
-    <None Include="Web.PRODUCTION.config" />
-    <None Include="Web.X.config" />
+    <None Include="Web.DEV.IISEXPRESS.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.DEV.LOCALIIS.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.PRODUCTION.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.X.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="work.ps1" />
   </ItemGroup>
   <ItemGroup Label="Folder">
