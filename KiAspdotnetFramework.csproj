@@ -638,6 +638,6 @@
     <PreBuildEvent>PowerShell -ExecutionPolicy Bypass ..\PreBuild.ps1</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>PowerShell -ExecutionPolicy Bypass ..\PostBuild.ps1</PostBuildEvent>
+    <PostBuildEvent>PowerShell -ExecutionPolicy Bypass $(MSBuildThisFileDirectory)\PostBuild.ps1</PostBuildEvent>
   </PropertyGroup>
 </Project>
