@@ -38,7 +38,7 @@ if ($be_production)
   Write-Host ""
   Write-Host "LAST CHANCE: If the PRODUCTION DATABASE is currently in use, proceeding is probably a CATASTROPHIC MISTAKE!!!"
   New-Variable -Option:Constant CHALLENGE "DROP-PRODUCTION-DB"
-  $be_insistent = ($(Read-Host "CONFIRM: If you really want to proceed, enter '$CHALLENGE': ") -ceq $CHALLENGE)
+  $be_insistent = ($(Read-Host "CONFIRM: If you really want to proceed, enter '$CHALLENGE'") -ceq $CHALLENGE)
   }
 if ((-not $be_production) -or $be_insistent)
   {
