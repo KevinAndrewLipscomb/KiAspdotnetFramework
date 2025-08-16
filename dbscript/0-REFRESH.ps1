@@ -65,7 +65,6 @@ if ((-not $be_production) -or $be_insistent)
   }
 else
   {
-  Write-Host ""
   Write-Host "$scriptName ABORTED."
   }
 Pause
