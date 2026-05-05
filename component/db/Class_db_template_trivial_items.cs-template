@@ -3,35 +3,26 @@ using Class_db_trail;
 using MySql.Data.MySqlClient;
 using kix;
 using System;
-using System.Web.UI.WebControls;
+using System.Data;
 
 namespace Class_db_template_trivial_items
   {
-
-  internal enum template_trivial_item_enumeration
-    {
-    DESCRIPTION_1 = 1,
-    DESCRIPTION_2 = 2
-    }
-
   public class TClass_db_template_trivial_items: TClass_db
     {
 
-    private readonly TClass_db_trail db_trail = null;
-
-    public TClass_db_template_trivial_items() : base()
+    public TClass_db_template_trivial_items // CONSTRUCTOR
+      (
+      TClass_db_trail db_trail_imp
+      )
+      : base()
       {
       db_trail = new TClass_db_trail();
       }
 
-    public bool Bind
-      (
-      string partial_spec,
-      object target
-      )
+    public DataTable ItemsForLookup( partial_spec)
       {
-      Open();
-      ((target) as ListControl).Items.Clear();
+      var result = (DataTable)null;
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       using var my_sql_command = new MySqlCommand
         (
         "SELECT lpad(id,4,'0') as id"
@@ -41,41 +32,19 @@ namespace Class_db_template_trivial_items
         + " order by description",
         connection
         );
-      var dr = my_sql_command.ExecuteReader();
-      while (dr.Read())
-        {
-        ((target) as ListControl).Items.Add(new ListItem(dr["id"].ToString() + k.SPACE_HYPHENS_SPACE + dr["description"].ToString(), dr["id"].ToString()));
-        }
-      dr.Close();
-      Close();
-      return ((target) as ListControl).Items.Count > 0;
+      new MySqlDataAdapter(my_sql_command).Fill(result);
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
+      return result;
       }
 
-    public void BindDirectToListControl
-      (
-      object target,
-      string unselected_literal = k.EMPTY,
-      string selected_value = "-- template_trivial_item --"
-      )
+    public DataTable Avatars()
       {
-      ((target) as ListControl).Items.Clear();
-      if (unselected_literal.Length > 0)
-        {
-        ((target) as ListControl).Items.Add(new ListItem(unselected_literal, k.EMPTY));
-        }
-      Open();
+      var result = (DataTable)null;
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       using var my_sql_command = new MySqlCommand("SELECT id,description FROM template_trivial_item where description <> '(none specified)' order by id", connection);
-      var dr = my_sql_command.ExecuteReader();
-      while (dr.Read())
-        {
-        ((target) as ListControl).Items.Add(new ListItem(dr["description"].ToString(), dr["id"].ToString()));
-        }
-      dr.Close();
-      Close();
-      if (selected_value.Length > 0)
-        {
-        ((target) as ListControl).SelectedValue = selected_value;
-        }
+      new MySqlDataAdapter(my_sql_command).Fill(result);
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
+      return result;
       }
 
     public bool Delete(string id)
@@ -139,6 +108,7 @@ namespace Class_db_template_trivial_items
         );
       }
 
-    } // end TClass_db_template_trivial_items
+    private readonly TClass_db_trail db_trail = null;
 
+    } // end TClass_db_template_trivial_items
   }
