@@ -3,35 +3,26 @@ using kix;
 
 namespace Class_biz_template_trivial_items
   {
-
   public class TClass_biz_template_trivial_items
     {
 
-    private readonly TClass_db_template_trivial_items db_template_trivial_items = null;
-
-    public TClass_biz_template_trivial_items() : base()
+    public TClass_biz_template_trivial_items // CONSTRUCTOR
+      (
+      TClass_db_template_trivial_items db_template_trivial_items_imp
+      )
+      : base()
       {
-      db_template_trivial_items = new TClass_db_template_trivial_items();
+      db_template_trivial_items = db_template_trivial_items_imp;
       }
 
-    public bool Bind(string partial_code, object target)
+    public DataTable ItemsForLookup(string partial_code, object target)
       {
-      return db_template_trivial_items.Bind(partial_code, target);
+      return db_template_trivial_items.ItemsForLookup(partial_code, target);
       }
 
-    public void BindDirectToListControl(object target, string unselected_literal, string selected_value)
+    public void Avatars()
       {
-      db_template_trivial_items.BindDirectToListControl(target, unselected_literal, selected_value);
-      }
-
-    public void BindDirectToListControl(object target)
-      {
-      BindDirectToListControl(target, "-- template_trivial_item --");
-      }
-
-    public void BindDirectToListControl(object target, string unselected_literal)
-      {
-      BindDirectToListControl(target, unselected_literal, k.EMPTY);
+      db_template_trivial_items.Avatars();
       }
 
     public bool Delete(string code)
@@ -49,6 +40,7 @@ namespace Class_biz_template_trivial_items
       db_template_trivial_items.Set(code, description);
       }
 
-    } // end TClass_biz_template_trivial_items
+    private readonly TClass_db_template_trivial_items db_template_trivial_items = null;
 
+    } // end TClass_biz_template_trivial_items
   }
