@@ -6,100 +6,82 @@ using kix;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
-using System.Web.UI.WebControls;
+using System.Data;
 using UserControl_drop_down_date;
 
 namespace Class_db_template_kicrudhelped_items
   {
-  public class TClass_db_template_kicrudhelped_items: TClass_db
+  public class TClass_db_template_kicrudhelped_items : TClass_db
     {
-    private class template_kicrudhelped_item_summary
+
+    public TClass_db_template_kicrudhelped_items // CONSTRUCTOR
+      (
+      TClass_db_trail db_trail_imp
+      )
+      : base()
       {
-      public string ki_crud_helper_user_key;
+      db_trail = db_trail_imp;
       }
 
-    private readonly TClass_db_trail db_trail = null;
-
-    public TClass_db_template_kicrudhelped_items() : base()
+    public DataTable ItemsForLookup(string partial_spec)
       {
-      db_trail = new TClass_db_trail();
-      }
-
-    public bool Bind(string partial_spec, object target)
-      {
+      var result = new DataTable();
       var concat_clause = "concat(ki_crud_helper_spec_clause)";
-      Open();
-      ((target) as ListControl).Items.Clear();
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       using var my_sql_command = new MySqlCommand
         (
         "select ki_crud_helper_user_key"
-        + " , CONVERT(" + concat_clause + " USING utf8) as spec"
-        + " from template_kicrudhelped_item"
-        + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
-        + " order by spec",
+        + $" , CONVERT({concat_clause} USING utf8) as spec"
+        + $" from template_kicrudhelped_item"
+        + $" where {concat_clause} like '%{partial_spec.ToUpper()}%'"
+        + $" order by spec",
         connection
         );
-      var dr = my_sql_command.ExecuteReader();
-      while (dr.Read())
-        {
-        ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
-        }
-      dr.Close();
-      Close();
-      return ((target) as ListControl).Items.Count > 0;
+      new MySqlDataAdapter(my_sql_command).Fill(result);
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
+      return result;
       }
 
-    internal void BindBaseDataList
+    internal DataTable Items
       (
       string sort_order,
-      bool be_sort_order_ascending,
-      object target
+      bool be_sort_order_ascending
       )
       {
-      Open();
+      var result = new DataTable();
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       using var my_sql_command = new MySqlCommand
         (
         "select template_kicrudhelped_item.ki_crud_helper_user_key as ki_crud_helper_user_key"
-        + " from template_kicrudhelped_item"
-        + " order by " + sort_order.Replace("%",(be_sort_order_ascending ? "asc" : "desc")),
+        + $" from template_kicrudhelped_item"
+        + $" order by {sort_order.Replace("%",(be_sort_order_ascending ? "asc" : "desc"))}",
         connection
         );
-      ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
-      ((target) as BaseDataList).DataBind();
-      Close();
+      new MySqlDataAdapter(my_sql_command).Fill(result);
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
+      return result;
       }
 
-    public void BindDirectToListControl(object target)
+    public DataTable Avatars()
       {
-      Open();
-      ((target) as ListControl).Items.Clear();
-      using var my_sql_command = new MySqlCommand
-        (
-        "SELECT ki_crud_helper_user_key"
-        + " , CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec"
-        + " FROM template_kicrudhelped_item"
-        + " order by spec",
-        connection
-        );
-      var dr = my_sql_command.ExecuteReader();
-      while (dr.Read())
-        {
-        ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["ki_crud_helper_user_key"].ToString()));
-        }
-      dr.Close();
-      Close();
+      var result = new DataTable();
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
+      using var my_sql_command = new MySqlCommand("SELECT ki_crud_helper_user_key, CONVERT(concat(ki_crud_helper_spec_clause) USING utf8) as spec FROM template_kicrudhelped_item order by spec",connection);
+      new MySqlDataAdapter(my_sql_command).Fill(result);
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
+      return result;
       }
 
     public bool Delete(string ki_crud_helper_user_key)
       {
       var result = true;
-      Open();
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       try
         {
-        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from template_kicrudhelped_item where ki_crud_helper_user_key = \"" + ki_crud_helper_user_key + "\""), connection);
+        using var my_sql_command = new MySqlCommand(db_trail.Saved($"delete from template_kicrudhelped_item where ki_crud_helper_user_key = '{ki_crud_helper_user_key}'"), connection);
         my_sql_command.ExecuteNonQuery();
         }
-      catch(System.Exception e)
+      catch (Exception e)
         {
         if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
           {
@@ -110,7 +92,7 @@ namespace Class_db_template_kicrudhelped_items
           throw;
           }
         }
-      Close();
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
       return result;
       }
 
@@ -123,8 +105,8 @@ namespace Class_db_template_kicrudhelped_items
 //<KiCrudHelper:InitGetOutArgs/>
       var result = false;
       //
-      Open();
-      using var my_sql_command = new MySqlCommand("select * from template_kicrudhelped_item where CAST(ki_crud_helper_user_key AS CHAR) = \"" + ki_crud_helper_user_key + "\"", connection);
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
+      using var my_sql_command = new MySqlCommand($"select * from template_kicrudhelped_item where CAST(ki_crud_helper_user_key AS CHAR) = '{ki_crud_helper_user_key}'", connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
@@ -132,7 +114,7 @@ namespace Class_db_template_kicrudhelped_items
         result = true;
         }
       dr.Close();
-      Close();
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
       return result;
       }
 
@@ -156,24 +138,24 @@ namespace Class_db_template_kicrudhelped_items
 
     internal object Summary(string ki_crud_helper_user_key)
       {
-      Open();
-      using var my_sql_command = new MySqlCommand
-        (
-        "SELECT *"
-        + " FROM template_kicrudhelped_item"
-        + " where ki_crud_helper_user_key = '" + ki_crud_helper_user_key + "'",
-        connection
-        );
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
+      using var my_sql_command = new MySqlCommand($"SELECT * FROM template_kicrudhelped_item where ki_crud_helper_user_key = '{ki_crud_helper_user_key}'",connection);
       var dr = my_sql_command.ExecuteReader();
       dr.Read();
       var the_summary = new template_kicrudhelped_item_summary()
         {
         ki_crud_helper_user_key = ki_crud_helper_user_key
         };
-      Close();
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
       return the_summary;
       }
 
-    } // end TClass_db_template_kicrudhelped_items
+    private readonly TClass_db_trail db_trail = null;
 
+    private class template_kicrudhelped_item_summary
+      {
+      public string ki_crud_helper_user_key;
+      }
+
+    } // end TClass_db_template_kicrudhelped_items
   }

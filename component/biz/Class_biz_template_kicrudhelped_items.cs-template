@@ -4,44 +4,39 @@ using Class_db_template_kicrudhelped_items;
 using kix;
 using System;
 using System.Collections;
+using System.Data;
 
 namespace Class_biz_template_kicrudhelped_items
   {
-  internal enum presentation_mode_enum
-    {
-    NONE,
-    FULL_FUNCTION,
-    NEW,
-    REVIEW_ONLY
-    };
-
   public class TClass_biz_template_kicrudhelped_items
     {
-    private readonly TClass_db_template_kicrudhelped_items db_template_kicrudhelped_items = null;
 
-    public TClass_biz_template_kicrudhelped_items() : base()
+    public TClass_biz_template_kicrudhelped_items // CONSTRUCTOR
+      (
+      TClass_db_template_kicrudhelped_items db_template_kicrudhelped_items_imp
+      )
+      : base()
       {
-      db_template_kicrudhelped_items = new TClass_db_template_kicrudhelped_items();
+      db_template_kicrudhelped_items = db_template_kicrudhelped_items_imp;
       }
 
-    public bool Bind(string partial_spec, object target)
+    public DataTable ItemsForLookup(string partial_spec)
       {
-      return db_template_kicrudhelped_items.Bind(partial_spec, target);
+      return db_template_kicrudhelped_items.ItemsForLookup(partial_spec);
       }
 
-    public void BindBaseDataList
+    public DataTable Items
       (
       string sort_order,
-      bool be_sort_order_ascending,
-      object target
+      bool be_sort_order_ascending
       )
       {
-      db_template_kicrudhelped_items.BindBaseDataList(sort_order,be_sort_order_ascending,target);
+      return db_template_kicrudhelped_items.Items(sort_order,be_sort_order_ascending);
       }
 
-    public void BindDirectToListControl(object target)
+    public DataTable Avatars()
       {
-      db_template_kicrudhelped_items.BindDirectToListControl(target);
+      return db_template_kicrudhelped_items.Avatars();
       }
 
     public bool Delete(string id)
@@ -75,11 +70,12 @@ namespace Class_biz_template_kicrudhelped_items
         );
       }
 
-    internal object Summary(string ki_crud_helper_user_key)
+    public object Summary(string ki_crud_helper_user_key)
       {
       return db_template_kicrudhelped_items.Summary(ki_crud_helper_user_key);
       }
 
-    } // end TClass_biz_template_kicrudhelped_items
+    private readonly TClass_db_template_kicrudhelped_items db_template_kicrudhelped_items = null;
 
+    } // end TClass_biz_template_kicrudhelped_items
   }
