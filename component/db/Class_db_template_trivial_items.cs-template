@@ -21,17 +21,9 @@ namespace Class_db_template_trivial_items
 
     public DataTable ItemsForLookup( partial_spec)
       {
-      var result = (DataTable)null;
+      var result = new DataTable();
       /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
-      using var my_sql_command = new MySqlCommand
-        (
-        "SELECT lpad(id,4,'0') as id"
-        + " , description"
-        + " FROM template_trivial_item"
-        + " WHERE concat(lpad(id,4,'0'),' -- ',description) like '%" + partial_spec + "%'"
-        + " order by description",
-        connection
-        );
+      using var my_sql_command = new MySqlCommand($"SELECT lpad(id,4,'0') as id, description FROM template_trivial_item WHERE concat(lpad(id,4,'0'),' -- ',description) like '%{partial_spec}%' order by description",connection);
       new MySqlDataAdapter(my_sql_command).Fill(result);
       /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
       return result;
@@ -39,7 +31,7 @@ namespace Class_db_template_trivial_items
 
     public DataTable Avatars()
       {
-      var result = (DataTable)null;
+      var result = new DataTable();
       /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       using var my_sql_command = new MySqlCommand("SELECT id,description FROM template_trivial_item where description <> '(none specified)' order by id", connection);
       new MySqlDataAdapter(my_sql_command).Fill(result);
@@ -50,13 +42,13 @@ namespace Class_db_template_trivial_items
     public bool Delete(string id)
       {
       var result = true;
-      Open();
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
       try
         {
-        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from template_trivial_item where id = '" + id + "'"), connection);
+        using var my_sql_command = new MySqlCommand(db_trail.Saved($"delete from template_trivial_item where id = '{id}'"), connection);
         my_sql_command.ExecuteNonQuery();
         }
-      catch(System.Exception e)
+      catch (Exception e)
         {
         if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
           {
@@ -67,7 +59,7 @@ namespace Class_db_template_trivial_items
           throw;
           }
         }
-      Close();
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
       return result;
       }
 
@@ -79,8 +71,8 @@ namespace Class_db_template_trivial_items
       {
       description = k.EMPTY;
       var result = false;
-      Open();
-      using var my_sql_command = new MySqlCommand("select description from template_trivial_item where id = '" + id + "'", connection);
+      /* vvvvvvv Legacy "base.Open();" vvvvvvv */ using var connection = new MySqlConnection(ConnectionString); OpenNormalized(connection);
+      using var my_sql_command = new MySqlCommand($"select description from template_trivial_item where id = '{id}'", connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
@@ -88,7 +80,7 @@ namespace Class_db_template_trivial_items
         result = true;
         }
       dr.Close();
-      Close();
+      /* ^^^^^^^ Legacy "base.Close();" ^^^^^^^ */
       return result;
       }
 
@@ -98,7 +90,7 @@ namespace Class_db_template_trivial_items
       string description
       )
       {
-      var childless_field_assignments_clause = "description = '" + description + "'";
+      var childless_field_assignments_clause = $"description = '{description}'";
       db_trail.MimicTraditionalInsertOnDuplicateKeyUpdate
         (
         target_table_name:"template_trivial_item",

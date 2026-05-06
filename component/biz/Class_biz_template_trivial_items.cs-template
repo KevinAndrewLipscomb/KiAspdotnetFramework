@@ -1,5 +1,5 @@
 using Class_db_template_trivial_items;
-using kix;
+using System.Data;
 
 namespace Class_biz_template_trivial_items
   {
@@ -15,14 +15,14 @@ namespace Class_biz_template_trivial_items
       db_template_trivial_items = db_template_trivial_items_imp;
       }
 
-    public DataTable ItemsForLookup(string partial_code, object target)
+    public DataTable ItemsForLookup(string partial_code)
       {
-      return db_template_trivial_items.ItemsForLookup(partial_code, target);
+      return db_template_trivial_items.ItemsForLookup(partial_code);
       }
 
-    public void Avatars()
+    public DataTable Avatars()
       {
-      db_template_trivial_items.Avatars();
+      return db_template_trivial_items.Avatars();
       }
 
     public bool Delete(string code)
