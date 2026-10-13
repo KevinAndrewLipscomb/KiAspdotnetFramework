@@ -9,94 +9,39 @@ using System;
 namespace UserControl_template_binder
   {
 
-  public partial class TWebUserControl_template_binder: ki_web_ui.usercontrol_class
+  public partial class TWebUserControl_template_binder : BizUsercontrol
     {
 
     //--
     //
-    // PRIVATE
+    // PUBLIC
     //
     //--
 
-    private static class Static
+    public TWebUserControl_template_binder Fresh()
       {
-      public const int TSSI_0 = 0;
-      public const int TSSI_1 = 1;
-      public const int TSSI_2 = 2;
+      Session.Remove(InstanceId() + ".p");
+      return this;
       }
 
-    private struct p_type
+    public void SetTarget(string target)
       {
-      internal bool be_loaded;
-      internal string content_id;
-      internal uint tab_index;
-      }
-
-    private struct v_type
-      {
-      }
-
-    private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
-    private v_type v; // Volatile instance Variable container
-
-    private void FillPlaceHolder
-      (
-      bool be_fresh_control_required,
-      string target = k.EMPTY
-      )
-      {
-      if (p.tab_index == Static.TSSI_0)
+      if (target != k.EMPTY)
         {
-        var c = ((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx")));
-        p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_0",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
-        c.SetTarget(target);
-        }
-      else if (p.tab_index == Static.TSSI_1)
-        {
-        var c = ((TWebUserControl_1)(LoadControl("~/usercontrol/app/UserControl_1.ascx")));
-        p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_1",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
-        c.SetTarget(target);
-        }
-      }
-
-    // / <summary>
-    // / Required method for Designer support -- do not modify
-    // / the contents of this method with the code editor.
-    // / </summary>
-    private void InitializeComponent()
-      {
-      TabContainer_control.ActiveTabChanged += TabContainer_control_ActiveTabChanged;
-      PreRender += TWebUserControl_template_binder_PreRender;
-      }
-
-    private void Page_Load(object sender, EventArgs e)
-      {
-      if (!p.be_loaded)
-        {
-        if (k.Has((string[])(Session["privilege_array"]), "privilege-0"))
+        if (target.ToLower().Contains("/0/"))
           {
-          TabPanel_0.Enabled = true;
+          p.tab_index = Static.TSSI_0;
           }
-        TabContainer_control.ActiveTabIndex = (int)(p.tab_index);
-        p.be_loaded = true;
+        else if (target.ToLower().Contains("/1/"))
+          {
+          p.tab_index = Static.TSSI_1;
+          }
+        //
+        TabContainer_control.ActiveTabIndex = p.tab_index;
+        PlaceHolder_content.Controls.Clear();
+        FillPlaceHolder(false,target);
+        //
         }
-      }
-
-    private void TabContainer_control_ActiveTabChanged(object sender, EventArgs e)
-      {
-      p.tab_index = (uint)(TabContainer_control.ActiveTabIndex);
-      PlaceHolder_content.Controls.Clear();
-      FillPlaceHolder(true);
-      }
-
-    private void TWebUserControl_template_binder_PreRender(object sender, EventArgs e)
-      {
-      //
-      // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
-      // not it is already loaded in the user's browser.
-      //
-      SessionSet(PlaceHolder_content.ClientID, p.content_id);
-      SessionSet(InstanceId() + ".p", p);
       }
 
     //--
@@ -145,34 +90,90 @@ namespace UserControl_template_binder
 
     //--
     //
-    // PUBLIC
+    // PRIVATE
     //
     //--
 
-    public TWebUserControl_template_binder Fresh()
+    static private class Static
       {
-      Session.Remove(InstanceId() + ".p");
-      return this;
+      static private int tss_index;
+      static public readonly int TSSI_0 = tss_index++;
+      static public readonly int TSSI_1 = tss_index++;
+      static public readonly int TSSI_2 = tss_index++;
       }
 
-    public void SetTarget(string target)
+    private struct p_type
       {
-      if (target != k.EMPTY)
+      internal bool be_loaded;
+      internal string content_id;
+      internal int tab_index;
+      }
+
+    private struct v_type
+      {
+      }
+
+    private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
+    private v_type v; // Volatile instance Variable container
+
+    private void FillPlaceHolder
+      (
+      bool be_fresh_control_required,
+      string target = k.EMPTY
+      )
+      {
+      if (p.tab_index == Static.TSSI_0)
         {
-        if (target.ToLower().Contains("/0/"))
-          {
-          p.tab_index = Static.TSSI_0;
-          }
-        else if (target.ToLower().Contains("/1/"))
-          {
-          p.tab_index = Static.TSSI_1;
-          }
-        //
-        TabContainer_control.ActiveTabIndex = (int)p.tab_index;
-        PlaceHolder_content.Controls.Clear();
-        FillPlaceHolder(false,target);
-        //
+        var c = ((TWebUserControl_0)(LoadControl("~/usercontrol/app/UserControl_0.ascx")));
+        p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_0",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
+        c.SetTarget(target);
         }
+      else if (p.tab_index == Static.TSSI_1)
+        {
+        var c = ((TWebUserControl_1)(LoadControl("~/usercontrol/app/UserControl_1.ascx")));
+        p.content_id = AddIdentifiedControlToPlaceHolder(c,"UserControl_1",PlaceHolder_content,(be_fresh_control_required ? InstanceId() : k.EMPTY));
+        c.SetTarget(target);
+        }
+      }
+
+    // / <summary>
+    // / Required method for Designer support -- do not modify
+    // / the contents of this method with the code editor.
+    // / </summary>
+    private void InitializeComponent()
+      {
+      TabContainer_control.ActiveTabChanged += TabContainer_control_ActiveTabChanged;
+      PreRender += TWebUserControl_template_binder_PreRender;
+      }
+
+    private void Page_Load(object sender, EventArgs e)
+      {
+      if (!p.be_loaded)
+        {
+        if (UserMember.BeOkTo("privilege-0"))
+          {
+          TabPanel_0.Enabled = true;
+          }
+        TabContainer_control.ActiveTabIndex = p.tab_index;
+        p.be_loaded = true;
+        }
+      }
+
+    private void TabContainer_control_ActiveTabChanged(object sender, EventArgs e)
+      {
+      p.tab_index = TabContainer_control.ActiveTabIndex;
+      PlaceHolder_content.Controls.Clear();
+      FillPlaceHolder(true);
+      }
+
+    private void TWebUserControl_template_binder_PreRender(object sender, EventArgs e)
+      {
+      //
+      // Indicate to children which content control was active on this pass, so that on subsequent passes a child can detect whether or
+      // not it is already loaded in the user's browser.
+      //
+      SessionSet(PlaceHolder_content.ClientID, p.content_id);
+      SessionSet(InstanceId() + ".p", p);
       }
 
     } // end TWebUserControl_template_binder
