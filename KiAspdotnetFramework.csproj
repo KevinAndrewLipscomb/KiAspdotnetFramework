@@ -567,12 +567,25 @@
     <None Include="protected\template-protected-datagrid-sortable.aspx-template" />
     <None Include="protected\template-protected-landing.aspx-template" />
     <None Include="protected\template-protected-nonlanding.aspx-template" />
+    <Content Include="usercontrol\app\UserControl_capture_subjoined_involvement_name_template.ascx-template" />
+    <Content Include="usercontrol\app\UserControl_capture_subjoined_involvement_name_template.ascx.cs-template" />
+    <Content Include="usercontrol\app\UserControl_capture_subjoined_involvement_name_template.ascx.designer.cs-template" />
     <None Include="usercontrol\app\UserControl_template_binder.ascx-template" />
+    <Content Include="usercontrol\app\UserControl_template_binder.ascx.cs-template" />
+    <Content Include="usercontrol\app\UserControl_template_binder.ascx.designer.cs-template" />
     <None Include="usercontrol\app\UserControl_template_datagrid_sortable.ascx-template" />
+    <Content Include="usercontrol\app\UserControl_template_datagrid_sortable.ascx.cs-template" />
+    <Content Include="usercontrol\app\UserControl_template_datagrid_sortable.ascx.designer.cs-template" />
     <None Include="usercontrol\app\UserControl_template_gridview_sortable.ascx-template" />
     <None Include="usercontrol\app\UserControl_template_kicrudhelped_item.ascx-template" />
+    <Content Include="usercontrol\app\UserControl_template_kicrudhelped_item.ascx.cs-template" />
+    <Content Include="usercontrol\app\UserControl_template_kicrudhelped_item.ascx.designer.cs-template" />
     <None Include="usercontrol\app\UserControl_template_std.ascx-template" />
+    <Content Include="usercontrol\app\UserControl_template_std.ascx.cs-template" />
+    <Content Include="usercontrol\app\UserControl_template_std.ascx.designer.cs-template" />
     <None Include="usercontrol\app\UserControl_template_trivial_item.ascx-template" />
+    <Content Include="usercontrol\app\UserControl_template_trivial_item.ascx.cs-template" />
+    <Content Include="usercontrol\app\UserControl_template_trivial_item.ascx.designer.cs-template" />
     <None Include="Web.DEV.IISEXPRESS.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -589,12 +602,6 @@
   </ItemGroup>
   <ItemGroup Label="Folder">
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup Label="ProjectReference">
-    <ProjectReference Include="lib\ki\ki.csproj">
-      <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
-      <Name>ki</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="js\ErrorHandler.ts" />
