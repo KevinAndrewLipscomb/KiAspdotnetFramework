@@ -169,11 +169,7 @@ namespace UserControl_template_kicrudhelped_item
       if (!PresentRecord(saved_ki_crud_helper_user_key))
         {
         TextBox_ki_crud_helper_user_key.Text = saved_ki_crud_helper_user_key;
-        DropDownList_ki_crud_helper_user_key.Bind
-          (
-          dataSource:biz.template_kicrudhelped_items.ItemsForLookup(saved_id),
-          selected_id:saved_ki_crud_helper_user_key
-          );
+        DropDownList_ki_crud_helper_user_key.Bind(biz.template_kicrudhelped_items.ItemsForLookup(saved_id));
         num_matches = (uint)(DropDownList_ki_crud_helper_user_key.Items.Count);
         if (num_matches > 0)
           {
